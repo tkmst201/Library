@@ -2,10 +2,10 @@
 #include <cassert>
 
 /*
-last-updated: 2020/05/05
+last-updated: 2020/07/25
 
-b: { b_0, \ldots, b_{k-1} }, m: { m_0, \ldots, m_{k-1} } に対して、
-\forall i, x \equiv b_i (mod. m_i) となる x を [0, lcm(m_0, \ldots, m_{k-1})) の範囲で求める。
+b: ( b_0, \ldots, b_{k-1} ), m: ( m_0, \ldots, m_{k-1} ) に対して、
+x \equiv b_i (mod. m_i) (\forall i) となる x を [0, lcm(m_0, \ldots, m_{k-1})) の範囲で求める。
 このような x は、b_0 \equiv \dots \equiv b_{k-1} (mod. gcd(m_0, \ldots, m_{k-1})) であるときのみ存在し、一意である。
 
 template<typename T>
@@ -18,10 +18,9 @@ template<typename T>
 static T garner(const std::vector<T> & b, std::vector<T> m, const T &mod) :
 	O(k(k + log m))
 	m は互いに素であることが必要
-	(\forall i, x \equiv b_i (mod. m_i) となる x) mod. mod を返す(m は互いに素より必ず存在する)
+	(x \equiv b_i (mod. m_i) (\forall i) となる x) modulo. mod を返す(m は互いに素より必ず存在する)
 
 仕様
-- 高速化のために b_i >= 0 と仮定している。
 - T は符号付き整数。
 
 参考 :
@@ -57,16 +56,22 @@ public:
 	static T garner(const std::vector<T> &b, std::vector<T> m, const T mod) {
 		assert(b.size() == m.size());
 		assert(!b.empty());
+		T tg = m[0];
 		for (size_type i = 0; i < b.size(); ++i) {
-			assert(b[i] >= 0);
 			assert(m[i] > 0);
+			tg = gcd(tg, m[i]);
 		}
 		assert(mod > 0);
+		assert(b.size() == 1 || tg == 1);
 		
 		m.emplace_back(mod);
 		std::vector<T> sum(m.size()), ip(m.size(), 1);
 		for (size_type i = 0; i < b.size(); ++i) {
-			T t = (b[i] % m[i] - sum[i] + m[i]) % m[i] * inverse(ip[i], m[i]) % m[i];
+			/*
+				ip[j] := m_0 m_1 \ldots m_{i-1} (mod. m_j)
+				sum[j] := t_0 ip[0]  t_1 ip[1]  \ldots  t_{i-1} ip[i-1] (mod. m_j)
+			*/
+			T t = ((b[i] % m[i] + m[i]) % m[i] - sum[i] + m[i]) % m[i] % m[i] * inverse(ip[i], m[i]) % m[i];
 			for (size_type j = i + 1; j < m.size(); ++j) {
 				sum[j] = (sum[j] + ip[j] * t) % m[j];
 				ip[j] = (ip[j] * m[i] % m[j]);
