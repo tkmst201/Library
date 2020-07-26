@@ -2,7 +2,7 @@
 #include <cassert>
 
 /*
-last-updated: 2020/07/25
+last-updated: 2020/07/27
 
 b: ( b_0, \ldots, b_{k-1} ), m: ( m_0, \ldots, m_{k-1} ) に対して、
 x \equiv b_i (mod. m_i) (\forall i) となる x を [0, lcm(m_0, \ldots, m_{k-1})) の範囲で求める。
@@ -96,7 +96,7 @@ private:
 		T a0 = (a % mod + mod) % mod, a1 = 1, a2 = 0;
 		T b0 = mod, b1 = 0, b2 = 1;
 		while (b0 > 0) {
-			T q = a0 / b0, r = a0 % b0;
+			T q = a0 / b0;
 			T nb0 = a0 % b0, nb1 = a1 - b1 * q, nb2 = a2 - b2 * q;
 			a0 = b0; a1 = b1; a2 = b2;
 			b0 = nb0; b1 = nb1; b2 = nb2;
