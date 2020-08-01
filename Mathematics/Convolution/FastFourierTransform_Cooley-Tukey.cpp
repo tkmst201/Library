@@ -5,32 +5,20 @@
 /*
 last-updated: 2020/08/01
 
-基数 2 時間間引き Cooley-Tuley
+基数 2 Cooley-Tuley
 
 # 解説
-N を 2 冪として f[0], f[1], \ldots, f[N - 1] が既知
-
-\omega_N := 1 の原始 N 乗根
-
-F[\omega_N^{-i}] := \Sum_{k = 0}^{N - 1} f[k] \omega_N^{-ki}
-で偶数次数、奇数次数で多項式を分ける
-
-0 \leq i < N/2 として
-F[\omega_N^{-i}]         = \Sum_{k = 0}^{N/2 - 1} f[2k] \omega_{N/2}^{-ki} + \Sum_{k = 0}^{N/2 - 1} f[2k + 1] \omega_{N/2}^{-ki}
-F[\omega_N^{-(i + N/2)}] = \Sum_{k = 0}^{N/2 - 1} f[2k] \omega_{N/2}^{-ki} - \Sum_{k = 0}^{N/2 - 1} f[2k + 1] \omega_{N/2}^{-ki}
-
-ビット反転を行った状態から N が小さい順に計算を行えば in-place で計算可能
-
+周波数間引きで FFT を行ったあとはビット反転した位置になっている。
+そのまま時間間引きで FFT を行うことでビット反転の処理が不要になる。
 
 # 仕様
 template<typename T>
 static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) :
 	θ(n log n)
 	2 つの多項式の乗算を行う。
-
+	
 # 参考
-https://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79, 2020/05/01
-http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/08/01
+周波数間引き FFT と 時間間引き FFT それぞれ参照
 */
 
 struct FastFourierTransform {
@@ -49,13 +37,13 @@ public:
 		a.reserve(n), b.reserve(n);
 		for (size_type i = 0; i < A.size(); ++i) a.emplace_back(A[i], 0);
 		for (size_type i = 0; i < B.size(); ++i) b.emplace_back(B[i], 0);
-		a.resize(n); fft(a);
-		b.resize(n); fft(b);
+		a.resize(n); fft_frequency(a);
+		b.resize(n); fft_frequency(b);
 		
 		std::vector<complex_type> c;
 		c.reserve(n);
 		for (size_type i = 0; i < n; ++i) c.emplace_back(std::conj(a[i] * b[i]));
-		fft(c);
+		fft_time(c);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
@@ -64,11 +52,32 @@ public:
 	}
 	
 private:
-	static void fft(std::vector<complex_type> &A) {
+	static void fft_frequency(std::vector<complex_type> &A) {
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		
-		bit_reverse(A);
+		for (size_type n = N; n > 1; n >>= 1) {
+			const size_type m = n >> 1;
+			std::vector<complex_type> zeta;
+			zeta.reserve(m);
+			zeta.emplace_back(1);
+			const complex_type zeta0 = std::polar<value_type>(1, static_cast<value_type>(-2) * PI / static_cast<value_type>(n));
+			for (size_type i = 1; i < m; ++i) zeta.emplace_back(zeta.back() * zeta0);
+			
+			for (size_type p = 0; p < N; p += n) {
+				for (size_type i = p, ei = p + m; i != ei; ++i) {
+					const complex_type a = A[i], b = A[i + m];
+					A[i] = a + b;
+					A[i + m] = (a - b) * zeta[i - p];
+				}
+			}
+		}
+	}
+	
+	static void fft_time(std::vector<complex_type> &A) {
+		const size_type N = A.size();
+		const value_type PI = std::acos(static_cast<value_type>(-1));
+		
 		for (size_type n = 2; n <= N; n <<= 1) {
 			const size_type m = n >> 1;
 			std::vector<complex_type> zeta;
@@ -84,14 +93,6 @@ private:
 					A[i + m] = a - b;
 				}
 			}
-		}
-	}
-	
-	static void bit_reverse(std::vector<complex_type> &A) {
-		const size_type N = A.size();
-		for (size_type i = 1, j = 0; i < N - 1; ++i) {
-			for (size_type k = N >> 1; k > (j ^= k); k >>= 1);
-			if (i < j) std::swap(A[i], A[j]);
 		}
 	}
 };

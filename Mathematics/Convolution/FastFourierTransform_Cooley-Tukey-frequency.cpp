@@ -3,16 +3,31 @@
 #include <algorithm>
 
 /*
-last-updated: 2020/05/02
+last-updated: 2020/08/01
 
-基数 2 周波数間引き Cooley-Tuley のアルゴリズム (非再帰)
+基数 2 周波数間引き Cooley-Tuley
 
+# 解説
+N を 2 冪として f[0], f[1], \ldots, f[N - 1] が既知
+
+\omega_N := 1 の原始 N 乗根
+
+F[\omega_N^{-i}] := \Sum_{k = 0}^{N - 1} f[k] \omega_N^{-ki}
+で i の偶奇で分ける。
+
+0 \leq i < N/2 として
+F[\omega_N^{-2i}]       = \Sum_{k = 0}^{N/2 - 1} (f[k] + f[k + N/2]) \omega_{N/2}^{-ki}
+F[\omega_N^{-(2i + 1)}] = \Sum_{k = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \omega_{N/2}^{-ki}
+
+計算結果はビット反転した位置になっているので最後に修正する。
+
+# 仕様
 template<typename T>
 static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) :
 	θ(n log n)
 	2 つの多項式の乗算を行う。
 
-参考 :
+# 参考
 http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/05/02
 */
 
@@ -60,7 +75,7 @@ private:
 			for (size_type i = 1; i < m; ++i) zeta.emplace_back(zeta.back() * zeta0);
 			
 			for (size_type p = 0; p < N; p += n) {
-				for (size_type i = p, ei = p + m; i < ei; ++i) {
+				for (size_type i = p, ei = p + m; i != ei; ++i) {
 					const complex_type a = A[i], b = A[i + m];
 					A[i] = a + b;
 					A[i + m] = (a - b) * zeta[i - p];
