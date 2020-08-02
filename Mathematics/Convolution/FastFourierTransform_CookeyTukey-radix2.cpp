@@ -3,9 +3,9 @@
 #include <algorithm>
 
 /*
-last-updated: 2020/08/01
+last-updated: 2020/08/02
 
-基数 2 Cooley-Tuley
+基数 2 Cooley-Tukey
 
 # 解説
 周波数間引きで FFT を行ったあとはビット反転した位置になっている。
@@ -61,7 +61,7 @@ private:
 		size_type zi = 1;
 		for (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);
 		size_type ni = zi;
-		while (1 << ni > A.size()) --ni;
+		while (1 << ni > N) --ni;
 		
 		for (size_type n = N; n > 1; n >>= 1, --ni) {
 			const size_type m = n >> 1;
@@ -96,14 +96,15 @@ private:
 	
 	static std::vector<complex_type> _zeta(size_type max_p) {
 		const value_type PI = std::acos(static_cast<value_type>(-1));
-		// zeta[i] := \omega_{2^max_p}^j (0 \leq j < 2^(i - 1))
-		std::vector<complex_type> zeta(1 << max_p - 1);
-		zeta[0] = complex_type(1, 0);
+		// zeta[j] := \omega_{2^max_p}^j (0 \leq j < 2^(max_p - 1))
+		std::vector<complex_type> zeta;
+		zeta.reserve(1 << max_p - 1);
+		zeta.emplace_back(1, 0);
 		for (size_type i = 0; i < max_p - 1; ++i) {
 			const value_type rad = static_cast<value_type>(-2) * PI / static_cast<value_type>(1 << max_p - i);
-			zeta[1 << i] = std::polar<value_type>(1, rad);
+			zeta.emplace_back(std::polar<value_type>(1, rad));
 			for (size_type j = (1 << i) + 1, ej = 1 << i + 1; j != ej; ++j) {
-				zeta[j] = zeta[1 << i ^ j] * zeta[1 << i];
+				zeta.emplace_back(zeta[1 << i ^ j] * zeta[1 << i]);
 			}
 		}
 		return zeta;

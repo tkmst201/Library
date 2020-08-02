@@ -3,24 +3,12 @@
 #include <algorithm>
 
 /*
-last-updated: 2020/08/01
+last-updated: 2020/08/02
 
-基数 2 周波数間引き Cooley-Tuley
+実数の畳み込み
+基数 4 周波数間引き Cooley-Tukey
 
-# 解説
-N を 2 冪として f[0], f[1], \ldots, f[N - 1] が既知
-
-\omega_N := 1 の原始 N 乗根
-
-F[z] := \Sum_{k = 0}^{N - 1} f[k] z^k
-F[\omega_N^{-i}] = \Sum_{k = 0}^{N - 1} f[k] \omega_N^{-ki}
-で i の偶奇で分ける。
-
-0 \leq i < N/2 として
-F[\omega_N^{-2i}]       = \Sum_{k = 0}^{N/2 - 1} (f[k] + f[k + N/2]) \omega_{N/2}^{-ki}
-F[\omega_N^{-(2i + 1)}] = \Sum_{k = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \omega_{N/2}^{-ki}
-
-計算結果はビット反転した位置になっているので最後に修正する。
+定数倍で基数 2 時間間引き Cookey-Tukey と差が無い
 
 # 仕様
 template<typename T>
@@ -29,7 +17,8 @@ static std::vector<value_type> multiply(const std::vector<T> &A, const std::vect
 	2 つの多項式の乗算を行う。
 
 # 参考
-http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/05/02
+基数 4 の時間間引き FFT
+実数の畳み込み
 */
 
 struct FastFourierTransform {
@@ -69,22 +58,47 @@ private:
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		
-		size_type zi = 1;
+		size_type zi = 0;
 		for (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);
-		size_type ni = zi;
-		while (1 << ni > A.size()) --ni;
 		
-		for (size_type n = N; n > 1; n >>= 1, --ni) {
-			const size_type m = n >> 1;
-			for (size_type p = 0; p < N; p += n) {
+		bit_reverse(A);
+		for (size_type n = 4; n <= N; n <<= 2) {
+			zi -= 2;
+			size_type m = n >> 2;
+			// \omega_n^k = zeta[k << zi]
+			size_type p;
+			for (p = 0; p < N; p += n) {
 				for (size_type i = p, ei = p + m; i != ei; ++i) {
-					const complex_type a = A[i], b = A[i + m];
+					complex_type a0 = A[i], a2 = A[i + m] * zeta[(i - p) << (zi + 1)];
+					complex_type a1 = A[i + (m << 1)] * zeta[(i - p) << zi], a3 = A[i + n - m] * zeta[3 * (i - p) << zi];
+					
+					complex_type lp = a0 + a2, ln = a0 - a2;
+					complex_type rp = a1 + a3, rn = a1 - a3;
+					A[i] = lp + rp;
+					A[i + m] = complex_type(ln.real() + rn.imag(), ln.imag() - rn.real());
+					A[i + (m << 1)] = lp - rp;
+					A[i + n - m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());
+				}
+			}
+			if (p > N) {
+				p -= n;
+				m = n >> 1;
+				for (size_type i = p; i != N; ++i) {
+					const complex_type a = A[i], b = A[i + m] * zeta[(i - p) << (zi - 1)];
 					A[i] = a + b;
-					A[i + m] = (a - b) * zeta[(i - p) << (zi - ni)];
+					A[i + m] = a - b;
 				}
 			}
 		}
-		bit_reverse(A);
+		
+		if (zi > 0) {
+			--zi;
+			for (size_type i = 0, m = N >> 1; i != m; ++i) {
+				const complex_type a = A[i], b = A[i + m] * zeta[i << zi];
+				A[i] = a + b;
+				A[i + m] = a - b;
+			}
+		}
 	}
 	
 	static void bit_reverse(std::vector<complex_type> &A) {
@@ -97,14 +111,15 @@ private:
 	
 	static std::vector<complex_type> _zeta(size_type max_p) {
 		const value_type PI = std::acos(static_cast<value_type>(-1));
-		// zeta[i] := \omega_{2^max_p}^j (0 \leq j < 2^(i - 1))
-		std::vector<complex_type> zeta(1 << max_p - 1);
-		zeta[0] = complex_type(1, 0);
-		for (size_type i = 0; i < max_p - 1; ++i) {
+		// zeta[j] := \omega_{2^max_p}^j
+		std::vector<complex_type> zeta;
+		zeta.reserve(1 << max_p);
+		zeta.emplace_back(1, 0);
+		for (size_type i = 0; i < max_p; ++i) {
 			const value_type rad = static_cast<value_type>(-2) * PI / static_cast<value_type>(1 << max_p - i);
-			zeta[1 << i] = std::polar<value_type>(1, rad);
+			zeta.emplace_back(std::polar<value_type>(1, rad));
 			for (size_type j = (1 << i) + 1, ej = 1 << i + 1; j != ej; ++j) {
-				zeta[j] = zeta[1 << i ^ j] * zeta[1 << i];
+				zeta.emplace_back(zeta[1 << i ^ j] * zeta[1 << i]);
 			}
 		}
 		return zeta;

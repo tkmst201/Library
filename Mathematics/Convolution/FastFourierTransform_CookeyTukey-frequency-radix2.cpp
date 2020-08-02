@@ -3,9 +3,9 @@
 #include <algorithm>
 
 /*
-last-updated: 2020/08/01
+last-updated: 2020/08/02
 
-基数 2 時間間引き Cooley-Tuley
+基数 2 周波数間引き Cooley-Tukey
 
 # 解説
 N を 2 冪として f[0], f[1], \ldots, f[N - 1] が既知
@@ -14,14 +14,13 @@ N を 2 冪として f[0], f[1], \ldots, f[N - 1] が既知
 
 F[z] := \Sum_{k = 0}^{N - 1} f[k] z^k
 F[\omega_N^{-i}] = \Sum_{k = 0}^{N - 1} f[k] \omega_N^{-ki}
-で偶数次数、奇数次数で多項式を分ける
+で i の偶奇で分ける。
 
 0 \leq i < N/2 として
-F[\omega_N^{-i}]         = \Sum_{k = 0}^{N/2 - 1} f[2k] \omega_{N/2}^{-ki} + \Sum_{k = 0}^{N/2 - 1} f[2k + 1] \omega_{N/2}^{-ki}
-F[\omega_N^{-(i + N/2)}] = \Sum_{k = 0}^{N/2 - 1} f[2k] \omega_{N/2}^{-ki} - \Sum_{k = 0}^{N/2 - 1} f[2k + 1] \omega_{N/2}^{-ki}
+F[\omega_N^{-2i}]       = \Sum_{k = 0}^{N/2 - 1} (f[k] + f[k + N/2]) \omega_{N/2}^{-ki}
+F[\omega_N^{-(2i + 1)}] = \Sum_{k = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \omega_{N/2}^{-ki}
 
-ビット反転を行った状態から N が小さい順に計算を行えば in-place で計算可能
-
+計算結果はビット反転した位置になっているので最後に修正する。
 
 # 仕様
 template<typename T>
@@ -30,8 +29,7 @@ static std::vector<value_type> multiply(const std::vector<T> &A, const std::vect
 	2 つの多項式の乗算を行う。
 
 # 参考
-https://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79, 2020/05/01
-http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/08/01
+http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/05/02
 */
 
 struct FastFourierTransform {
@@ -71,20 +69,22 @@ private:
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		
-		size_type zi = 0;
+		size_type zi = 1;
 		for (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);
+		size_type ni = zi;
+		while (1 << ni > A.size()) --ni;
 		
-		bit_reverse(A);
-		for (size_type n = 2; n <= N; n <<= 1, --zi) {
+		for (size_type n = N; n > 1; n >>= 1, --ni) {
 			const size_type m = n >> 1;
 			for (size_type p = 0; p < N; p += n) {
 				for (size_type i = p, ei = p + m; i != ei; ++i) {
-					const complex_type a = A[i], b = A[i + m] * zeta[(i - p) << zi];
+					const complex_type a = A[i], b = A[i + m];
 					A[i] = a + b;
-					A[i + m] = a - b;
+					A[i + m] = (a - b) * zeta[(i - p) << (zi - ni)];
 				}
 			}
 		}
+		bit_reverse(A);
 	}
 	
 	static void bit_reverse(std::vector<complex_type> &A) {
@@ -97,14 +97,15 @@ private:
 	
 	static std::vector<complex_type> _zeta(size_type max_p) {
 		const value_type PI = std::acos(static_cast<value_type>(-1));
-		// zeta[i] := \omega_{2^max_p}^j (0 \leq j < 2^(i - 1))
-		std::vector<complex_type> zeta(1 << max_p - 1);
-		zeta[0] = complex_type(1, 0);
+		// zeta[j] := \omega_{2^max_p}^j (0 \leq j < 2^(max_p - 1))
+		std::vector<complex_type> zeta;
+		zeta.reserve(1 << max_p - 1);
+		zeta.emplace_back(1, 0);
 		for (size_type i = 0; i < max_p - 1; ++i) {
 			const value_type rad = static_cast<value_type>(-2) * PI / static_cast<value_type>(1 << max_p - i);
-			zeta[1 << i] = std::polar<value_type>(1, rad);
+			zeta.emplace_back(std::polar<value_type>(1, rad));
 			for (size_type j = (1 << i) + 1, ej = 1 << i + 1; j != ej; ++j) {
-				zeta[j] = zeta[1 << i ^ j] * zeta[1 << i];
+				zeta.emplace_back(zeta[1 << i ^ j] * zeta[1 << i]);
 			}
 		}
 		return zeta;
