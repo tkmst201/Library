@@ -3,7 +3,7 @@
 #include <algorithm>
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/08/04
 
 実数の畳み込み
 基数 2 周波数間引き Cooley-Tukey
@@ -83,7 +83,7 @@ public:
 		a.resize(n);
 		for (size_type i = 0; i < A.size(); ++i) a[i].real(A[i]);
 		for (size_type i = 0; i < B.size(); ++i) a[i].imag(B[i]);
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<complex_type> c;
 		c.reserve(m + 1);
@@ -102,7 +102,7 @@ public:
 			const complex_type o = (c[i] - c_conj) * std::conj(zeta[i]) / 2.0;
 			a[i] = complex_type(e.real() - o.imag(), -e.imag() - o.real());
 		}
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
@@ -114,7 +114,7 @@ public:
 	}
 	
 private:
-	static void fft_frequency(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
+	static void fft(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		
