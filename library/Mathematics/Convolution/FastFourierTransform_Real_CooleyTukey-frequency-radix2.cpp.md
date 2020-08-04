@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../../assets/css/copy-button.css" />
 
 
-# :warning: Mathematics/Convolution/FastFourierTransform_Real_CooleyTueky-frequency-radix2.cpp
+# :warning: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp
 
 <a href="../../../index.html">Back to top page</a>
 
 * category: <a href="../../../index.html#637dbc1fa2c49b2df4202c454476276a">Mathematics/Convolution</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Convolution/FastFourierTransform_Real_CooleyTueky-frequency-radix2.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-02 15:48:12+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-04 17:46:16+09:00
 
 
 
@@ -46,7 +46,7 @@ layout: default
 #include <algorithm>
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/08/04
 
 実数の畳み込み
 基数 2 周波数間引き Cooley-Tukey
@@ -126,7 +126,7 @@ public:
 		a.resize(n);
 		for (size_type i = 0; i < A.size(); ++i) a[i].real(A[i]);
 		for (size_type i = 0; i < B.size(); ++i) a[i].imag(B[i]);
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<complex_type> c;
 		c.reserve(m + 1);
@@ -145,7 +145,7 @@ public:
 			const complex_type o = (c[i] - c_conj) * std::conj(zeta[i]) / 2.0;
 			a[i] = complex_type(e.real() - o.imag(), -e.imag() - o.real());
 		}
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
@@ -157,7 +157,7 @@ public:
 	}
 	
 private:
-	static void fft_frequency(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
+	static void fft(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		
@@ -209,13 +209,13 @@ private:
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Mathematics/Convolution/FastFourierTransform_Real_CooleyTueky-frequency-radix2.cpp"
+#line 1 "Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp"
 #include <vector>
 #include <complex>
 #include <algorithm>
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/08/04
 
 実数の畳み込み
 基数 2 周波数間引き Cooley-Tukey
@@ -295,7 +295,7 @@ public:
 		a.resize(n);
 		for (size_type i = 0; i < A.size(); ++i) a[i].real(A[i]);
 		for (size_type i = 0; i < B.size(); ++i) a[i].imag(B[i]);
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<complex_type> c;
 		c.reserve(m + 1);
@@ -314,7 +314,7 @@ public:
 			const complex_type o = (c[i] - c_conj) * std::conj(zeta[i]) / 2.0;
 			a[i] = complex_type(e.real() - o.imag(), -e.imag() - o.real());
 		}
-		fft_frequency(a, zeta);
+		fft(a, zeta);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
@@ -326,7 +326,7 @@ public:
 	}
 	
 private:
-	static void fft_frequency(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
+	static void fft(std::vector<complex_type> &A, const std::vector<complex_type> &zeta) {
 		const size_type N = A.size();
 		const value_type PI = std::acos(static_cast<value_type>(-1));
 		

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#637dbc1fa2c49b2df4202c454476276a">Mathematics/Convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-02 15:48:12+09:00
+    - Last commit date: 2020-08-04 17:46:16+09:00
 
 
 
@@ -46,7 +46,7 @@ layout: default
 #include <algorithm>
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/08/04
 
 実数の畳み込み
 基数 4 周波数間引き Cooley-Tukey
@@ -76,23 +76,40 @@ public:
 		size_type n_ = A.size() + B.size() - 1;
 		size_type n = 1, ni = 0;
 		while (n < n_) n <<= 1, ++ni;
+		const size_type m = n >> 1;
 		const std::vector<complex_type> zeta = _zeta(ni);
 		
-		std::vector<complex_type> a, b;
-		a.reserve(n), b.reserve(n);
-		for (size_type i = 0; i < A.size(); ++i) a.emplace_back(A[i], 0);
-		for (size_type i = 0; i < B.size(); ++i) b.emplace_back(B[i], 0);
-		a.resize(n); fft(a, zeta);
-		b.resize(n); fft(b, zeta);
+		std::vector<complex_type> a;
+		a.resize(n);
+		for (size_type i = 0; i < A.size(); ++i) a[i].real(A[i]);
+		for (size_type i = 0; i < B.size(); ++i) a[i].imag(B[i]);
+		fft(a, zeta);
 		
 		std::vector<complex_type> c;
-		c.reserve(n);
-		for (size_type i = 0; i < n; ++i) c.emplace_back(std::conj(a[i] * b[i]));
-		fft(c, zeta);
+		c.reserve(m + 1);
+		c.emplace_back(a[0].real() * a[0].imag(), 0);
+		for (size_type i = 1; i != m; ++i) {
+			const complex_type a_conj = std::conj(a[n - i]);
+			const complex_type prod = (a[i] + a_conj) * (a[i] - a_conj) / 4.0;
+			c.emplace_back(prod.imag(), -prod.real());
+		}
+		c.emplace_back(a[m].real() * a[m].imag(), 0);
+		
+		a.resize(m);
+		for (size_type i = 0; i < m; ++i) {
+			const complex_type c_conj = std::conj(c[m - i]);
+			const complex_type e = (c[i] + c_conj) / 2.0;
+			const complex_type o = (c[i] - c_conj) * std::conj(zeta[i]) / 2.0;
+			a[i] = complex_type(e.real() - o.imag(), -e.imag() - o.real());
+		}
+		fft(a, zeta);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
-		for (size_type i = 0; i < n; ++i) res.emplace_back(std::conj(c[i]).real() / static_cast<value_type>(n));
+		for (size_type i = 0; i < m; ++i) {
+			res.emplace_back(a[i].real() / static_cast<value_type>(m));
+			res.emplace_back(-a[i].imag() / static_cast<value_type>(m));
+		}
 		return res;
 	}
 	
@@ -105,7 +122,8 @@ private:
 		for (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);
 		
 		bit_reverse(A);
-		for (size_type n = 4; n <= N; n <<= 2) {
+		size_type n;
+		for (n = 4; n <= N; n <<= 2) {
 			zi -= 2;
 			size_type m = n >> 2;
 			// \omega_n^k = zeta[k << zi]
@@ -123,18 +141,9 @@ private:
 					A[i + n - m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());
 				}
 			}
-			if (p > N) {
-				p -= n;
-				m = n >> 1;
-				for (size_type i = p; i != N; ++i) {
-					const complex_type a = A[i], b = A[i + m] * zeta[(i - p) << (zi - 1)];
-					A[i] = a + b;
-					A[i + m] = a - b;
-				}
-			}
 		}
 		
-		if (zi > 0) {
+		if (n >> 2 < N) {
 			--zi;
 			for (size_type i = 0, m = N >> 1; i != m; ++i) {
 				const complex_type a = A[i], b = A[i + m] * zeta[i << zi];
@@ -168,7 +177,6 @@ private:
 		return zeta;
 	}
 };
-
 ```
 {% endraw %}
 
@@ -181,7 +189,7 @@ private:
 #include <algorithm>
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/08/04
 
 実数の畳み込み
 基数 4 周波数間引き Cooley-Tukey
@@ -211,23 +219,40 @@ public:
 		size_type n_ = A.size() + B.size() - 1;
 		size_type n = 1, ni = 0;
 		while (n < n_) n <<= 1, ++ni;
+		const size_type m = n >> 1;
 		const std::vector<complex_type> zeta = _zeta(ni);
 		
-		std::vector<complex_type> a, b;
-		a.reserve(n), b.reserve(n);
-		for (size_type i = 0; i < A.size(); ++i) a.emplace_back(A[i], 0);
-		for (size_type i = 0; i < B.size(); ++i) b.emplace_back(B[i], 0);
-		a.resize(n); fft(a, zeta);
-		b.resize(n); fft(b, zeta);
+		std::vector<complex_type> a;
+		a.resize(n);
+		for (size_type i = 0; i < A.size(); ++i) a[i].real(A[i]);
+		for (size_type i = 0; i < B.size(); ++i) a[i].imag(B[i]);
+		fft(a, zeta);
 		
 		std::vector<complex_type> c;
-		c.reserve(n);
-		for (size_type i = 0; i < n; ++i) c.emplace_back(std::conj(a[i] * b[i]));
-		fft(c, zeta);
+		c.reserve(m + 1);
+		c.emplace_back(a[0].real() * a[0].imag(), 0);
+		for (size_type i = 1; i != m; ++i) {
+			const complex_type a_conj = std::conj(a[n - i]);
+			const complex_type prod = (a[i] + a_conj) * (a[i] - a_conj) / 4.0;
+			c.emplace_back(prod.imag(), -prod.real());
+		}
+		c.emplace_back(a[m].real() * a[m].imag(), 0);
+		
+		a.resize(m);
+		for (size_type i = 0; i < m; ++i) {
+			const complex_type c_conj = std::conj(c[m - i]);
+			const complex_type e = (c[i] + c_conj) / 2.0;
+			const complex_type o = (c[i] - c_conj) * std::conj(zeta[i]) / 2.0;
+			a[i] = complex_type(e.real() - o.imag(), -e.imag() - o.real());
+		}
+		fft(a, zeta);
 		
 		std::vector<value_type> res;
 		res.reserve(n);
-		for (size_type i = 0; i < n; ++i) res.emplace_back(std::conj(c[i]).real() / static_cast<value_type>(n));
+		for (size_type i = 0; i < m; ++i) {
+			res.emplace_back(a[i].real() / static_cast<value_type>(m));
+			res.emplace_back(-a[i].imag() / static_cast<value_type>(m));
+		}
 		return res;
 	}
 	
@@ -240,7 +265,8 @@ private:
 		for (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);
 		
 		bit_reverse(A);
-		for (size_type n = 4; n <= N; n <<= 2) {
+		size_type n;
+		for (n = 4; n <= N; n <<= 2) {
 			zi -= 2;
 			size_type m = n >> 2;
 			// \omega_n^k = zeta[k << zi]
@@ -258,18 +284,9 @@ private:
 					A[i + n - m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());
 				}
 			}
-			if (p > N) {
-				p -= n;
-				m = n >> 1;
-				for (size_type i = p; i != N; ++i) {
-					const complex_type a = A[i], b = A[i + m] * zeta[(i - p) << (zi - 1)];
-					A[i] = a + b;
-					A[i + m] = a - b;
-				}
-			}
 		}
 		
-		if (zi > 0) {
+		if (n >> 2 < N) {
 			--zi;
 			for (size_type i = 0, m = N >> 1; i != m; ++i) {
 				const complex_type a = A[i], b = A[i + m] * zeta[i << zi];

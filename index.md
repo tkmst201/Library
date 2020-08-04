@@ -81,7 +81,7 @@ layout: default
 * :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.cpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.cpp</a>
 * :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.cpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.cpp</a>
 * :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.cpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.cpp</a>
-* :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTueky-frequency-radix2.cpp.html">Mathematics/Convolution/FastFourierTransform_Real_CooleyTueky-frequency-radix2.cpp</a>
+* :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp.html">Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp</a>
 * :warning: <a href="library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.cpp.html">Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.cpp</a>
 * :heavy_check_mark: <a href="library/Mathematics/Convolution/NumberTheoreticTransform.cpp.html">Mathematics/Convolution/NumberTheoreticTransform.cpp</a>
 
