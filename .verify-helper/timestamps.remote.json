@@ -1,11 +1,12 @@
 {
+"Test/BinaryIndexedTree.test.cpp": "2020-08-15 15:59:39 +0900",
 "Test/DisjointSparseTable.test.cpp": "2020-06-26 17:19:32 +0900",
-"Test/HeavyLightDecomposition.test.cpp": "2020-06-26 17:19:32 +0900",
+"Test/HeavyLightDecomposition.test.cpp": "2020-08-15 11:57:19 +0900",
 "Test/HeavyLightDecomposition_lca.test.cpp": "2020-06-26 17:19:32 +0900",
 "Test/Matrix_Determinant.test.cpp": "2020-06-26 17:19:32 +0900",
 "Test/NumberTheoreticTransform.test.cpp": "2020-07-27 00:50:20 +0900",
 "Test/PotentializedUnionFind.test.cpp": "2020-06-26 17:19:32 +0900",
-"Test/SegmentTree_fold.test.cpp": "2020-06-26 17:19:32 +0900",
+"Test/SegmentTree_fold.test.cpp": "2020-08-15 11:57:19 +0900",
 "Test/SparseTable.test.cpp": "2020-06-26 17:19:32 +0900",
 "Test/UnionFind_basic.test.cpp": "2020-06-26 17:19:32 +0900"
 }
