@@ -5,9 +5,6 @@
 /*
 last-updated: 2020/08/15
 
-BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) :
-	要素数 n_, 二項演算 f, 単位元 id_elem
-
 # 仕様
 SegmentTree(size_type n_, const F & f, const_reference id_elem) :
 	要素数 n_, 二項演算 f, 単位元 id_elem
@@ -59,7 +56,7 @@ struct BinaryIndexedTree {
 		return res;
 	}
 	
-	// sum[0, r] \leq x を満たす最小の r を返す (存在しなければ size())
+	// sum[0, r] <= x を満たす最小の r を返す (存在しなければ size())
 	size_type lower_bound(const_reference x) const {
 		size_type res = 0;
 		size_type s = id_elem, w = 1;
