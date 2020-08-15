@@ -37,13 +37,14 @@ struct BinaryIndexedTree {
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) : n(n_), f(f), id_elem(id_elem) {
+	BinaryIndexedTree(size_type n, const F & f, const_reference id_elem) : n(n), f(f), id_elem(id_elem) {
 		node.resize(n + 1, id_elem);
 	}
 	
 	size_type size() const noexcept {
 		return n;
 	}
+	
 	void add(size_type i, const_reference x) {
 		assert(i < size());
 		++i;
