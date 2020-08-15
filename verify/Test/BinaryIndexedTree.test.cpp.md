@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/BinaryIndexedTree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 15:59:39+09:00
+    - Last commit date: 2020-08-15 23:22:28+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
@@ -86,9 +86,6 @@ int main() {
 /*
 last-updated: 2020/08/15
 
-BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) :
-	要素数 n_, 二項演算 f, 単位元 id_elem
-
 # 仕様
 SegmentTree(size_type n_, const F & f, const_reference id_elem) :
 	要素数 n_, 二項演算 f, 単位元 id_elem
@@ -118,13 +115,14 @@ struct BinaryIndexedTree {
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) : n(n_), f(f), id_elem(id_elem) {
+	BinaryIndexedTree(size_type n, const F & f, const_reference id_elem) : n(n), f(f), id_elem(id_elem) {
 		node.resize(n + 1, id_elem);
 	}
 	
 	size_type size() const noexcept {
 		return n;
 	}
+	
 	void add(size_type i, const_reference x) {
 		assert(i < size());
 		++i;
@@ -139,7 +137,7 @@ struct BinaryIndexedTree {
 		return res;
 	}
 	
-	// sum[0, r] \leq x を満たす最小の r を返す (存在しなければ size())
+	// sum[0, r] <= x を満たす最小の r を返す (存在しなければ size())
 	size_type lower_bound(const_reference x) const {
 		size_type res = 0;
 		size_type s = id_elem, w = 1;
