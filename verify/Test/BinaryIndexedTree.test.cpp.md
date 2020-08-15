@@ -25,23 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/HeavyLightDecomposition.test.cpp
+# :heavy_check_mark: Test/BinaryIndexedTree.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Test/HeavyLightDecomposition.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 11:57:19+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/Test/BinaryIndexedTree.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-08-15 15:59:39+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/vertex_set_path_composite">https://judge.yosupo.jp/problem/vertex_set_path_composite</a>
+* see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
 
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/SegmentTree.cpp.html">DataStructure/SegmentTree.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree.cpp.html">DataStructure/BinaryIndexedTree.cpp</a>
 * :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.cpp.html">GraphTheory/HeavyLightDecomposition.cpp</a>
-* :heavy_check_mark: <a href="../../library/Mathematics/ModInt.cpp.html">Mathematics/ModInt.cpp</a>
 
 
 ## Code
@@ -49,59 +48,25 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#include "Mathematics/ModInt.cpp"
-#include "DataStructure/SegmentTree.cpp"
+#include "DataStructure/BinaryIndexedTree.cpp"
 #include "GraphTheory/HeavyLightDecomposition.cpp"
 
 #include <cstdio>
-#include <vector>
-
 int main() {
-	int N, Q;
-	scanf("%d %d", &N, &Q);
+	int n, q;
+	scanf("%d %d", &n, &q);
+	BinaryIndexedTree<int> bit(n, [](auto &&x, auto &&y) {
+		return x + y;
+	}, 0);
 	
-	using mint = ModInt<998244353>;
-	using pmm = std::pair<mint, mint>;
-	using HLD = HeavyLightDecomposition<pmm, SegmentTree>;
-	
-	std::vector<pmm> val(N);
-	for (int i = 0; i < N; ++i) {
-		int a, b;
-		scanf("%d %d", &a, &b);
-		val[i] = {a, b};
+	while (q--) {
+		int com, x, y;
+		scanf("%d %d %d", &com, &x, &y);
+		if (com == 0) bit.add(x - 1, y);
+		else printf("%d\n", bit.sum(y) - bit.sum(x - 1));
 	}
-	
-	std::vector<std::vector<HLD::size_type>> g(N);
-	for (int i = 0; i < N - 1; ++i) {
-		int u, v;
-		scanf("%d %d", &u, &v);
-		g[u].emplace_back(v);
-		g[v].emplace_back(u);
-	}
-	
-	HLD hld(g, 0, [](const pmm &a, const pmm &b) -> pmm {
-		return {a.first * b.first, b.first * a.second + b.second};
-	}, pmm(1, 0), true);
-	
-	for (int i = 0; i < N; ++i) {
-		hld.set(i, val[i]);
-	}
-	
-	while (Q--) {
-		int q, a, b, c;
-		scanf("%d %d %d %d", &q, &a, &b, &c);
-		if (q == 0) {
-			hld.set(a, {b, c});
-		}
-		else {
-			pmm v = hld.fold(a, b);
-			mint ans = v.first * c + v.second;
-			printf("%lld\n", ans.get());
-		}
-	}
-	
 	return 0;
 }
 ```
@@ -110,203 +75,85 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Test/HeavyLightDecomposition.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
+#line 1 "Test/BinaryIndexedTree.test.cpp"
+#define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#line 1 "Mathematics/ModInt.cpp"
-#include <cassert>
-#include <iostream>
-
-/*
-last-updated: 2020/02/26
-
-ModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
-
-ModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
-ModInt inverse() const : O(log n) 法 M の元での逆元を返す
-
-const value_type & get() const noexcept
-value_type & get() noexcept : 値を返す
-
-static decltype(M) get_mod() noexcept : 法 M を返す
-
-explicit operator bool() const noexcept : boolへ型変換 0以外のときTrue
-operator ==() const noexcept
-operator !=() const noexcept
-operator +() const noexept
-operator -() const noexept
-operator +(const ModInt & rhs) const noexept
-operator -(const ModInt & rhs) const noexept
-operator *(const ModInt & rhs) const noexept
-operator /(const ModInt & rhs) const noexept
-ModInt & operator +=(const ModInt & rhs) const noexept
-ModInt & operator +=(const ModInt & rhs) const noexept :
-
-friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs)
-friend std::istream & operator >>(std::istream & is, ModInt & rhs) :
-	入出力用
-
-参考 :
-https://noshi91.hatenablog.com/entry/2019/03/31/174006
-*/
-
-template<int M>
-struct ModInt {
-public:
-	using value_type = long long;
-	
-	ModInt(value_type val = 0) : val(val < 0 ? (M - (-val % M)) % M : val % M) {}
-	
-	explicit operator bool() const noexcept { return val; }
-	bool operator ==(const ModInt & rhs) const noexcept { return val == rhs.val; }
-	bool operator !=(const ModInt & rhs) const noexcept { return !(*this == rhs); }
-	ModInt operator +() const noexcept { return ModInt(*this); }
-	ModInt operator -() const noexcept { return ModInt(0) -= *this; }
-	ModInt operator +(const ModInt & rhs) const noexcept { return ModInt(*this) += rhs; }
-	ModInt operator -(const ModInt & rhs) const noexcept { return ModInt(*this) -= rhs; }
-	ModInt operator *(const ModInt & rhs) const noexcept { return ModInt(*this) *= rhs; }
-	ModInt operator /(const ModInt & rhs) const noexcept { return ModInt(*this) /= rhs; }
-	
-	ModInt & operator +=(const ModInt & rhs) noexcept {
-		val += rhs.val;
-		if (val >= M) val -= M;
-		return *this;
-	}
-	ModInt & operator -=(const ModInt & rhs) noexcept {
-		if (val < rhs.val) val += M;
-		val -= rhs.val;
-		return *this;
-	}
-	ModInt & operator *=(const ModInt & rhs) noexcept {
-		val = val * rhs.val % M;
-		return *this;
-	}
-	ModInt & operator /=(const ModInt & rhs) noexcept {
-		*this *= rhs.inverse();
-		return *this;
-	}
-	
-	ModInt pow(value_type n) const {
-		ModInt res = 1, x = val;
-		if (n < 0) { x = x.inverse(); n = -n; }
-		while (n) { if (n & 1) res *= x; x *= x; n >>= 1; }
-		return res;
-	}
-	
-	ModInt inverse() const {
-		long long a = val, a1 = 1, a2 = 0, b = M, b1 = 0, b2 = 1;
-		while (b > 0) {
-			value_type q = a / b, r = a % b;
-			value_type nb1 = a1 - q * b1, nb2 = a2 - q * b2;
-			a = b; b = r;
-			a1 = b1; b1 = nb1;
-			a2 = b2; b2 = nb2;
-		}
-		assert(a == 1);
-		return a1;
-	}
-	
-	const value_type & get() const noexcept { return val; }
-	static decltype(M) get_mod() noexcept { return M; }
-	
-	friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs) { return os << rhs.val; }
-	friend std::istream & operator >>(std::istream & is, ModInt & rhs) {
-		value_type x;
-		is >> x;
-		rhs = ModInt(x);
-		return is;
-	}
-private:
-	value_type val;
-};
-#line 1 "DataStructure/SegmentTree.cpp"
+#line 1 "DataStructure/BinaryIndexedTree.cpp"
 #include <vector>
-#include <algorithm>
-#line 4 "DataStructure/SegmentTree.cpp"
+#include <cassert>
 #include <functional>
 
 /*
 last-updated: 2020/08/15
 
-SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
-void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
-void add(size_type i, const_reference x) : Θ(lon n) i 番目の要素に x を演算する
-value_type fold(size_type l, size_type r) const : Θ(log n) [l, r) を fold した結果を返す
-size_type lower_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) >= x となるような最小の idx を返す
-size_type upper_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) > x となるような最小の idx を返す
+BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) :
+	要素数 n_, 二項演算 f, 単位元 id_elem
 
-参考 :
-https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf, 2020/04/08
+# 仕様
+SegmentTree(size_type n_, const F & f, const_reference id_elem) :
+	要素数 n_, 二項演算 f, 単位元 id_elem
+
+
+void add(size_type i, const_reference x) :
+	時間計算量 Θ(lon n)
+	i 番目の要素に x を加える
+
+value_type sum(size_type i) const :
+	時間計算量 Θ(log n)
+	[0, i) の合計を返す
+
+size_type lower_bound(const_reference x) const {
+	時間計算量 Θ(log n)
+	sum[0, r] \leq x を満たす最小の r を返す (存在しなければ size())
+	各要素は非負である必要がある
+
+# 参考
+https://algo-logic.info/binary-indexed-tree/, 2020/08/15
 */
 
 template<typename T>
-struct SegmentTree {
+struct BinaryIndexedTree {
 	using value_type = T;
 	using const_reference = const value_type &;
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	SegmentTree(size_type n_, const F & f, const_reference id_elem) : f(f), id_elem(id_elem) {
-		n = 1;
-		while (n < n_) n <<= 1;
-		node.resize(2 * n, id_elem);
+	BinaryIndexedTree(size_type n_, const F & f, const_reference id_elem) : n(n_), f(f), id_elem(id_elem) {
+		node.resize(n + 1, id_elem);
 	}
 	
 	size_type size() const noexcept {
 		return n;
 	}
-	
-	void set(size_type i, const_reference x) {
-		assert(i < size());
-		node[i += size()] = x;
-		update_(i);
-	}
-	
 	void add(size_type i, const_reference x) {
 		assert(i < size());
-		i += size();
-		node[i] = f(node[i], x);
-		update_(i);
+		++i;
+		for (; i <= size(); i += i & -i) node[i] = f(node[i], x);
 	}
 	
-	value_type fold(size_type l, size_type r) const {
-		assert(l <= size() && r <= size());
-		value_type lv = id_elem, rv = id_elem;
-		for (l += size(), r += size(); l < r; l >>= 1, r >>= 1) {
-			if (l & 1) lv = f(lv, node[l++]);
-			if (r & 1) rv = f(node[r - 1], rv);
-		}
-		return f(lv, rv);
+	// [0, i)
+	value_type sum(size_type i) const {
+		assert(i <= size());
+		value_type res = id_elem;
+		for (; i > 0; i -= i & -i) res = f(res, node[i]);
+		return res;
 	}
 	
+	// sum[0, r] \leq x を満たす最小の r を返す (存在しなければ size())
 	size_type lower_bound(const_reference x) const {
-		if (node[1] < x) return size();
-		size_type idx;
-		value_type s = id_elem;
-		for (idx = 1; idx < size();) {
-			value_type nex = f(s, node[idx << 1]);
-			if (nex < x) {
-				idx = idx << 1 | 1;
-				s = nex;
+		size_type res = 0;
+		size_type s = id_elem, w = 1;
+		while (w < size()) w <<= 1;
+		for (; w > 0; w >>= 1) {
+			if (res + w <= size()) {
+				value_type cur = f(s, node[res + w]);
+				if (cur < x) {
+					res += w;
+					s = cur;
+				}
 			}
-			else idx = idx << 1;
 		}
-		return idx - n;
-	}
-	
-	size_type upper_bound(const_reference x) const {
-		if (node[1] <= x) return size();
-		size_type idx;
-		value_type s = id_elem;
-		for (idx = 1; idx < size();) {
-			value_type nex = f(s, node[idx << 1]);
-			if (nex <= x) {
-				idx = idx << 1 | 1;
-				s = nex;
-			}
-			else idx = idx << 1;
-		}
-		return idx - n;
+		return res;
 	}
 	
 private:
@@ -314,18 +161,11 @@ private:
 	F f;
 	value_type id_elem;
 	std::vector<value_type> node;
-	
-	void update_(size_type i) {
-		assert(size() <= i && i < node.size());
-		while (i > 1) {
-			i >>= 1;
-			node[i] = f(node[i << 1], node[i << 1 | 1]);
-		}
-	}
 };
 #line 2 "GraphTheory/HeavyLightDecomposition.cpp"
 #include <utility>
-#line 5 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 4 "GraphTheory/HeavyLightDecomposition.cpp"
+#include <algorithm>
 #include <stack>
 #line 7 "GraphTheory/HeavyLightDecomposition.cpp"
 
@@ -549,55 +389,22 @@ private:
 		rvalue[node_idx[i]].set(get_r_path_idx(node_idx[i], path_idx[i]), x);
 	}
 };
-#line 6 "Test/HeavyLightDecomposition.test.cpp"
+#line 5 "Test/BinaryIndexedTree.test.cpp"
 
 #include <cstdio>
-#line 9 "Test/HeavyLightDecomposition.test.cpp"
-
 int main() {
-	int N, Q;
-	scanf("%d %d", &N, &Q);
+	int n, q;
+	scanf("%d %d", &n, &q);
+	BinaryIndexedTree<int> bit(n, [](auto &&x, auto &&y) {
+		return x + y;
+	}, 0);
 	
-	using mint = ModInt<998244353>;
-	using pmm = std::pair<mint, mint>;
-	using HLD = HeavyLightDecomposition<pmm, SegmentTree>;
-	
-	std::vector<pmm> val(N);
-	for (int i = 0; i < N; ++i) {
-		int a, b;
-		scanf("%d %d", &a, &b);
-		val[i] = {a, b};
+	while (q--) {
+		int com, x, y;
+		scanf("%d %d %d", &com, &x, &y);
+		if (com == 0) bit.add(x - 1, y);
+		else printf("%d\n", bit.sum(y) - bit.sum(x - 1));
 	}
-	
-	std::vector<std::vector<HLD::size_type>> g(N);
-	for (int i = 0; i < N - 1; ++i) {
-		int u, v;
-		scanf("%d %d", &u, &v);
-		g[u].emplace_back(v);
-		g[v].emplace_back(u);
-	}
-	
-	HLD hld(g, 0, [](const pmm &a, const pmm &b) -> pmm {
-		return {a.first * b.first, b.first * a.second + b.second};
-	}, pmm(1, 0), true);
-	
-	for (int i = 0; i < N; ++i) {
-		hld.set(i, val[i]);
-	}
-	
-	while (Q--) {
-		int q, a, b, c;
-		scanf("%d %d %d %d", &q, &a, &b, &c);
-		if (q == 0) {
-			hld.set(a, {b, c});
-		}
-		else {
-			pmm v = hld.fold(a, b);
-			mint ans = v.first * c + v.second;
-			printf("%lld\n", ans.get());
-		}
-	}
-	
 	return 0;
 }
 

@@ -39,6 +39,7 @@ layout: default
 ### DataStructure
 
 * :warning: <a href="library/DataStructure/AVL_tree.cpp.html">DataStructure/AVL_tree.cpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.cpp.html">DataStructure/BinaryIndexedTree.cpp</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.cpp.html">DataStructure/DisjointSparseTable.cpp</a>
 * :warning: <a href="library/DataStructure/PersistentArray.cpp.html">DataStructure/PersistentArray.cpp</a>
 * :warning: <a href="library/DataStructure/PersistentStack.cpp.html">DataStructure/PersistentStack.cpp</a>
@@ -95,6 +96,7 @@ layout: default
 
 ## Verify Files
 
+* :heavy_check_mark: <a href="verify/Test/BinaryIndexedTree.test.cpp.html">Test/BinaryIndexedTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/DisjointSparseTable.test.cpp.html">Test/DisjointSparseTable.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition_lca.test.cpp.html">Test/HeavyLightDecomposition_lca.test.cpp</a>

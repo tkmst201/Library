@@ -38,6 +38,7 @@ layout: default
 
 ## Verified with
 
+* :heavy_check_mark: <a href="../../verify/Test/BinaryIndexedTree.test.cpp.html">Test/BinaryIndexedTree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/Test/HeavyLightDecomposition_lca.test.cpp.html">Test/HeavyLightDecomposition_lca.test.cpp</a>
 

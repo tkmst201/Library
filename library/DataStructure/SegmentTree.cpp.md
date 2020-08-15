@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SegmentTree.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-15 11:57:19+09:00
 
 
 
@@ -53,7 +53,7 @@ layout: default
 #include <functional>
 
 /*
-last-updated: 2020/04/22
+last-updated: 2020/08/15
 
 SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
 void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
@@ -85,27 +85,21 @@ struct SegmentTree {
 	
 	void set(size_type i, const_reference x) {
 		assert(i < size());
-		node[i += n] = x;
-		while (i > 1) {
-			i >>= 1;
-			node[i] = f(node[i << 1], node[i << 1 | 1]);
-		}
+		node[i += size()] = x;
+		update_(i);
 	}
 	
 	void add(size_type i, const_reference x) {
 		assert(i < size());
-		i += n;
+		i += size();
 		node[i] = f(node[i], x);
-		while (i > 1) {
-			i >>= 1;
-			node[i] = f(node[i << 1], node[i << 1 | 1]);
-		}
+		update_(i);
 	}
 	
 	value_type fold(size_type l, size_type r) const {
 		assert(l <= size() && r <= size());
 		value_type lv = id_elem, rv = id_elem;
-		for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+		for (l += size(), r += size(); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) lv = f(lv, node[l++]);
 			if (r & 1) rv = f(node[r - 1], rv);
 		}
@@ -113,10 +107,10 @@ struct SegmentTree {
 	}
 	
 	size_type lower_bound(const_reference x) const {
-		if (node[1] < x) return n;
+		if (node[1] < x) return size();
 		size_type idx;
 		value_type s = id_elem;
-		for (idx = 1; idx < n;) {
+		for (idx = 1; idx < size();) {
 			value_type nex = f(s, node[idx << 1]);
 			if (nex < x) {
 				idx = idx << 1 | 1;
@@ -128,10 +122,10 @@ struct SegmentTree {
 	}
 	
 	size_type upper_bound(const_reference x) const {
-		if (node[1] <= x) return n;
+		if (node[1] <= x) return size();
 		size_type idx;
 		value_type s = id_elem;
-		for (idx = 1; idx < n;) {
+		for (idx = 1; idx < size();) {
 			value_type nex = f(s, node[idx << 1]);
 			if (nex <= x) {
 				idx = idx << 1 | 1;
@@ -147,6 +141,14 @@ private:
 	F f;
 	value_type id_elem;
 	std::vector<value_type> node;
+	
+	void update_(size_type i) {
+		assert(size() <= i && i < node.size());
+		while (i > 1) {
+			i >>= 1;
+			node[i] = f(node[i << 1], node[i << 1 | 1]);
+		}
+	}
 };
 
 ```
@@ -162,7 +164,7 @@ private:
 #include <functional>
 
 /*
-last-updated: 2020/04/22
+last-updated: 2020/08/15
 
 SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
 void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
@@ -194,27 +196,21 @@ struct SegmentTree {
 	
 	void set(size_type i, const_reference x) {
 		assert(i < size());
-		node[i += n] = x;
-		while (i > 1) {
-			i >>= 1;
-			node[i] = f(node[i << 1], node[i << 1 | 1]);
-		}
+		node[i += size()] = x;
+		update_(i);
 	}
 	
 	void add(size_type i, const_reference x) {
 		assert(i < size());
-		i += n;
+		i += size();
 		node[i] = f(node[i], x);
-		while (i > 1) {
-			i >>= 1;
-			node[i] = f(node[i << 1], node[i << 1 | 1]);
-		}
+		update_(i);
 	}
 	
 	value_type fold(size_type l, size_type r) const {
 		assert(l <= size() && r <= size());
 		value_type lv = id_elem, rv = id_elem;
-		for (l += n, r += n; l < r; l >>= 1, r >>= 1) {
+		for (l += size(), r += size(); l < r; l >>= 1, r >>= 1) {
 			if (l & 1) lv = f(lv, node[l++]);
 			if (r & 1) rv = f(node[r - 1], rv);
 		}
@@ -222,10 +218,10 @@ struct SegmentTree {
 	}
 	
 	size_type lower_bound(const_reference x) const {
-		if (node[1] < x) return n;
+		if (node[1] < x) return size();
 		size_type idx;
 		value_type s = id_elem;
-		for (idx = 1; idx < n;) {
+		for (idx = 1; idx < size();) {
 			value_type nex = f(s, node[idx << 1]);
 			if (nex < x) {
 				idx = idx << 1 | 1;
@@ -237,10 +233,10 @@ struct SegmentTree {
 	}
 	
 	size_type upper_bound(const_reference x) const {
-		if (node[1] <= x) return n;
+		if (node[1] <= x) return size();
 		size_type idx;
 		value_type s = id_elem;
-		for (idx = 1; idx < n;) {
+		for (idx = 1; idx < size();) {
 			value_type nex = f(s, node[idx << 1]);
 			if (nex <= x) {
 				idx = idx << 1 | 1;
@@ -256,6 +252,14 @@ private:
 	F f;
 	value_type id_elem;
 	std::vector<value_type> node;
+	
+	void update_(size_type i) {
+		assert(size() <= i && i < node.size());
+		while (i > 1) {
+			i >>= 1;
+			node[i] = f(node[i << 1], node[i << 1 | 1]);
+		}
+	}
 };
 
 ```
