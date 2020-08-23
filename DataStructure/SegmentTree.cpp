@@ -6,6 +6,8 @@
 /*
 last-updated: 2020/08/15
 
+TODO: 二分探索の一般化
+
 SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
 void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
 void add(size_type i, const_reference x) : Θ(lon n) i 番目の要素に x を演算する

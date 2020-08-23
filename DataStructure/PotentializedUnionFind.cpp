@@ -22,9 +22,8 @@ size_type find(size_type x) : O(log n) 要素 x が属するグループの代�
 void link(size_type p, size_type x) : O(log n) 要素 x の親を p に設定する(このとき、x の親の付け替えは発生してはいけない)
 bool issame(size_type x, size_type y) : O(log n) 要素 x, y が同一グループに属するかを返す
 
-TODO:
-	計算量を O(α(n)) に改善できるらしいのでする
-	Potential 感を出す (2 要素の差の制約の追加, diff の追加など)
+TODO: 計算量を O(α(n)) に改善できるらしいのでする
+TODO: Potential 感を出す (2 要素の差の制約の追加, diff の追加など)
 
 参考 :
 http://sigma425.hatenablog.com/entry/2015/12/07/185047, 2020/04/23
