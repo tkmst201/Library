@@ -5,14 +5,13 @@
 /*
 last-updated: 2020/04/30
 
-T は結合律, 可換律, 反射律をすべて満たすもの
 build θ(n log n), fold θ(1)
 
 template<class InputIterator>
 DisjointSparseTable(InputIterator first, InputIterator last, const F &f) :
 	θ(n log n)
 	[farst, last) でテーブルを作成する
-	反射的な二項演算 f
+	冪等な二項演算 f
 
 size_type empty() const noexcept : θ(1) 要素が空であるかを判定する
 size_type size() const noexcept : θ(1) 要素数を返す

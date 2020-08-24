@@ -12,7 +12,7 @@ HL 分解
 
 template<typename U, typename T> :
 	U : モノイドの型
-	T : fold 演算を行なえるデータ構造(ex. SegmentTree)
+	T : fold 演算が可能なデータ構造(ex. SegmentTree)
 
 HeavyLightDecomposition(
 		std::vector<std::vector<size_type>> &g,
