@@ -4,13 +4,12 @@
 #include <cassert>
 
 /*
-last-updated: 2020/08/24
+last-updated: 2020/08/25
 
 # 概要
-TODO: SA-IS にする
-SuffixArray の計算は Manber & Myers の方法: Θ(|s| log^2 |s|)
+SuffixArray の計算は SA-IS: Θ(|s|)
 LCP 配列の計算は Kasai&s's algorighm: Θ(|s|)
-文字列 p の検索は LCP 配列を用いた方法: Θ(|p| + log|s|)
+文字列 p の検索は LCP 配列を用いた二分探索: Θ(|p| + log|s|)
 
 # 仕様
 SuffixArray(string_type s) :
@@ -26,8 +25,8 @@ const std::vector<size_type> & get_lcp() const noexcept :
 	計算済みの sa, lcp をそれぞれ返す
 
 void build(string_type s) :
-	時間計算量: Θ(|s| log^2 |s|)
-	Suffix Array の構築 (Θ(|s| log^2 |s|))
+	時間計算量: Θ(|s|)
+	Suffix Array の構築 (Θ(|s|)
 	Longest Common Prefix 配列の計算 (Θ(|s|))
 
 std::pair<size_type, size_type> lower_bound(string_type p) const
@@ -92,6 +91,8 @@ SparseTable を用いれば 構築: Θ(|s|log|s|), クエリ: Θ(1)
 # 参考
 https://qiita.com/flare/items/20439a1db54b367eea70, 2020/08/23
 https://blog.shibayu36.org/entry/2017/01/06/103956, 2020/08/23
+https://mametter.hatenablog.com/entry/20180130/p1, 2020/08/25
+https://niuez.hatenablog.com/entry/2019/12/16/203739, 2020/08/25
 */
 
 // #include <iostream>
@@ -127,37 +128,9 @@ struct SuffixArray {
 	
 	void build(string_type s) {
 		this->s = s;
-		sa.resize(size() + 1);
+		sa = sa_is(s);
 		rank.resize(size() + 1);
-		
-		for (size_type i = 0; i < size(); ++i) {
-			sa[i] = i;
-			assert(s[i] > 0);
-			rank[i] = s[i];
-		}
-		sa[size()] = size();
-		rank[size()] = 0;
-		
-		for (size_type k = 0, kp = 1; kp < size(); ++k, kp <<= 1) {
-			// sa_k[i] := 2^k 文字見たとき i 番目に小さい suffix の先頭 index
-			// rank_k[i] := 2^k 文字見たとき s[i..] が suffix の中で何番目に小さいか
-			
-			// 2^{k + 1} 文字について s[i..] と s[j..] を比較
-			auto cmp = [&](size_type i, size_type j) {
-				if (rank[i] != rank[j]) return rank[i] < rank[j];
-				if (i + kp > size()) return true;
-				if (j + kp > size()) return false;
-				return rank[i + kp] < rank[j + kp];
-			};
-			
-			std::sort(std::begin(sa), std::end(sa), cmp); // sa_{k + 1} を求める
-			
-			std::vector<size_type> nex_rank(size() + 1);
-			nex_rank[sa[0]] = 0;
-			for (size_type i = 1; i <= size(); ++i) nex_rank[sa[i]] = nex_rank[sa[i - 1]] + cmp(sa[i - 1], sa[i]);
-			rank = nex_rank;
-		}
-		if (size() == 1) std::swap(sa[0], sa[1]);
+		for (size_type i = 0; i <= size(); ++i) rank[sa[i]] = i;
 		
 		// LCP 配列の構築
 		lcp.resize(size());
@@ -187,6 +160,112 @@ struct SuffixArray {
 		// 	if (i < size()) std::cout << "\t\t\t lcp[i] = " << lcp[i];
 		// 	std::cout << std::endl;
 		// }
+	}
+	
+	template<class S>
+	static std::vector<size_type> sa_is(S s, const size_type kind = 128) {
+		size_type n = s.size();
+		for (size_type i = 0; i < n; ++i) ++s[i];
+		s.push_back(0);
+		
+		std::vector<bool> Stype(n + 1); // true: S-type, false: L-type
+		std::vector<size_type> lms; // LMS-index
+		std::vector<size_type> lms_map(n + 1, n + 1); // [i] := もし i が LMS-index なら lms 配列の index, 違えば n + 1
+		std::vector<size_type> bin(kind + 2); // [i] := count_{j < i} (s[j] = j) => count(s[i] = i]) = bin[i + 1] - bin[i]
+		++bin[1];
+		
+		Stype[n] = true;
+		for (size_type i = n; i > 0; --i) {
+			Stype[i - 1] = s[i - 1] == s[i] ? Stype[i] : s[i - 1] < s[i];
+			++bin[s[i - 1] + 1];
+		}
+		for (size_type i = 1; i <= n; ++i) {
+			if (!Stype[i - 1] && Stype[i]) {
+				lms_map[i] = lms.size();
+				lms.emplace_back(i);
+			}
+		}
+		for (size_type i = 0; i < kind + 1; ++i) bin[i + 1] += bin[i];
+		
+		std::vector<size_type> sa, cnt;
+		
+		auto induce = [&](const std::vector<size_type> &lms) {
+			sa.assign(n + 1, 0);
+			
+			cnt.assign(kind + 1, 0);
+			for (size_type i = lms.size(); i > 0; --i) {
+				const size_type idx = lms[i - 1];
+				const size_type c = s[idx];
+				sa[bin[c + 1] - cnt[c] - 1] = idx;
+				++cnt[c];
+			}
+			
+			cnt.assign(kind + 1, 0);
+			for (size_type i = 0; i < n; ++i) {
+				if (sa[i] == 0) continue;
+				const size_type idx = sa[i] - 1;
+				if (!Stype[idx]) {
+					const size_type c = s[idx];
+					sa[bin[c] + cnt[c]] = idx;
+					++cnt[c];
+				}
+			}
+			
+			cnt.assign(kind + 1, 0);
+			for (size_type i = n; i > 0; --i) {
+				if (sa[i] == 0) continue;
+				const size_type idx = sa[i] - 1;
+				if (Stype[idx]) {
+					const size_type c = s[idx];
+					sa[bin[c + 1] - 1 - cnt[c]] = idx;
+					++cnt[c];
+				}
+			}
+		};
+		
+		induce(lms);
+		
+		if (lms.size() >= 2) {
+			std::vector<size_type> lms_str(lms.size() - 1); // [i] := lms の index i が何番目(0-indexed) に小さいか("$" は無視)
+			size_type pre = lms[lms_map[sa[0]]], pre_len = 1, rank = 0;
+			for (size_type i = 1; i <= n; ++i) {
+				const size_type lms_idx = lms_map[sa[i]]; // sa[i] が LMS なら lms の index, 違えば n + 1
+				if (lms_idx == n + 1) continue;
+				const size_type idx = lms[lms_map[sa[i]]];
+				const size_type len = lms[lms_idx + 1] - idx + 1;
+				
+				// LMS-substring の s[pre..] と s[idx..] を比較
+				bool issame = pre_len == len;
+				if (issame) {
+					for (size_type j = 0; j < len; ++j) {
+						if (s[pre + j] != s[idx + j]) {
+							issame = false;
+							break;
+						}
+					}
+				}
+				rank += !issame;
+				lms_str[lms_idx] = rank - 1;
+				
+				pre = idx;
+				pre_len = len;
+			}
+			
+			std::vector<size_type> new_seed(lms.size());
+			new_seed[0] = sa[0];
+			
+			if (rank == lms_str.size()) {
+				for (size_type i = 0; i < lms_str.size(); ++i) new_seed[lms_str[i] + 1] = lms[i];
+			}
+			else {
+				std::vector<size_type> lms_sa = sa_is(lms_str, rank);
+				for (size_type i = 1; i < lms_sa.size(); ++i) new_seed[i] = lms[lms_sa[i]];
+			}
+			
+			induce(new_seed);
+		}
+		
+		return sa;
 	}
 	
 	std::pair<size_type, size_type> lower_bound(string_type p) const {
