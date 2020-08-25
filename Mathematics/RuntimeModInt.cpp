@@ -4,6 +4,7 @@
 /*
 last-updated: 2020/02/26
 
+# 仕様
 RuntimeModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 
 RuntimeModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
@@ -31,7 +32,7 @@ friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs)
 friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) :
 	入出力用
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
 

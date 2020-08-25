@@ -6,12 +6,26 @@
 /*
 last-updated: 2019/11/30
 
+# 解説
 S[i] で不一致が起こった場合、次に table[i] から比較を行う。
-build_KMP_table : Θ(|S|)
-search_KMP : Θ(|T|)
 
-MP 法を利用して S[0..i-1] の最小周期を求める。
-build_period_table : Θ(|S|) --unverified--
+# 仕様
+std::vector<int> build_KMP_table(const std::string &S) :
+	時間計算量: Θ(|S|)
+	KMP_table を構築する
+
+std::vector<std::size_t> search_KMP(const std::string &T, const std::string &S, const std::vector<int> &table) :
+	時間計算量: Θ(|T|)
+	KMP テーブル(table) を用いて文字列 S から文字列 T を検索する
+
+std::vector<int> build_period_table(const std::string &S) : --unverified--
+	時間計算量: Θ(|S|)
+	MP 法を利用して S[0..i-1] の最小周期を求める。
+
+# 参考
+https://snuke.hatenablog.com/entry/2014/12/01/235807, 2019/11/30
+https://snuke.hatenablog.com/entry/2017/07/18/101026, 2019/11/30
+https://qiita.com/itomomoti/items/5e95aeef3f17a29a41cd, 2019/11/30
 */
 
 std::vector<int> build_KMP_table(const std::string &S) {

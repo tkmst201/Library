@@ -10,6 +10,7 @@ last-updated: 2020/04/22
 
 HL 分解
 
+# 仕様
 template<typename U, typename T> :
 	U : モノイドの型
 	T : fold 演算が可能なデータ構造(ex. SegmentTree)
@@ -21,41 +22,41 @@ HeavyLightDecomposition(
 		const value_type
 		&id_elem,
 		bool value_on_vertex) :
-	Θ(N)
+	時間計算量: Θ(n)
 	root_num を根とする木 g に対して HL 分解を行う。
 	載せるモノイドの二項演算を f, 単位元を id_elem とする。
 	{value_on_vertex - true : 頂点, false : 辺} に値を持たせる。
 
 size_type size() const noexcept :
+	時間計算量: Θ(1)
 	分解前の頂点数を返す
 
 void set(size_type i, const_reference x) :
-	Θ(log N)
+	時間計算量: Θ(log N)
 	頂点 i の値を x に変更する
 
 void set(size_type u, size_type v, const_reference x) :
-	Θ(log N)
+	時間計算量: Θ(log N)
 	辺 (u, v) の重みを x に変更する
 
-
 size_type lca(size_type x, size_type y) const :
-	O(log N)
+	時間計算量: O(log N)
 	x と y の LCA を返す
 
 value_type fold(size_type u, size_type v) const :
-	O(loglog N)
+	時間計算量: O(loglog N)
 	パス u -> v で fold 演算した結果を返す
 
 -- private --
 std::pair<size_type, size_type> lca_node_num(size_type x, size_type y) const :
-	O(log N)
+	時間計算量: O(log N)
 	x と y の LCA が属する列にはじめて到達したときの頂点の組を返す。
 
-memo :
+# memo
 	num は分解前の添字
 	idx は分解後の添字
 
-参考 :
+# 参考
 https://qiita.com/ageprocpp/items/8dfe768218da83314989, 2020/04/19
 https://math314.hateblo.jp/entry/2014/06/24/220107, 2020/04/19
 

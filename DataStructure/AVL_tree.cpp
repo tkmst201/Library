@@ -4,24 +4,85 @@
 /*
 last-updated: 2019/11/19
 
-bool empty() : いつもの
-size_t size() : いつもの
-void clear() : いつもの
-vector<T> enumerate() : 要素を全列挙
-Node *begin() : いつもの
-Node *end() : いつもの
-Node *find(const T &x) : いつもの
-Node *insert(const T &x) : いつもの
-Node *erase(const T &x) : 削除
-Node *erase(Node *x) : 削除
-Node *lower_bound(const T &x) : いつもの
-Node *upper_bound(const T &x) : いつもの
-Node *k_th_smallest(size_t k) : k 番目に小さい要素を返す
-Node *k_th_largest(size_t k) : k 番目に大きい要素を返す
-Node *next(Node *Q) : 次に大きい要素を返す
-Node *prev(Node *Q) : 次に小さい要素を返す
+# 仕様
+イテレータは実装していないのでポインタでノードを扱う
 
-参考 :
+AVL_tree() :
+	時間計算量: Θ(1)
+	空の木を作成する
+
+AVL_tree(const AVL_tree &rhs) :
+AVL_tree &operator=(const AVL_tree &rhs) :
+	時間計算量: Θ(n log n)
+	木のコピーを行う
+	enumerate() で得た各要素を insert() しているので遅い
+
+bool empty() const :
+	時間計算量: Θ(1)
+	木が空がどうか判定する
+
+std::size_t size() const :
+	時間計算量: Θ(1)
+	木の要素数を返す
+
+void clear() :
+	時間計算量: Θ(n)
+	全ての要素を削除する
+
+std::vector<T> enumerate() const :
+	時間計算量: Θ(n)
+	木の全ての要素を昇順に std::vector に入れて返す
+
+Node *begin() const :
+	時間計算量: Θ(1)
+	最も小さい要素のポインタを返す
+
+Node *end() const :
+	時間計算量: Θ(1)
+	最も大きい要素の次の要素(?)のポインタを返す
+
+Node *find(const T &x) :
+	時間計算量: Θ(log n)
+	要素 x を検索してそのポインタを返す
+	複数存在する場合ポインタで最小のポインタ
+
+Node *insert(const T &x) :
+	時間計算量: Θ(log n)
+	要素 x を挿入し、挿入後の要素のポインタを返す
+
+Node *erase(const T &x) :
+	時間計算量: Θ(log n)
+	要素 x を削除する
+
+Node *erase(Node *Q) :
+	時間計算量: Θ(log n)
+	ポインタ Q の要素を削除する
+
+Node *lower_bound(const T &x) const :
+	時間計算量: Θ(log n)
+	x 以上の最小の要素のポインタを返す
+
+Node *upper_bound(const T &x) const :
+	時間計算量: Θ(log n)
+	x より大きい最小の要素のポインタを返す
+
+Node *k_th_smallest(std::size_t k) const :
+	時間計算量: Θ(log n)
+	k 番目に小さい要素のポインタを返す
+
+Node *k_th_largest(std::size_t k) const :
+	時間計算量: Θ(log n)
+	k 番目に大きい要素のポインタを返す
+
+Node *next(Node *Q) const :
+	時間計算量: O(log n)
+	Q の次に大きい要素のポインタを返す
+
+Node *prev(Node *Q) const :
+	時間計算量: O(log n)
+	Q より 1 つ小さい要素のポインタを返す
+
+# 参考
 https://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19
 */
 

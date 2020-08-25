@@ -6,14 +6,34 @@
 /*
 last-updated: 2020/03/03
 
-LowestCommonAncestor(size_t)
-LowestCommonAncestor(vector<vector<int>>, int rootNode = 0, bool isper = true) : isper=falseでbuildしない
+# 仕様
+LowestCommonAncestor(size_t _size) :
+	時間計算量: Θ(n)
+	頂点数 n のグラフを作成する
 
-void add_edge(int u, int v) : u -> v Θ(1)
-void clear() : クリア
-void build(int rootNode) : Θ(N log N) 構築
-int find(int a, int b) const : Θ(log N) 頂点 a , 頂点 b の LCA を求める
-int query(int a, int b) const : Θ(log N) パス a - b の長さを求める
+LowestCommonAncestor(vector<vector<int>> g, int rootNode = 0, bool isper = true) :
+	時間計算量: Θ(1)
+	isper = false で build しない
+
+void add_edge(int u, int v) :
+	時間計算量: Θ(1)
+	頂点 u -> 頂点 v に辺を張る
+
+void clear() :
+	時間計算量: Θ(n)
+	グラフを削除する
+
+void build(int rootNode) :
+	時間計算量: Θ(N log N)
+	LCA 計算のための事前計算を行う
+
+int find(int a, int b) const :
+	時間計算量: Θ(log N)
+	頂点 a , 頂点 b の LCA を求める
+
+int query(int a, int b) const :
+	時間計算量: Θ(log N)
+	パス a - b の長さを求める
 */
 
 struct LowestCommonAncestor {

@@ -7,14 +7,28 @@ last-updated: 2020/04/15 unverified
 
 永続スタック
 
-PersistentStack() : 空の stack の作成
+# 仕様
+PersistentStack() :
+	時間計算量: Θ(1)
+	空の stack を作成する
 
-bool empty() const : Θ(1) 空であるかの判定
-PersistentStack push(value_type x) const : O(1) x を追加した stack を作成
-PersistentStack pop() const : O(1) : 一番最後に入れた要素を削除した stack を作成
-const_reference top() const : O(1) 最後に入れた要素を返す
+bool empty() const :
+	時間計算量: Θ(1)
+	空であるかどうか判定する
 
-参考 :
+PersistentStack push(value_type x) const :
+	時間計算量: Θ(1)
+	値 x を追加した stack を作成する
+
+PersistentStack pop() const :
+	時間計算量: Θ(1)
+	一番最後に入れた要素を削除した stack を作成
+
+const_reference top() const :
+	時間計算量: Θ(1)
+	最後に入れた要素を返す
+
+# 参考
 http://noshi91.hatenablog.com/entry/2019/02/04/175100, 2020/04/10
 */
 

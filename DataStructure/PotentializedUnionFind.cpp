@@ -8,25 +8,44 @@
 /*
 last-updated: 2020/04/23
 
-verify : https://atcoder.jp/contests/abc087/submissions/12241089
-
 ポテンシャル付き UnionFind
 
+# 仕様
 PotentializedUnionFind(size_type n, const F &f, const_reference id_elem) :
-	Θ(n) 要素数 n. 二項演算 f, 単位元 id_elem で初期化
+	時間計算量: Θ(n)
+	要素数 n, 二項演算 f, 単位元 id_elem で初期化
 
-size_type size(size_type x) : O(log n) 要素 x が属するグループの要素数を返す
-value_type get(size_type x) : O(log n) 要素 x から根まで fold した結果を返す
-size_type add(const_reference v) : Θ(1) 値が v である頂点を追加する
-size_type find(size_type x) : O(log n) 要素 x が属するグループの代表番号を返す
-void link(size_type p, size_type x) : O(log n) 要素 x の親を p に設定する(このとき、x の親の付け替えは発生してはいけない)
-bool issame(size_type x, size_type y) : O(log n) 要素 x, y が同一グループに属するかを返す
+size_type size(size_type x) :
+	時間計算量: O(log n)
+	要素 x が属するグループの要素数を返す
+
+value_type get(size_type x) :
+	時間計算量: O(log n)
+	要素 x から根まで fold した結果を返す
+
+size_type add(const_reference v) :
+	時間計算量: Θ(1)
+	値が v である頂点を追加する
+
+size_type find(size_type x) :
+	時間計算量: O(log n)
+	要素 x が属するグループの代表番号を返す
+
+void link(size_type p, size_type x) :
+	時間計算量: O(log n)
+	要素 x の親を p に設定する(このとき、x の親の付け替えは発生してはいけない)
+
+bool issame(size_type x, size_type y) :
+	時間計算量: O(log n)
+	要素 x, y が同一グループに属するかを返す
 
 TODO: 計算量を O(α(n)) に改善できるらしいのでする
 TODO: Potential 感を出す (2 要素の差の制約の追加, diff の追加など)
 
-参考 :
+# 参考
 http://sigma425.hatenablog.com/entry/2015/12/07/185047, 2020/04/23
+
+verify : https://atcoder.jp/contests/abc087/submissions/12241089
 */
 
 template<typename T>

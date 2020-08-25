@@ -5,6 +5,7 @@
 /*
 last-updated: 2020/01/15
 
+# 仕様
 template引数 には ModInt を渡す。(require get_mod())
 
 Construct : Amortized Θ(max k + (logM)^2 ) ??
@@ -13,14 +14,18 @@ Query : Amortized Θ(1) ?? 謎
 Comination(size_type sz = 1) :
 	sz! を計算できるだけ前計算
 
-T fact(size_type k) : k! を求める
-T finv(size_type k) : (k!)^-1 を求める
-T inv(size_type k) : k^-1 を求める
+T fact(size_type k) :
+	k! を求める
+
+T finv(size_type k) :
+	(k!)^-1 を求める
+
+T inv(size_type k) :
+	k^-1 を求める
 
 :private:
 void build(size_type k) :
 	k! が計算できるように確保
-
 */
 
 template<typename T>

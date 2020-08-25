@@ -10,13 +10,24 @@ last-updated: 2020/02/28
 
 辺の容量は非負の実数である必要がある。
 
-EdmondsKarp(size_type n) : 頂点数を n とする
+# 仕様
+EdmondsKarp(size_type n) :
+	時間計算量: Θ(n)
+	頂点数が n のグラフを準備
 
-size_type size() const noexcept : 頂点数を返す
-void add_edge(size_type i, size_type j, value_type c) : u -> v へ容量 c の辺を張る
-value_type max_flow(size_type s, size_type t) : O(VE^2) s -> t の最大フローを返す
+size_type size() const noexcept :
+	時間計算量: Θ(1)
+	グラフの頂点数を返す
 
-参考 :
+void add_edge(size_type i, size_type j, value_type c) :
+	時間計算量: Θ(1)
+	u -> v へ容量 c の辺を張る
+
+value_type max_flow(size_type s, size_type t) :
+	時間計算量: O(VE^2)
+	s -> t の最大フローを返す
+
+# 参考
 http://hos.ac/slides/20150319_flow.pdf, 2020/02/27
 */
 

@@ -8,14 +8,32 @@ last-updated: 2020/08/15
 
 TODO: 二分探索の一般化
 
-SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
-void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
-void add(size_type i, const_reference x) : Θ(lon n) i 番目の要素に x を演算する
-value_type fold(size_type l, size_type r) const : Θ(log n) [l, r) を fold した結果を返す
-size_type lower_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) >= x となるような最小の idx を返す
-size_type upper_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) > x となるような最小の idx を返す
+# 仕様
+SegmentTree(size_type n_, const F & f, const_reference id_elem) :
+	時間計算量: Θ(n)
+	要素数 n_, 二項演算 f, 単位元 id_elem で初期化
 
-参考 :
+void set(size_type i, const_reference x) :
+	時間計算量: Θ(log n)
+	i 番目の要素に x を代入
+
+void add(size_type i, const_reference x) :
+	時間計算量: Θ(lon n)
+	i 番目の要素に x を演算する
+
+value_type fold(size_type l, size_type r) const :
+	時間計算量: Θ(log n)
+	[l, r) を fold した結果を返す
+
+size_type lower_bound(const_reference x) const :
+	時間計算量: Θ(log n)
+	単調増加を仮定し、fold(0, idx) >= x となるような最小の idx を返す
+
+size_type upper_bound(const_reference x) const :
+	時間計算量: Θ(log n)
+	単調増加を仮定し、fold(0, idx) > x となるような最小の idx を返す
+
+# 参考
 https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf, 2020/04/08
 */
 
