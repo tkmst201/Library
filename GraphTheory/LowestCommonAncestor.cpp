@@ -1,21 +1,30 @@
 #include <vector>
 #include <cassert>
 #include <utility>
-#include <iostream>
 
 /*
-last-updated: 2020/03/03
+last-updated: 2020/08/27
+
+木グラフでの最近共通祖先を求める
+木グラフではないとバグるので注意
+
+おまけで木の任意の 2 頂点間のパスの長さを返す機能がついている
 
 # 仕様
-LowestCommonAncestor(size_t _size) :
+LowestCommonAncestor(size_type n) :
 	時間計算量: Θ(n)
-	頂点数 n のグラフを作成する
+	頂点数が n のグラフを作成する
 
-LowestCommonAncestor(vector<vector<int>> g, int rootNode = 0, bool isper = true) :
+LowestCommonAncestor(std::vector<std::vector<size_type>> g) :
+	時間計算量: Θ(n + m)
+	グラフ g で初期化する
+	build() を呼ぶ必要があることに注意
+
+size_type size() const noexcept :
 	時間計算量: Θ(1)
-	isper = false で build しない
+	グラフの頂点数を返す
 
-void add_edge(int u, int v) :
+void add_edge(size_type s, size_type t)
 	時間計算量: Θ(1)
 	頂点 u -> 頂点 v に辺を張る
 
@@ -23,87 +32,105 @@ void clear() :
 	時間計算量: Θ(n)
 	グラフを削除する
 
-void build(int rootNode) :
+void build(size_type rootNode = 0)
 	時間計算量: Θ(N log N)
 	LCA 計算のための事前計算を行う
 
-int find(int a, int b) const :
+size_type find(size_type a, size_type b) const
 	時間計算量: Θ(log N)
 	頂点 a , 頂点 b の LCA を求める
 
-int query(int a, int b) const :
+size_type query(size_type a, size_type b) const :
 	時間計算量: Θ(log N)
 	パス a - b の長さを求める
 */
 
+#include <vector>
+#include <cassert>
+#include <utility>
+
 struct LowestCommonAncestor {
+	using size_type = std::size_t;
+	
+private:
+	size_type logsize;
+	std::vector<std::vector<size_type> > g, par;
+	std::vector<size_type> depth;
+	bool isbuilt;
+	
 public:
-	LowestCommonAncestor(std::size_t _size) : _size(_size) {
-		g.resize(_size);
+	LowestCommonAncestor(size_type n) {
+		g.resize(n);
 		isbuilt = false;
 	}
-	LowestCommonAncestor(std::vector<std::vector<int> > g, int rootNode = 0, bool isper = true) : g(g) {
-		_size = g.size();
-		if (isper) build(rootNode);
+	
+	LowestCommonAncestor(std::vector<std::vector<size_type>> g) : g(g) {
+		isbuilt = false;
 	};
 	
-	void add_edge(int s, int t) {
+	size_type size() const noexcept {
+		return g.size();
+	}
+	
+	void add_edge(size_type s, size_type t) {
+		assert(s < size());
+		assert(t < size());
 		g[s].push_back(t);
+		isbuilt = false;
 	}
 	
 	void clear() {
-		_size = 0;
 		g.clear();
 		par.clear();
 		depth.clear();
 		isbuilt = false;
 	}
 	
-	void build(int rootNode = 0) {
+	void build(size_type rootNode = 0) {
+		assert(rootNode < size());
 		logsize = 1;
-		while (1<<logsize < _size) ++logsize;
-		depth.assign(_size, -1);
-		par.assign(logsize, std::vector<int>(_size, -1));
+		while (1 << logsize < size()) ++logsize;
+		depth.assign(size(), size());
+		par.assign(logsize, std::vector<size_type>(size(), size()));
 		
 		depth[rootNode] = 0;
-		dfs(rootNode, -1);
-		for (int i = 1; i < logsize; ++i) {
-			for (int j = 0; j < _size; ++j) {
-				if (~par[i - 1][j]) par[i][j] = par[i - 1][ par[i - 1][j] ];
+		dfs(rootNode, size());
+		for (size_type i = 1; i < logsize; ++i) {
+			for (size_type j = 0; j < size(); ++j) {
+				if (par[i - 1][j] != size()) par[i][j] = par[i - 1][ par[i - 1][j] ];
 			}
 		}
 		isbuilt = true;
 	}
 	
-	int find(int a, int b) const {
+	size_type find(size_type a, size_type b) const {
 		assert(isbuilt);
+		assert(a < size());
+		assert(b < size());
 		if (depth[a] < depth[b]) std::swap(a, b);
 		
-		int up = depth[a] - depth[b];
-		for (int i = 0; i < logsize; ++i) if (up >> i & 1) a = par[i][a];
+		size_type up = depth[a] - depth[b];
+		for (size_type i = 0; i < logsize; ++i) if (up >> i & 1) a = par[i][a];
 		if (a == b) return a;
-		for (int i = logsize - 1; i >= 0; i--) {
-			if (par[i][a] != par[i][b]) {
-				a = par[i][a];
-				b = par[i][b];
+		for (size_type i = logsize; i > 0; --i) {
+			if (par[i - 1][a] != par[i - 1][b]) {
+				a = par[i - 1][a];
+				b = par[i - 1][b];
 			}
 		}
 		return par[0][a];
 	}
 	
-	int query(int a, int b) const {
+	size_type query(size_type a, size_type b) const {
 		assert(isbuilt);
+		assert(a < size());
+		assert(b < size());
 		return depth[a] + depth[b] - 2 * depth[find(a, b)];
 	}
 	
 private:
-	std::size_t _size, logsize;
-	std::vector<std::vector<int> > g, par;
-	std::vector<int> depth;
-	bool isbuilt;
-	
-	void dfs(int u, int p) {
-		for (int v : g[u]) {
+	void dfs(size_type u, size_type p) {
+		for (size_type v : g[u]) {
 			if (v == p) continue;
 			depth[v] = depth[u] + 1;
 			par[0][v] = u;
@@ -111,26 +138,3 @@ private:
 		}
 	}
 };
-
-/*
-int main() {
-	std::cin.tie(0);
-	
-	int N, Q;
-	std::cin >> N >> Q;
-	LowestCommonAncestor lca(N);
-	for (int i = 1; i < N; ++i) {
-		int p; std::cin >> p;
-		lca.add_edge(p, i);
-	}
-	lca.build();
-	
-	while (Q--) {
-		int u, v;
-		std::cin >> u >> v;
-		std::cout << lca.find(u, v) << '\n';
-	}
-	
-	return 0;
-}
-*/
