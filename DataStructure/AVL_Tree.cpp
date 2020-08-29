@@ -2,17 +2,17 @@
 #include <vector>
 
 /*
-last-updated: 2019/11/19
+last-updated: 2020/08/29
 
 # 仕様
 イテレータは実装していないのでポインタでノードを扱う
 
-AVL_tree() :
+AVL_Tree() :
 	時間計算量: Θ(1)
 	空の木を作成する
 
-AVL_tree(const AVL_tree &rhs) :
-AVL_tree &operator=(const AVL_tree &rhs) :
+AVL_Tree(const AVL_Tree &rhs) :
+AVL_Tree &operator=(const AVL_Tree &rhs) :
 	時間計算量: Θ(n log n)
 	木のコピーを行う
 	enumerate() で得た各要素を insert() しているので遅い
@@ -86,7 +86,7 @@ Node *prev(Node *Q) const :
 https://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19
 */
 
-template<typename T> struct AVL_tree {
+template<typename T> struct AVL_Tree {
 public:
 	
 	// private に, したくない…??
@@ -100,16 +100,16 @@ public:
 			: value(x), par(par), is_r(is_r) {}
 	};
 	
-	AVL_tree() : size_(0), root_node(nullptr) {}
-	~AVL_tree() {
+	AVL_Tree() : size_(0), root_node(nullptr) {}
+	~AVL_Tree() {
 		clear();
 	}
 	
-	AVL_tree(const AVL_tree &rhs) {
+	AVL_Tree(const AVL_Tree &rhs) {
 		*this = rhs;
 	}
 	
-	AVL_tree &operator=(const AVL_tree &rhs) {
+	AVL_Tree &operator=(const AVL_Tree &rhs) {
 		if (this != &rhs) {
 			this->clear();
 			std::vector<T> tmp = rhs.enumerate();
@@ -402,7 +402,7 @@ private:
 
 /*
 int main() {
-	AVL_tree<int> tree;
+	AVL_Tree<int> tree;
 	
 	const int queryNumber = 11;
 	std::string str[queryNumber] = {"clear", "kths", "kthl", "size", "print", "ins", "find", "era", "lower", "upper", "exit"};

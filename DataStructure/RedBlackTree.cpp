@@ -67,6 +67,7 @@ node_ptr erase(const_reference x) :
 
 node_ptr erase(node_ptr node) :
 	時間計算量: O(log n)
+	node が指す要素を削除する
 	削除した要素の次に大きい要素を返す
 
 bool check() const : 赤黒木の条件を満たしているか確認する

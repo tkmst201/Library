@@ -11,7 +11,7 @@ int main() {
 	using ll = long long;
 	using pll = std::pair<ll, ll>;
 	
-	AVL_tree<pll> avl;
+	AVL_Tree<pll> avl;
 	
 	while (Q--) {
 		int q;
