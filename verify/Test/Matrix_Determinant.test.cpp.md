@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/Matrix_Determinant.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
@@ -84,6 +84,7 @@ int main() {
 /*
 last-updated: 2020/02/26
 
+# 仕様
 ModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 
 ModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
@@ -110,7 +111,7 @@ friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs)
 friend std::istream & operator >>(std::istream & is, ModInt & rhs) :
 	入出力用
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
 
@@ -194,6 +195,7 @@ private:
 /*
 last-updated: 2020/04/13
 
+# 仕様
 Matrix() : 空の行列を作成
 Matrix(size_type h, size_type w, const value_type & x = 0) : 型(h, w) 初期値 x の行列を作成
 Matrix(std::vector<std::vector<value_type>> val) : 2次元 vector から行列を作成
@@ -241,7 +243,7 @@ std::pair<size_type, value_type> gauss_jordan(size_type colnum = -1) :
 	(rank, determinant) を返す
 friend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) : 行列を出力できる
 
-参考 :
+# 参考
 https://drken1215.hatenablog.com/entry/2019/03/20/202800
 */
 

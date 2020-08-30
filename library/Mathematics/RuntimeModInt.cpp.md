@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#540b21ecdb276f5087ee585cedd6d5d0">Mathematics</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/RuntimeModInt.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -47,6 +47,7 @@ layout: default
 /*
 last-updated: 2020/02/26
 
+# 仕様
 RuntimeModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 
 RuntimeModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
@@ -74,7 +75,7 @@ friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs)
 friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) :
 	入出力用
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
 
@@ -166,6 +167,7 @@ using mint = RuntimeModInt;
 /*
 last-updated: 2020/02/26
 
+# 仕様
 RuntimeModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 
 RuntimeModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
@@ -193,7 +195,7 @@ friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs)
 friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) :
 	入出力用
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
 

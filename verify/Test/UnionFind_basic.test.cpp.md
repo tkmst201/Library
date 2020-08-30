@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/UnionFind_basic.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/unionfind">https://judge.yosupo.jp/problem/unionfind</a>
@@ -84,15 +84,28 @@ last-updated: 2020/04/22
 
 size() verify : https://atcoder.jp/contests/abc157/submissions/12223429
 
+# 仕様
+UnionFind(size_type n) :
+	時間計算量: Θ(n)
+	要素数 n で初期化
 
-UnionFind(size_type n) : Θ(n) 要素数 n で初期化
+size_type size(size_type x) :
+	時間計算量: O(α(n))
+	要素 x が属するグループの要素数を返す
 
-size_type size(size_type x) : O(α(n)) 要素 x が属するグループの要素数を返す
-size_type find(size_type x) : O(α(n)) 要素 x が属するグループの代表番号を返す
-void unite(size_type x, size_type y) : O(α(n)) 要素 x, y がそれぞれ属するグループを併合する
-bool issame(size_type x, size_type y) : O(α(n)) 要素 x, y が同一グループに属するかを返す
+size_type find(size_type x) :
+	時間計算量: O(α(n))
+	要素 x が属するグループの代表番号を返す
 
-参考 :
+void unite(size_type x, size_type y) :
+	時間計算量: O(α(n))
+	要素 x, y がそれぞれ属するグループを併合する
+
+bool issame(size_type x, size_type y) :
+	時間計算量: O(α(n))
+	要素 x, y が同一グループに属するかを返す
+
+# 参考
 https://en.wikipedia.org/wiki/Disjoint-set_data_structure, 2020/04/22
 https://qiita.com/kopricky/items/3e5847ab1451fe990367, 2020/04/22
 */

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#540b21ecdb276f5087ee585cedd6d5d0">Mathematics</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/MathUtility.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -44,17 +44,21 @@ layout: default
 /*
 last-updated: 2020/01/14
 
+# 仕様
 (boost の gcd が動いて遅くなるかも)
-T gcd(const T & a, const T & b) : O(log b)
+T gcd(const T & a, const T & b) :
+	時間計算量: O(log b)
 	a と b の greatest common divisor を求める
 
-T lcm(const T & a, const T &b) : O(log b)
+T lcm(const T & a, const T &b) :
+	時間計算量: O(log b)
 	a と b の least common multiple を求める
 
-T extgcd(const T & a, const T & b, T &x, T &y) : O(log b)
+T extgcd(const T & a, const T & b, T &x, T &y) :
+	時間計算量: O(log b)
 	一次不定方程式 ax + by = gcd(x, y) の解 (x, y) を求める
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/04/01/184957, 2020/01/14
 */
 
@@ -93,17 +97,21 @@ T extgcd(const T & a, const T & b, T &x, T &y) {
 /*
 last-updated: 2020/01/14
 
+# 仕様
 (boost の gcd が動いて遅くなるかも)
-T gcd(const T & a, const T & b) : O(log b)
+T gcd(const T & a, const T & b) :
+	時間計算量: O(log b)
 	a と b の greatest common divisor を求める
 
-T lcm(const T & a, const T &b) : O(log b)
+T lcm(const T & a, const T &b) :
+	時間計算量: O(log b)
 	a と b の least common multiple を求める
 
-T extgcd(const T & a, const T & b, T &x, T &y) : O(log b)
+T extgcd(const T & a, const T & b, T &x, T &y) :
+	時間計算量: O(log b)
 	一次不定方程式 ax + by = gcd(x, y) の解 (x, y) を求める
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/04/01/184957, 2020/01/14
 */
 

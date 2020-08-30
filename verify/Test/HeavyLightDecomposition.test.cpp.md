@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/HeavyLightDecomposition.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 11:57:19+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_set_path_composite">https://judge.yosupo.jp/problem/vertex_set_path_composite</a>
@@ -120,6 +120,7 @@ int main() {
 /*
 last-updated: 2020/02/26
 
+# 仕様
 ModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 
 ModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
@@ -146,7 +147,7 @@ friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs)
 friend std::istream & operator >>(std::istream & is, ModInt & rhs) :
 	入出力用
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
 
@@ -228,14 +229,34 @@ private:
 /*
 last-updated: 2020/08/15
 
-SegmentTree(size_type n_, const F & f, const_reference id_elem) : 要素数 n_, 二項演算 f, 単位元 id_elem
-void set(size_type i, const_reference x) : Θ(log n) i 番目の要素に x を代入
-void add(size_type i, const_reference x) : Θ(lon n) i 番目の要素に x を演算する
-value_type fold(size_type l, size_type r) const : Θ(log n) [l, r) を fold した結果を返す
-size_type lower_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) >= x となるような最小の idx を返す
-size_type upper_bound(const_reference x) const : Θ(log n) 単調増加を仮定し、fold(0, idx) > x となるような最小の idx を返す
+TODO: 二分探索の一般化
 
-参考 :
+# 仕様
+SegmentTree(size_type n_, const F & f, const_reference id_elem) :
+	時間計算量: Θ(n)
+	要素数 n_, 二項演算 f, 単位元 id_elem で初期化
+
+void set(size_type i, const_reference x) :
+	時間計算量: Θ(log n)
+	i 番目の要素に x を代入
+
+void add(size_type i, const_reference x) :
+	時間計算量: Θ(lon n)
+	i 番目の要素に x を演算する
+
+value_type fold(size_type l, size_type r) const :
+	時間計算量: Θ(log n)
+	[l, r) を fold した結果を返す
+
+size_type lower_bound(const_reference x) const :
+	時間計算量: Θ(log n)
+	単調増加を仮定し、fold(0, idx) >= x となるような最小の idx を返す
+
+size_type upper_bound(const_reference x) const :
+	時間計算量: Θ(log n)
+	単調増加を仮定し、fold(0, idx) > x となるような最小の idx を返す
+
+# 参考
 https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf, 2020/04/08
 */
 
@@ -334,9 +355,10 @@ last-updated: 2020/04/22
 
 HL 分解
 
+# 仕様
 template<typename U, typename T> :
 	U : モノイドの型
-	T : fold 演算を行なえるデータ構造(ex. SegmentTree)
+	T : fold 演算が可能なデータ構造(ex. SegmentTree)
 
 HeavyLightDecomposition(
 		std::vector<std::vector<size_type>> &g,
@@ -345,41 +367,41 @@ HeavyLightDecomposition(
 		const value_type
 		&id_elem,
 		bool value_on_vertex) :
-	Θ(N)
+	時間計算量: Θ(n)
 	root_num を根とする木 g に対して HL 分解を行う。
 	載せるモノイドの二項演算を f, 単位元を id_elem とする。
 	{value_on_vertex - true : 頂点, false : 辺} に値を持たせる。
 
 size_type size() const noexcept :
+	時間計算量: Θ(1)
 	分解前の頂点数を返す
 
 void set(size_type i, const_reference x) :
-	Θ(log N)
+	時間計算量: Θ(log N)
 	頂点 i の値を x に変更する
 
 void set(size_type u, size_type v, const_reference x) :
-	Θ(log N)
+	時間計算量: Θ(log N)
 	辺 (u, v) の重みを x に変更する
 
-
 size_type lca(size_type x, size_type y) const :
-	O(log N)
+	時間計算量: O(log N)
 	x と y の LCA を返す
 
 value_type fold(size_type u, size_type v) const :
-	O(loglog N)
+	時間計算量: O(loglog N)
 	パス u -> v で fold 演算した結果を返す
 
 -- private --
 std::pair<size_type, size_type> lca_node_num(size_type x, size_type y) const :
-	O(log N)
+	時間計算量: O(log N)
 	x と y の LCA が属する列にはじめて到達したときの頂点の組を返す。
 
-memo :
+# memo
 	num は分解前の添字
 	idx は分解後の添字
 
-参考 :
+# 参考
 https://qiita.com/ageprocpp/items/8dfe768218da83314989, 2020/04/19
 https://math314.hateblo.jp/entry/2014/06/24/220107, 2020/04/19
 

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/DisjointSparseTable.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -54,23 +54,28 @@ layout: default
 /*
 last-updated: 2020/04/30
 
+# 仕様
 ※非可換の場合は unverified
 T は半群
-
 template<class InputIterator>
 DisjointSparseTable(InputIterator first, InputIterator last, const F &f) :
-	θ(n log n)
+	時間計算量: θ(n log n)
 	[farst, last) でテーブルを作成する
 	二項演算 f
 
-size_type empty() const noexcept : θ(1) 要素が空であるかを判定する
-size_type size() const noexcept : θ(1) 要素数を返す
+size_type empty() const noexcept :
+	時間計算量: θ(1)
+	要素が空であるかを判定する
+
+size_type size() const noexcept :
+	時間計算量: θ(1)
+	要素数を返す
 
 value_type fold(size_type l, size_type r) const :
-	θ(loglog n)
+	時間計算量: θ(loglog n)
 	[l, r) を fold した結果を返す
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b, 2020/04/30
 */
 
@@ -152,23 +157,28 @@ private:
 /*
 last-updated: 2020/04/30
 
+# 仕様
 ※非可換の場合は unverified
 T は半群
-
 template<class InputIterator>
 DisjointSparseTable(InputIterator first, InputIterator last, const F &f) :
-	θ(n log n)
+	時間計算量: θ(n log n)
 	[farst, last) でテーブルを作成する
 	二項演算 f
 
-size_type empty() const noexcept : θ(1) 要素が空であるかを判定する
-size_type size() const noexcept : θ(1) 要素数を返す
+size_type empty() const noexcept :
+	時間計算量: θ(1)
+	要素が空であるかを判定する
+
+size_type size() const noexcept :
+	時間計算量: θ(1)
+	要素数を返す
 
 value_type fold(size_type l, size_type r) const :
-	θ(loglog n)
+	時間計算量: θ(loglog n)
 	[l, r) を fold した結果を返す
 
-参考 :
+# 参考
 https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b, 2020/04/30
 */
 

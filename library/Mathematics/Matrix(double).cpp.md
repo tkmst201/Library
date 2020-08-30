@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#540b21ecdb276f5087ee585cedd6d5d0">Mathematics</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Matrix(double).cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -55,6 +55,7 @@ last-updated: 2020/04/13
 
 **gauss-jordan : unverified**
 
+# 仕様
 Matrix() : 空の行列を作成
 Matrix(size_type h, size_type w, const value_type & x = 0) : 型(h, w) 初期値 x の行列を作成
 Matrix(std::vector<std::vector<value_type>> val) : 2次元 vector から行列を作成
@@ -102,7 +103,7 @@ std::pair<size_type, value_type> gauss_jordan(size_type colnum = -1) :
 	(rank, determinant) を返す
 friend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) : 行列を出力できる
 
-参考 :
+# 参考
 https://drken1215.hatenablog.com/entry/2019/03/20/202800
 */
 
@@ -322,6 +323,7 @@ last-updated: 2020/04/13
 
 **gauss-jordan : unverified**
 
+# 仕様
 Matrix() : 空の行列を作成
 Matrix(size_type h, size_type w, const value_type & x = 0) : 型(h, w) 初期値 x の行列を作成
 Matrix(std::vector<std::vector<value_type>> val) : 2次元 vector から行列を作成
@@ -369,7 +371,7 @@ std::pair<size_type, value_type> gauss_jordan(size_type colnum = -1) :
 	(rank, determinant) を返す
 friend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) : 行列を出力できる
 
-参考 :
+# 参考
 https://drken1215.hatenablog.com/entry/2019/03/20/202800
 */
 

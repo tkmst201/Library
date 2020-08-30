@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../../index.html#637dbc1fa2c49b2df4202c454476276a">Mathematics/Convolution</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Convolution/NumberTheoreticTransform.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-07-27 00:50:20+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -197,26 +197,28 @@ private:
 /*
 last-updated: 2020/07/27
 
+# 解説
 b: ( b_0, \ldots, b_{k-1} ), m: ( m_0, \ldots, m_{k-1} ) に対して、
 x \equiv b_i (mod. m_i) (\forall i) となる x を [0, lcm(m_0, \ldots, m_{k-1})) の範囲で求める。
 このような x は、b_0 \equiv \dots \equiv b_{k-1} (mod. gcd(m_0, \ldots, m_{k-1})) であるときのみ存在し、一意である。
 
+# 仕様
 template<typename T>
 static bool preprocess(std::vector<T> &b, std::vector<T> &m) :
-	O(k^2 log m (loglog m)) ? これより小さい気がするが分からず
+	時間計算量: O(k^2 log m (loglog m)) ? これより小さい気がするが分からず
 	m が互いに素でないときに連立合同式の同値変形を行い、互いに素に変形する。
 	解が存在しない場合は false を返す
 
 template<typename T>
 static T garner(const std::vector<T> & b, std::vector<T> m, const T &mod) :
-	O(k(k + log m))
+	時間計算量: O(k(k + log m))
 	m は互いに素であることが必要
 	(x \equiv b_i (mod. m_i) (\forall i) となる x) modulo. mod を返す(m は互いに素より必ず存在する)
 
 仕様
 - T は符号付き整数。
 
-参考 :
+# 参考
 https://qiita.com/drken/items/ae02240cd1f8edfc86fd, 2020/05/05
 */
 

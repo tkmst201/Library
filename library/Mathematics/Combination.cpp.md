@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#540b21ecdb276f5087ee585cedd6d5d0">Mathematics</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Mathematics/Combination.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -48,6 +48,7 @@ layout: default
 /*
 last-updated: 2020/01/15
 
+# 仕様
 template引数 には ModInt を渡す。(require get_mod())
 
 Construct : Amortized Θ(max k + (logM)^2 ) ??
@@ -56,14 +57,18 @@ Query : Amortized Θ(1) ?? 謎
 Comination(size_type sz = 1) :
 	sz! を計算できるだけ前計算
 
-T fact(size_type k) : k! を求める
-T finv(size_type k) : (k!)^-1 を求める
-T inv(size_type k) : k^-1 を求める
+T fact(size_type k) :
+	k! を求める
+
+T finv(size_type k) :
+	(k!)^-1 を求める
+
+T inv(size_type k) :
+	k^-1 を求める
 
 :private:
 void build(size_type k) :
 	k! が計算できるように確保
-
 */
 
 template<typename T>
@@ -119,6 +124,7 @@ private:
 /*
 last-updated: 2020/01/15
 
+# 仕様
 template引数 には ModInt を渡す。(require get_mod())
 
 Construct : Amortized Θ(max k + (logM)^2 ) ??
@@ -127,14 +133,18 @@ Query : Amortized Θ(1) ?? 謎
 Comination(size_type sz = 1) :
 	sz! を計算できるだけ前計算
 
-T fact(size_type k) : k! を求める
-T finv(size_type k) : (k!)^-1 を求める
-T inv(size_type k) : k^-1 を求める
+T fact(size_type k) :
+	k! を求める
+
+T finv(size_type k) :
+	(k!)^-1 を求める
+
+T inv(size_type k) :
+	k^-1 を求める
 
 :private:
 void build(size_type k) :
 	k! が計算できるように確保
-
 */
 
 template<typename T>

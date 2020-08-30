@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/SlidingWindowAggregation.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -53,15 +53,29 @@ last-updated: 2019/12/18
 抽象化したいね
 vbackは1要素しか必要ないのでそうするべき
 
-void push(const int &x) : 後ろに x を入れる
-void pop() : 先頭の要素を削除する
-bool empty() : 空かどうかを返す
-int fald_all() : 現在入っている全ての要素の演算結果を返す
+# 仕様
+void push(const int &x) :
+	時間計算量: Θ(1) amortized
+	後ろに値 x を入れる
+
+void pop() :
+	時間計算量: Θ(1) amortized
+	先頭の要素を削除する
+
+bool empty() :
+	時間計算量: Θ(1)
+	空かどうかを返す
+
+int fald_all() :
+	時間計算量: Θ(1)
+	現在入っている全ての要素の演算結果を返す
 
 private:
-int func(const int &x, const int &y) : 区間演算
+int func(const int &x, const int &y) :
+	時間計算量: Θ(1)
+	二項演算
 
-参考 :
+# 参考
 https://scrapbox.io/data-structures/Sliding_Window_Aggregation, 2019/12/18
 */
 
@@ -154,15 +168,29 @@ last-updated: 2019/12/18
 抽象化したいね
 vbackは1要素しか必要ないのでそうするべき
 
-void push(const int &x) : 後ろに x を入れる
-void pop() : 先頭の要素を削除する
-bool empty() : 空かどうかを返す
-int fald_all() : 現在入っている全ての要素の演算結果を返す
+# 仕様
+void push(const int &x) :
+	時間計算量: Θ(1) amortized
+	後ろに値 x を入れる
+
+void pop() :
+	時間計算量: Θ(1) amortized
+	先頭の要素を削除する
+
+bool empty() :
+	時間計算量: Θ(1)
+	空かどうかを返す
+
+int fald_all() :
+	時間計算量: Θ(1)
+	現在入っている全ての要素の演算結果を返す
 
 private:
-int func(const int &x, const int &y) : 区間演算
+int func(const int &x, const int &y) :
+	時間計算量: Θ(1)
+	二項演算
 
-参考 :
+# 参考
 https://scrapbox.io/data-structures/Sliding_Window_Aggregation, 2019/12/18
 */
 

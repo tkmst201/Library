@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#5e248f107086635fddcead5bf28943fc">DataStructure</a>
 * <a href="{{ site.github.repository_url }}/blob/master/DataStructure/PersistentArray.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-06-26 17:19:32+09:00
+    - Last commit date: 2020-08-25 21:49:12+09:00
 
 
 
@@ -51,16 +51,32 @@ last-updated: 2020/04/15
 
 永続配列
 
-PersistentArray() : 空の array の作成
-PersistentArray(size_type n, const_reference def_v) : Θ(n) サイズ n 以上の最小の 2 冪の配列を作成, 初期値は def_v
+# 仕様
+PersistentArray() :
+	時間計算量: Θ(1)
+	空の array の作成
 
-bool empty() const noexcept : Θ(1) 空であるかの判定
-size_type size() const noexcept : Θ(1) 配列のサイズを返す
+PersistentArray(size_type n, const_reference def_v) :
+	時間計算量: Θ(n)
+	サイズ n 以上の最小の 2 冪の配列を作成, 初期値は def_v
 
-const_reference lookup(size_type i) const : Θ(log n) i(0-indexed) 番目の要素を返す
-PersistentArray update(size_type i, const_reference x) const : Θ(log n) i(0-indexed) 番目の要素を x に書き換えた配列を作成
+bool empty() const noexcept :
+	時間計算量: Θ(1)
+	空であるかどうかを判定する
 
-参考 :
+size_type size() const noexcept :
+	時間計算量: Θ(1)
+	配列のサイズを返す
+
+const_reference lookup(size_type i) const :
+	時間計算量: Θ(log n)
+	i(0-indexed) 番目の要素を返す
+
+PersistentArray update(size_type i, const_reference x) const :
+	時間計算量: Θ(log n)
+	i(0-indexed) 番目の要素を x に書き換えた配列を作成
+
+# 参考
 https://trap.jp/post/663/, 2020/04/10
 */
 
@@ -169,16 +185,32 @@ last-updated: 2020/04/15
 
 永続配列
 
-PersistentArray() : 空の array の作成
-PersistentArray(size_type n, const_reference def_v) : Θ(n) サイズ n 以上の最小の 2 冪の配列を作成, 初期値は def_v
+# 仕様
+PersistentArray() :
+	時間計算量: Θ(1)
+	空の array の作成
 
-bool empty() const noexcept : Θ(1) 空であるかの判定
-size_type size() const noexcept : Θ(1) 配列のサイズを返す
+PersistentArray(size_type n, const_reference def_v) :
+	時間計算量: Θ(n)
+	サイズ n 以上の最小の 2 冪の配列を作成, 初期値は def_v
 
-const_reference lookup(size_type i) const : Θ(log n) i(0-indexed) 番目の要素を返す
-PersistentArray update(size_type i, const_reference x) const : Θ(log n) i(0-indexed) 番目の要素を x に書き換えた配列を作成
+bool empty() const noexcept :
+	時間計算量: Θ(1)
+	空であるかどうかを判定する
 
-参考 :
+size_type size() const noexcept :
+	時間計算量: Θ(1)
+	配列のサイズを返す
+
+const_reference lookup(size_type i) const :
+	時間計算量: Θ(log n)
+	i(0-indexed) 番目の要素を返す
+
+PersistentArray update(size_type i, const_reference x) const :
+	時間計算量: Θ(log n)
+	i(0-indexed) 番目の要素を x に書き換えた配列を作成
+
+# 参考
 https://trap.jp/post/663/, 2020/04/10
 */
 
