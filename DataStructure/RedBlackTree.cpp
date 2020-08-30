@@ -2,11 +2,9 @@
 #include <utility>
 
 /*
-last-updated: 2020/08/29
+last-updated: 2020/08/30
 
-TODO: k-th largest を追加する
-TODO: merge/split base を学ぶ
-
+全てのノードに値を持たせる insert/delete ベースの赤黒木
 操作の前後で安定
 
 # 仕様
@@ -22,6 +20,14 @@ RedBrackTree(const RedBrackTree & rhs) :
 	時間計算量: O(n)
 	デストラクタ
 	clear() を呼ぶ
+
+size_type size() const noexcept :
+	時間計算量: O(1)
+	要素数を返す
+
+bool empty() const noexcept :
+	時間計算量: O(1)
+	要素が空であるかどうか判定する
 
 void clear() :
 	時間計算量: O(n)
@@ -107,6 +113,7 @@ public:
 private:
 	node_ptr root = nullptr;
 	node_ptr begin_ptr = nullptr, end_ptr = nullptr;
+	size_type n = 0;
 	
 public:
 	RedBlackTree() = default;
@@ -119,16 +126,27 @@ public:
 		auto dfs = [&](auto &&self, node_ptr node, node_ptr par) -> node_ptr {
 			if (!node) return nullptr;
 			node_ptr ret = new Node{node->val, node->isred, nullptr, nullptr, par, node->isright};
+			if (node == rhs.begin_ptr) begin_ptr = ret;
+			if (node == rhs.end_ptr) end_ptr = ret;
 			ret->child[0] = self(self, node->child[0], ret);
 			ret->child[1] = self(self, node->child[1], ret);
 			return ret;
 		};
 		root = dfs(dfs, rhs.root, nullptr);
+		n = rhs.n;
 		return *this;
 	}
 	
 	~RedBlackTree() {
 		clear();
+	}
+	
+	size_type size() const noexcept {
+		return n;
+	}
+	
+	bool empty() const noexcept {
+		return size() == 0;
 	}
 	
 	void clear() {
@@ -165,6 +183,7 @@ public:
 	node_ptr insert(const_reference x) {
 		if (!root) {
 			root = new Node{x, false, nullptr, nullptr, nullptr, false};
+			++n;
 			begin_ptr = end_ptr = root;
 			return root;
 		}
@@ -177,6 +196,7 @@ public:
 			if (par->child[nex_r]) par = par->child[nex_r];
 			else {
 				ins = new Node{x, true, nullptr, nullptr, par, nex_r};
+				++n;
 				if (move_only[0]) begin_ptr = ins;
 				if (move_only[1]) end_ptr = ins;
 				par->child[nex_r] = ins;
@@ -395,6 +415,7 @@ private:
 			else root = nullptr;
 		}
 		delete node;
+		--n;
 		if (isred) return;
 		
 		while (par) {
