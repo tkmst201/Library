@@ -8,6 +8,8 @@ last-updated: 2020/09/01
 
 merge/split ベースの完全永続赤黒木
 
+TODO: メモリプールを使用して高速化(できるかはわからない)
+
 # 仕様
 PersistentRedBlackTree() :
 	時間計算量: O(1)

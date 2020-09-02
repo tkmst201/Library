@@ -8,7 +8,7 @@ last-updated: 2020/08/04
 実数の畳み込み
 基数 4 周波数間引き Cooley-Tukey
 
-定数倍で基数 2 時間間引き Cookey-Tukey と差が無い
+ライブラリ内では一番高速(のはず)
 
 # 仕様
 template<typename T>

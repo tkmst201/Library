@@ -7,6 +7,8 @@ last-updated: 2020/08/30
 全てのノードに値を持たせる insert/delete ベースの赤黒木
 操作の前後で安定
 
+TODO: 葉に値を持たせるような insert/erase ベース(merge/split 対応) の赤黒木の作成(できるかはわからない)
+
 # 仕様
 RedBrackTree() :
 	時間計算量: O(1)

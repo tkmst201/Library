@@ -2,7 +2,7 @@
 #include <cassert>
 
 /*
-last-updated: 2020/09/02
+last-updated: 2020/09/03
 
 コンストラクタで渡した g は変更してはいけない
 used フラグの変更は set を通して行う
@@ -58,6 +58,29 @@ long long get_tree_diameter(
 	全方位木 dp を用いれば Θ(n) で求めることができそう
 	重みが正の場合は double-sweap で Θ(n) で求まる
 	これは verify 用
+
+// おまけ その３
+std::vector<long long> get_dist_frequency_table(const Graph & g) :
+	要求ライブラリ: FastFourierTransform(multiply を実装済)
+	時間計算量: Θ(n log^2 n)
+	n 頂点の木において次のテーブルを作成する
+		table[i] = u \leq v で dist(u, v) = i となるような (u, v) の個数
+	
+	# 解説
+		u < v で (u, v), (v, u) と重複して数えあげて最後に 2 で割る
+		
+		centroid を通るパスを考える。
+		部分木ごとに centroid からの距離を d として table[d]++ した table を用意
+		全ての table の和を取る
+		この table を 2 乗すると (異なる部分木を結合した table) + (同一部分木を結合した table) が得られる
+		このとき、両方の table で [0] = 1 としておくと centroid - * のパスを数えることが可能
+		((centroid, *) が重複してちょうど 2 回数え上げられる)
+		
+		(同一部分木を結合した table) では (centroid, *) は正しいが (*, *) の状態は消す必要があるので
+		[0] = 0 として部分木のテーブルを 2 乗して引く
+		
+		1 つの階層で全体で O(n log n) の畳み込み
+		全 O(log n) 層なので全体で O(n log^2 n)
 
 # 参考
 https://ferin-tech.hatenablog.com/entry/2020/03/06/162311, 2020/09/02
@@ -241,4 +264,75 @@ long long get_tree_diameter(
 	path.emplace_back(dat.v);
 	while (par[path.back()] != g.size()) path.emplace_back(par[path.back()]);
 	return dat.dist;
+}
+
+// おまけ その３
+#include <cmath>
+#include <algorithm>
+
+template<class FFT>
+std::vector<long long> get_dist_frequency_table(const CentroidDecomposition::Graph & g) {
+	using CD = CentroidDecomposition;
+	using value_type = long long;
+	using size_type = CD::size_type;
+	CD cd(g);
+	
+	size_type n = g.size();
+	std::vector<size_type> depth(n);
+	
+	auto dfs = [&](auto && self, size_type centroid) -> std::vector<value_type> {
+		cd.set(centroid);
+		
+		bool iso = true;
+		for (auto r : g[centroid]) if (!cd[r]) { iso = false; break; }
+		if (iso) return {0};
+		
+		std::vector<value_type> res;
+		std::vector<value_type> sum_table;
+		for (auto r : g[centroid]) {
+			if (cd[r]) continue;
+			
+			std::vector<size_type> dvec;
+			auto dfs2 = [&](auto && self, size_type u, size_type par) -> size_type {
+				size_type res = depth[u];
+				dvec.emplace_back(depth[u]);
+				for (auto v : g[u]) {
+					if (v == par || cd[v]) continue;
+					depth[v] = depth[u] + 1;
+					size_type pred = self(self, v, u);
+					if (res < pred) res = pred;
+				}
+				return res;
+			};
+			
+			depth[r] = 1;
+			size_type mx_depth = dfs2(dfs2, r, n);
+			std::vector<value_type> table(mx_depth + 1, 0);
+			for (auto i : dvec) ++table[i];
+			if (sum_table.size() < mx_depth + 1) sum_table.resize(mx_depth + 1);
+			for (size_type i = 1; i < table.size(); ++i) sum_table[i] += table[i];
+			
+			auto mul = FFT::multiply(table, table);
+			if (mul.size() > n) mul.resize(n);
+			if (res.size() < mul.size()) res.resize(mul.size());
+			for (size_type i = 1; i < mul.size(); ++i) res[i] -= static_cast<value_type>(std::round(mul[i]));
+			
+			table = self(self, cd.get_centroid(r)[0]);
+			if (res.size() < table.size()) res.resize(table.size());
+			for (size_type i = 1; i < table.size(); ++i) res[i] += table[i];
+		}
+		
+		sum_table[0] = 1;
+		auto prod = FFT::multiply(sum_table, sum_table);
+		if (prod.size() > n) prod.resize(n);
+		if (res.size() < prod.size()) res.resize(prod.size());
+		for (size_type i = 1; i < prod.size(); ++i) res[i] += static_cast<value_type>(std::round(prod[i]));
+		return res;
+	};
+	
+	auto res = dfs(dfs, cd.get_centroid(0)[0]);
+	for (size_type i = 1; i < res.size(); ++i) res[i] >>= 1;
+	if (res.size() < n) res.resize(n);
+	res[0] = n;
+	return res;
 }
