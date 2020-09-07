@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "DataStructure/RedBlackTree.cpp"
+#include "DataStructure/RedBlackTree.hpp"
 
 #include <cstdio>
 

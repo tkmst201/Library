@@ -1,7 +1,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "DataStructure/BinaryIndexedTree.cpp"
-#include "DataStructure/BinaryIndexedTree_RangeAdd.cpp"
+#include "DataStructure/BinaryIndexedTree.hpp"
+#include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 
 #include <cstdio>
 int main() {

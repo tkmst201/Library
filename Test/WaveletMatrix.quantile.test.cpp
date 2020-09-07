@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_kth_smallest"
 
-#include "DataStructure/SuccintBitVector.cpp"
-#include "DataStructure/WaveletMatrix.cpp"
+#include "DataStructure/SuccintBitVector.hpp"
+#include "DataStructure/WaveletMatrix.hpp"
 
 #include <cstdio>
 #include <vector>

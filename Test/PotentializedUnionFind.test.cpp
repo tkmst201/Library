@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1330"
 
-#include "DataStructure/PotentializedUnionFind.cpp"
+#include "DataStructure/PotentializedUnionFind.hpp"
 
 #include <cstdio>
 

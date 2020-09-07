@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/frequency_table_of_tree_distance"
 
-#include "GraphTheory/CentroidDecomposition.cpp"
-#include "Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.cpp"
+#include "GraphTheory/CentroidDecomposition.hpp"
+#include "Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp"
 
 #include <cstdio>
 #include <vector>

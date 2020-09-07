@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2426?year=2012"
 
-#include "DataStructure/SuccintBitVector.cpp"
-#include "DataStructure/WaveletMatrix.cpp"
+#include "DataStructure/SuccintBitVector.hpp"
+#include "DataStructure/WaveletMatrix.hpp"
 
 #include <cstdio>
 #include <vector>

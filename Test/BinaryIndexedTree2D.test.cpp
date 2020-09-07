@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842"
 
-#include "DataStructure/BinaryIndexedTree2D.cpp"
+#include "DataStructure/BinaryIndexedTree2D.hpp"
 
 #include <cstdio>
 #include <vector>

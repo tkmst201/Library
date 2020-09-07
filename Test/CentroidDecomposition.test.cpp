@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/tree_diameter"
 
-#include "GraphTheory/CentroidDecomposition.cpp"
+#include "GraphTheory/CentroidDecomposition.hpp"
 
 #include <cstdio>
 #include <vector>

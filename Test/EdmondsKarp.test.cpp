@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/problems/GRL_6_A"
 
-#include "GraphTheory/EdmondsKarp.cpp"
+#include "GraphTheory/EdmondsKarp.hpp"
 
 #include <cstdio>
 

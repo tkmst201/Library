@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/enumerate_primes"
 
-#include "Mathematics/PrimeNumber/enumerate_primes.cpp"
+#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
 
 #include <cstdio>
 

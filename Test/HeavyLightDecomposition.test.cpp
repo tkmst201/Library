@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#include "Mathematics/ModInt.cpp"
-#include "DataStructure/SegmentTree.cpp"
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "Mathematics/ModInt.hpp"
+#include "DataStructure/SegmentTree.hpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 #include <vector>

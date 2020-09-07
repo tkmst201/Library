@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
-#include "String/RollingHash.cpp"
+#include "String/RollingHash.hpp"
 
 #include <string>
 #include <iostream>

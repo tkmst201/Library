@@ -1,6 +1,6 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D"
 
-#include "String/SuffixArray.cpp"
+#include "String/SuffixArray.hpp"
 
 #include <string>
 #include <iostream>

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "DataStructure/AVL_Tree.cpp"
+#include "DataStructure/AVL_Tree.hpp"
 
 #include <cstdio>
 

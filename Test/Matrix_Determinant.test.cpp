@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 
-#include "Mathematics/ModInt.cpp"
-#include "Mathematics/Matrix.cpp"
+#include "Mathematics/ModInt.hpp"
+#include "Mathematics/Matrix.hpp"
 
 #include <iostream>
 

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 
-#include "DataStructure/DisjointSparseTable.cpp"
+#include "DataStructure/DisjointSparseTable.hpp"
 // これは可換の場合でのテスト
 
 #include <cstdio>

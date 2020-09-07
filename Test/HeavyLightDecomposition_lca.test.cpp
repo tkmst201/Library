@@ -1,6 +1,6 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C"
 
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 #include <functional>

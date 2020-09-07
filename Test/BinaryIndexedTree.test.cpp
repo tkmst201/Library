@@ -1,7 +1,7 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#include "DataStructure/BinaryIndexedTree.cpp"
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "DataStructure/BinaryIndexedTree.hpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 int main() {

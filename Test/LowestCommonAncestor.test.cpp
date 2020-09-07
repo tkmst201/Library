@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 
-#include "GraphTheory/LowestCommonAncestor.cpp"
+#include "GraphTheory/LowestCommonAncestor.hpp"
 
 #include <cstdio>
 

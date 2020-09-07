@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "DataStructure/SparseTable.cpp"
+#include "DataStructure/SparseTable.hpp"
 
 #include <cstdio>
 #include <algorithm>

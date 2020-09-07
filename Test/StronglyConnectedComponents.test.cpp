@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "GraphTheory/StronglyConnectedComponents.cpp"
+#include "GraphTheory/StronglyConnectedComponents.hpp"
 
 #include <cstdio>
 

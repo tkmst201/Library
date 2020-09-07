@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 
-#include "DataStructure/UnionFind.cpp"
+#include "DataStructure/UnionFind.hpp"
 
 #include <cstdio>
 

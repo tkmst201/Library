@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/counting_primes"
 
-#include "Mathematics/ModInt.cpp"
-#include "Mathematics/PrimeNumber/counting_primes.cpp"
+#include "Mathematics/ModInt.hpp"
+#include "Mathematics/PrimeNumber/counting_primes.hpp"
 
 #include <cstdio>
 

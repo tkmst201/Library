@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_set_range_composite"
 
-#include "DataStructure/SegmentTree.cpp"
-#include "Mathematics/ModInt.cpp"
+#include "DataStructure/SegmentTree.hpp"
+#include "Mathematics/ModInt.hpp"
 
 #include <cstdio>
 
