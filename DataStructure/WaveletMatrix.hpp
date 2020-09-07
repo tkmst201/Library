@@ -9,16 +9,9 @@
 #include <stack>
 
 /*
-last-updated: 2020/09/05
+last-updated: 2020/09/07
 
 非負整数列を扱う静的なデータ構造
-
-# verify 進捗
-rank_all : verified
-select : 手元テスト ok: TODO: get_rect: 矩形内の点をリストで返す関数, を作成すれば AOJ の kd木 verify 用問題が使える?
-quantile : verified
-rangefreq : verified
-next_value, prev_value: TODO: https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1549?year=2014
 
 # 仕様
 BitVector において select の計算量を α とする。
@@ -61,24 +54,42 @@ value_type quantile(size_type l, size_type r, size_type k) const :
 	[l, r) 内で k 番目[1-indexed] に小さい要素を返す
 	l < r \leq n かつ 0 < k \leq r - l である必要がある
 
-size_type range_frequency(size_type l, size_type r, size_type val_l, size_type val_r) const :
+size_type range_frequency(size_type l, size_type r, value_type val_l, value_type val_r) const :
 	時間計算量: Θ(log BITS)
 	[l, r) 内の要素であって、値が [val_l, val_r) の範囲に入っているような要素の個数を返す
 	l \geq または val_l \geq r の場合は 0 を返す
 
-std::pair<value_type, bool> next_value(size_type l, size_type r, size_type val_l, size_type val_r) const :
+std::vector<std::pair<value_type, size_type>> range_min_k
+	(size_type l, size_type r, value_type val_l, value_type val_r, size_type k) const :
+	時間計算量: Θ(k log BITS)
+	[l, r) 内の要素であって、値が [val_l, val_r) 内に含まれているものから、
+	同じ値はまとめて小さい値から順に k 個以下の組 (値, 出現回数) の配列にして返す
+
+std::vector<std::pair<value_type, size_type>> range_max_k
+	(size_type l, size_type r, value_type val_l, value_type val_r, size_type k) const :
+	時間計算量: Θ(k log BITS)
+	[l, r) 内の要素であって、値が [val_l, val_r) 内に含まれているものから、
+	同じ値はまとめて大きい値から順に k 個以下の組 (値, 出現回数) の配列にして返す
+
+std::pair<value_type, bool> next_value(size_type l, size_type r, value_type val_l, value_type val_r) const :
 	時間計算量: Θ(log BITS)
 	[l, r) 内の要素であって、値が [val_l, val_r) の範囲に入るような要素の最小値を返す
-	{最小値, 最小値が存在するかどうか(true: 存在する, false: 存在しない)}
+	( 最小値, 最小値が存在するかどうか(true: 存在する, false: 存在しない) )
 
-std::pair<value_type, bool> prev_value(size_type l, size_type r, size_type val_l, size_type val_r) const :
+std::pair<value_type, bool> prev_value(size_type l, size_type r, value_type val_l, value_type val_r) const :
 	時間計算量: Θ(log BITS)
 	[l, r) 内の要素であって、値が [val_l, val_r) の範囲に入るような要素の最大値を返す
-	{最大値, 最大値が存在するかどうか(true: 存在する, false: 存在しない)}
+	( 最大値, 最大値が存在するかどうか(true: 存在する, false: 存在しない) )
+
+std::vector<std::pair<size_type, value_type>> get_rect(size_type l, size_type r, value_type val_l, value_type val_r) const :
+	時間計算量: Θ(D log BITS)
+	[l, r) 内の要素であって、値が [val_l, val_r) の範囲に入るような要素を (index, 値) の組の配列にして返す
+	対象の要素の個数を D とする。
 
 # 参考
 https://www.slideshare.net/pfi/ss-15916040, 2020/09/03
 https://miti-7.hatenablog.com/entry/2018/04/28/152259, 2020/09/04
+http://algoogle.hadrori.jp/algorithm/wavelet.html, 2020/09/07
 */
 
 template<std::size_t BITS, typename T, class BV>
@@ -155,7 +166,7 @@ public:
 	}
 	
 	size_type select(size_type k, const_reference x) const {
-		assert(k < size());
+		assert(k <= size());
 		assert((x >> BITS) == 0);
 		if (k == 0) return 0;
 		
@@ -208,18 +219,20 @@ public:
 		return res;
 	}
 	
-	size_type range_frequency(size_type l, size_type r, size_type val_l, size_type val_r) const {
+	size_type range_frequency(size_type l, size_type r, value_type val_l, value_type val_r) const {
 		assert(r <= size());
 		assert(((val_r - 1) >> BITS) == 0);
 		if (l >= r || val_l >= val_r) return 0;
 		return rank_less_than(l, r, val_r) - rank_less_than(l, r, val_l);
 	}
 	
-	std::pair<value_type, bool> next_value(size_type l, size_type r, size_type val_l, size_type val_r) const {
+	std::vector<std::pair<value_type, size_type>> range_min_k
+		(size_type l, size_type r, value_type val_l, value_type val_r, size_type k) const {
 		assert(r <= size());
 		assert(((val_r - 1) >> BITS) == 0);
-		if (l >= r || val_l >= val_r) return {0, false};
+		if (l >= r || val_l >= val_r || k == 0) return {};
 		
+		std::vector<std::pair<value_type, size_type>> res;
 		struct Data {
 			size_type i, l, r;
 			bool ismin;
@@ -234,8 +247,12 @@ public:
 		while (!stk.empty()) {
 			const Data dat = stk.top(); stk.pop();
 			if (dat.i == 0) {
-				if (dat.val < val_r) return {dat.val, true};
-				return {0, false};
+				if (dat.val < val_r) {
+					res.emplace_back(dat.val, dat.r - dat.l);
+					if (res.size() == k) break;
+					continue;
+				}
+				else break;
 			}
 			const size_type b = dat.i - 1;
 			const size_type l1 = bit_vector[b].rank1(dat.l), r1 = bit_vector[b].rank1(dat.r);
@@ -247,15 +264,17 @@ public:
 				if (l0 != r0) stk.emplace(b, l0, r0, dat.ismin, dat.val);
 			}
 		}
-		return {0, false};
+		return res;
 	}
 	
-	std::pair<value_type, bool> prev_value(size_type l, size_type r, size_type val_l, size_type val_r) const {
+	std::vector<std::pair<value_type, size_type>> range_max_k
+		(size_type l, size_type r, value_type val_l, value_type val_r, size_type k) const {
 		assert(r <= size());
 		assert(((val_r - 1) >> BITS) == 0);
-		if (l >= r || val_l >= val_r) return {0, false};
+		if (l >= r || val_l >= val_r || k == 0) return {};
 		--val_r;
 		
+		std::vector<std::pair<value_type, size_type>> res;
 		struct Data {
 			size_type i, l, r;
 			bool ismax;
@@ -270,8 +289,12 @@ public:
 		while (!stk.empty()) {
 			const Data dat = stk.top(); stk.pop();
 			if (dat.i == 0) {
-				if (dat.val >= val_l) return {dat.val, true};
-				return {0, false};
+				if (dat.val >= val_l) {
+					res.emplace_back(dat.val, dat.r - dat.l);
+					if (res.size() == k) break;
+					continue;
+				}
+				else break;
 			}
 			const size_type b = dat.i - 1;
 			const size_type l1 = bit_vector[b].rank1(dat.l), r1 = bit_vector[b].rank1(dat.r);
@@ -281,7 +304,29 @@ public:
 			if (l0 != r0) stk.emplace(b, l0, r0, dat.ismax & !bit, dat.val);
 			if (!(dat.ismax & !bit) && l1 != r1) stk.emplace(b, l1 + zero[b], r1 + zero[b], dat.ismax, dat.val | (1ull << b));
 		}
-		return {0, false};
+		return res;
+	}
+	
+	std::pair<value_type, bool> next_value(size_type l, size_type r, value_type val_l, value_type val_r) const {
+		const auto res = range_min_k(l, r, val_l, val_r, 1);
+		if (res.empty()) return {0, false};
+		return {res[0].first, true};
+	}
+	
+	std::pair<value_type, bool> prev_value(size_type l, size_type r, value_type val_l, value_type val_r) const {
+		const auto res = range_max_k(l, r, val_l, val_r, 1);
+		if (res.empty()) return {0, false};
+		return {res[0].first, true};
+	}
+	
+	std::vector<std::pair<size_type, value_type>> get_rect(size_type l, size_type r, value_type val_l, value_type val_r) const {
+		auto points = range_min_k(l, r, val_l, val_r, r - l);
+		std::vector<std::pair<size_type, value_type>> res;
+		for (auto &p : points) {
+			const size_type c = rank(0, l, p.first);
+			for (size_type i = 0; i < p.second; ++i) res.emplace_back(select(c + i + 1, p.first) - 1, p.first);
+		}
+		return res;
 	}
 	
 private:

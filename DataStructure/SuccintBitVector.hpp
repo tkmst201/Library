@@ -7,14 +7,12 @@
 #include <cassert>
 
 /*
-last-updated: 2020/09/04
+last-updated: 2020/09/07
 
 使用する前に必ず build() を呼ぶ
 高速化のために assert チェックを入れていないので注意
 
 TODO: O(1) select を調べる
-TODO: 改善した select 二分探索が正しく動作するかどうかの確認とどれだけ速くなるのかの検証
-TODO: 改善した select 二分探索で、select0, select1 に対応(現在 select 1 のみの動作)
 
 # 仕様
 n = 2^16 ~ 10^4.8 で計算量が保証されている実装
@@ -124,11 +122,59 @@ public:
 	}
 	
 	size_type select1(size_type k) const {
-		return select(k, &SuccintBitVector::rank1);
+		if (k == 0) return 0;
+		
+		size_type l = 0, r = large.size() - 1; // (l, r]
+		while (r - l > 1) {
+			size_type m = (l + r) >> 1;
+			(large[m] >= k ? r : l) = m;
+		}
+		
+		size_type res = (r - 1) << LARGE;
+		k -= large[r - 1];
+		size_type base = (r - 1) << (LARGE - SMALL);
+		l = 0; r = 1u << (LARGE - SMALL);
+		while (r - l > 1) {
+			size_type m = (l + r) >> 1;
+			(small[base + m] >= k ? r : l) = m;
+		}
+		
+		res += (r - 1) << SMALL;
+		base += r - 1;
+		k -= small[base];
+		base >>= DAT_B - SMALL;
+		for (size_type idx = ((r - 1) & ((1u << SMALL) - 1)) << SMALL; k; ++idx, ++res) {
+			if (bits[base] >> idx & 1) --k;
+		}
+		return res;
 	}
 	
 	size_type select0(size_type k) const {
-		return select(k, &SuccintBitVector::rank0);
+		if (k == 0) return 0;
+		
+		size_type l = 0, r = large.size() - 1; // (l, r]
+		while (r - l > 1) {
+			size_type m = (l + r) >> 1;
+			((1u << LARGE) * m - large[m] >= k ? r : l) = m;
+		}
+		
+		size_type res = (r - 1) << LARGE;
+		k -= (1u << LARGE) * (r - 1) - large[r - 1];
+		size_type base = (r - 1) << (LARGE - SMALL);
+		l = 0; r = 1u << (LARGE - SMALL);
+		while (r - l > 1) {
+			size_type m = (l + r) >> 1;
+			((1u << SMALL) * m - small[base + m] >= k ? r : l) = m;
+		}
+		
+		res += (r - 1) << SMALL;
+		base += r - 1;
+		k -= (1u << SMALL) * (r - 1) - small[base];
+		base >>= DAT_B - SMALL;
+		for (size_type idx = ((r - 1) & ((1u << SMALL) - 1)) << SMALL; k; ++idx, ++res) {
+			if (~bits[base] >> idx & 1) --k;
+		}
+		return res;
 	}
 	
 	void build() {
@@ -157,53 +203,6 @@ private:
 	
 	uint16 pop_count(uint16 x) const {
 		return table[x];
-	}
-	
-	size_type select(size_type k, size_type (SuccintBitVector::*count)(size_type) const) const {
-		if (k == 0) return 0;
-		if (k > (this->*count)(size())) return size() + 1;
-		size_type l = 0, r = size();
-		while (r - l > 1) {
-			size_type m = (l + r) >> 1;
-			if ((this->*count)(m) >= k) r = m;
-			else l = m;
-		}
-		return r;
-		// if (k == 0) return 0;
-		// if (k > (this->*count)(size())) return size() + 1;
-		
-		// size_type l = 0, r = large.size() - 1; // (l, r]
-		// while (r - l > 1) {
-		// 	size_type m = (l + r) >> 1;
-		// 	if (large[m] >= k) r = m;
-		// 	else l = m;
-		// }
-		
-		// size_type res = (r - 1) << LARGE;
-		// k -= large[r - 1];
-		// size_type base = (r - 1) << (LARGE - SMALL);
-		// l = 0; r = 1u << (LARGE - SMALL);
-		// while (r - l > 1) {
-		// 	size_type m = (l + r) >> 1;
-		// 	if (small[base + m] >= k) r = m;
-		// 	else l = m;
-		// }
-		
-		// res += (r - 1) << SMALL;
-		// base += r - 1;
-		// k -= small[base];
-		// base >>= DAT_B - SMALL;
-		// size_type idx = ((r - 1) & ((1u << SMALL) - 1)) << SMALL;
-		
-		// // bits[base][idx] を調べる
-		// // std::cout << "k = " << k << ", idx = " << idx << ", res = " << res << ", idx = " << idx << std::endl;
-		// while (k) {
-		// 	if (bits[base] >> idx & 1) --k;
-		// 	++idx;
-		// 	++res;
-		// }
-		
-		// return res;
 	}
 };
 
