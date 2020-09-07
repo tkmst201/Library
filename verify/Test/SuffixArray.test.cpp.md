@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/SuffixArray.test.cpp
+# :x: Test/SuffixArray.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/SuffixArray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 18:38:22+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D">https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/String/SuffixArray.cpp.html">String/SuffixArray.cpp</a>
+* :x: <a href="../../library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D"
 
-#include "String/SuffixArray.cpp"
+#include "String/SuffixArray.hpp"
 
 #include <string>
 #include <iostream>
@@ -81,7 +81,10 @@ int main() {
 #line 1 "Test/SuffixArray.test.cpp"
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D"
 
-#line 1 "String/SuffixArray.cpp"
+#line 1 "String/SuffixArray.hpp"
+
+
+
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -424,6 +427,8 @@ private:
 	size_type seg_n;
 	std::vector<size_type> seg;
 };
+
+
 #line 4 "Test/SuffixArray.test.cpp"
 
 #line 6 "Test/SuffixArray.test.cpp"

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/BinaryIndexedTree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree.cpp.html">DataStructure/BinaryIndexedTree.cpp</a>
-* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.cpp.html">GraphTheory/HeavyLightDecomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree.hpp.html">DataStructure/BinaryIndexedTree.hpp</a>
+* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.hpp.html">GraphTheory/HeavyLightDecomposition.hpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#include "DataStructure/BinaryIndexedTree.cpp"
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "DataStructure/BinaryIndexedTree.hpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 int main() {
@@ -78,7 +78,10 @@ int main() {
 #line 1 "Test/BinaryIndexedTree.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_B"
 
-#line 1 "DataStructure/BinaryIndexedTree.cpp"
+#line 1 "DataStructure/BinaryIndexedTree.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -160,12 +163,18 @@ private:
 	value_type id_elem;
 	std::vector<value_type> node;
 };
-#line 2 "GraphTheory/HeavyLightDecomposition.cpp"
+
+
+#line 1 "GraphTheory/HeavyLightDecomposition.hpp"
+
+
+
+#line 5 "GraphTheory/HeavyLightDecomposition.hpp"
 #include <utility>
-#line 4 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 7 "GraphTheory/HeavyLightDecomposition.hpp"
 #include <algorithm>
 #include <stack>
-#line 7 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 10 "GraphTheory/HeavyLightDecomposition.hpp"
 
 /*
 last-updated: 2020/04/22
@@ -234,7 +243,7 @@ public:
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	HeavyLightDecomposition(std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
+	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
 		build(g, root_num);
 	}
 	
@@ -388,6 +397,8 @@ private:
 		rvalue[node_idx[i]].set(get_r_path_idx(node_idx[i], path_idx[i]), x);
 	}
 };
+
+
 #line 5 "Test/BinaryIndexedTree.test.cpp"
 
 #include <cstdio>

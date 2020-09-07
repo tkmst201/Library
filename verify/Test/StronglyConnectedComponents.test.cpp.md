@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/StronglyConnectedComponents.test.cpp
+# :x: Test/StronglyConnectedComponents.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/StronglyConnectedComponents.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-27 11:41:13+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/scc">https://judge.yosupo.jp/problem/scc</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/GraphTheory/StronglyConnectedComponents.cpp.html">GraphTheory/StronglyConnectedComponents.cpp</a>
+* :x: <a href="../../library/GraphTheory/StronglyConnectedComponents.hpp.html">GraphTheory/StronglyConnectedComponents.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#include "GraphTheory/StronglyConnectedComponents.cpp"
+#include "GraphTheory/StronglyConnectedComponents.hpp"
 
 #include <cstdio>
 
@@ -84,7 +84,10 @@ int main() {
 #line 1 "Test/StronglyConnectedComponents.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 
-#line 1 "GraphTheory/StronglyConnectedComponents.cpp"
+#line 1 "GraphTheory/StronglyConnectedComponents.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <algorithm>
@@ -227,6 +230,8 @@ public:
 		return res;
 	}
 };
+
+
 #line 4 "Test/StronglyConnectedComponents.test.cpp"
 
 #include <cstdio>

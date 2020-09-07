@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/Matrix_Determinant.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/matrix_det">https://judge.yosupo.jp/problem/matrix_det</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/Mathematics/Matrix.cpp.html">Mathematics/Matrix.cpp</a>
-* :heavy_check_mark: <a href="../../library/Mathematics/ModInt.cpp.html">Mathematics/ModInt.cpp</a>
+* :heavy_check_mark: <a href="../../library/Mathematics/Matrix.hpp.html">Mathematics/Matrix.hpp</a>
+* :question: <a href="../../library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 
-#include "Mathematics/ModInt.cpp"
-#include "Mathematics/Matrix.cpp"
+#include "Mathematics/ModInt.hpp"
+#include "Mathematics/Matrix.hpp"
 
 #include <iostream>
 
@@ -77,7 +77,10 @@ int main() {
 #line 1 "Test/Matrix_Determinant.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 
-#line 1 "Mathematics/ModInt.cpp"
+#line 1 "Mathematics/ModInt.hpp"
+
+
+
 #include <cassert>
 #include <iostream>
 
@@ -184,7 +187,13 @@ public:
 private:
 	value_type val;
 };
-#line 3 "Mathematics/Matrix.cpp"
+
+
+#line 1 "Mathematics/Matrix.hpp"
+
+
+
+#line 6 "Mathematics/Matrix.hpp"
 #include <vector>
 #include <utility>
 #include <type_traits>
@@ -443,6 +452,8 @@ private:
 	size_type h, w;
 	std::vector<std::vector<value_type>> val;
 };
+
+
 #line 5 "Test/Matrix_Determinant.test.cpp"
 
 #line 7 "Test/Matrix_Determinant.test.cpp"

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/PotentializedUnionFind.test.cpp
+# :x: Test/PotentializedUnionFind.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/PotentializedUnionFind.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1330">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1330</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/PotentializedUnionFind.cpp.html">DataStructure/PotentializedUnionFind.cpp</a>
+* :x: <a href="../../library/DataStructure/PotentializedUnionFind.hpp.html">DataStructure/PotentializedUnionFind.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1330"
 
-#include "DataStructure/PotentializedUnionFind.cpp"
+#include "DataStructure/PotentializedUnionFind.hpp"
 
 #include <cstdio>
 
@@ -90,7 +90,10 @@ int main() {
 #line 1 "Test/PotentializedUnionFind.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=1330"
 
-#line 1 "DataStructure/PotentializedUnionFind.cpp"
+#line 1 "DataStructure/PotentializedUnionFind.hpp"
+
+
+
 #include <vector>
 #include <numeric>
 #include <utility>
@@ -204,6 +207,8 @@ private:
 	std::vector<size_type> size_, par;
 	std::vector<value_type> val;
 };
+
+
 #line 4 "Test/PotentializedUnionFind.test.cpp"
 
 #include <cstdio>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/BipartiteMatching.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-26 23:37:17+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/bipartitematching">https://judge.yosupo.jp/problem/bipartitematching</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/GraphTheory/BipartiteMatching.cpp.html">GraphTheory/BipartiteMatching.cpp</a>
+* :heavy_check_mark: <a href="../../library/GraphTheory/BipartiteMatching.hpp.html">GraphTheory/BipartiteMatching.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
 
-#include "GraphTheory/BipartiteMatching.cpp"
+#include "GraphTheory/BipartiteMatching.hpp"
 
 #include <cstdio>
 
@@ -80,7 +80,10 @@ int main() {
 #line 1 "Test/BipartiteMatching.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/bipartitematching"
 
-#line 1 "GraphTheory/BipartiteMatching.cpp"
+#line 1 "GraphTheory/BipartiteMatching.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <utility>
@@ -217,6 +220,8 @@ private:
 		return false;
 	}
 };
+
+
 #line 4 "Test/BipartiteMatching.test.cpp"
 
 #include <cstdio>

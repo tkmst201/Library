@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/RollingHash.test.cpp
+# :x: Test/RollingHash.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/RollingHash.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-22 23:32:23+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/String/RollingHash.cpp.html">String/RollingHash.cpp</a>
+* :x: <a href="../../library/String/RollingHash.hpp.html">String/RollingHash.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
-#include "String/RollingHash.cpp"
+#include "String/RollingHash.hpp"
 
 #include <string>
 #include <iostream>
@@ -78,7 +78,10 @@ int main() {
 #line 1 "Test/RollingHash.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B"
 
-#line 1 "String/RollingHash.cpp"
+#line 1 "String/RollingHash.hpp"
+
+
+
 #include <vector>
 #include <string>
 #include <random>
@@ -256,6 +259,8 @@ private:
 		return x;
 	}
 };
+
+
 #line 4 "Test/RollingHash.test.cpp"
 
 #line 6 "Test/RollingHash.test.cpp"

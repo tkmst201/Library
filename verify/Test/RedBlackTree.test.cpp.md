@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/RedBlackTree.test.cpp
+# :x: Test/RedBlackTree.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/RedBlackTree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-30 09:19:11+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/associative_array">https://judge.yosupo.jp/problem/associative_array</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/RedBlackTree.cpp.html">DataStructure/RedBlackTree.cpp</a>
+* :x: <a href="../../library/DataStructure/RedBlackTree.hpp.html">DataStructure/RedBlackTree.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "DataStructure/RedBlackTree.cpp"
+#include "DataStructure/RedBlackTree.hpp"
 
 #include <cstdio>
 
@@ -88,7 +88,10 @@ int main() {
 #line 1 "Test/RedBlackTree.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#line 1 "DataStructure/RedBlackTree.cpp"
+#line 1 "DataStructure/RedBlackTree.hpp"
+
+
+
 #include <cassert>
 #include <utility>
 
@@ -97,6 +100,8 @@ last-updated: 2020/08/30
 
 全てのノードに値を持たせる insert/delete ベースの赤黒木
 操作の前後で安定
+
+TODO: 葉に値を持たせるような insert/erase ベース(merge/split 対応) の赤黒木の作成(できるかはわからない)
 
 # 仕様
 RedBrackTree() :
@@ -625,6 +630,8 @@ public:
 	// 	dfs(dfs, root);
 	// }
 };
+
+
 #line 4 "Test/RedBlackTree.test.cpp"
 
 #include <cstdio>

@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/SparseTable.test.cpp
+# :x: Test/SparseTable.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/SparseTable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/staticrmq">https://judge.yosupo.jp/problem/staticrmq</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/SparseTable.cpp.html">DataStructure/SparseTable.cpp</a>
+* :x: <a href="../../library/DataStructure/SparseTable.hpp.html">DataStructure/SparseTable.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#include "DataStructure/SparseTable.cpp"
+#include "DataStructure/SparseTable.hpp"
 
 #include <cstdio>
 #include <algorithm>
@@ -81,7 +81,10 @@ int main() {
 #line 1 "Test/SparseTable.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
-#line 1 "DataStructure/SparseTable.cpp"
+#line 1 "DataStructure/SparseTable.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -157,6 +160,8 @@ private:
 		}
 	}
 };
+
+
 #line 4 "Test/SparseTable.test.cpp"
 
 #include <cstdio>

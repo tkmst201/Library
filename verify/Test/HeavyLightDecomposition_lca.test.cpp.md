@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/HeavyLightDecomposition_lca.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.cpp.html">GraphTheory/HeavyLightDecomposition.cpp</a>
+* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.hpp.html">GraphTheory/HeavyLightDecomposition.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C"
 
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 #include <functional>
@@ -100,7 +100,10 @@ int main() {
 #line 1 "Test/HeavyLightDecomposition_lca.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_C"
 
-#line 1 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 1 "GraphTheory/HeavyLightDecomposition.hpp"
+
+
+
 #include <vector>
 #include <utility>
 #include <cassert>
@@ -175,7 +178,7 @@ public:
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	HeavyLightDecomposition(std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
+	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
 		build(g, root_num);
 	}
 	
@@ -329,6 +332,8 @@ private:
 		rvalue[node_idx[i]].set(get_r_path_idx(node_idx[i], path_idx[i]), x);
 	}
 };
+
+
 #line 4 "Test/HeavyLightDecomposition_lca.test.cpp"
 
 #include <cstdio>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/HeavyLightDecomposition.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/vertex_set_path_composite">https://judge.yosupo.jp/problem/vertex_set_path_composite</a>
@@ -39,9 +39,9 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/SegmentTree.cpp.html">DataStructure/SegmentTree.cpp</a>
-* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.cpp.html">GraphTheory/HeavyLightDecomposition.cpp</a>
-* :heavy_check_mark: <a href="../../library/Mathematics/ModInt.cpp.html">Mathematics/ModInt.cpp</a>
+* :question: <a href="../../library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
+* :heavy_check_mark: <a href="../../library/GraphTheory/HeavyLightDecomposition.hpp.html">GraphTheory/HeavyLightDecomposition.hpp</a>
+* :question: <a href="../../library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
 
 
 ## Code
@@ -51,9 +51,9 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#include "Mathematics/ModInt.cpp"
-#include "DataStructure/SegmentTree.cpp"
-#include "GraphTheory/HeavyLightDecomposition.cpp"
+#include "Mathematics/ModInt.hpp"
+#include "DataStructure/SegmentTree.hpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -113,7 +113,10 @@ int main() {
 #line 1 "Test/HeavyLightDecomposition.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
-#line 1 "Mathematics/ModInt.cpp"
+#line 1 "Mathematics/ModInt.hpp"
+
+
+
 #include <cassert>
 #include <iostream>
 
@@ -220,10 +223,15 @@ public:
 private:
 	value_type val;
 };
-#line 1 "DataStructure/SegmentTree.cpp"
+
+
+#line 1 "DataStructure/SegmentTree.hpp"
+
+
+
 #include <vector>
 #include <algorithm>
-#line 4 "DataStructure/SegmentTree.cpp"
+#line 7 "DataStructure/SegmentTree.hpp"
 #include <functional>
 
 /*
@@ -344,11 +352,17 @@ private:
 		}
 	}
 };
-#line 2 "GraphTheory/HeavyLightDecomposition.cpp"
+
+
+#line 1 "GraphTheory/HeavyLightDecomposition.hpp"
+
+
+
+#line 5 "GraphTheory/HeavyLightDecomposition.hpp"
 #include <utility>
-#line 5 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 8 "GraphTheory/HeavyLightDecomposition.hpp"
 #include <stack>
-#line 7 "GraphTheory/HeavyLightDecomposition.cpp"
+#line 10 "GraphTheory/HeavyLightDecomposition.hpp"
 
 /*
 last-updated: 2020/04/22
@@ -417,7 +431,7 @@ public:
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	HeavyLightDecomposition(std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
+	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
 		build(g, root_num);
 	}
 	
@@ -571,6 +585,8 @@ private:
 		rvalue[node_idx[i]].set(get_r_path_idx(node_idx[i], path_idx[i]), x);
 	}
 };
+
+
 #line 6 "Test/HeavyLightDecomposition.test.cpp"
 
 #include <cstdio>

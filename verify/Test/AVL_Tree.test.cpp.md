@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/AVL_Tree.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-29 16:55:44+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/associative_array">https://judge.yosupo.jp/problem/associative_array</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/AVL_Tree.cpp.html">DataStructure/AVL_Tree.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/AVL_Tree.hpp.html">DataStructure/AVL_Tree.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#include "DataStructure/AVL_Tree.cpp"
+#include "DataStructure/AVL_Tree.hpp"
 
 #include <cstdio>
 
@@ -88,7 +88,10 @@ int main() {
 #line 1 "Test/AVL_Tree.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 
-#line 1 "DataStructure/AVL_Tree.cpp"
+#line 1 "DataStructure/AVL_Tree.hpp"
+
+
+
 #include <algorithm>
 #include <vector>
 
@@ -571,6 +574,8 @@ int main() {
 	return 0;
 }
 */
+
+
 #line 4 "Test/AVL_Tree.test.cpp"
 
 #include <cstdio>

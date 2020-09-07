@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/NumberTheoreticTransform.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/convolution_mod_1000000007">https://judge.yosupo.jp/problem/convolution_mod_1000000007</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/Mathematics/Convolution/NumberTheoreticTransform.cpp.html">Mathematics/Convolution/NumberTheoreticTransform.cpp</a>
-* :heavy_check_mark: <a href="../../library/Mathematics/Garner.cpp.html">Mathematics/Garner.cpp</a>
+* :heavy_check_mark: <a href="../../library/Mathematics/Convolution/NumberTheoreticTransform.hpp.html">Mathematics/Convolution/NumberTheoreticTransform.hpp</a>
+* :heavy_check_mark: <a href="../../library/Mathematics/Garner.hpp.html">Mathematics/Garner.hpp</a>
 
 
 ## Code
@@ -48,7 +48,9 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#include "Mathematics/Convolution/NumberTheoreticTransform.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+
+#include "Mathematics/Convolution/NumberTheoreticTransform.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -70,14 +72,22 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Mathematics/Convolution/NumberTheoreticTransform.cpp"
+#line 1 "Test/NumberTheoreticTransform.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
+
+#line 1 "Mathematics/Convolution/NumberTheoreticTransform.hpp"
+
+
 
 #include <vector>
 #include <utility>
 #include <cassert>
 
-#line 3 "Mathematics/Garner.cpp"
+#line 1 "Mathematics/Garner.hpp"
+
+
+
+#line 6 "Mathematics/Garner.hpp"
 
 /*
 last-updated: 2020/07/27
@@ -185,7 +195,9 @@ private:
 		return (a1 % mod + mod) % mod;
 	}
 };
-#line 8 "Mathematics/Convolution/NumberTheoreticTransform.cpp"
+
+
+#line 9 "Mathematics/Convolution/NumberTheoreticTransform.hpp"
 
 /*
 last-updated: 2020/07/27
@@ -306,10 +318,12 @@ private:
 		}
 	}
 };
-#line 2 "Test/NumberTheoreticTransform.test.cpp"
+
+
+#line 4 "Test/NumberTheoreticTransform.test.cpp"
 
 #include <cstdio>
-#line 5 "Test/NumberTheoreticTransform.test.cpp"
+#line 7 "Test/NumberTheoreticTransform.test.cpp"
 
 int main() {
 	int N, M;

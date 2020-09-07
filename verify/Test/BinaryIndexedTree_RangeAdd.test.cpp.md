@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/BinaryIndexedTree_RangeAdd.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 23:22:28+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G</a>
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree.cpp.html">DataStructure/BinaryIndexedTree.cpp</a>
-* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree_RangeAdd.cpp.html">DataStructure/BinaryIndexedTree_RangeAdd.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree.hpp.html">DataStructure/BinaryIndexedTree.hpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">DataStructure/BinaryIndexedTree_RangeAdd.hpp</a>
 
 
 ## Code
@@ -50,8 +50,8 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "DataStructure/BinaryIndexedTree.cpp"
-#include "DataStructure/BinaryIndexedTree_RangeAdd.cpp"
+#include "DataStructure/BinaryIndexedTree.hpp"
+#include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 
 #include <cstdio>
 int main() {
@@ -85,7 +85,10 @@ int main() {
 #line 1 "Test/BinaryIndexedTree_RangeAdd.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#line 1 "DataStructure/BinaryIndexedTree.cpp"
+#line 1 "DataStructure/BinaryIndexedTree.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -167,7 +170,13 @@ private:
 	value_type id_elem;
 	std::vector<value_type> node;
 };
-#line 4 "DataStructure/BinaryIndexedTree_RangeAdd.cpp"
+
+
+#line 1 "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
+
+
+
+#line 7 "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 
 /*
 last-updated: 2020/08/15
@@ -242,6 +251,8 @@ private:
 	size_type n;
 	std::vector<bit_type> bit;
 };
+
+
 #line 5 "Test/BinaryIndexedTree_RangeAdd.test.cpp"
 
 #include <cstdio>

@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/BinaryIndexedTree2D.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-15 23:22:28+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842">http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree2D.cpp.html">DataStructure/BinaryIndexedTree2D.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/BinaryIndexedTree2D.hpp.html">DataStructure/BinaryIndexedTree2D.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842"
 
-#include "DataStructure/BinaryIndexedTree2D.cpp"
+#include "DataStructure/BinaryIndexedTree2D.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -100,7 +100,10 @@ int main() {
 #line 1 "Test/BinaryIndexedTree2D.test.cpp"
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842"
 
-#line 1 "DataStructure/BinaryIndexedTree2D.cpp"
+#line 1 "DataStructure/BinaryIndexedTree2D.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -176,6 +179,8 @@ private:
 	size_type h, w;
 	std::vector<std::vector<value_type>> node;
 };
+
+
 #line 4 "Test/BinaryIndexedTree2D.test.cpp"
 
 #include <cstdio>

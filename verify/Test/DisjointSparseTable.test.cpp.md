@@ -31,7 +31,7 @@ layout: default
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
 * <a href="{{ site.github.repository_url }}/blob/master/Test/DisjointSparseTable.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-08-25 21:49:12+09:00
+    - Last commit date: 2020-09-07 16:22:32+09:00
 
 
 * see: <a href="https://judge.yosupo.jp/problem/static_range_sum">https://judge.yosupo.jp/problem/static_range_sum</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :heavy_check_mark: <a href="../../library/DataStructure/DisjointSparseTable.cpp.html">DataStructure/DisjointSparseTable.cpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/DisjointSparseTable.hpp.html">DataStructure/DisjointSparseTable.hpp</a>
 
 
 ## Code
@@ -49,7 +49,7 @@ layout: default
 ```cpp
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 
-#include "DataStructure/DisjointSparseTable.cpp"
+#include "DataStructure/DisjointSparseTable.hpp"
 // これは可換の場合でのテスト
 
 #include <cstdio>
@@ -82,7 +82,10 @@ int main() {
 #line 1 "Test/DisjointSparseTable.test.cpp"
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 
-#line 1 "DataStructure/DisjointSparseTable.cpp"
+#line 1 "DataStructure/DisjointSparseTable.hpp"
+
+
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -179,6 +182,8 @@ private:
 		return l;
 	}
 };
+
+
 #line 4 "Test/DisjointSparseTable.test.cpp"
 // これは可換の場合でのテスト
 
