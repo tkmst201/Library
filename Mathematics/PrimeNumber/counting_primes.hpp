@@ -66,6 +66,6 @@ std::uint64_t counting_primes(std::uint64_t n) {
 	
 	return dp.back();
 }
-};
+} // namespace tk
 
 #endif // INCLUDE_GUARD_COUNTING_PRIMES_HPP

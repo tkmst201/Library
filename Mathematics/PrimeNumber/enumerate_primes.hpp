@@ -57,6 +57,6 @@ std::vector<std::uint32_t> enumerate_primes(std::uint32_t n) {
 	
 	return primes;
 }
-}
+} // namespace tk
 
 #endif // INCLUDE_GUARD_ENUMERATE_PRIMES_HPP

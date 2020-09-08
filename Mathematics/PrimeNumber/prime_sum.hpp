@@ -5,7 +5,7 @@
 #include <vector>
 #include <algorithm>
 
-#include "Mathematics/PrimeNumber/enumerate_primes.cpp"
+#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
 
 /*
 last-updated: 2020/09/07
@@ -106,6 +106,6 @@ T prime_sum(std::uint64_t n) {
 	
 	return dp.back();
 }
-}
+} // namespace tk
 
 #endif // INCLUDE_GUARD_PRIME_SUM_HPP
