@@ -25,10 +25,11 @@ void add_edge(size_type u, size_type v) :
 	時間計算量: Θ(1)
 	頂点 u から 頂点 v へ辺を張る
 
-size_type build() :
+size_type build(bool build_idx_map = true)
 	時間計算量: Θ(n + m)
 	強連結成分分解を行う
 	強連結成分の個数を返す
+	build_idx_map が false のときは idx_map テーブルを構築しない(get_map や get_graph の動作は未定義)
 
 size_type get_rank(size_type i) :
 	時間計算量: Θ(1)
@@ -80,7 +81,7 @@ public:
 		isbuilt = false;
 	}
 	
-	size_type build() {
+	size_type build(bool build_idx_map = true) {
 		std::vector<bool> visited;
 		std::vector<size_type> back_num; // [i] := 帰りがけ順が i である頂点
 		
@@ -111,17 +112,18 @@ public:
 			++c;
 		}
 		
-		idx_map.assign(c, {});
-		for (size_type i = 0; i < size(); ++i) idx_map[rank[i]].emplace_back(i);
-		
+		if (build_idx_map) {
+			idx_map.assign(c, {});
+			for (size_type i = 0; i < size(); ++i) idx_map[rank[i]].emplace_back(i);
+		}
 		isbuilt = true;
-		return idx_map.size();
+		return c;
 	}
 	
 	size_type get_rank(size_type i) {
 		assert(isbuilt);
 		assert(i < size());
-		return i;
+		return rank[i];
 	}
 	
 	const std::vector<size_type> & get_map(size_type i) {
@@ -137,8 +139,8 @@ public:
 			for (size_type j : idx_map[i]) {
 				for (size_type v : g[j]) res[i].emplace_back(v);
 			}
-			std::sort(std::begin(res[i]), std::end(res[i]));
-			res[i].erase(std::unique(std::begin(res[i]), std::end(res[i])), std::end(res[i]));
+			std::sort(begin(res[i]), end(res[i]));
+			res[i].erase(unique(begin(res[i]), end(res[i])), end(res[i]));
 		}
 		return res;
 	}
