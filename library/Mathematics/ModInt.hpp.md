@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: Mathematics/ModInt.hpp
+# :heavy_check_mark: Mathematics/ModInt.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,9 +39,10 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/LazySegmentTree.test.cpp.html">Test/LazySegmentTree.test.cpp</a>
 * :heavy_check_mark: <a href="../../verify/Test/Matrix_Determinant.test.cpp.html">Test/Matrix_Determinant.test.cpp</a>
-* :x: <a href="../../verify/Test/PrimeNumber.counting_primes.test.cpp.html">Test/PrimeNumber.counting_primes.test.cpp</a>
-* :x: <a href="../../verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/PrimeNumber.counting_primes.test.cpp.html">Test/PrimeNumber.counting_primes.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
 
 
 ## Code

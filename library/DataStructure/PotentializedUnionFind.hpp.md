@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: DataStructure/PotentializedUnionFind.hpp
+# :heavy_check_mark: DataStructure/PotentializedUnionFind.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,7 +38,7 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/Test/PotentializedUnionFind.test.cpp.html">Test/PotentializedUnionFind.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/PotentializedUnionFind.test.cpp.html">Test/PotentializedUnionFind.test.cpp</a>
 
 
 ## Code

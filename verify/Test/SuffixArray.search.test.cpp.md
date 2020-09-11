@@ -25,13 +25,13 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: Test/SuffixArray.test.cpp
+# :heavy_check_mark: Test/SuffixArray.search.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Test/SuffixArray.test.cpp">View this file on GitHub</a>
-    - Last commit date: 2020-09-07 16:22:32+09:00
+* <a href="{{ site.github.repository_url }}/blob/master/Test/SuffixArray.search.test.cpp">View this file on GitHub</a>
+    - Last commit date: 2020-09-08 10:02:39+09:00
 
 
 * see: <a href="https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D">https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D</a>
@@ -39,7 +39,7 @@ layout: default
 
 ## Depends on
 
-* :x: <a href="../../library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
+* :heavy_check_mark: <a href="../../library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
 
 
 ## Code
@@ -78,7 +78,7 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Test/SuffixArray.test.cpp"
+#line 1 "Test/SuffixArray.search.test.cpp"
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D"
 
 #line 1 "String/SuffixArray.hpp"
@@ -429,9 +429,9 @@ private:
 };
 
 
-#line 4 "Test/SuffixArray.test.cpp"
+#line 4 "Test/SuffixArray.search.test.cpp"
 
-#line 6 "Test/SuffixArray.test.cpp"
+#line 6 "Test/SuffixArray.search.test.cpp"
 #include <iostream>
 using namespace std;
 

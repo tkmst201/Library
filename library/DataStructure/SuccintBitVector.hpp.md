@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: DataStructure/SuccintBitVector.hpp
+# :heavy_check_mark: DataStructure/SuccintBitVector.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -38,10 +38,10 @@ layout: default
 
 ## Verified with
 
-* :x: <a href="../../verify/Test/WaveletMatrix.next_prev_value.test.cpp.html">Test/WaveletMatrix.next_prev_value.test.cpp</a>
-* :x: <a href="../../verify/Test/WaveletMatrix.quantile.test.cpp.html">Test/WaveletMatrix.quantile.test.cpp</a>
-* :x: <a href="../../verify/Test/WaveletMatrix.range_frequency.test.cpp.html">Test/WaveletMatrix.range_frequency.test.cpp</a>
-* :x: <a href="../../verify/Test/WaveletMatrix.select.test.cpp.html">Test/WaveletMatrix.select.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/WaveletMatrix.next_prev_value.test.cpp.html">Test/WaveletMatrix.next_prev_value.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/WaveletMatrix.quantile.test.cpp.html">Test/WaveletMatrix.quantile.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/WaveletMatrix.range_frequency.test.cpp.html">Test/WaveletMatrix.range_frequency.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/WaveletMatrix.select.test.cpp.html">Test/WaveletMatrix.select.test.cpp</a>
 
 
 ## Code

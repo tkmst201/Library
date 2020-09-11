@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :question: DataStructure/SegmentTree.hpp
+# :heavy_check_mark: DataStructure/SegmentTree.hpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,7 +39,7 @@ layout: default
 ## Verified with
 
 * :heavy_check_mark: <a href="../../verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
-* :x: <a href="../../verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
+* :heavy_check_mark: <a href="../../verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
 
 
 ## Code

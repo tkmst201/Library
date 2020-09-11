@@ -25,21 +25,22 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :heavy_check_mark: Test/StronglyConnectedComponents.test.cpp
+# :heavy_check_mark: Test/TwoSat.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
 * category: <a href="../../index.html#0cbc6611f5540bd0809a388dc95a615b">Test</a>
-* <a href="{{ site.github.repository_url }}/blob/master/Test/StronglyConnectedComponents.test.cpp">View this file on GitHub</a>
+* <a href="{{ site.github.repository_url }}/blob/master/Test/TwoSat.test.cpp">View this file on GitHub</a>
     - Last commit date: 2020-09-10 10:57:52+09:00
 
 
-* see: <a href="https://judge.yosupo.jp/problem/scc">https://judge.yosupo.jp/problem/scc</a>
+* see: <a href="https://judge.yosupo.jp/problem/two_sat">https://judge.yosupo.jp/problem/two_sat</a>
 
 
 ## Depends on
 
 * :heavy_check_mark: <a href="../../library/GraphTheory/StronglyConnectedComponents.hpp.html">GraphTheory/StronglyConnectedComponents.hpp</a>
+* :heavy_check_mark: <a href="../../library/Mathematics/TwoSat.hpp.html">Mathematics/TwoSat.hpp</a>
 
 
 ## Code
@@ -47,31 +48,38 @@ layout: default
 <a id="unbundled"></a>
 {% raw %}
 ```cpp
-#define PROBLEM "https://judge.yosupo.jp/problem/scc"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
-#include "GraphTheory/StronglyConnectedComponents.hpp"
+#include "Mathematics/TwoSat.hpp"
 
-#include <cstdio>
+#include <iostream>
+#include <string>
+#include <cmath>
 
 int main() {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(0);
+	
+	std::string dummy; std::cin >> dummy >> dummy;
+	
 	int N, M;
-	scanf("%d %d", &N, &M);
+	std::cin >> N >> M;
 	
-	StronglyConnectedComponents scc(N);
+	TwoSat sat(N);
 	
-	for (int i = 0; i < M; ++i) {
-		int a, b;
-		scanf("%d %d", &a, &b);
-		scc.add_edge(a, b);
+	while (M--) {
+		int a, b, t;
+		std::cin >> a >> b >> t;
+		sat.add_clause(std::abs(a) - 1, a > 0, std::abs(b) - 1, b > 0);
 	}
 	
-	int sz = scc.build();
-	printf("%d\n", sz);
-	
-	for (int i = 0; i < sz; ++i) {
-		auto &lis = scc.get_map(i);
-		printf("%d ", lis.size());
-		for (int j = 0; j < lis.size(); ++j) printf("%d%c", lis[j], " \n"[j + 1 == lis.size()]);
+	if (!sat.build()) std::cout << "s UNSATISFIABLE" << std::endl;
+	else {
+		std::cout << "s SATISFIABLE" << std::endl;
+		const auto & ans = sat.get_answer();
+		std::cout << "v";
+		for (int i = 0; i < N; ++i) std::cout << " " << (ans[i] ? i + 1 : -(i + 1));
+		std::cout << " 0" << std::endl;
 	}
 	return 0;
 }
@@ -81,15 +89,54 @@ int main() {
 <a id="bundled"></a>
 {% raw %}
 ```cpp
-#line 1 "Test/StronglyConnectedComponents.test.cpp"
-#define PROBLEM "https://judge.yosupo.jp/problem/scc"
+#line 1 "Test/TwoSat.test.cpp"
+#define PROBLEM "https://judge.yosupo.jp/problem/two_sat"
 
-#line 1 "GraphTheory/StronglyConnectedComponents.hpp"
+#line 1 "Mathematics/TwoSat.hpp"
 
 
 
 #include <vector>
 #include <cassert>
+
+/*
+last-updated: 2020/09/10
+
+# 仕様
+TwoSat(size_type n) :
+	時間計算量: Θ(n)
+	n 変数を対象として構築
+
+void add_clause(size_type x, bool xb, size_type y, bool yb) :
+	時間計算量: Θ(1)
+	(x = xb) v (y = yb) を加える
+
+void add_clause(size_type x, bool xb) :
+	時間計算量: Θ(1)
+	x = xb を加える
+
+bool build() :
+	時間計算量: Θ(n)
+	全ての条件を満たすような変数の値の組み合わせを求める
+	そのような組み合わせが存在するならば true, 存在しないのならば false を返す
+
+const std::vector<bool> & get_answer() const :
+	時間計算量: Θ(1)
+	全ての条件を満たすような変数の真偽値が入っているテーブルを返す
+
+bool get(size_type i) :
+	時間計算量: Θ(1)
+	全ての条件を満たすような変数の値の組み合わせで、変数 i の真偽値を返す
+
+# 参考
+"AC Library" https://atcoder.jp/posts/517m, 2020/09/10
+*/
+
+#line 1 "GraphTheory/StronglyConnectedComponents.hpp"
+
+
+
+#line 6 "GraphTheory/StronglyConnectedComponents.hpp"
 #include <algorithm>
 
 /*
@@ -234,29 +281,95 @@ public:
 };
 
 
-#line 4 "Test/StronglyConnectedComponents.test.cpp"
+#line 41 "Mathematics/TwoSat.hpp"
 
-#include <cstdio>
-
-int main() {
-	int N, M;
-	scanf("%d %d", &N, &M);
+struct TwoSat {
+	using size_type = std::size_t;
 	
-	StronglyConnectedComponents scc(N);
+private:
+	size_type n;
+	StronglyConnectedComponents scc;
+	std::vector<bool> ans;
+	bool isbuilt, satisfiability;
 	
-	for (int i = 0; i < M; ++i) {
-		int a, b;
-		scanf("%d %d", &a, &b);
-		scc.add_edge(a, b);
+public:
+	TwoSat(size_type n) : n(n), scc(2 * n + 2) {}
+	
+	void add_clause(size_type x, bool xb, size_type y, bool yb) {
+		assert(x < n);
+		assert(y < n);
+		scc.add_edge(x + (xb ? n : 0), y + ((yb^1) ? n : 0));
+		scc.add_edge(y + (yb ? n : 0), x + ((xb^1) ? n : 0));
+		isbuilt = false;
 	}
 	
-	int sz = scc.build();
-	printf("%d\n", sz);
+	void add_clause(size_type x, bool xb) {
+		assert(x < n);
+		scc.add_edge(x + (xb ? n : 0), 2*n);
+		scc.add_edge(x + (xb ? n : 0), 2*n + 1);
+		scc.add_edge(2*n, x + ((xb^1) ? n : 0));
+		scc.add_edge(2*n + 1, x + ((xb^1) ? n : 0));
+	}
 	
-	for (int i = 0; i < sz; ++i) {
-		auto &lis = scc.get_map(i);
-		printf("%d ", lis.size());
-		for (int j = 0; j < lis.size(); ++j) printf("%d%c", lis[j], " \n"[j + 1 == lis.size()]);
+	bool build() {
+		scc.build(false);
+		ans.assign(n, false);
+		satisfiability = false;
+		if (scc.get_rank(2*n) == scc.get_rank(2*n + 1)) return false;
+		for (size_type i = 0; i < n; ++i) {
+			if (scc.get_rank(i) == scc.get_rank(i + n)) return false;
+			if (scc.get_rank(i) > scc.get_rank(i + n)) ans[i] = true;
+		}
+		isbuilt = true;
+		satisfiability = true;
+		return true;
+	}
+	
+	const std::vector<bool> & get_answer() const {
+		assert(isbuilt);
+		assert(satisfiability);
+		return ans;
+	}
+	
+	bool get(size_type i) const {
+		assert(isbuilt);
+		assert(satisfiability);
+		assert(i < n);
+		return ans[i];
+	}
+};
+
+
+#line 4 "Test/TwoSat.test.cpp"
+
+#include <iostream>
+#include <string>
+#include <cmath>
+
+int main() {
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(0);
+	
+	std::string dummy; std::cin >> dummy >> dummy;
+	
+	int N, M;
+	std::cin >> N >> M;
+	
+	TwoSat sat(N);
+	
+	while (M--) {
+		int a, b, t;
+		std::cin >> a >> b >> t;
+		sat.add_clause(std::abs(a) - 1, a > 0, std::abs(b) - 1, b > 0);
+	}
+	
+	if (!sat.build()) std::cout << "s UNSATISFIABLE" << std::endl;
+	else {
+		std::cout << "s SATISFIABLE" << std::endl;
+		const auto & ans = sat.get_answer();
+		std::cout << "v";
+		for (int i = 0; i < N; ++i) std::cout << " " << (ans[i] ? i + 1 : -(i + 1));
+		std::cout << " 0" << std::endl;
 	}
 	return 0;
 }

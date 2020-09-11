@@ -43,17 +43,18 @@ layout: default
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree2D.hpp.html">DataStructure/BinaryIndexedTree2D.hpp</a>
 * :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">DataStructure/BinaryIndexedTree_RangeAdd.hpp</a>
 * :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DataStructure/DisjointSparseTable.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/LazySegmentTree.hpp.html">DataStructure/LazySegmentTree.hpp</a>
 * :warning: <a href="library/DataStructure/PersistentArray.hpp.html">DataStructure/PersistentArray.hpp</a>
 * :heavy_check_mark: <a href="library/DataStructure/PersistentRedBlackTree.hpp.html">DataStructure/PersistentRedBlackTree.hpp</a>
 * :warning: <a href="library/DataStructure/PersistentStack.hpp.html">DataStructure/PersistentStack.hpp</a>
-* :x: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">DataStructure/PotentializedUnionFind.hpp</a>
-* :x: <a href="library/DataStructure/RedBlackTree.hpp.html">DataStructure/RedBlackTree.hpp</a>
-* :question: <a href="library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">DataStructure/PotentializedUnionFind.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/RedBlackTree.hpp.html">DataStructure/RedBlackTree.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
 * :warning: <a href="library/DataStructure/SlidingWindowAggregation.hpp.html">DataStructure/SlidingWindowAggregation.hpp</a>
-* :x: <a href="library/DataStructure/SparseTable.hpp.html">DataStructure/SparseTable.hpp</a>
-* :x: <a href="library/DataStructure/SuccintBitVector.hpp.html">DataStructure/SuccintBitVector.hpp</a>
-* :x: <a href="library/DataStructure/UnionFind.hpp.html">DataStructure/UnionFind.hpp</a>
-* :x: <a href="library/DataStructure/WaveletMatrix.hpp.html">DataStructure/WaveletMatrix.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">DataStructure/SparseTable.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/SuccintBitVector.hpp.html">DataStructure/SuccintBitVector.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">DataStructure/UnionFind.hpp</a>
+* :heavy_check_mark: <a href="library/DataStructure/WaveletMatrix.hpp.html">DataStructure/WaveletMatrix.hpp</a>
 
 
 <div id="f381732df2a59e8e35d7811ba3c2868c"></div>
@@ -66,7 +67,7 @@ layout: default
 * :heavy_check_mark: <a href="library/GraphTheory/EdmondsKarp.hpp.html">GraphTheory/EdmondsKarp.hpp</a>
 * :heavy_check_mark: <a href="library/GraphTheory/HeavyLightDecomposition.hpp.html">GraphTheory/HeavyLightDecomposition.hpp</a>
 * :heavy_check_mark: <a href="library/GraphTheory/LowestCommonAncestor.hpp.html">GraphTheory/LowestCommonAncestor.hpp</a>
-* :x: <a href="library/GraphTheory/StronglyConnectedComponents.hpp.html">GraphTheory/StronglyConnectedComponents.hpp</a>
+* :heavy_check_mark: <a href="library/GraphTheory/StronglyConnectedComponents.hpp.html">GraphTheory/StronglyConnectedComponents.hpp</a>
 
 
 <div id="540b21ecdb276f5087ee585cedd6d5d0"></div>
@@ -78,9 +79,11 @@ layout: default
 * :warning: <a href="library/Mathematics/MathUtility.hpp.html">Mathematics/MathUtility.hpp</a>
 * :warning: <a href="library/Mathematics/Matrix(double).hpp.html">Mathematics/Matrix(double).hpp</a>
 * :heavy_check_mark: <a href="library/Mathematics/Matrix.hpp.html">Mathematics/Matrix.hpp</a>
-* :question: <a href="library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
+* :heavy_check_mark: <a href="library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
 * :warning: <a href="library/Mathematics/Polynomial.hpp.html">Mathematics/Polynomial.hpp</a>
 * :warning: <a href="library/Mathematics/RuntimeModInt.hpp.html">Mathematics/RuntimeModInt.hpp</a>
+* :heavy_check_mark: <a href="library/Mathematics/TwoSat.hpp.html">Mathematics/TwoSat.hpp</a>
+* :heavy_check_mark: <a href="library/Mathematics/sum_of_floor_of_linear.hpp.html">Mathematics/sum_of_floor_of_linear.hpp</a>
 
 
 <div id="637dbc1fa2c49b2df4202c454476276a"></div>
@@ -99,8 +102,8 @@ layout: default
 
 ### Mathematics/PrimeNumber
 
-* :x: <a href="library/Mathematics/PrimeNumber/counting_primes.hpp.html">Mathematics/PrimeNumber/counting_primes.hpp</a>
-* :x: <a href="library/Mathematics/PrimeNumber/enumerate_primes.hpp.html">Mathematics/PrimeNumber/enumerate_primes.hpp</a>
+* :heavy_check_mark: <a href="library/Mathematics/PrimeNumber/counting_primes.hpp.html">Mathematics/PrimeNumber/counting_primes.hpp</a>
+* :heavy_check_mark: <a href="library/Mathematics/PrimeNumber/enumerate_primes.hpp.html">Mathematics/PrimeNumber/enumerate_primes.hpp</a>
 * :warning: <a href="library/Mathematics/PrimeNumber/prime_sum.hpp.html">Mathematics/PrimeNumber/prime_sum.hpp</a>
 
 
@@ -109,8 +112,8 @@ layout: default
 ### String
 
 * :warning: <a href="library/String/KMP.hpp.html">String/KMP.hpp</a>
-* :x: <a href="library/String/RollingHash.hpp.html">String/RollingHash.hpp</a>
-* :x: <a href="library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
+* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">String/RollingHash.hpp</a>
+* :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
 
 
 ## Verify Files
@@ -131,23 +134,28 @@ layout: default
 * :heavy_check_mark: <a href="verify/Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp.html">Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition_lca.test.cpp.html">Test/HeavyLightDecomposition_lca.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/LazySegmentTree.test.cpp.html">Test/LazySegmentTree.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/LowestCommonAncestor.test.cpp.html">Test/LowestCommonAncestor.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/Matrix_Determinant.test.cpp.html">Test/Matrix_Determinant.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/NumberTheoreticTransform.test.cpp.html">Test/NumberTheoreticTransform.test.cpp</a>
 * :heavy_check_mark: <a href="verify/Test/PersistentRedBlackTree.test.cpp.html">Test/PersistentRedBlackTree.test.cpp</a>
-* :x: <a href="verify/Test/PotentializedUnionFind.test.cpp.html">Test/PotentializedUnionFind.test.cpp</a>
-* :x: <a href="verify/Test/PrimeNumber.counting_primes.test.cpp.html">Test/PrimeNumber.counting_primes.test.cpp</a>
-* :x: <a href="verify/Test/PrimeNumber.enumerate_primes.test.cpp.html">Test/PrimeNumber.enumerate_primes.test.cpp</a>
-* :x: <a href="verify/Test/RedBlackTree.test.cpp.html">Test/RedBlackTree.test.cpp</a>
-* :x: <a href="verify/Test/RollingHash.test.cpp.html">Test/RollingHash.test.cpp</a>
-* :x: <a href="verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
-* :x: <a href="verify/Test/SparseTable.test.cpp.html">Test/SparseTable.test.cpp</a>
-* :x: <a href="verify/Test/StronglyConnectedComponents.test.cpp.html">Test/StronglyConnectedComponents.test.cpp</a>
-* :x: <a href="verify/Test/SuffixArray.test.cpp.html">Test/SuffixArray.test.cpp</a>
-* :x: <a href="verify/Test/UnionFind.test.cpp.html">Test/UnionFind.test.cpp</a>
-* :x: <a href="verify/Test/WaveletMatrix.next_prev_value.test.cpp.html">Test/WaveletMatrix.next_prev_value.test.cpp</a>
-* :x: <a href="verify/Test/WaveletMatrix.quantile.test.cpp.html">Test/WaveletMatrix.quantile.test.cpp</a>
-* :x: <a href="verify/Test/WaveletMatrix.range_frequency.test.cpp.html">Test/WaveletMatrix.range_frequency.test.cpp</a>
-* :x: <a href="verify/Test/WaveletMatrix.select.test.cpp.html">Test/WaveletMatrix.select.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/PotentializedUnionFind.test.cpp.html">Test/PotentializedUnionFind.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/PrimeNumber.counting_primes.test.cpp.html">Test/PrimeNumber.counting_primes.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/PrimeNumber.enumerate_primes.test.cpp.html">Test/PrimeNumber.enumerate_primes.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/RedBlackTree.test.cpp.html">Test/RedBlackTree.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/RollingHash.test.cpp.html">Test/RollingHash.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/SparseTable.test.cpp.html">Test/SparseTable.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/StronglyConnectedComponents.test.cpp.html">Test/StronglyConnectedComponents.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/SuffixArray.lcp.test.cpp.html">Test/SuffixArray.lcp.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/SuffixArray.sa_is.test.cpp.html">Test/SuffixArray.sa_is.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/SuffixArray.search.test.cpp.html">Test/SuffixArray.search.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/TwoSat.test.cpp.html">Test/TwoSat.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/UnionFind.test.cpp.html">Test/UnionFind.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.next_prev_value.test.cpp.html">Test/WaveletMatrix.next_prev_value.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.quantile.test.cpp.html">Test/WaveletMatrix.quantile.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.range_frequency.test.cpp.html">Test/WaveletMatrix.range_frequency.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.select.test.cpp.html">Test/WaveletMatrix.select.test.cpp</a>
+* :heavy_check_mark: <a href="verify/Test/sum_of_floor_of_linear.test.cpp.html">Test/sum_of_floor_of_linear.test.cpp</a>
 
 

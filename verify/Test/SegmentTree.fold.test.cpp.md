@@ -25,7 +25,7 @@ layout: default
 <link rel="stylesheet" href="../../assets/css/copy-button.css" />
 
 
-# :x: Test/SegmentTree.fold.test.cpp
+# :heavy_check_mark: Test/SegmentTree.fold.test.cpp
 
 <a href="../../index.html">Back to top page</a>
 
@@ -39,8 +39,8 @@ layout: default
 
 ## Depends on
 
-* :question: <a href="../../library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
-* :question: <a href="../../library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
+* :heavy_check_mark: <a href="../../library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
+* :heavy_check_mark: <a href="../../library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
 
 
 ## Code
