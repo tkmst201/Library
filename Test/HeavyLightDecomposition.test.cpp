@@ -30,9 +30,9 @@ int main() {
 		g[v].emplace_back(u);
 	}
 	
-	HLD hld(g, 0, [](const pmm &a, const pmm &b) -> pmm {
+	HLD hld(g, 0, pmm(1, 0), [](const pmm &a, const pmm &b) -> pmm {
 		return {a.first * b.first, b.first * a.second + b.second};
-	}, pmm(1, 0), true);
+	}, true);
 	
 	for (int i = 0; i < N; ++i) {
 		hld.set(i, val[i]);

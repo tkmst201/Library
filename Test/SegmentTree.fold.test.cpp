@@ -12,9 +12,9 @@ int main() {
 	using mint = ModInt<998244353>;
 	using pmm = std::pair<mint, mint>;
 	
-	SegmentTree<pmm> seg(N, [](const pmm & a, const pmm & b) -> pmm {
+	SegmentTree<pmm> seg(N, pmm(1, 0), [](const pmm & a, const pmm & b) -> pmm {
 		return {a.first * b.first, b.first * a.second + b.second};
-	}, pmm(1, 0));
+	});
 	
 	for (int i = 0; i < N; ++i) {
 		int a, b;

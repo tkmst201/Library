@@ -7,7 +7,7 @@
 
 template<typename T>
 struct Dummy {
-	Dummy(int n_, const std::function<int(int, int)> f, const int & id_elem) {}
+	Dummy(int n_, const int & id_elem, const std::function<int(int, int)> f) {}
 	
 	int fold(int l, int r) {
 		return 0;
@@ -31,7 +31,7 @@ int main() {
 		}
 	}
 	
-	HLD hld(g, 0, [](int a, int b) { return a + b; }, 0, true);
+	HLD hld(g, 0, 0, [](int a, int b) { return a + b; }, true);
 	
 	int Q;
 	scanf("%d", &Q);

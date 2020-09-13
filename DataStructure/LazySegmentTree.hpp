@@ -6,12 +6,16 @@
 #include <functional>
 
 /*
-last-updated: 2020/09/11
+last-updated: 2020/09/13
 
 遅延伝搬セグメント木
 
+TODO: 一般化された二分探索の追加
+TODO: 非再帰に変更
+TODO: set, get, fold_all の追加
+
 # 仕様
-LazySegmentTree(size_type n_, const value_type & id_node, const lazy_type & id_lazy, const F & f, const G & g, const H & h, const P & p = [](const lazy_type & a, size_type l) { return a; })
+LazySegmentTree(size_type n, const value_type & id_node, const lazy_type & id_lazy, const F & f, const G & g, const H & h, const P & p = [](const lazy_type & a, size_type l) { return a; })
 	時間計算量: Θ(n)
 	要素、作用素の単位元をそれぞれ id_node, id_lazy とし、{n_ 以上の最小の 2 冪} 個の単位元で初期化
 	
@@ -60,29 +64,29 @@ struct LazySegmentTree {
 	using P = std::function<lazy_type(const lazy_type &, size_type)>; // 区間への作用がその区間の大きさ(k) に比例して変化するとき p(a, k) := g(a, a, ..., a) (k 個)
 	
 private:
-	size_type n;
+	size_type n, n_;
+	value_type id_node;
+	lazy_type id_lazy;
 	F f;
 	G g;
 	H h;
 	P p;
-	value_type id_node;
-	lazy_type id_lazy;
 	std::vector<value_type> node;
 	std::vector<lazy_type> lazy;
 
 public:
-	LazySegmentTree(size_type n_, const value_type & id_node, const lazy_type & id_lazy, const F & f, const G & g, const H & h, const P & p = [](const lazy_type & a, size_type l) { return a; })
+	LazySegmentTree(size_type n, const value_type & id_node, const lazy_type & id_lazy, const F & f, const G & g, const H & h, const P & p = [](const lazy_type & a, size_type l) { return a; })
 			: n(n), id_node(id_node), id_lazy(id_lazy), f(f), g(g), h(h), p(p) {
-		n = 1;
-		while (n < n_) n <<= 1;
-		node.resize(2 * n, id_node);
-		lazy.resize(2 * n, id_lazy);
+		n_ = 1;
+		while (n_ < n) n_ <<= 1;
+		node.resize(2 * n_, id_node);
+		lazy.resize(2 * n_, id_lazy);
 	}
 	
 	LazySegmentTree(const std::vector<value_type> & v, const value_type & id_node, const lazy_type & id_lazy, const F & f, const G & g, const H & h, const P & p = [](const lazy_type & a, size_type l) { return a; })
 			: LazySegmentTree(v.size(), id_node, id_lazy, f, g, h, p) {
-		for (size_type i = 0; i < v.size(); ++i) node[i + size()] = v[i];
-		for (size_type i = size() - 1; i > 0; --i) node[i] = f(node[i << 1], node[i << 1 | 1]);
+		for (size_type i = 0; i < v.size(); ++i) node[i + n_] = v[i];
+		for (size_type i = n_ - 1; i > 0; --i) node[i] = f(node[i << 1], node[i << 1 | 1]);
 	}
 	
 	size_type size() const noexcept {
@@ -90,17 +94,17 @@ public:
 	}
 	
 	void update(size_type l, size_type r, const lazy_type & x) {
-		if (l == r) return;
-		assert(l < r);
+		assert(l <= r);
 		assert(r <= size());
-		update(l, r, x, 1, 0, size());
+		if (l == r) return;
+		update(l, r, x, 1, 0, n_);
 	}
 	
 	value_type fold(size_type l, size_type r) {
-		if (l == r) return id_node;
-		assert(l < r);
+		assert(l <= r);
 		assert(r <= size());
-		return fold(l, r, 1, 0, size());
+		if (l == r) return id_node;
+		return fold(l, r, 1, 0, n_);
 	}
 	
 private:

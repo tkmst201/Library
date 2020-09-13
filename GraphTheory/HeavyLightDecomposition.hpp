@@ -9,7 +9,7 @@
 #include <functional>
 
 /*
-last-updated: 2020/04/22
+last-updated: 2020/09/13
 
 HL 分解
 
@@ -19,15 +19,14 @@ template<typename U, typename T> :
 	T : fold 演算が可能なデータ構造(ex. SegmentTree)
 
 HeavyLightDecomposition(
-		std::vector<std::vector<size_type>> &g,
+		const std::vector<std::vector<size_type>> &g,
 		size_type root_num,
+		const_reference id_elem,
 		const F &f,
-		const value_type
-		&id_elem,
 		bool value_on_vertex) :
 	時間計算量: Θ(n)
 	root_num を根とする木 g に対して HL 分解を行う。
-	載せるモノイドの二項演算を f, 単位元を id_elem とする。
+	載せるモノイド単位元を id_elem, 二項演算を f とする。
 	{value_on_vertex - true : 頂点, false : 辺} に値を持たせる。
 
 size_type size() const noexcept :
@@ -75,7 +74,21 @@ public:
 	using F = std::function<value_type(const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
-	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const F &f, const_reference id_elem, bool value_on_vertex) : f(f), id_elem(id_elem), value_on_vertex(value_on_vertex) {
+private:
+	const value_type id_elem; // 単位元
+	F f; // 二項演算 f
+	bool value_on_vertex; // 値が {true : 頂点, false : 辺} に存在する
+	size_type size_; // 分解前の頂点数
+	std::vector<size_type> node_idx; // node_idx[i] := 頂点 i が属する分解後の列の index
+	std::vector<size_type> path_idx; // path_idx[i] := 頂点 i が属する分解後の列での頂点 i の index
+	std::vector<std::vector<size_type>> ver_num; // [i][j] := 分解後の列 i の j 番目の要素の分解前の頂点番号
+	
+	std::vector<size_type> par_num; // par_num[i] := 頂点 i の親の頂点番号
+	std::vector<std::vector<size_type>> childs; // childs[i] := 頂点 i の子の頂点番号
+	std::vector<container_type> value, rvalue; // 頂点や辺の値, rvalue は逆向きの演算
+	
+public:
+	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const_reference id_elem, const F &f, bool value_on_vertex) : id_elem(id_elem), f(f), value_on_vertex(value_on_vertex) {
 		build(g, root_num);
 	}
 	
@@ -124,18 +137,6 @@ public:
 	}
 	
 private:
-	F f; // 二項演算 f
-	const value_type id_elem; // 単位元
-	bool value_on_vertex; // 値が {true : 頂点, false : 辺} に存在する
-	size_type size_; // 分解前の頂点数
-	std::vector<size_type> node_idx; // node_idx[i] := 頂点 i が属する分解後の列の index
-	std::vector<size_type> path_idx; // path_idx[i] := 頂点 i が属する分解後の列での頂点 i の index
-	std::vector<std::vector<size_type>> ver_num; // [i][j] := 分解後の列 i の j 番目の要素の分解前の頂点番号
-	
-	std::vector<size_type> par_num; // par_num[i] := 頂点 i の親の頂点番号
-	std::vector<std::vector<size_type>> childs; // childs[i] := 頂点 i の子の頂点番号
-	std::vector<container_type> value, rvalue; // 頂点や辺の値, rvalue は逆向きの演算
-	
 	void build(const std::vector<std::vector<size_type>> &g, size_type root_num) {
 		size_ = g.size();
 		node_idx.resize(size());
@@ -187,8 +188,8 @@ private:
 		}
 		
 		for (size_type i = 0; i < ver_num.size(); ++i) {
-			value.emplace_back(ver_num[i].size(), f, id_elem);
-			rvalue.emplace_back(ver_num[i].size(), f, id_elem);
+			value.emplace_back(ver_num[i].size(), id_elem, f);
+			rvalue.emplace_back(ver_num[i].size(), id_elem, f);
 		}
 	}
 	
