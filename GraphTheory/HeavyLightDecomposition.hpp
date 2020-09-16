@@ -12,6 +12,8 @@
 last-updated: 2020/09/13
 
 HL 分解
+TODO: HL 分解とセグ木の分離と良い感じのインターフェースの実装
+TODO: 森に対応
 
 # 仕様
 template<typename U, typename T> :

@@ -62,7 +62,6 @@ long long get_tree_diameter(
 	重みが正の場合は double-sweap で Θ(n) で求まる
 	これは verify 用
 
-// おまけ その３
 std::vector<long long> get_dist_frequency_table(const Graph & g) :
 	要求ライブラリ: FastFourierTransform(multiply を実装済)
 	時間計算量: Θ(n log^2 n)

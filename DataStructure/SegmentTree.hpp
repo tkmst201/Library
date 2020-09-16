@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_SEGMENT_TREE_HPP
 #define INCLUDE_GUARD_SEGMENT_TREE_HPP
 
-#include <vector>
-#include <algorithm>
-#include <cassert>
-#include <functional>
-
 /*
 last-updated: 2020/09/13
 
@@ -65,6 +60,12 @@ size_type min_left(size_type r, std::function<bool(const_reference)> g) const :
 https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf, 2020/04/08
 AC Library, 2020/09/13
 */
+
+#include <vector>
+#include <algorithm>
+#include <cassert>
+#include <functional>
+
 
 template<typename T>
 struct SegmentTree {

@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP
 #define INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP
 
-#include <vector>
-#include <cassert>
-#include <utility>
-
 /*
 last-updated: 2020/08/27
 
