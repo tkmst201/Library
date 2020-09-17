@@ -1,235 +1,255 @@
 #ifndef INCLUDE_GUARD_HEAVY_LIGHT_DECOMPOSITION_HPP
 #define INCLUDE_GUARD_HEAVY_LIGHT_DECOMPOSITION_HPP
 
-#include <vector>
-#include <utility>
-#include <cassert>
-#include <algorithm>
-#include <stack>
-#include <functional>
-
 /*
-last-updated: 2020/09/13
+last-updated: 2020/09/17
 
 HL 分解
-TODO: HL 分解とセグ木の分離と良い感じのインターフェースの実装
-TODO: 森に対応
+単純な森に対応(自己ループ, 多重辺なし)
+lca: 最近共通祖先のこと
 
 # 仕様
-template<typename U, typename T> :
-	U : モノイドの型
-	T : fold 演算が可能なデータ構造(ex. SegmentTree)
+HeavyLightDecomposition(const Graph & g, bool use_lca = false)
+	時間計算量:
+		use_lca = false : Θ(n)
+		use_lca = true: Θ(n loglog n)
+	
+	グラフ g を HL 分解する
+	一度渡した g は変更してはいけない
+	use_lca = false のときは lca 関連の機能が使えない
 
-HeavyLightDecomposition(
-		const std::vector<std::vector<size_type>> &g,
-		size_type root_num,
-		const_reference id_elem,
-		const F &f,
-		bool value_on_vertex) :
-	時間計算量: Θ(n)
-	root_num を根とする木 g に対して HL 分解を行う。
-	載せるモノイド単位元を id_elem, 二項演算を f とする。
-	{value_on_vertex - true : 頂点, false : 辺} に値を持たせる。
-
-size_type size() const noexcept :
+size_type bf_size() const noexcept
 	時間計算量: Θ(1)
-	分解前の頂点数を返す
+	分解前のグラフの頂点数を返す
 
-void set(size_type i, const_reference x) :
-	時間計算量: Θ(log N)
-	頂点 i の値を x に変更する
+size_type af_size() const noexcept
+	時間計算量: Θ(1)
+	分解後のグラフの頂点数を返す
 
-void set(size_type u, size_type v, const_reference x) :
-	時間計算量: Θ(log N)
-	辺 (u, v) の重みを x に変更する
+size_type heavy_size(size_type k) const
+	時間計算量: Θ(1)
+	heavy-path k に属する頂点数を返す
 
-size_type lca(size_type x, size_type y) const :
-	時間計算量: O(log N)
-	x と y の LCA を返す
+size_type tree_cnt() const noexcept
+	時間計算量: Θ(1)
+	分解前のグラフに含まれている木の個数を返す
 
-value_type fold(size_type u, size_type v) const :
-	時間計算量: O(loglog N)
-	パス u -> v で fold 演算した結果を返す
+const std::vector<size_type> & trees() const noexcept
+	時間計算量: Θ(1)
+	分解前のグラフに含まれている木の根のリストを返す
 
--- private --
-std::pair<size_type, size_type> lca_node_num(size_type x, size_type y) const :
-	時間計算量: O(log N)
-	x と y の LCA が属する列にはじめて到達したときの頂点の組を返す。
+const std::vector<size_type> & operator [](size_type k) const noexcept
+	時間計算量: Θ(1)
+	分解後のグラフで heavy-path k に属する、分解前のグラフの頂点のリストを返す
+	添字の out-of-range 判定は行わない
 
-# memo
-	num は分解前の添字
-	idx は分解後の添字
+size_type at(size_type i, size_type j) const
+	時間計算量: Θ(1)
+	分解前のグラフで heavy-path i の index j の頂点を返す
+
+size_type par(size_type k) const
+	時間計算量: Θ(1)
+	分解前のグラフで頂点 k の親を返す(k が根なら k を返す)
+
+size_type heavy_map(size_type k) const
+	時間計算量: Θ(1)
+	分解前のグラフの頂点 k が属する heavy-path id
+
+size_type idx_map(size_type k) const
+	時間計算量: Θ(1)
+	分解前のグラフの頂点 k が属する heavy-path 内の index を返す
+
+size_type tree_id(size_type k) const
+	時間計算量: Θ(1)
+	分解前のグラフで頂点 k が属する木の id を返す
+
+size_type heavy_depth(size_type k) const
+	時間計算量: Θ(1)
+	分解後のグラフで heavy-path k の根からの深さ(0-indexed, \leq log n) を返す
+
+const std::vector<std::vector<size_type>> & par_dblng() const
+	時間計算量: Θ(1)
+	use_lca = true である必要がある
+	次のような 2 次元配列を返す
+	[k][i] := 分解前のグラフで heavy-path i から2^k 回 heavy-path を上ったとき、最初に到達する頂点番号
+
+std::pair<size_type, size_type> get_lca_path(size_type x, size_type y) const
+	時間計算量: O(loglog n)
+	use_lca = true である必要がある
+	分解前のグラフの頂点 x, y が属する分解後の列の lca 列を L とする
+	x, y が分解前のグラフで列 L に属する頂点に到達するまで上ったときに初めて到達する列 L の頂点の組を返す
+
+size_type get_lca(size_type x, size_type y) const
+	時間計算量: O(loglog n)
+	use_lca = true である必要がある
+	分解前のグラフで頂点 x, y の lca を返す
 
 # 参考
 https://qiita.com/ageprocpp/items/8dfe768218da83314989, 2020/04/19
 https://math314.hateblo.jp/entry/2014/06/24/220107, 2020/04/19
-
-path query verfied : https://atcoder.jp/contests/abc133/submissions/14120006
 */
 
-template<typename U, template<typename> typename T>
+#include <vector>
+#include <utility>
+#include <cassert>
+#include <stack>
+#include <algorithm>
+#include <cstdint>
+
 struct HeavyLightDecomposition {
-public:
-	using value_type = U;
-	using container_type = T<U>;
-	using const_reference = const value_type &;
-	using F = std::function<value_type(const_reference, const_reference)>;
-	using size_type = std::size_t;
+	using size_type = std::uint_fast32_t;
+	using Graph = std::vector<std::vector<size_type>>;
 	
 private:
-	const value_type id_elem; // 単位元
-	F f; // 二項演算 f
-	bool value_on_vertex; // 値が {true : 頂点, false : 辺} に存在する
-	size_type size_; // 分解前の頂点数
-	std::vector<size_type> node_idx; // node_idx[i] := 頂点 i が属する分解後の列の index
-	std::vector<size_type> path_idx; // path_idx[i] := 頂点 i が属する分解後の列での頂点 i の index
-	std::vector<std::vector<size_type>> ver_num; // [i][j] := 分解後の列 i の j 番目の要素の分解前の頂点番号
-	
-	std::vector<size_type> par_num; // par_num[i] := 頂点 i の親の頂点番号
-	std::vector<std::vector<size_type>> childs; // childs[i] := 頂点 i の子の頂点番号
-	std::vector<container_type> value, rvalue; // 頂点や辺の値, rvalue は逆向きの演算
+	size_type bf_n; // 分解前の頂点数
+	std::vector<size_type> roots; // 各木の根
+	std::vector<size_type> par_; // 分解前の頂点 i の親頂点(頂点 i が根の場合は自分自身)
+	std::vector<std::vector<size_type>> ver_info; // i 番目の heavy-path に含まれる分解前の頂点番号(index が大きいほど根側)
+	std::vector<size_type> heavy_map_; // 分解後において、分解前の頂点 i が属する heavy-path
+	std::vector<size_type> idx_map_; // 分解後において、分解前の頂点 i が属する heavy-path 内の index
+	std::vector<size_type> tree_id_; // 分解前の頂点 i が属する木の番号
+	std::vector<size_type> heavy_depth_; // [i] := heavy-path i の根からの深さ(0-indexed)
+	std::vector<std::vector<size_type>> par_dblng_; // [k][i] := 分解前で heavy-path i から2^k 回 heavy-path を上ったとき、最初に到達する頂点番号
 	
 public:
-	HeavyLightDecomposition(const std::vector<std::vector<size_type>> &g, size_type root_num, const_reference id_elem, const F &f, bool value_on_vertex) : id_elem(id_elem), f(f), value_on_vertex(value_on_vertex) {
-		build(g, root_num);
-	}
-	
-	size_type size() const noexcept {
-		return size_;
-	}
-	
-	void set(size_type i, const_reference x) {
-		assert(value_on_vertex);
-		assert(i < size());
-		set_(i, x);
-	}
-	
-	void set(size_type u, size_type v, const_reference x) {
-		assert(!value_on_vertex);
-		assert(u < size() && v < size());
-		assert(par_num[u] == v || par_num[v] == u);
-		size_type i = par_num[u] == v ? u : v;
-		set_(i, x);
-	}
-	
-	value_type fold(size_type u, size_type v) const {
-		assert(u < size() && v < size());
-		size_type lca_node = node_idx[lca_node_num(u, v).first];
-		value_type lv = id_elem, rv = id_elem;
+	HeavyLightDecomposition(const Graph & g, bool use_lca = false) : bf_n(g.size()) {
+		par_.assign(bf_size(), bf_size());
+		heavy_map_.assign(bf_size(), bf_size());
+		idx_map_.assign(bf_size(), bf_size());
+		tree_id_.assign(bf_size(), bf_size());
 		
-		while (node_idx[u] != lca_node) {
-			lv = f(lv, value[node_idx[u]].fold(path_idx[u], ver_num[node_idx[u]].size()));
-			u = par_num[ver_num[node_idx[u]].back()];
-		}
-		while (node_idx[v] != lca_node) {
-			rv = f(rvalue[node_idx[v]].fold(0, get_r_path_idx(node_idx[v], path_idx[v]) + 1), rv);
-			v = par_num[ver_num[node_idx[v]].back()];
-		}
-		
-		if (path_idx[u] <= path_idx[v]) lv = f(lv, value[node_idx[u]].fold(path_idx[u], path_idx[v] + value_on_vertex));
-		else rv = f(rvalue[node_idx[u]].fold(get_r_path_idx(node_idx[u], path_idx[u]) + !value_on_vertex, get_r_path_idx(node_idx[v], path_idx[v]) + 1), rv);
-		
-		return f(lv, rv);
-	}
-	
-	size_type lca(size_type x, size_type y) const {
-		assert(x < size() && y < size());
-		std::pair<size_type, size_type> res = lca_node_num(x, y);
-		return ver_num[node_idx[res.first]][std::max(path_idx[res.first], path_idx[res.second])];
-	}
-	
-private:
-	void build(const std::vector<std::vector<size_type>> &g, size_type root_num) {
-		size_ = g.size();
-		node_idx.resize(size());
-		path_idx.resize(size());
-		par_num.resize(size());
-		childs.resize(size());
-		
-		std::vector<bool> done(size(), 0);
-		std::vector<size_type> sub_size(size(), 0);
-		
-		std::stack<std::pair<size_type, size_type>> stk;
-		stk.emplace(root_num, 0);
-		par_num[root_num] = root_num;
-		done[root_num] = true;
-		
-		while (!stk.empty()) {
-			int u = stk.top().first;
-			int idx = stk.top().second;
-			stk.pop();
+		std::vector<size_type> sub_size(bf_size());
+		size_type tree_cnt = 0;
+		for (size_type i = 0; i < bf_size(); ++i) {
+			if (tree_id_[i] != bf_size()) continue;
+			std::stack<std::pair<size_type, size_type>> stk;
+			stk.emplace(i, 0);
+			par_[i] = i;
+			tree_id_[i] = roots.size();
 			
-			if (idx < g[u].size()) {
-				stk.emplace(u, idx + 1);
+			while (!stk.empty()) {
+				const size_type u = stk.top().first;
+				const size_type j = stk.top().second;
+				stk.pop();
 				
-				int v = g[u][idx];
-				if (!done[v]) {
-					done[v] = true;
-					par_num[v] = u;
-					childs[u].push_back(v);
+				if (j < g[u].size()) {
+					const size_type v = g[u][j];
+					stk.emplace(u, j + 1);
+					if (v == par_[u]) continue;
+					par_[v] = u;
+					tree_id_[v] = tree_cnt;
+					stk.emplace(v, 0);
+				}
+				else {
+					sub_size[u] = 1;
+					size_type mx_size = 0, mx_idx = u;
+					for (size_type v : g[u]) {
+						if (v == par_[u]) continue;
+						sub_size[u] += sub_size[v];
+						if (mx_size < sub_size[v]) {
+							mx_size = sub_size[v];
+							mx_idx = v;
+						}
+					}
+					if (sub_size[u] == 1) {
+						heavy_map_[u] = ver_info.size();
+						idx_map_[u] = 0;
+						ver_info.emplace_back();
+						heavy_depth_.emplace_back();
+					}
+					else {
+						heavy_map_[u] = heavy_map_[mx_idx];
+						idx_map_[u] = idx_map_[mx_idx] + 1;
+					}
+					ver_info[heavy_map_[mx_idx]].emplace_back(u);
+				}
+			}
+			
+			stk.emplace(i, 0);
+			heavy_depth_[heavy_map_[i]] = 0;
+			while (!stk.empty()) {
+				const size_type u = stk.top().first;
+				const size_type j = stk.top().second;
+				stk.pop();
+				if (j < g[u].size()) {
+					stk.emplace(u, j + 1);
+					const size_type v = g[u][j];
+					if (v == par_[u]) continue;
+					if (heavy_map_[u] != heavy_map_[v]) heavy_depth_[heavy_map_[v]] = heavy_depth_[heavy_map_[u]] + 1;
 					stk.emplace(v, 0);
 				}
 			}
-			else {
-				size_type mx_idx, mx_size = 0, size_cnt = 1;
-				for (size_type child : childs[u]) {
-					size_cnt += sub_size[child];
-					if (mx_size < sub_size[child]) {
-						mx_size = sub_size[child];
-						mx_idx = child;
-					}
-				}
-				
-				if (size_cnt == 1) ver_num.emplace_back();
-				size_type cur_node_idx = size_cnt == 1 ? ver_num.size() - 1 : node_idx[mx_idx];
-				sub_size[u] = size_cnt;
-				node_idx[u] = cur_node_idx;
-				path_idx[u] = ver_num[node_idx[u]].size();
-				ver_num[node_idx[u]].emplace_back(u);
-			}
+			roots.emplace_back(i);
 		}
+		sub_size.clear();
 		
-		for (size_type i = 0; i < ver_num.size(); ++i) {
-			value.emplace_back(ver_num[i].size(), id_elem, f);
-			rvalue.emplace_back(ver_num[i].size(), id_elem, f);
-		}
-	}
-	
-	std::pair<size_type, size_type> lca_node_num(size_type x, size_type y) const {
-		assert(x < size() && y < size());
-		if (node_idx[x] == node_idx[y]) return {x, y};
-		std::stack<size_type> stk[2];
-		for (size_type i = 0; i < 2; ++i) {
-			stk[i].emplace(-1);
-			stk[i].emplace(i == 0 ? x : y);
-			while (true) {
-				size_type top_num = ver_num[node_idx[stk[i].top()]].back();
-				size_type par = par_num[top_num];
-				if (top_num == par) break;
-				stk[i].emplace(par);
-			}
-		}
+		if (!use_lca) return;
+		size_type max_depth = *std::max_element(begin(heavy_depth_), end(heavy_depth_));
+		size_type lglg_n = 0;
+		while ((1 << lglg_n) < max_depth) ++lglg_n;
 		
-		size_type lca_pred[2];
-		while (node_idx[stk[0].top()] == node_idx[stk[1].top()]) {
-			for (size_type i = 0; i < 2; ++i) {
-				lca_pred[i] = stk[i].top();
-				stk[i].pop();
+		par_dblng_.assign(lglg_n + 1, std::vector<size_type>(ver_info.size(), bf_size()));
+		for (size_type i = 0; i < ver_info.size(); ++i) par_dblng_[0][i] = par_[ver_info[i].back()];
+		
+		for (size_type i = 0; i < lglg_n; ++i) {
+			for (size_type j = 0; j < ver_info.size(); ++j) {
+				par_dblng_[i + 1][j] = par_dblng_[i][heavy_map_[par_dblng_[i][j]]];
 			}
 		}
-		return {lca_pred[0], lca_pred[1]};
 	}
 	
-	size_type get_r_path_idx(size_type nidx, size_type pidx) const {
-		assert(nidx < ver_num.size());
-		assert(pidx < ver_num[nidx].size());
-		return ver_num[nidx].size() - pidx - 1;
+	size_type bf_size() const noexcept { return bf_n; }
+	size_type af_size() const noexcept { return ver_info.size(); }
+	size_type heavy_size(size_type k) const { assert(k < af_size()); return ver_info[k].size(); }
+	size_type tree_cnt() const noexcept { return roots.size(); }
+	const std::vector<size_type> & trees() const noexcept { return roots; }
+	const std::vector<size_type> & operator [](size_type k) const noexcept { return ver_info[k]; }
+	size_type at(size_type i, size_type j) const {
+		assert(i < af_size());
+		assert(j < ver_info[i].size());
+		return ver_info[i][j];
+	}
+	size_type par(size_type k) const { assert(k < bf_size()); return par_[k]; }
+	size_type heavy_map(size_type k) const { assert(k < bf_size()); return heavy_map_[k]; }
+	size_type idx_map(size_type k) const { assert(k < bf_size()); return idx_map_[k]; }
+	size_type tree_id(size_type k) const { assert(k < bf_size()); return tree_id_[k]; }
+	size_type heavy_depth(size_type k) const { assert(k < af_size()); return heavy_depth_[k]; }
+	const std::vector<std::vector<size_type>> & par_dblng() const {
+		assert(!par_dblng_.empty());
+		return par_dblng_;
 	}
 	
-	void set_(size_type i, const_reference x) {
-		assert(i < size());
-		value[node_idx[i]].set(path_idx[i], x);
-		rvalue[node_idx[i]].set(get_r_path_idx(node_idx[i], path_idx[i]), x);
+	std::pair<size_type, size_type> get_lca_path(size_type x, size_type y) const {
+		assert(!par_dblng_.empty());
+		assert(x < bf_size());
+		assert(y < bf_size());
+		assert(tree_id_[x] == tree_id_[y]);
+		if (heavy_map_[x] == heavy_map_[y]) return {x, y};
+		
+		bool isswap = heavy_depth_[heavy_map_[x]] < heavy_depth_[heavy_map_[y]];
+		if (isswap) std::swap(x, y);
+		
+		const size_type diff = heavy_depth_[heavy_map_[x]] - heavy_depth_[heavy_map_[y]];
+		for (size_type i = par_dblng_.size(); i > 0; --i) {
+			if (diff >> (i - 1) & 1) x = par_dblng_[i - 1][heavy_map_[x]];
+		}
+		if (heavy_map_[x] == heavy_map_[y]) return isswap ? std::make_pair(y, x) : std::make_pair(x, y);
+		
+		for (size_type i = par_dblng_.size(); i > 0; --i) {
+			const size_type p1 = par_dblng_[i - 1][heavy_map_[x]], p2 = par_dblng_[i - 1][heavy_map_[y]];
+			if (heavy_map_[p1] != heavy_map_[p2]) x = p1, y = p2;
+		}
+		x = par_dblng_[0][heavy_map_[x]];
+		y = par_dblng_[0][heavy_map_[y]];
+		return isswap ? std::make_pair(y, x) : std::make_pair(x, y);
+	}
+	
+	size_type get_lca(size_type x, size_type y) const {
+		assert(!par_dblng_.empty());
+		assert(x < bf_size());
+		assert(y < bf_size());
+		std::pair<size_type, size_type> res = get_lca_path(x, y);
+		return ver_info[heavy_map_[res.first]][std::max(idx_map_[res.first], idx_map_[res.second])];
 	}
 };
 

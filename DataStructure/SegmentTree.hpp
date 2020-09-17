@@ -66,7 +66,6 @@ AC Library, 2020/09/13
 #include <cassert>
 #include <functional>
 
-
 template<typename T>
 struct SegmentTree {
 	using value_type = T;

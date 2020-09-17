@@ -67,7 +67,6 @@ https://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7, 2020/09/16
 https://beet-aizu.hatenablog.com/entry/2019/07/08/174727, 2020/09/16
 */
 
-#include <cstdint>
 #include <vector>
 #include <cassert>
 #include <stack>

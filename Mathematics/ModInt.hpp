@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_MOD_INT_HPP
 #define INCLUDE_GUARD_MOD_INT_HPP
 
-#include <cassert>
-#include <iostream>
-
 /*
 last-updated: 2020/02/26
 
@@ -37,6 +34,9 @@ friend std::istream & operator >>(std::istream & is, ModInt & rhs) :
 # 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
 */
+
+#include <cassert>
+#include <iostream>
 
 template<int M>
 struct ModInt {

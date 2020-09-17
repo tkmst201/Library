@@ -8,6 +8,7 @@ last-updated: 2020/08/27
 木グラフではないとバグるので注意
 
 おまけで木の任意の 2 頂点間のパスの長さを返す機能がついている
+Heavy Light Decomposition を使った 構築 O(n loglog n) クエリ O(loglog n) の方が早いのでそっちを使おう
 
 # 仕様
 LowestCommonAncestor(size_type n) :
