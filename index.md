@@ -1,161 +1,287 @@
 ---
-layout: default
+data:
+  libraryCategories:
+  - name: DataStructure
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/AVL_Tree.hpp
+      title: DataStructure/AVL_Tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/BinaryIndexedTree.hpp
+      title: DataStructure/BinaryIndexedTree.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/BinaryIndexedTree2D.hpp
+      title: DataStructure/BinaryIndexedTree2D.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/BinaryIndexedTree_RangeAdd.hpp
+      title: DataStructure/BinaryIndexedTree_RangeAdd.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/DisjointSparseTable.hpp
+      title: DataStructure/DisjointSparseTable.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/LazySegmentTree.hpp
+      title: DataStructure/LazySegmentTree.hpp
+    - icon: ':warning:'
+      path: DataStructure/PersistentArray.hpp
+      title: DataStructure/PersistentArray.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/PersistentRedBlackTree.hpp
+      title: DataStructure/PersistentRedBlackTree.hpp
+    - icon: ':warning:'
+      path: DataStructure/PersistentStack.hpp
+      title: DataStructure/PersistentStack.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/PotentializedUnionFind.hpp
+      title: DataStructure/PotentializedUnionFind.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/RedBlackTree.hpp
+      title: DataStructure/RedBlackTree.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/SegmentTree.hpp
+      title: DataStructure/SegmentTree.hpp
+    - icon: ':warning:'
+      path: DataStructure/SlidingWindowAggregation.hpp
+      title: DataStructure/SlidingWindowAggregation.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/SparseTable.hpp
+      title: DataStructure/SparseTable.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/SuccintBitVector.hpp
+      title: DataStructure/SuccintBitVector.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/UnionFind.hpp
+      title: DataStructure/UnionFind.hpp
+    - icon: ':heavy_check_mark:'
+      path: DataStructure/WaveletMatrix.hpp
+      title: DataStructure/WaveletMatrix.hpp
+  - name: GraphTheory
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/BipartiteMatching.hpp
+      title: GraphTheory/BipartiteMatching.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/CentroidDecomposition.hpp
+      title: GraphTheory/CentroidDecomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/Dinic.hpp
+      title: GraphTheory/Dinic.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/EdmondsKarp.hpp
+      title: GraphTheory/EdmondsKarp.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/EulerTour.hpp
+      title: GraphTheory/EulerTour.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/HeavyLightDecomposition.hpp
+      title: GraphTheory/HeavyLightDecomposition.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/HeavyLightDecomposition_Query.hpp
+      title: GraphTheory/HeavyLightDecomposition_Query.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/LowestCommonAncestor.hpp
+      title: GraphTheory/LowestCommonAncestor.hpp
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/StronglyConnectedComponents.hpp
+      title: GraphTheory/StronglyConnectedComponents.hpp
+  - name: Mathematics
+    pages:
+    - icon: ':warning:'
+      path: Mathematics/Combination.hpp
+      title: Mathematics/Combination.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Garner.hpp
+      title: Mathematics/Garner.hpp
+    - icon: ':warning:'
+      path: Mathematics/MathUtility.hpp
+      title: Mathematics/MathUtility.hpp
+    - icon: ':warning:'
+      path: Mathematics/Matrix(double).hpp
+      title: Mathematics/Matrix(double).hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Matrix.hpp
+      title: Mathematics/Matrix.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/ModInt.hpp
+      title: Mathematics/ModInt.hpp
+    - icon: ':warning:'
+      path: Mathematics/Polynomial.hpp
+      title: Mathematics/Polynomial.hpp
+    - icon: ':warning:'
+      path: Mathematics/RuntimeModInt.hpp
+      title: Mathematics/RuntimeModInt.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/TwoSat.hpp
+      title: Mathematics/TwoSat.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/sum_of_floor_of_linear.hpp
+      title: Mathematics/sum_of_floor_of_linear.hpp
+  - name: Mathematics/Convolution
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp
+      title: Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.hpp
+      title: Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.hpp
+      title: Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp
+      title: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp
+      title: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/Convolution/NumberTheoreticTransform.hpp
+      title: Mathematics/Convolution/NumberTheoreticTransform.hpp
+  - name: Mathematics/PrimeNumber
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/PrimeNumber/counting_primes.hpp
+      title: Mathematics/PrimeNumber/counting_primes.hpp
+    - icon: ':heavy_check_mark:'
+      path: Mathematics/PrimeNumber/enumerate_primes.hpp
+      title: Mathematics/PrimeNumber/enumerate_primes.hpp
+    - icon: ':warning:'
+      path: Mathematics/PrimeNumber/prime_sum.hpp
+      title: Mathematics/PrimeNumber/prime_sum.hpp
+  - name: String
+    pages:
+    - icon: ':warning:'
+      path: String/KMP.hpp
+      title: String/KMP.hpp
+    - icon: ':heavy_check_mark:'
+      path: String/RollingHash.hpp
+      title: String/RollingHash.hpp
+    - icon: ':heavy_check_mark:'
+      path: String/SuffixArray.hpp
+      title: String/SuffixArray.hpp
+  verificationCategories:
+  - name: Test
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: Test/AVL_Tree.test.cpp
+      title: Test/AVL_Tree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/BinaryIndexedTree.test.cpp
+      title: Test/BinaryIndexedTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/BinaryIndexedTree2D.test.cpp
+      title: Test/BinaryIndexedTree2D.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/BinaryIndexedTree_RangeAdd.test.cpp
+      title: Test/BinaryIndexedTree_RangeAdd.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/BipartiteMatching.test.cpp
+      title: Test/BipartiteMatching.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/CentroidDecomposition.test.cpp
+      title: Test/CentroidDecomposition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/Dinic.test.cpp
+      title: Test/Dinic.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/DisjointSparseTable.test.cpp
+      title: Test/DisjointSparseTable.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/EdmondsKarp.test.cpp
+      title: Test/EdmondsKarp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/EulerTour.test.cpp
+      title: Test/EulerTour.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
+      title: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+      title: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+      title: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
+      title: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+      title: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/HeavyLightDecomposition.test.cpp
+      title: Test/HeavyLightDecomposition.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+      title: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+      title: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/LazySegmentTree.test.cpp
+      title: Test/LazySegmentTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/LowestCommonAncestor.test.cpp
+      title: Test/LowestCommonAncestor.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/Matrix_Determinant.test.cpp
+      title: Test/Matrix_Determinant.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/NumberTheoreticTransform.test.cpp
+      title: Test/NumberTheoreticTransform.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/PersistentRedBlackTree.test.cpp
+      title: Test/PersistentRedBlackTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/PotentializedUnionFind.test.cpp
+      title: Test/PotentializedUnionFind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/PrimeNumber.counting_primes.test.cpp
+      title: Test/PrimeNumber.counting_primes.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/PrimeNumber.enumerate_primes.test.cpp
+      title: Test/PrimeNumber.enumerate_primes.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/RedBlackTree.test.cpp
+      title: Test/RedBlackTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/RollingHash.test.cpp
+      title: Test/RollingHash.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/SegmentTree.fold.test.cpp
+      title: Test/SegmentTree.fold.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/SparseTable.test.cpp
+      title: Test/SparseTable.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/StronglyConnectedComponents.test.cpp
+      title: Test/StronglyConnectedComponents.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/SuffixArray.lcp.test.cpp
+      title: Test/SuffixArray.lcp.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/SuffixArray.sa_is.test.cpp
+      title: Test/SuffixArray.sa_is.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/SuffixArray.search.test.cpp
+      title: Test/SuffixArray.search.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/TwoSat.test.cpp
+      title: Test/TwoSat.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/UnionFind.test.cpp
+      title: Test/UnionFind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/WaveletMatrix.next_prev_value.test.cpp
+      title: Test/WaveletMatrix.next_prev_value.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/WaveletMatrix.quantile.test.cpp
+      title: Test/WaveletMatrix.quantile.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/WaveletMatrix.range_frequency.test.cpp
+      title: Test/WaveletMatrix.range_frequency.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/WaveletMatrix.select.test.cpp
+      title: Test/WaveletMatrix.select.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/sum_of_floor_of_linear.test.cpp
+      title: Test/sum_of_floor_of_linear.test.cpp
+layout: toppage
 ---
-
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    TeX: { equationNumbers: { autoNumber: "AMS" }},
-    tex2jax: {
-      inlineMath: [ ['$','$'] ],
-      processEscapes: true
-    },
-    "HTML-CSS": { matchFontHeight: false },
-    displayAlign: "left",
-    displayIndent: "2em"
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-balloon-js@1.1.2/jquery.balloon.min.js" integrity="sha256-ZEYs9VrgAeNuPvs15E39OsyOJaIkXEEt10fzxJ20+2I=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="assets/js/copy-button.js"></script>
-<link rel="stylesheet" href="assets/css/copy-button.css" />
-
-
-# {{ site.title }}
-
-[![Actions Status]({{ site.github.repository_url }}/workflows/verify/badge.svg)]({{ site.github.repository_url }}/actions)
-<a href="{{ site.github.repository_url }}"><img src="https://img.shields.io/github/last-commit/{{ site.github.owner_name }}/{{ site.github.repository_name }}" /></a>
-
-{% if site.github.project_tagline %}{{ site.github.project_tagline }}{% else %}This documentation is automatically generated by <a href="https://github.com/online-judge-tools/verification-helper">online-judge-tools/verification-helper</a>.{% endif %}
-
-## Library Files
-
-<div id="5e248f107086635fddcead5bf28943fc"></div>
-
-### DataStructure
-
-* :heavy_check_mark: <a href="library/DataStructure/AVL_Tree.hpp.html">DataStructure/AVL_Tree.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree.hpp.html">DataStructure/BinaryIndexedTree.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree2D.hpp.html">DataStructure/BinaryIndexedTree2D.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/BinaryIndexedTree_RangeAdd.hpp.html">DataStructure/BinaryIndexedTree_RangeAdd.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/DisjointSparseTable.hpp.html">DataStructure/DisjointSparseTable.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/LazySegmentTree.hpp.html">DataStructure/LazySegmentTree.hpp</a>
-* :warning: <a href="library/DataStructure/PersistentArray.hpp.html">DataStructure/PersistentArray.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/PersistentRedBlackTree.hpp.html">DataStructure/PersistentRedBlackTree.hpp</a>
-* :warning: <a href="library/DataStructure/PersistentStack.hpp.html">DataStructure/PersistentStack.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/PotentializedUnionFind.hpp.html">DataStructure/PotentializedUnionFind.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/RedBlackTree.hpp.html">DataStructure/RedBlackTree.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/SegmentTree.hpp.html">DataStructure/SegmentTree.hpp</a>
-* :warning: <a href="library/DataStructure/SlidingWindowAggregation.hpp.html">DataStructure/SlidingWindowAggregation.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/SparseTable.hpp.html">DataStructure/SparseTable.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/SuccintBitVector.hpp.html">DataStructure/SuccintBitVector.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/UnionFind.hpp.html">DataStructure/UnionFind.hpp</a>
-* :heavy_check_mark: <a href="library/DataStructure/WaveletMatrix.hpp.html">DataStructure/WaveletMatrix.hpp</a>
-
-
-<div id="f381732df2a59e8e35d7811ba3c2868c"></div>
-
-### GraphTheory
-
-* :heavy_check_mark: <a href="library/GraphTheory/BipartiteMatching.hpp.html">GraphTheory/BipartiteMatching.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/CentroidDecomposition.hpp.html">GraphTheory/CentroidDecomposition.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/Dinic.hpp.html">GraphTheory/Dinic.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/EdmondsKarp.hpp.html">GraphTheory/EdmondsKarp.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/HeavyLightDecomposition.hpp.html">GraphTheory/HeavyLightDecomposition.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/LowestCommonAncestor.hpp.html">GraphTheory/LowestCommonAncestor.hpp</a>
-* :heavy_check_mark: <a href="library/GraphTheory/StronglyConnectedComponents.hpp.html">GraphTheory/StronglyConnectedComponents.hpp</a>
-
-
-<div id="540b21ecdb276f5087ee585cedd6d5d0"></div>
-
-### Mathematics
-
-* :warning: <a href="library/Mathematics/Combination.hpp.html">Mathematics/Combination.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Garner.hpp.html">Mathematics/Garner.hpp</a>
-* :warning: <a href="library/Mathematics/MathUtility.hpp.html">Mathematics/MathUtility.hpp</a>
-* :warning: <a href="library/Mathematics/Matrix(double).hpp.html">Mathematics/Matrix(double).hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Matrix.hpp.html">Mathematics/Matrix.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/ModInt.hpp.html">Mathematics/ModInt.hpp</a>
-* :warning: <a href="library/Mathematics/Polynomial.hpp.html">Mathematics/Polynomial.hpp</a>
-* :warning: <a href="library/Mathematics/RuntimeModInt.hpp.html">Mathematics/RuntimeModInt.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/TwoSat.hpp.html">Mathematics/TwoSat.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/sum_of_floor_of_linear.hpp.html">Mathematics/sum_of_floor_of_linear.hpp</a>
-
-
-<div id="637dbc1fa2c49b2df4202c454476276a"></div>
-
-### Mathematics/Convolution
-
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.hpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.hpp.html">Mathematics/Convolution/FastFourierTransform_CookeyTukey-time-radix2.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp.html">Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp.html">Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/Convolution/NumberTheoreticTransform.hpp.html">Mathematics/Convolution/NumberTheoreticTransform.hpp</a>
-
-
-<div id="52bd1cf97062cf16ea4e1de9a8338397"></div>
-
-### Mathematics/PrimeNumber
-
-* :heavy_check_mark: <a href="library/Mathematics/PrimeNumber/counting_primes.hpp.html">Mathematics/PrimeNumber/counting_primes.hpp</a>
-* :heavy_check_mark: <a href="library/Mathematics/PrimeNumber/enumerate_primes.hpp.html">Mathematics/PrimeNumber/enumerate_primes.hpp</a>
-* :warning: <a href="library/Mathematics/PrimeNumber/prime_sum.hpp.html">Mathematics/PrimeNumber/prime_sum.hpp</a>
-
-
-<div id="27118326006d3829667a400ad23d5d98"></div>
-
-### String
-
-* :warning: <a href="library/String/KMP.hpp.html">String/KMP.hpp</a>
-* :heavy_check_mark: <a href="library/String/RollingHash.hpp.html">String/RollingHash.hpp</a>
-* :heavy_check_mark: <a href="library/String/SuffixArray.hpp.html">String/SuffixArray.hpp</a>
-
-
-## Verify Files
-
-* :heavy_check_mark: <a href="verify/Test/AVL_Tree.test.cpp.html">Test/AVL_Tree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/BinaryIndexedTree.test.cpp.html">Test/BinaryIndexedTree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/BinaryIndexedTree2D.test.cpp.html">Test/BinaryIndexedTree2D.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/BinaryIndexedTree_RangeAdd.test.cpp.html">Test/BinaryIndexedTree_RangeAdd.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/BipartiteMatching.test.cpp.html">Test/BipartiteMatching.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/CentroidDecomposition.test.cpp.html">Test/CentroidDecomposition.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/Dinic.test.cpp.html">Test/Dinic.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/DisjointSparseTable.test.cpp.html">Test/DisjointSparseTable.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/EdmondsKarp.test.cpp.html">Test/EdmondsKarp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp.html">Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/FastFourierTransform_CookeyTukey-radix2.test.cpp.html">Test/FastFourierTransform_CookeyTukey-radix2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp.html">Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp.html">Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp.html">Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition.test.cpp.html">Test/HeavyLightDecomposition.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/HeavyLightDecomposition_lca.test.cpp.html">Test/HeavyLightDecomposition_lca.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/LazySegmentTree.test.cpp.html">Test/LazySegmentTree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/LowestCommonAncestor.test.cpp.html">Test/LowestCommonAncestor.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/Matrix_Determinant.test.cpp.html">Test/Matrix_Determinant.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/NumberTheoreticTransform.test.cpp.html">Test/NumberTheoreticTransform.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/PersistentRedBlackTree.test.cpp.html">Test/PersistentRedBlackTree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/PotentializedUnionFind.test.cpp.html">Test/PotentializedUnionFind.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/PrimeNumber.counting_primes.test.cpp.html">Test/PrimeNumber.counting_primes.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/PrimeNumber.enumerate_primes.test.cpp.html">Test/PrimeNumber.enumerate_primes.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/RedBlackTree.test.cpp.html">Test/RedBlackTree.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/RollingHash.test.cpp.html">Test/RollingHash.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/SegmentTree.fold.test.cpp.html">Test/SegmentTree.fold.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/SparseTable.test.cpp.html">Test/SparseTable.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/StronglyConnectedComponents.test.cpp.html">Test/StronglyConnectedComponents.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/SuffixArray.lcp.test.cpp.html">Test/SuffixArray.lcp.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/SuffixArray.sa_is.test.cpp.html">Test/SuffixArray.sa_is.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/SuffixArray.search.test.cpp.html">Test/SuffixArray.search.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/TwoSat.test.cpp.html">Test/TwoSat.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/UnionFind.test.cpp.html">Test/UnionFind.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.next_prev_value.test.cpp.html">Test/WaveletMatrix.next_prev_value.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.quantile.test.cpp.html">Test/WaveletMatrix.quantile.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.range_frequency.test.cpp.html">Test/WaveletMatrix.range_frequency.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/WaveletMatrix.select.test.cpp.html">Test/WaveletMatrix.select.test.cpp</a>
-* :heavy_check_mark: <a href="verify/Test/sum_of_floor_of_linear.test.cpp.html">Test/sum_of_floor_of_linear.test.cpp</a>
-
-
