@@ -2,43 +2,48 @@
 #define INCLUDE_GUARD_SEGMENT_TREE_HPP
 
 /*
-last-updated: 2020/09/13
+last-updated: 2020/09/18
 
 max_right: verified(https://atcoder.jp/contests/practice2/submissions/16664880)
 min_left: unverified
 
 # 仕様
-SegmentTree(size_type n, const_reference id_elem, const F & f) :
+SegmentTree()
+	時間計算量: Θ(1)
+	空のセグ木を作成
+	何か操作を行った場合の動作は未定義
+
+SegmentTree(size_type n, const_reference id_elem, const F & f)
 	時間計算量: Θ(n)
 	要素数 n, 単位元 id_elem, 二項演算 f で初期化
 
-SegmentTree(std::vector<value_type> v, const_reference id_elem, const F & f) :
+SegmentTree(std::vector<value_type> v, const_reference id_elem, const F & f)
 	時間計算量: Θ(n)
 	配列 v で初期化
 	他の引数については上記の通り
 
-size_type size() const noexcept :
+size_type size() const noexcept
 	時間計算量: Θ(1)
 	要素数を返す(\neq 内部のノード数)
 
-void set(size_type i, const_reference x) :
+void set(size_type i, const_reference x)
 	時間計算量: Θ(log n)
 	i 番目(0 \leq i < n) の要素に x を代入
 
-const_reference get(size_type i) const :
+const_reference get(size_type i) const
 	時間計算量: Θ(1)
 	i 番目(0 \leq i < n) の要素を返す
 
-value_type fold(size_type l, size_type r) const :
+value_type fold(size_type l, size_type r) const
 	時間計算量: O(log n)
 	[l, r) (0 \leq l \leq r \leq n) を fold した結果を返す
 	l = r のときは id_elem を返す
 
-const_reference fold_all() const :
+const_reference fold_all() const
 	時間計算量: Θ(1)
 	fold(0, n) の結果を返す
 
-size_type max_right(size_type l, std::function<bool(const_reference)> g) const :
+size_type max_right(size_type l, std::function<bool(const_reference)> g) const
 	時間計算量: O(log n)
 	0 \leq l \leq n
 	g は単調な関数
@@ -47,7 +52,7 @@ size_type max_right(size_type l, std::function<bool(const_reference)> g) const :
 		g(fold(l, r + 1)) = false
 	g(fold(l, n)) = true のときは r = n
 
-size_type min_left(size_type r, std::function<bool(const_reference)> g) const :
+size_type min_left(size_type r, std::function<bool(const_reference)> g) const
 	時間計算量: O(log n)
 	0 \leq r \leq n
 	g は単調な関数
@@ -80,6 +85,8 @@ private:
 	std::vector<value_type> node;
 	
 public:
+	SegmentTree() = default;
+	
 	SegmentTree(size_type n, const_reference id_elem, const F & f) : n(n), id_elem(id_elem), f(f) {
 		n_ = 1;
 		while (n_ < n) n_ <<= 1;

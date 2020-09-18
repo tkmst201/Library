@@ -3,7 +3,7 @@
 #include "Mathematics/ModInt.hpp"
 #include "DataStructure/SegmentTree.hpp"
 #include "GraphTheory/HeavyLightDecomposition.hpp"
-#include "GraphTheory/HeavyLightDecomposition_PathQuery.hpp"
+#include "GraphTheory/HeavyLightDecomposition_Query.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -24,7 +24,7 @@ int main() {
 		init[i] = {a, b};
 	}
 	
-	HeavyLightDecomposition_PathQuery<HLD, P, SegmentTree>::Graph g(N);
+	HeavyLightDecomposition_Query<HLD, P, SegmentTree>::Graph g(N);
 	for (int i = 0; i < N - 1; ++i) {
 		int u, v;
 		scanf("%d %d", &u, &v);
@@ -32,7 +32,7 @@ int main() {
 		g[v].emplace_back(u);
 	}
 	
-	HeavyLightDecomposition_PathQuery<HLD, P, SegmentTree> hld(g, init, {1, 0},
+	HeavyLightDecomposition_Query<HLD, P, SegmentTree> hld(g, init, {1, 0},
 		[](auto && x, auto && y) -> P { return {x.first * y.first, x.second * y.first + y.second}; });
 	
 	while (Q--) {
