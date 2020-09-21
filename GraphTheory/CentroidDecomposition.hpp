@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_CENTROID_DECOMPOSITION_HPP
 #define INCLUDE_GUARD_CENTROID_DECOMPOSITION_HPP
 
-#include <vector>
-#include <cassert>
-
 /*
 last-updated: 2020/09/03
 
@@ -88,6 +85,9 @@ std::vector<long long> get_dist_frequency_table(const Graph & g) :
 https://ferin-tech.hatenablog.com/entry/2020/03/06/162311, 2020/09/02
 https://qiita.com/drken/items/4b4c3f1824339b090202, 2020/09/02
 */
+
+#include <vector>
+#include <cassert>
 
 class CentroidDecomposition {
 public:

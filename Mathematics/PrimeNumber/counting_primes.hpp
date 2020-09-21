@@ -1,12 +1,6 @@
 #ifndef INCLUDE_GUARD_COUNTING_PRIMES_HPP
 #define INCLUDE_GUARD_COUNTING_PRIMES_HPP
 
-#include <cstdint>
-#include <vector>
-#include <algorithm>
-
-#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
-
 /*
 last-updated: 2020/09/07
 
@@ -24,6 +18,12 @@ prime_sum を少しいじると素数の個数に変更できる
 # 参考
 https://math314.hateblo.jp/entry/2016/06/05/004332, 2020/09/07
 */
+
+#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
+
+#include <cstdint>
+#include <vector>
+#include <algorithm>
 
 namespace tk {
 std::uint64_t counting_primes(std::uint64_t n) {

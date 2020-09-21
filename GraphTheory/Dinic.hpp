@@ -1,13 +1,6 @@
 #ifndef INCLUDE_GUARD_DINIC_HPP
 #define INCLUDE_GUARD_DINIC_HPP
 
-#include <vector>
-#include <cassert>
-#include <queue>
-#include <utility>
-#include <type_traits>
-#include <algorithm>
-
 /*
 last-updated: 2020/03/03
 
@@ -34,6 +27,13 @@ value_type max_flow(size_type s, size_type t) :
 http://hos.ac/slides/20150319_flow.pdf, 2020/03/03
 http://vartkw.hatenablog.com/entry/2016/12/02/002703, 2020/03/03
 */
+
+#include <vector>
+#include <cassert>
+#include <queue>
+#include <utility>
+#include <type_traits>
+#include <algorithm>
 
 template<typename T>
 struct Dinic {

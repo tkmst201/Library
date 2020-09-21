@@ -1,12 +1,10 @@
 #ifndef INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP
 #define INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP
 
-#include <vector>
-#include <cassert>
-#include <algorithm>
-
 /*
 last-updated: 2020/08/27
+
+TODO: SCC: 非再帰にする
 
 # 仕様
 StronglyConnectedComponents(size_type n) :
@@ -46,6 +44,10 @@ std::vector<std::vector<size_type>> get_graph() const :
 # 参考
 https://mathtrain.jp/kyorenketsu, 2020/08/27
 */
+
+#include <vector>
+#include <cassert>
+#include <algorithm>
 
 struct StronglyConnectedComponents {
 	using size_type = std::size_t;

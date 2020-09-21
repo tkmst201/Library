@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_SUM_OF_FLOOR_OF_LINEAR_HPP
 #define INCLUDE_GUARD_SUM_OF_FLOOR_OF_LINEAR_HPP
 
-#include <utility>
-#include <cassert>
-
 /*
 last-updated: 2020/09/11
 
@@ -17,6 +14,9 @@ T sum_of_floor_of_linear(T N, T M, T A, T B) :
 https://twitter.com/kyopro_friends/status/1304063876019793921?s=20, 2020/09/11
 https://qiita.com/HNJ/items/564f15316719209df73c, 2020/09/10
 */
+
+#include <utility>
+#include <cassert>
 
 namespace tk {
 template<typename T>

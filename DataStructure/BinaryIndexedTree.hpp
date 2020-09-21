@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_BINARY_INDEXED_TREE_HPP
 #define INCLUDE_GUARD_BINARY_INDEXED_TREE_HPP
 
-#include <vector>
-#include <cassert>
-#include <functional>
-
 /*
 last-updated: 2020/08/15
 
@@ -29,6 +25,10 @@ size_type lower_bound(const_reference x) const {
 # 参考
 https://algo-logic.info/binary-indexed-tree/, 2020/08/15
 */
+
+#include <vector>
+#include <cassert>
+#include <functional>
 
 template<typename T>
 struct BinaryIndexedTree {

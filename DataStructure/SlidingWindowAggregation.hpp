@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_SLIDING_WINDOW_AGGREGATION_HPP
 #define INCLUDE_GUARD_SLIDING_WINDOW_AGGREGATION_HPP
 
-#include <stack>
-#include <vector>
-#include <cassert>
-#include <cstdio>
-
 /*
 last-updated: 2019/12/18
 
@@ -38,6 +33,11 @@ int func(const int &x, const int &y) :
 # 参考
 https://scrapbox.io/data-structures/Sliding_Window_Aggregation, 2019/12/18
 */
+
+#include <stack>
+#include <vector>
+#include <cassert>
+#include <cstdio>
 
 struct SlidingWindowAggregation {
 public:

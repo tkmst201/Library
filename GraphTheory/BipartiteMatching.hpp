@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_BIPARTITE_MATCHING_HPP
 #define INCLUDE_GUARD_BIPARTITE_MATCHING_HPP
 
-#include <vector>
-#include <cassert>
-#include <utility>
-
 /*
 last-updated: 2020/08/26
 
@@ -12,6 +8,8 @@ last-updated: 2020/08/26
 オーダーが怪しいが実際には高速に動く
 
 N \leq 10^5, M \leq 2 \times 10^5 でも高速
+
+TODO: 二部マッチング 頂点 or 辺 の追加や削除
 
 # 仕様
 BipartiteMatching(size_type x, size_type y)
@@ -48,6 +46,10 @@ std::vector<size_type> get_match_y() const :
 https://ikatakos.com/pot/programming_algorithm/graph_theory/bipartite_matching, 2020/03/05
 https://snuke.hatenablog.com/entry/2019/05/07/013609, 2020/08/26
 */
+
+#include <vector>
+#include <cassert>
+#include <utility>
 
 struct BipartiteMatching {
 	using size_type = std::size_t;

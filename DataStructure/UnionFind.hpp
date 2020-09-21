@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_UNION_FIND_HPP
 #define INCLUDE_GUARD_UNION_FIND_HPP
 
-#include <vector>
-#include <numeric>
-#include <utility>
-#include <cassert>
-
 /*
 last-updated: 2020/04/22
 
@@ -36,6 +31,11 @@ bool issame(size_type x, size_type y) :
 https://en.wikipedia.org/wiki/Disjoint-set_data_structure, 2020/04/22
 https://qiita.com/kopricky/items/3e5847ab1451fe990367, 2020/04/22
 */
+
+#include <vector>
+#include <numeric>
+#include <utility>
+#include <cassert>
 
 struct UnionFind {
 public:

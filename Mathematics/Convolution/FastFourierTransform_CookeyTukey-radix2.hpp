@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_RADIX2_HPP
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_RADIX2_HPP
 
-#include <vector>
-#include <complex>
-#include <algorithm>
-
 /*
 last-updated: 2020/08/02
 
@@ -23,6 +19,10 @@ static std::vector<value_type> multiply(const std::vector<T> &A, const std::vect
 # 参考
 周波数間引き FFT と 時間間引き FFT それぞれ参照
 */
+
+#include <vector>
+#include <complex>
+#include <algorithm>
 
 struct FastFourierTransform {
 public:

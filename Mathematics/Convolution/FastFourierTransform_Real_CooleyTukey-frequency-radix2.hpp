@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP
 
-#include <vector>
-#include <complex>
-#include <algorithm>
-
 /*
 last-updated: 2020/08/04
 
@@ -66,6 +62,10 @@ static std::vector<value_type> multiply(const std::vector<T> &A, const std::vect
 https://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79, 2020/05/01
 http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/08/01
 */
+
+#include <vector>
+#include <complex>
+#include <algorithm>
 
 struct FastFourierTransform {
 public:

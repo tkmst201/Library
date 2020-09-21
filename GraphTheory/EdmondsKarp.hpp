@@ -1,13 +1,6 @@
 #ifndef INCLUDE_GUARD_EDMONDS_KARP_HPP
 #define INCLUDE_GUARD_EDMONDS_KARP_HPP
 
-#include <vector>
-#include <cassert>
-#include <queue>
-#include <utility>
-#include <type_traits>
-#include <algorithm>
-
 /*
 last-updated: 2020/02/28
 
@@ -33,6 +26,13 @@ value_type max_flow(size_type s, size_type t) :
 # 参考
 http://hos.ac/slides/20150319_flow.pdf, 2020/02/27
 */
+
+#include <vector>
+#include <cassert>
+#include <queue>
+#include <utility>
+#include <type_traits>
+#include <algorithm>
 
 template<typename T>
 struct EdmondsKarp {

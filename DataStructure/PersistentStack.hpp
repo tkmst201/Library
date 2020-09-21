@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_PERSISTENT_STACK_HPP
 #define INCLUDE_GUARD_PERSISTENT_STACK_HPP
 
-#include <vector>
-#include <memory>
-#include <cassert>
-
 /*
 last-updated: 2020/04/15 unverified
 
@@ -34,6 +30,10 @@ const_reference top() const :
 # 参考
 http://noshi91.hatenablog.com/entry/2019/02/04/175100, 2020/04/10
 */
+
+#include <vector>
+#include <memory>
+#include <cassert>
 
 template<typename T>
 struct PersistentStack {

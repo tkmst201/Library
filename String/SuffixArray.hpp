@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_SUFFIX_ARRAY_HPP
 #define INCLUDE_GUARD_SUFFIX_ARRAY_HPP
 
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <cassert>
-
 /*
 last-updated: 2020/08/25
 
@@ -99,6 +94,11 @@ https://niuez.hatenablog.com/entry/2019/12/16/203739, 2020/08/25
 */
 
 // #include <iostream>
+
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <cassert>
 
 struct SuffixArray {
 	using size_type = std::size_t;

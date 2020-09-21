@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_PERSISTENT_ARRAY_HPP
 #define INCLUDE_GUARD_PERSISTENT_ARRAY_HPP
 
-#include <memory>
-#include <stack>
-#include <utility>
-#include <cassert>
-
 /*
 last-updated: 2020/04/15
 
@@ -39,6 +34,11 @@ PersistentArray update(size_type i, const_reference x) const :
 # 参考
 https://trap.jp/post/663/, 2020/04/10
 */
+
+#include <memory>
+#include <stack>
+#include <utility>
+#include <cassert>
 
 template<typename T>
 struct PersistentArray {

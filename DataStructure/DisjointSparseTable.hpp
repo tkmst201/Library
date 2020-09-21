@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_DISJOINT_SPARSE_TABLE_HPP
 #define INCLUDE_GUARD_DISJOINT_SPARSE_TABLE_HPP
 
-#include <vector>
-#include <cassert>
-#include <functional>
-#include <algorithm>
-
 /*
 last-updated: 2020/04/30
 
@@ -33,6 +28,11 @@ value_type fold(size_type l, size_type r) const :
 # 参考
 https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b, 2020/04/30
 */
+
+#include <vector>
+#include <cassert>
+#include <functional>
+#include <algorithm>
 
 template <typename T>
 struct DisjointSparseTable {

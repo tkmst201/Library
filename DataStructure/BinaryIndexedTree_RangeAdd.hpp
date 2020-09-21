@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_BINARY_INDEXED_TREE_RANGE_ADD_HPP
 #define INCLUDE_GUARD_BINARY_INDEXED_TREE_RANGE_ADD_HPP
 
-#include <vector>
-#include <cassert>
-#include <functional>
-
 /*
 last-updated: 2020/08/15
 
@@ -35,6 +31,10 @@ value_type sum(size_type l, size_type r) :
 # 参考
 https://algo-logic.info/binary-indexed-tree/, 2020/08/15
 */
+
+#include <vector>
+#include <cassert>
+#include <functional>
 
 template<typename T, template<typename> class U>
 struct BinaryIndexedTree_RangeAdd {

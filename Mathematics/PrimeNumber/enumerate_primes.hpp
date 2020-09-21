@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_ENUMERATE_PRIMES_HPP
 #define INCLUDE_GUARD_ENUMERATE_PRIMES_HPP
 
-#include <vector>
-#include <cstdint>
-#include <algorithm>
-
 /*
 last-updated: 2020/09/08
 
@@ -21,6 +17,10 @@ n 以下の素数を昇順に並べた配列を返す
 https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes, 2020/09/07
 https://qiita.com/peria/items/a4ff4ddb3336f7b81d50, 2020/09/08
 */
+
+#include <vector>
+#include <cstdint>
+#include <algorithm>
 
 namespace tk {
 std::vector<std::uint32_t> enumerate_primes(std::uint32_t n) {

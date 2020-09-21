@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_SUCCINT_BIT_VECTOR_HPP
 #define INCLUDE_GUARD_SUCCINT_BIT_VECTOR_HPP
 
-#include <vector>
-#include <cstdint>
-#include <algorithm>
-#include <cassert>
-
 /*
 last-updated: 2020/09/07
 
@@ -60,6 +55,11 @@ size_type select0(size_type k) const :
 https://misteer.hatenablog.com/entry/bit-vector, 2020/09/03
 https://miti-7.hatenablog.com/entry/2018/04/15/155638, 2020/09/03
 */
+
+#include <vector>
+#include <cstdint>
+#include <algorithm>
+#include <cassert>
 
 struct SuccintBitVector {
 	using size_type = std::size_t;

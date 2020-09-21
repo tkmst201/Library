@@ -1,12 +1,6 @@
 #ifndef INCLUDE_GUARD_ROLLING_HASH_HPP
 #define INCLUDE_GUARD_ROLLING_HASH_HPP
 
-#include <vector>
-#include <string>
-#include <random>
-#include <functional>
-#include <cassert>
-
 /*
 last-updated: 2020/08/22
 
@@ -51,6 +45,12 @@ static void set_base() :
 https://qiita.com/keymoon/items/11fac5627672a6d6a9f6#fnref1, 2020/08/22
 https://trap.jp/post/1036/, 2020/08/22
 */
+
+#include <vector>
+#include <string>
+#include <random>
+#include <functional>
+#include <cassert>
 
 struct RollingHash {
 public:

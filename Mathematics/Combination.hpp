@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_COMBINATION_HPP
 #define INCLUDE_GUARD_COMBINATION_HPP
 
-#include <vector>
-#include <cassert>
-#include <algorithm>
-
 /*
 last-updated: 2020/01/15
 
@@ -30,6 +26,10 @@ T inv(size_type k) :
 void build(size_type k) :
 	k! が計算できるように確保
 */
+
+#include <vector>
+#include <cassert>
+#include <algorithm>
 
 template<typename T>
 struct Combination {

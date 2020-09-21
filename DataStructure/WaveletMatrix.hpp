@@ -1,13 +1,6 @@
 #ifndef INCLUDE_GUARD_WAVELET_MATRIX_HPP
 #define INCLUDE_GUARD_WAVELET_MATRIX_HPP
 
-#include <vector>
-#include <cstdint>
-#include <cassert>
-#include <numeric>
-#include <tuple>
-#include <stack>
-
 /*
 last-updated: 2020/09/07
 
@@ -91,6 +84,13 @@ https://www.slideshare.net/pfi/ss-15916040, 2020/09/03
 https://miti-7.hatenablog.com/entry/2018/04/28/152259, 2020/09/04
 http://algoogle.hadrori.jp/algorithm/wavelet.html, 2020/09/07
 */
+
+#include <vector>
+#include <cstdint>
+#include <cassert>
+#include <numeric>
+#include <tuple>
+#include <stack>
 
 template<std::size_t BITS, typename T, class BV>
 struct WaveletMatrix {

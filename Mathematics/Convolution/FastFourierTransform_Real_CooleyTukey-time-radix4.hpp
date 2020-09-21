@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP
 
-#include <vector>
-#include <complex>
-#include <algorithm>
-
 /*
 last-updated: 2020/08/04
 
@@ -23,6 +19,10 @@ static std::vector<value_type> multiply(const std::vector<T> &A, const std::vect
 基数 4 の時間間引き FFT
 実数の畳み込み
 */
+
+#include <vector>
+#include <complex>
+#include <algorithm>
 
 struct FastFourierTransform {
 public:

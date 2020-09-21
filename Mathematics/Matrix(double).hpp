@@ -1,15 +1,6 @@
 #ifndef INCLUDE_GUARD_MATRIX_DOUBLE_HPP
 #define INCLUDE_GUARD_MATRIX_DOUBLE_HPP
 
-#include <iostream>
-#include <cassert>
-#include <vector>
-#include <utility>
-#include <type_traits>
-#include <initializer_list>
-#include <algorithm>
-#include <cmath>
-
 /*
 last-updated: 2020/04/13
 
@@ -66,6 +57,15 @@ friend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) : 行�
 # 参考
 https://drken1215.hatenablog.com/entry/2019/03/20/202800
 */
+
+#include <iostream>
+#include <cassert>
+#include <vector>
+#include <utility>
+#include <type_traits>
+#include <initializer_list>
+#include <algorithm>
+#include <cmath>
 
 struct Matrix {
 public:

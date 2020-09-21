@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_SPARSE_TABLE_HPP
 #define INCLUDE_GUARD_SPARSE_TABLE_HPP
 
-#include <vector>
-#include <cassert>
-#include <functional>
-
 /*
 last-updated: 2020/04/30
 
@@ -32,6 +28,10 @@ value_type fold(size_type l, size_type r) const :
 # 参考
 http://tookunn.hatenablog.com/entry/2016/07/13/211148, 2020/04/30
 */
+
+#include <vector>
+#include <cassert>
+#include <functional>
 
 template<typename T>
 struct SparseTable {

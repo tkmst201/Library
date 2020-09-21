@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_PERSISTENT_RED_BLACK_TREE_HPP
 #define INCLUDE_GUARD_PERSISTENT_RED_BLACK_TREE_HPP
 
-#include <cassert>
-#include <memory>
-#include <utility>
-#include <vector>
-
 /*
 last-updated: 2020/09/01
 
@@ -68,6 +63,11 @@ https://www.ioi-jp.org/camp/2012/2012-sp-tasks/2012-sp-day4-copypaste-slides.pdf
 http://blog.mitaki28.info/1447078746296/, 2020/08/30
 http://algoogle.hadrori.jp/algorithm/rbtree_merge.html, 2020/08/30
 */
+
+#include <cassert>
+#include <memory>
+#include <utility>
+#include <vector>
 
 template<typename T>
 struct PersistentRedBlackTree {

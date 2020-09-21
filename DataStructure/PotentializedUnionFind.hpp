@@ -1,13 +1,6 @@
 #ifndef INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP
 #define INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP
 
-#include <vector>
-#include <numeric>
-#include <utility>
-#include <cassert>
-#include <functional>
-#include <stack>
-
 /*
 last-updated: 2020/04/23
 
@@ -50,6 +43,13 @@ http://sigma425.hatenablog.com/entry/2015/12/07/185047, 2020/04/23
 
 verify : https://atcoder.jp/contests/abc087/submissions/12241089
 */
+
+#include <vector>
+#include <numeric>
+#include <utility>
+#include <cassert>
+#include <functional>
+#include <stack>
 
 template<typename T>
 struct PotentializedUnionFind {

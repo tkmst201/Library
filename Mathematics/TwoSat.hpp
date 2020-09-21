@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_TWO_SAT_HPP
 #define INCLUDE_GUARD_TWO_SAT_HPP
 
-#include <vector>
-#include <cassert>
-
 /*
 last-updated: 2020/09/10
 
@@ -38,6 +35,9 @@ bool get(size_type i) :
 */
 
 #include "GraphTheory/StronglyConnectedComponents.hpp"
+
+#include <vector>
+#include <cassert>
 
 struct TwoSat {
 	using size_type = std::size_t;

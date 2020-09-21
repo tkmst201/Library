@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_AVL_TREE_HPP
 #define INCLUDE_GUARD_AVL_TREE_HPP
 
-#include <algorithm>
-#include <vector>
-
 /*
 last-updated: 2020/08/29
 
@@ -88,6 +85,9 @@ Node *prev(Node *Q) const :
 # 参考
 https://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19
 */
+
+#include <algorithm>
+#include <vector>
 
 template<typename T> struct AVL_Tree {
 public:

@@ -1,12 +1,6 @@
 #ifndef INCLUDE_GUARD_PRIME_SUM_HPP
 #define INCLUDE_GUARD_PRIME_SUM_HPP
 
-#include <cstdint>
-#include <vector>
-#include <algorithm>
-
-#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
-
 /*
 last-updated: 2020/09/07
 
@@ -59,6 +53,12 @@ div の要素から div の index を求める方法
 # 参考
 https://math314.hateblo.jp/entry/2016/06/05/004332, 2020/09/07
 */
+
+#include "Mathematics/PrimeNumber/enumerate_primes.hpp"
+
+#include <cstdint>
+#include <vector>
+#include <algorithm>
 
 namespace tk {
 template<typename T>

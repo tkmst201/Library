@@ -1,11 +1,6 @@
 #ifndef INCLUDE_GUARD_KMP_HPP
 #define INCLUDE_GUARD_KMP_HPP
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <cstdio>
-
 /*
 last-updated: 2019/11/30
 
@@ -30,6 +25,11 @@ https://snuke.hatenablog.com/entry/2014/12/01/235807, 2019/11/30
 https://snuke.hatenablog.com/entry/2017/07/18/101026, 2019/11/30
 https://qiita.com/itomomoti/items/5e95aeef3f17a29a41cd, 2019/11/30
 */
+
+#include <vector>
+#include <string>
+#include <iostream>
+#include <cstdio>
 
 std::vector<int> build_KMP_table(const std::string &S) {
 	std::vector<int> table(S.size() + 1);

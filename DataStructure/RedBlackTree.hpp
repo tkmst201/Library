@@ -1,9 +1,6 @@
 #ifndef INCLUDE_GUARD_RED_BLACK_TREE_HPP
 #define INCLUDE_GUARD_RED_BLACK_TREE_HPP
 
-#include <cassert>
-#include <utility>
-
 /*
 last-updated: 2020/08/30
 
@@ -91,6 +88,9 @@ http://www.nct9.ne.jp/m_hiroi/light/pyalgo16.html, 2020/08/27
 */
 
 // #include <iostream>
+
+#include <cassert>
+#include <utility>
 
 template<typename T>
 struct RedBlackTree {

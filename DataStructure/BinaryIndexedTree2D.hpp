@@ -1,10 +1,6 @@
 #ifndef INCLUDE_GUARD_BINARY_INDEXED_TREE_2D_HPP
 #define INCLUDE_GUARD_BINARY_INDEXED_TREE_2D_HPP
 
-#include <vector>
-#include <cassert>
-#include <functional>
-
 /*
 last-updated: 2020/08/15
 
@@ -28,6 +24,10 @@ value_type sum(size_type i1, size_type j1, size_type i2, size_type j2) const :
 # 参考
 https://algo-logic.info/binary-indexed-tree/, 2020/08/15
 */
+
+#include <vector>
+#include <cassert>
+#include <functional>
 
 template<typename T>
 struct BinaryIndexedTree2D {
