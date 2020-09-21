@@ -4,6 +4,3 @@ DataStructure/BinarySearchTree(bug).cpp
 
 # CodeForces 対応していないっぽい
 Test/PersistentArray.test.cpp
-
-# yukicode 対応していないっぽい
-Test/Garner.test.cpp

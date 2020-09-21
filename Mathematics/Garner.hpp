@@ -82,7 +82,8 @@ public:
 				ip[j] := m_0 m_1 \ldots m_{i-1} (mod. m_j)
 				sum[j] := t_0 ip[0]  t_1 ip[1]  \ldots  t_{i-1} ip[i-1] (mod. m_j)
 			*/
-			T t = ((b[i] % m[i] + m[i]) % m[i] - sum[i] + m[i]) % m[i] % m[i] * tk::mod_inv(ip[i], m[i]) % m[i];
+			if (m[i] == 1) continue;
+			T t = ((b[i] % m[i] + m[i]) % m[i] - sum[i] + m[i]) % m[i] * tk::mod_inv(ip[i], m[i]) % m[i];
 			for (size_type j = i + 1; j < m.size(); ++j) {
 				sum[j] = (sum[j] + ip[j] * t) % m[j];
 				ip[j] = (ip[j] * m[i] % m[j]);
