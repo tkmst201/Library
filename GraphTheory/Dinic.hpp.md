@@ -13,23 +13,23 @@ data:
     links:
     - http://hos.ac/slides/20150319_flow.pdf,
     - http://vartkw.hatenablog.com/entry/2016/12/02/002703,
-  bundledCode: "#line 1 \"GraphTheory/Dinic.hpp\"\n\n\n\r\n#include <vector>\r\n#include\
-    \ <cassert>\r\n#include <queue>\r\n#include <utility>\r\n#include <type_traits>\r\
-    \n#include <algorithm>\r\n\r\n/*\r\nlast-updated: 2020/03/03\r\n\r\n\u8FBA\u306E\
-    \u5BB9\u91CF\u306F\u975E\u8CA0\u306E\u5B9F\u6570\u3067\u3042\u308B\u5FC5\u8981\
-    \u304C\u3042\u308B\u3002\r\n\r\n# \u4ED5\u69D8\r\nDinic(size_type n) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\
-    \u3092 n \u3068\u3059\u308B\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\
-    \u3092\u8FD4\u3059\r\n\r\nvoid add_edge(size_type i, size_type j, value_type c)\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 i -> \u9802\
-    \u70B9 j \u3078\u5BB9\u91CF c \u306E\u8FBA\u3092\u5F35\u308B\r\n\r\nvalue_type\
-    \ max_flow(size_type s, size_type t) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(V^2\
-    \ E)\r\n\t\u9802\u70B9 s -> \u9802\u70B9 t \u306E\u6700\u5927\u30D5\u30ED\u30FC\
-    \u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf,\
+  bundledCode: "#line 1 \"GraphTheory/Dinic.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/03/03\r\
+    \n\r\n\u8FBA\u306E\u5BB9\u91CF\u306F\u975E\u8CA0\u306E\u5B9F\u6570\u3067\u3042\
+    \u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\r\n\r\n# \u4ED5\u69D8\r\nDinic(size_type\
+    \ n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u30B0\u30E9\u30D5\u306E\
+    \u9802\u70B9\u6570\u3092 n \u3068\u3059\u308B\r\n\r\nsize_type size() const noexcept\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u30B0\u30E9\u30D5\u306E\
+    \u9802\u70B9\u6570\u3092\u8FD4\u3059\r\n\r\nvoid add_edge(size_type i, size_type\
+    \ j, value_type c) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\
+    \u70B9 i -> \u9802\u70B9 j \u3078\u5BB9\u91CF c \u306E\u8FBA\u3092\u5F35\u308B\
+    \r\n\r\nvalue_type max_flow(size_type s, size_type t) :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: O(V^2 E)\r\n\t\u9802\u70B9 s -> \u9802\u70B9 t \u306E\u6700\u5927\
+    \u30D5\u30ED\u30FC\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf,\
     \ 2020/03/03\r\nhttp://vartkw.hatenablog.com/entry/2016/12/02/002703, 2020/03/03\r\
-    \n*/\r\n\r\ntemplate<typename T>\r\nstruct Dinic {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tDinic(size_type n) : g(std::vector<std::vector<Edge>>(n))\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include <queue>\r\n#include\
+    \ <utility>\r\n#include <type_traits>\r\n#include <algorithm>\r\n\r\ntemplate<typename\
+    \ T>\r\nstruct Dinic {\r\npublic:\r\n\tusing value_type = T;\r\n\tusing size_type\
+    \ = std::size_t;\r\n\t\r\n\tDinic(size_type n) : g(std::vector<std::vector<Edge>>(n))\
     \ {}\r\n\t\r\n\tsize_type size() const noexcept { return g.size(); }\r\n\t\r\n\
     \tvoid add_edge(size_type i, size_type j, value_type c) {\r\n\t\tassert(i < size()\
     \ && j < size() && c >= 0);\r\n\t\tg[i].push_back({j, g[j].size(), c});\r\n\t\t\
@@ -53,22 +53,23 @@ data:
     \ += cur;\r\n\t\t\t\treturn cur;\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn 0;\r\n\t}\r\
     \n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_DINIC_HPP\r\n#define INCLUDE_GUARD_DINIC_HPP\r\n\r\n\
+    /*\r\nlast-updated: 2020/03/03\r\n\r\n\u8FBA\u306E\u5BB9\u91CF\u306F\u975E\u8CA0\
+    \u306E\u5B9F\u6570\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\r\n\r\
+    \n# \u4ED5\u69D8\r\nDinic(size_type n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF:\
+    \ \u0398(n)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092 n \u3068\u3059\
+    \u308B\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(1)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\u8FD4\u3059\r\
+    \n\r\nvoid add_edge(size_type i, size_type j, value_type c) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 i -> \u9802\u70B9 j \u3078\u5BB9\
+    \u91CF c \u306E\u8FBA\u3092\u5F35\u308B\r\n\r\nvalue_type max_flow(size_type s,\
+    \ size_type t) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(V^2 E)\r\n\t\u9802\u70B9\
+    \ s -> \u9802\u70B9 t \u306E\u6700\u5927\u30D5\u30ED\u30FC\u3092\u8FD4\u3059\r\
+    \n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf, 2020/03/03\r\n\
+    http://vartkw.hatenablog.com/entry/2016/12/02/002703, 2020/03/03\r\n*/\r\n\r\n\
     #include <vector>\r\n#include <cassert>\r\n#include <queue>\r\n#include <utility>\r\
-    \n#include <type_traits>\r\n#include <algorithm>\r\n\r\n/*\r\nlast-updated: 2020/03/03\r\
-    \n\r\n\u8FBA\u306E\u5BB9\u91CF\u306F\u975E\u8CA0\u306E\u5B9F\u6570\u3067\u3042\
-    \u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\r\n\r\n# \u4ED5\u69D8\r\nDinic(size_type\
-    \ n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u30B0\u30E9\u30D5\u306E\
-    \u9802\u70B9\u6570\u3092 n \u3068\u3059\u308B\r\n\r\nsize_type size() const noexcept\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u30B0\u30E9\u30D5\u306E\
-    \u9802\u70B9\u6570\u3092\u8FD4\u3059\r\n\r\nvoid add_edge(size_type i, size_type\
-    \ j, value_type c) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\
-    \u70B9 i -> \u9802\u70B9 j \u3078\u5BB9\u91CF c \u306E\u8FBA\u3092\u5F35\u308B\
-    \r\n\r\nvalue_type max_flow(size_type s, size_type t) :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: O(V^2 E)\r\n\t\u9802\u70B9 s -> \u9802\u70B9 t \u306E\u6700\u5927\
-    \u30D5\u30ED\u30FC\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf,\
-    \ 2020/03/03\r\nhttp://vartkw.hatenablog.com/entry/2016/12/02/002703, 2020/03/03\r\
-    \n*/\r\n\r\ntemplate<typename T>\r\nstruct Dinic {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tDinic(size_type n) : g(std::vector<std::vector<Edge>>(n))\
+    \n#include <type_traits>\r\n#include <algorithm>\r\n\r\ntemplate<typename T>\r\
+    \nstruct Dinic {\r\npublic:\r\n\tusing value_type = T;\r\n\tusing size_type =\
+    \ std::size_t;\r\n\t\r\n\tDinic(size_type n) : g(std::vector<std::vector<Edge>>(n))\
     \ {}\r\n\t\r\n\tsize_type size() const noexcept { return g.size(); }\r\n\t\r\n\
     \tvoid add_edge(size_type i, size_type j, value_type c) {\r\n\t\tassert(i < size()\
     \ && j < size() && c >= 0);\r\n\t\tg[i].push_back({j, g[j].size(), c});\r\n\t\t\
@@ -95,7 +96,7 @@ data:
   isVerificationFile: false
   path: GraphTheory/Dinic.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/Dinic.test.cpp

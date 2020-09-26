@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: GraphTheory/StronglyConnectedComponents.hpp
     title: GraphTheory/StronglyConnectedComponents.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -15,9 +15,9 @@ data:
     - https://judge.yosupo.jp/problem/scc
   bundledCode: "#line 1 \"Test/StronglyConnectedComponents.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/scc\"\r\n\r\n#line 1 \"GraphTheory/StronglyConnectedComponents.hpp\"\
-    \n\n\n\r\n#include <vector>\r\n#include <cassert>\r\n#include <algorithm>\r\n\r\
-    \n/*\r\nlast-updated: 2020/08/27\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type\
-    \ n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
+    \u3059\u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n)\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
     \ n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
     \ g) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n + m)\r\n\t\u30B0\u30E9\u30D5\
     \ g \u3067\u521D\u671F\u5316\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\
@@ -40,7 +40,8 @@ data:
     \ get_graph() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(n + m log m)\r\n\t\
     \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\u5F8C\u306E\u30B0\u30E9\u30D5\u3092\
     \u4F5C\u6210\u3057\u3066\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttps://mathtrain.jp/kyorenketsu,\
-    \ 2020/08/27\r\n*/\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
+    \ 2020/08/27\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
     \ = std::size_t;\r\n\t\r\nprivate:\r\n\tstd::vector<std::vector<size_type>> g,\
     \ rg;\r\n\tstd::vector<size_type> rank; // [i] := \u9802\u70B9 i \u304C\u5C5E\u3059\
     \u308B\u5F37\u9023\u7D50\u6210\u5206\u306E\u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\
@@ -101,8 +102,8 @@ data:
   isVerificationFile: true
   path: Test/StronglyConnectedComponents.test.cpp
   requiredBy: []
-  timestamp: '2020-09-10 10:57:52+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: Test/StronglyConnectedComponents.test.cpp
 layout: document

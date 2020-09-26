@@ -12,14 +12,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/Matrix_Determinant.test.cpp
     title: Test/Matrix_Determinant.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/PrimeNumber.counting_primes.test.cpp
     title: Test/PrimeNumber.counting_primes.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/DynamicSegmentTree.test.cpp
+    title: Test/DynamicSegmentTree.test.cpp
+  - icon: ':x:'
+    path: Test/SlidingWindowAggregation.test.cpp
+    title: Test/SlidingWindowAggregation.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/SegmentTree.fold.test.cpp
     title: Test/SegmentTree.fold.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
@@ -130,12 +136,14 @@ data:
   path: Mathematics/ModInt.hpp
   requiredBy: []
   timestamp: '2020-09-17 16:57:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - Test/LazySegmentTree.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/Matrix_Determinant.test.cpp
   - Test/PrimeNumber.counting_primes.test.cpp
+  - Test/DynamicSegmentTree.test.cpp
+  - Test/SlidingWindowAggregation.test.cpp
   - Test/SegmentTree.fold.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document

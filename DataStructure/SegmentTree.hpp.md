@@ -10,8 +10,8 @@ data:
     path: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
     title: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - icon: ':heavy_check_mark:'
-    path: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
-    title: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+    path: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
+    title: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/SegmentTree.fold.test.cpp
     title: Test/SegmentTree.fold.test.cpp
@@ -181,7 +181,7 @@ data:
   verifiedWith:
   - Test/EulerTour.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
-  - Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/SegmentTree.fold.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document

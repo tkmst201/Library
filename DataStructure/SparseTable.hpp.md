@@ -3,29 +3,29 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/SparseTable.test.cpp
     title: Test/SparseTable.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://tookunn.hatenablog.com/entry/2016/07/13/211148,
-  bundledCode: "#line 1 \"DataStructure/SparseTable.hpp\"\n\n\n\r\n#include <vector>\r\
-    \n#include <cassert>\r\n#include <functional>\r\n\r\n/*\r\nlast-updated: 2020/04/30\r\
-    \n\r\nbuild \u03B8(n log n), fold \u03B8(1)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<class\
-    \ InputIterator>\r\nDisjointSparseTable(InputIterator first, InputIterator last,\
-    \ const F &f) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t[farst,\
-    \ last) \u3067\u30C6\u30FC\u30D6\u30EB\u3092\u4F5C\u6210\u3059\u308B\r\n\t\u51AA\
-    \u7B49\u306A\u4E8C\u9805\u6F14\u7B97 f\r\n\r\nsize_type empty() const noexcept\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u8981\u7D20\u304C\u7A7A\
-    \u3067\u3042\u308B\u304B\u3092\u5224\u5B9A\u3059\u308B\r\n\r\nsize_type size()\
+  bundledCode: "#line 1 \"DataStructure/SparseTable.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
+    \ 2020/04/30\r\n\r\nbuild \u03B8(n log n), fold \u03B8(1)\r\n\r\n# \u4ED5\u69D8\
+    \r\ntemplate<class InputIterator>\r\nDisjointSparseTable(InputIterator first,\
+    \ InputIterator last, const F &f) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (n log n)\r\n\t[farst, last) \u3067\u30C6\u30FC\u30D6\u30EB\u3092\u4F5C\u6210\u3059\
+    \u308B\r\n\t\u51AA\u7B49\u306A\u4E8C\u9805\u6F14\u7B97 f\r\n\r\nsize_type empty()\
     \ const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u8981\u7D20\
-    \u6570\u3092\u8FD4\u3059\r\n\r\nvalue_type fold(size_type l, size_type r) const\
-    \ :\r\n\t\u03B8(1)\r\n\t[l, r) \u3092 fold \u3057\u305F\u7D50\u679C\u3092\u8FD4\
-    \u3059\r\n\r\n# \u53C2\u8003\r\nhttp://tookunn.hatenablog.com/entry/2016/07/13/211148,\
-    \ 2020/04/30\r\n*/\r\n\r\ntemplate<typename T>\r\nstruct SparseTable {\r\npublic:\r\
+    \u304C\u7A7A\u3067\u3042\u308B\u304B\u3092\u5224\u5B9A\u3059\u308B\r\n\r\nsize_type\
+    \ size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\
+    \u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nvalue_type fold(size_type l, size_type\
+    \ r) const :\r\n\t\u03B8(1)\r\n\t[l, r) \u3092 fold \u3057\u305F\u7D50\u679C\u3092\
+    \u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://tookunn.hatenablog.com/entry/2016/07/13/211148,\
+    \ 2020/04/30\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <functional>\r\n\r\ntemplate<typename T>\r\nstruct SparseTable {\r\npublic:\r\
     \n\tusing value_type = T;\r\n\tusing const_reference = const value_type &;\r\n\
     \tusing size_type = std::size_t;\r\n\tusing F = std::function<value_type(const_reference,\
     \ const_reference)>;\r\n\t\r\n\ttemplate<class InputIterator>\r\n\tSparseTable(InputIterator\
@@ -45,9 +45,8 @@ data:
     \ << i) <= size(); ++j)\r\n\t\t\t\ttable[i].emplace_back(f(table[i - 1][j], table[i\
     \ - 1][j + (1 << i - 1)]));\r\n\t\t}\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_SPARSE_TABLE_HPP\r\n#define INCLUDE_GUARD_SPARSE_TABLE_HPP\r\
-    \n\r\n#include <vector>\r\n#include <cassert>\r\n#include <functional>\r\n\r\n\
-    /*\r\nlast-updated: 2020/04/30\r\n\r\nbuild \u03B8(n log n), fold \u03B8(1)\r\n\
-    \r\n# \u4ED5\u69D8\r\ntemplate<class InputIterator>\r\nDisjointSparseTable(InputIterator\
+    \n\r\n/*\r\nlast-updated: 2020/04/30\r\n\r\nbuild \u03B8(n log n), fold \u03B8\
+    (1)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<class InputIterator>\r\nDisjointSparseTable(InputIterator\
     \ first, InputIterator last, const F &f) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
     : \u0398(n log n)\r\n\t[farst, last) \u3067\u30C6\u30FC\u30D6\u30EB\u3092\u4F5C\
     \u6210\u3059\u308B\r\n\t\u51AA\u7B49\u306A\u4E8C\u9805\u6F14\u7B97 f\r\n\r\nsize_type\
@@ -57,7 +56,8 @@ data:
     : \u0398(1)\r\n\t\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nvalue_type fold(size_type\
     \ l, size_type r) const :\r\n\t\u03B8(1)\r\n\t[l, r) \u3092 fold \u3057\u305F\u7D50\
     \u679C\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://tookunn.hatenablog.com/entry/2016/07/13/211148,\
-    \ 2020/04/30\r\n*/\r\n\r\ntemplate<typename T>\r\nstruct SparseTable {\r\npublic:\r\
+    \ 2020/04/30\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <functional>\r\n\r\ntemplate<typename T>\r\nstruct SparseTable {\r\npublic:\r\
     \n\tusing value_type = T;\r\n\tusing const_reference = const value_type &;\r\n\
     \tusing size_type = std::size_t;\r\n\tusing F = std::function<value_type(const_reference,\
     \ const_reference)>;\r\n\t\r\n\ttemplate<class InputIterator>\r\n\tSparseTable(InputIterator\
@@ -80,8 +80,8 @@ data:
   isVerificationFile: false
   path: DataStructure/SparseTable.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - Test/SparseTable.test.cpp
 documentation_of: DataStructure/SparseTable.hpp

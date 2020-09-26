@@ -12,93 +12,93 @@ data:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://ja.wikipedia.org/wiki/AVL%E6%9C%A8,
-  bundledCode: "#line 1 \"DataStructure/AVL_Tree.hpp\"\n\n\n\r\n#include <algorithm>\r\
-    \n#include <vector>\r\n\r\n/*\r\nlast-updated: 2020/08/29\r\n\r\n# \u4ED5\u69D8\
-    \r\n\u30A4\u30C6\u30EC\u30FC\u30BF\u306F\u5B9F\u88C5\u3057\u3066\u3044\u306A\u3044\
-    \u306E\u3067\u30DD\u30A4\u30F3\u30BF\u3067\u30CE\u30FC\u30C9\u3092\u6271\u3046\
-    \r\n\r\nAVL_Tree() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u7A7A\
-    \u306E\u6728\u3092\u4F5C\u6210\u3059\u308B\r\n\r\nAVL_Tree(const AVL_Tree &rhs)\
-    \ :\r\nAVL_Tree &operator=(const AVL_Tree &rhs) :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(n log n)\r\n\t\u6728\u306E\u30B3\u30D4\u30FC\u3092\u884C\u3046\r\
-    \n\tenumerate() \u3067\u5F97\u305F\u5404\u8981\u7D20\u3092 insert() \u3057\u3066\
-    \u3044\u308B\u306E\u3067\u9045\u3044\r\n\r\nbool empty() const :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u304C\u7A7A\u304C\u3069\u3046\u304B\u5224\
-    \u5B9A\u3059\u308B\r\n\r\nstd::size_t size() const :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u6728\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\n\
-    void clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u5168\u3066\
-    \u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\nstd::vector<T> enumerate()\
-    \ const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u6728\u306E\u5168\
-    \u3066\u306E\u8981\u7D20\u3092\u6607\u9806\u306B std::vector \u306B\u5165\u308C\
-    \u3066\u8FD4\u3059\r\n\r\nNode *begin() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(1)\r\n\t\u6700\u3082\u5C0F\u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\
-    \u30BF\u3092\u8FD4\u3059\r\n\r\nNode *end() const :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u6700\u3082\u5927\u304D\u3044\u8981\u7D20\u306E\u6B21\u306E\
-    \u8981\u7D20(?)\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *find(const\
-    \ T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20\
-    \ x \u3092\u691C\u7D22\u3057\u3066\u305D\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
-    \u3059\r\n\t\u8907\u6570\u5B58\u5728\u3059\u308B\u5834\u5408\u30DD\u30A4\u30F3\
-    \u30BF\u3067\u6700\u5C0F\u306E\u30DD\u30A4\u30F3\u30BF\r\n\r\nNode *insert(const\
-    \ T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20\
-    \ x \u3092\u633F\u5165\u3057\u3001\u633F\u5165\u5F8C\u306E\u8981\u7D20\u306E\u30DD\
-    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *erase(const T &x) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u524A\u9664\
-    \u3059\u308B\r\n\r\nNode *erase(Node *Q) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(log n)\r\n\t\u30DD\u30A4\u30F3\u30BF Q \u306E\u8981\u7D20\u3092\u524A\
-    \u9664\u3059\u308B\r\n\r\nNode *lower_bound(const T &x) const :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u8981\
-    \u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *upper_bound(const\
-    \ T &x) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u3088\
-    \u308A\u5927\u304D\u3044\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\
-    \u30BF\u3092\u8FD4\u3059\r\n\r\nNode *k_th_smallest(std::size_t k) const :\r\n\
-    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5C0F\
-    \u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\
-    \nNode *k_th_largest(std::size_t k) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\
-    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *next(Node *Q) const :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u306E\u6B21\u306B\u5927\u304D\u3044\
-    \u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *prev(Node\
-    \ *Q) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u3088\u308A\
-    \ 1 \u3064\u5C0F\u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
-    \u3059\r\n\r\n# \u53C2\u8003\r\nhttps://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19\r\
-    \n*/\r\n\r\ntemplate<typename T> struct AVL_Tree {\r\npublic:\r\n\t\r\n\t// private\
-    \ \u306B, \u3057\u305F\u304F\u306A\u3044\u2026??\r\n\tstruct Node {\r\n\t\tT value;\r\
-    \n\t\tNode *child[2] {}, *par = nullptr;\r\n\t\tbool is_r;\r\n\t\tstd::size_t\
-    \ size[2] {}, height[2] {};\r\n\t\t\r\n\t\tNode(T x, Node *par, bool is_r)\r\n\
-    \t\t\t: value(x), par(par), is_r(is_r) {}\r\n\t};\r\n\t\r\n\tAVL_Tree() : size_(0),\
-    \ root_node(nullptr) {}\r\n\t~AVL_Tree() {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\t\
-    AVL_Tree(const AVL_Tree &rhs) {\r\n\t\t*this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree\
-    \ &operator=(const AVL_Tree &rhs) {\r\n\t\tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\
-    \n\t\t\tstd::vector<T> tmp = rhs.enumerate();\r\n\t\t\tfor (const T &elm : tmp)\
-    \ this->insert(elm);\r\n\t\t}\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tbool empty()\
-    \ const {\r\n\t\treturn size_ == 0;\r\n\t}\r\n\t\r\n\tstd::size_t size() const\
-    \ {\r\n\t\treturn size_;\r\n\t}\r\n\t\r\n\tvoid clear() {\r\n\t\tclear_dfs(root_node);\r\
-    \n\t\troot_node = nullptr;\r\n\t\tsize_ = 0;\r\n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\
-    \n\t}\r\n\t\r\n\tstd::vector<T> enumerate() const {\r\n\t\tstd::vector<T> elements;\r\
-    \n\t\telements.reserve(size_);\r\n\t\tenumerate_dfs(root_node, elements);\r\n\t\
-    \treturn elements;\r\n\t}\r\n\t\r\n\tNode *begin() const {\r\n\t\treturn begin_();\r\
-    \n\t}\r\n\t\r\n\tNode *end() const {\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\t\
-    Node *find(const T &x) {\r\n\t\treturn find_(x);\r\n\t}\r\n\t\r\n\tNode *insert(const\
-    \ T &x) {\r\n\t\tsize_++;\r\n\t\tbool ef[2] {};\r\n\t\t\r\n\t\tNode *Q = root_node,\
-    \ *R = nullptr;\r\n\t\tbool d = false;\r\n\t\twhile (Q) {\r\n\t\t\tR = Q;\r\n\t\
-    \t\td = Q->value <= x;\r\n\t\t\tef[!d] = true;\r\n\t\t\tQ = Q->child[d];\r\n\t\
-    \t}\r\n\t\tQ = new Node(x, R, d);\r\n\t\tif (!ef[0]) e_ptr[0] = Q;\r\n\t\tif (!ef[1])\
-    \ e_ptr[1] = Q;\r\n\t\t\r\n\t\tif (R) {\r\n\t\t\tR->size[d] = 1;\r\n\t\t\tR->height[d]\
-    \ = 1;\r\n\t\t\tR->child[d] = Q;\r\n\t\t\tupdate(R);\r\n\t\t}\r\n\t\telse root_node\
-    \ = Q;\r\n\t\treturn Q;\r\n\t}\r\n\t\r\n\tNode *erase(const T &x) {\r\n\t\tNode\
-    \ *Q = find_(x);\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\
-    \n\t\r\n\tNode *erase(Node *Q) {\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn\
-    \ end_();\r\n\t}\r\n\t\r\n\tNode *lower_bound(const T &x) const {\r\n\t\treturn\
-    \ lower_bound_(x);\r\n\t}\r\n\t\r\n\tNode *upper_bound(const T &x) const {\r\n\
-    \t\treturn upper_bound_(x);\r\n\t}\r\n\t\r\n\tNode *k_th_smallest(std::size_t\
-    \ k) const {\r\n\t\treturn k_th_smallest_(k);\r\n\t}\r\n\t\r\n\tNode *k_th_largest(std::size_t\
-    \ k) const {\r\n\t\treturn k_th_largest_(k);\r\n\t}\r\n\t\r\n\tNode *next(Node\
-    \ *Q) const {\r\n\t\tif (Q) return move(Q, true);\r\n\t\treturn e_ptr[0];\r\n\t\
-    }\r\n\t\r\n\tNode *prev(Node *Q) const {\r\n\t\tif (Q) return move(Q, false);\r\
-    \n\t\treturn e_ptr[1];\r\n\t}\r\n\t\r\nprivate:\r\n\tstd::size_t size_ {};\r\n\
-    \tNode *root_node {};\r\n\tNode *e_ptr[2] {};\r\n\t\r\n\tvoid clear_dfs(Node*\
-    \ Q) {\r\n\t\tif (!Q) return;\r\n\t\tclear_dfs(Q->child[0]);\r\n\t\tclear_dfs(Q->child[1]);\r\
-    \n\t\tdelete Q;\r\n\t}\r\n\t\r\n\tvoid enumerate_dfs(const Node *Q, std::vector<T>\
-    \ &elements) const {\r\n\t\tif (!Q) return;\r\n\t\tenumerate_dfs(Q->child[0],\
+  bundledCode: "#line 1 \"DataStructure/AVL_Tree.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
+    \ 2020/08/29\r\n\r\n# \u4ED5\u69D8\r\n\u30A4\u30C6\u30EC\u30FC\u30BF\u306F\u5B9F\
+    \u88C5\u3057\u3066\u3044\u306A\u3044\u306E\u3067\u30DD\u30A4\u30F3\u30BF\u3067\
+    \u30CE\u30FC\u30C9\u3092\u6271\u3046\r\n\r\nAVL_Tree() :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(1)\r\n\t\u7A7A\u306E\u6728\u3092\u4F5C\u6210\u3059\u308B\r\
+    \n\r\nAVL_Tree(const AVL_Tree &rhs) :\r\nAVL_Tree &operator=(const AVL_Tree &rhs)\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u6728\u306E\u30B3\
+    \u30D4\u30FC\u3092\u884C\u3046\r\n\tenumerate() \u3067\u5F97\u305F\u5404\u8981\
+    \u7D20\u3092 insert() \u3057\u3066\u3044\u308B\u306E\u3067\u9045\u3044\r\n\r\n\
+    bool empty() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\
+    \u304C\u7A7A\u304C\u3069\u3046\u304B\u5224\u5B9A\u3059\u308B\r\n\r\nstd::size_t\
+    \ size() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u306E\
+    \u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(n)\r\n\t\u5168\u3066\u306E\u8981\u7D20\u3092\u524A\u9664\u3059\
+    \u308B\r\n\r\nstd::vector<T> enumerate() const :\r\n\t\u6642\u9593\u8A08\u7B97\
+    \u91CF: \u0398(n)\r\n\t\u6728\u306E\u5168\u3066\u306E\u8981\u7D20\u3092\u6607\u9806\
+    \u306B std::vector \u306B\u5165\u308C\u3066\u8FD4\u3059\r\n\r\nNode *begin() const\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6700\u3082\u5C0F\u3055\
+    \u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode\
+    \ *end() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6700\u3082\
+    \u5927\u304D\u3044\u8981\u7D20\u306E\u6B21\u306E\u8981\u7D20(?)\u306E\u30DD\u30A4\
+    \u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *find(const T &x) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u691C\u7D22\u3057\
+    \u3066\u305D\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\t\u8907\u6570\
+    \u5B58\u5728\u3059\u308B\u5834\u5408\u30DD\u30A4\u30F3\u30BF\u3067\u6700\u5C0F\
+    \u306E\u30DD\u30A4\u30F3\u30BF\r\n\r\nNode *insert(const T &x) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u633F\u5165\u3057\
+    \u3001\u633F\u5165\u5F8C\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\
+    \u8FD4\u3059\r\n\r\nNode *erase(const T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u524A\u9664\u3059\u308B\r\n\r\nNode\
+    \ *erase(Node *Q) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u30DD\
+    \u30A4\u30F3\u30BF Q \u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\n\
+    Node *lower_bound(const T &x) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (log n)\r\n\tx \u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\
+    \u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *upper_bound(const T &x) const :\r\n\
+    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u3088\u308A\u5927\u304D\
+    \u3044\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
+    \u3059\r\n\r\nNode *k_th_smallest(std::size_t k) const :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5C0F\u3055\u3044\u8981\u7D20\
+    \u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *k_th_largest(std::size_t\
+    \ k) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\
+    \u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
+    \u3059\r\n\r\nNode *next(Node *Q) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : O(log n)\r\n\tQ \u306E\u6B21\u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\
+    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *prev(Node *Q) const :\r\n\t\u6642\
+    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u3088\u308A 1 \u3064\u5C0F\u3055\u3044\
+    \u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\
+    \r\nhttps://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19\r\n*/\r\n\r\n#include\
+    \ <algorithm>\r\n#include <vector>\r\n\r\ntemplate<typename T> struct AVL_Tree\
+    \ {\r\npublic:\r\n\t\r\n\t// private \u306B, \u3057\u305F\u304F\u306A\u3044\u2026\
+    ??\r\n\tstruct Node {\r\n\t\tT value;\r\n\t\tNode *child[2] {}, *par = nullptr;\r\
+    \n\t\tbool is_r;\r\n\t\tstd::size_t size[2] {}, height[2] {};\r\n\t\t\r\n\t\t\
+    Node(T x, Node *par, bool is_r)\r\n\t\t\t: value(x), par(par), is_r(is_r) {}\r\
+    \n\t};\r\n\t\r\n\tAVL_Tree() : size_(0), root_node(nullptr) {}\r\n\t~AVL_Tree()\
+    \ {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\tAVL_Tree(const AVL_Tree &rhs) {\r\n\t\t\
+    *this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree &operator=(const AVL_Tree &rhs) {\r\n\t\
+    \tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\n\t\t\tstd::vector<T> tmp = rhs.enumerate();\r\
+    \n\t\t\tfor (const T &elm : tmp) this->insert(elm);\r\n\t\t}\r\n\t\treturn *this;\r\
+    \n\t}\r\n\t\r\n\tbool empty() const {\r\n\t\treturn size_ == 0;\r\n\t}\r\n\t\r\
+    \n\tstd::size_t size() const {\r\n\t\treturn size_;\r\n\t}\r\n\t\r\n\tvoid clear()\
+    \ {\r\n\t\tclear_dfs(root_node);\r\n\t\troot_node = nullptr;\r\n\t\tsize_ = 0;\r\
+    \n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\n\t}\r\n\t\r\n\tstd::vector<T> enumerate()\
+    \ const {\r\n\t\tstd::vector<T> elements;\r\n\t\telements.reserve(size_);\r\n\t\
+    \tenumerate_dfs(root_node, elements);\r\n\t\treturn elements;\r\n\t}\r\n\t\r\n\
+    \tNode *begin() const {\r\n\t\treturn begin_();\r\n\t}\r\n\t\r\n\tNode *end()\
+    \ const {\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\tNode *find(const T &x) {\r\n\
+    \t\treturn find_(x);\r\n\t}\r\n\t\r\n\tNode *insert(const T &x) {\r\n\t\tsize_++;\r\
+    \n\t\tbool ef[2] {};\r\n\t\t\r\n\t\tNode *Q = root_node, *R = nullptr;\r\n\t\t\
+    bool d = false;\r\n\t\twhile (Q) {\r\n\t\t\tR = Q;\r\n\t\t\td = Q->value <= x;\r\
+    \n\t\t\tef[!d] = true;\r\n\t\t\tQ = Q->child[d];\r\n\t\t}\r\n\t\tQ = new Node(x,\
+    \ R, d);\r\n\t\tif (!ef[0]) e_ptr[0] = Q;\r\n\t\tif (!ef[1]) e_ptr[1] = Q;\r\n\
+    \t\t\r\n\t\tif (R) {\r\n\t\t\tR->size[d] = 1;\r\n\t\t\tR->height[d] = 1;\r\n\t\
+    \t\tR->child[d] = Q;\r\n\t\t\tupdate(R);\r\n\t\t}\r\n\t\telse root_node = Q;\r\
+    \n\t\treturn Q;\r\n\t}\r\n\t\r\n\tNode *erase(const T &x) {\r\n\t\tNode *Q = find_(x);\r\
+    \n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\tNode *erase(Node\
+    \ *Q) {\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\
+    \tNode *lower_bound(const T &x) const {\r\n\t\treturn lower_bound_(x);\r\n\t}\r\
+    \n\t\r\n\tNode *upper_bound(const T &x) const {\r\n\t\treturn upper_bound_(x);\r\
+    \n\t}\r\n\t\r\n\tNode *k_th_smallest(std::size_t k) const {\r\n\t\treturn k_th_smallest_(k);\r\
+    \n\t}\r\n\t\r\n\tNode *k_th_largest(std::size_t k) const {\r\n\t\treturn k_th_largest_(k);\r\
+    \n\t}\r\n\t\r\n\tNode *next(Node *Q) const {\r\n\t\tif (Q) return move(Q, true);\r\
+    \n\t\treturn e_ptr[0];\r\n\t}\r\n\t\r\n\tNode *prev(Node *Q) const {\r\n\t\tif\
+    \ (Q) return move(Q, false);\r\n\t\treturn e_ptr[1];\r\n\t}\r\n\t\r\nprivate:\r\
+    \n\tstd::size_t size_ {};\r\n\tNode *root_node {};\r\n\tNode *e_ptr[2] {};\r\n\
+    \t\r\n\tvoid clear_dfs(Node* Q) {\r\n\t\tif (!Q) return;\r\n\t\tclear_dfs(Q->child[0]);\r\
+    \n\t\tclear_dfs(Q->child[1]);\r\n\t\tdelete Q;\r\n\t}\r\n\t\r\n\tvoid enumerate_dfs(const\
+    \ Node *Q, std::vector<T> &elements) const {\r\n\t\tif (!Q) return;\r\n\t\tenumerate_dfs(Q->child[0],\
     \ elements);\r\n\t\telements.push_back(Q->value);\r\n\t\tenumerate_dfs(Q->child[1],\
     \ elements);\r\n\t}\r\n\t\r\n\t Node *begin_() const {\r\n\t\treturn e_ptr[0];\r\
     \n\t}\r\n\t\r\n\tNode *end_() const {\r\n\t\treturn nullptr;\r\n\t}\r\n\t\r\n\t\
@@ -182,92 +182,92 @@ data:
     \ prev(tree.end())->value);\r\n\t\t\r\n\t}\r\n\t\r\n\treturn 0;\r\n}\r\n*/\r\n\
     \r\n\n"
   code: "#ifndef INCLUDE_GUARD_AVL_TREE_HPP\r\n#define INCLUDE_GUARD_AVL_TREE_HPP\r\
-    \n\r\n#include <algorithm>\r\n#include <vector>\r\n\r\n/*\r\nlast-updated: 2020/08/29\r\
-    \n\r\n# \u4ED5\u69D8\r\n\u30A4\u30C6\u30EC\u30FC\u30BF\u306F\u5B9F\u88C5\u3057\
-    \u3066\u3044\u306A\u3044\u306E\u3067\u30DD\u30A4\u30F3\u30BF\u3067\u30CE\u30FC\
-    \u30C9\u3092\u6271\u3046\r\n\r\nAVL_Tree() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(1)\r\n\t\u7A7A\u306E\u6728\u3092\u4F5C\u6210\u3059\u308B\r\n\r\nAVL_Tree(const\
-    \ AVL_Tree &rhs) :\r\nAVL_Tree &operator=(const AVL_Tree &rhs) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u6728\u306E\u30B3\u30D4\u30FC\u3092\u884C\
-    \u3046\r\n\tenumerate() \u3067\u5F97\u305F\u5404\u8981\u7D20\u3092 insert() \u3057\
-    \u3066\u3044\u308B\u306E\u3067\u9045\u3044\r\n\r\nbool empty() const :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u304C\u7A7A\u304C\u3069\u3046\u304B\
-    \u5224\u5B9A\u3059\u308B\r\n\r\nstd::size_t size() const :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(1)\r\n\t\u6728\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\
-    \n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u5168\
-    \u3066\u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\nstd::vector<T> enumerate()\
-    \ const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u6728\u306E\u5168\
-    \u3066\u306E\u8981\u7D20\u3092\u6607\u9806\u306B std::vector \u306B\u5165\u308C\
-    \u3066\u8FD4\u3059\r\n\r\nNode *begin() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(1)\r\n\t\u6700\u3082\u5C0F\u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\
-    \u30BF\u3092\u8FD4\u3059\r\n\r\nNode *end() const :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u6700\u3082\u5927\u304D\u3044\u8981\u7D20\u306E\u6B21\u306E\
-    \u8981\u7D20(?)\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *find(const\
-    \ T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20\
-    \ x \u3092\u691C\u7D22\u3057\u3066\u305D\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
-    \u3059\r\n\t\u8907\u6570\u5B58\u5728\u3059\u308B\u5834\u5408\u30DD\u30A4\u30F3\
-    \u30BF\u3067\u6700\u5C0F\u306E\u30DD\u30A4\u30F3\u30BF\r\n\r\nNode *insert(const\
-    \ T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20\
-    \ x \u3092\u633F\u5165\u3057\u3001\u633F\u5165\u5F8C\u306E\u8981\u7D20\u306E\u30DD\
-    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *erase(const T &x) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u524A\u9664\
-    \u3059\u308B\r\n\r\nNode *erase(Node *Q) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(log n)\r\n\t\u30DD\u30A4\u30F3\u30BF Q \u306E\u8981\u7D20\u3092\u524A\
-    \u9664\u3059\u308B\r\n\r\nNode *lower_bound(const T &x) const :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u8981\
-    \u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *upper_bound(const\
-    \ T &x) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u3088\
-    \u308A\u5927\u304D\u3044\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\
-    \u30BF\u3092\u8FD4\u3059\r\n\r\nNode *k_th_smallest(std::size_t k) const :\r\n\
-    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5C0F\
-    \u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\
-    \nNode *k_th_largest(std::size_t k) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\
-    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *next(Node *Q) const :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u306E\u6B21\u306B\u5927\u304D\u3044\
-    \u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *prev(Node\
-    \ *Q) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u3088\u308A\
-    \ 1 \u3064\u5C0F\u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
-    \u3059\r\n\r\n# \u53C2\u8003\r\nhttps://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19\r\
-    \n*/\r\n\r\ntemplate<typename T> struct AVL_Tree {\r\npublic:\r\n\t\r\n\t// private\
-    \ \u306B, \u3057\u305F\u304F\u306A\u3044\u2026??\r\n\tstruct Node {\r\n\t\tT value;\r\
-    \n\t\tNode *child[2] {}, *par = nullptr;\r\n\t\tbool is_r;\r\n\t\tstd::size_t\
-    \ size[2] {}, height[2] {};\r\n\t\t\r\n\t\tNode(T x, Node *par, bool is_r)\r\n\
-    \t\t\t: value(x), par(par), is_r(is_r) {}\r\n\t};\r\n\t\r\n\tAVL_Tree() : size_(0),\
-    \ root_node(nullptr) {}\r\n\t~AVL_Tree() {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\t\
-    AVL_Tree(const AVL_Tree &rhs) {\r\n\t\t*this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree\
-    \ &operator=(const AVL_Tree &rhs) {\r\n\t\tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\
-    \n\t\t\tstd::vector<T> tmp = rhs.enumerate();\r\n\t\t\tfor (const T &elm : tmp)\
-    \ this->insert(elm);\r\n\t\t}\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tbool empty()\
-    \ const {\r\n\t\treturn size_ == 0;\r\n\t}\r\n\t\r\n\tstd::size_t size() const\
-    \ {\r\n\t\treturn size_;\r\n\t}\r\n\t\r\n\tvoid clear() {\r\n\t\tclear_dfs(root_node);\r\
-    \n\t\troot_node = nullptr;\r\n\t\tsize_ = 0;\r\n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\
-    \n\t}\r\n\t\r\n\tstd::vector<T> enumerate() const {\r\n\t\tstd::vector<T> elements;\r\
-    \n\t\telements.reserve(size_);\r\n\t\tenumerate_dfs(root_node, elements);\r\n\t\
-    \treturn elements;\r\n\t}\r\n\t\r\n\tNode *begin() const {\r\n\t\treturn begin_();\r\
-    \n\t}\r\n\t\r\n\tNode *end() const {\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\t\
-    Node *find(const T &x) {\r\n\t\treturn find_(x);\r\n\t}\r\n\t\r\n\tNode *insert(const\
-    \ T &x) {\r\n\t\tsize_++;\r\n\t\tbool ef[2] {};\r\n\t\t\r\n\t\tNode *Q = root_node,\
-    \ *R = nullptr;\r\n\t\tbool d = false;\r\n\t\twhile (Q) {\r\n\t\t\tR = Q;\r\n\t\
-    \t\td = Q->value <= x;\r\n\t\t\tef[!d] = true;\r\n\t\t\tQ = Q->child[d];\r\n\t\
-    \t}\r\n\t\tQ = new Node(x, R, d);\r\n\t\tif (!ef[0]) e_ptr[0] = Q;\r\n\t\tif (!ef[1])\
-    \ e_ptr[1] = Q;\r\n\t\t\r\n\t\tif (R) {\r\n\t\t\tR->size[d] = 1;\r\n\t\t\tR->height[d]\
-    \ = 1;\r\n\t\t\tR->child[d] = Q;\r\n\t\t\tupdate(R);\r\n\t\t}\r\n\t\telse root_node\
-    \ = Q;\r\n\t\treturn Q;\r\n\t}\r\n\t\r\n\tNode *erase(const T &x) {\r\n\t\tNode\
-    \ *Q = find_(x);\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\
-    \n\t\r\n\tNode *erase(Node *Q) {\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn\
-    \ end_();\r\n\t}\r\n\t\r\n\tNode *lower_bound(const T &x) const {\r\n\t\treturn\
-    \ lower_bound_(x);\r\n\t}\r\n\t\r\n\tNode *upper_bound(const T &x) const {\r\n\
-    \t\treturn upper_bound_(x);\r\n\t}\r\n\t\r\n\tNode *k_th_smallest(std::size_t\
-    \ k) const {\r\n\t\treturn k_th_smallest_(k);\r\n\t}\r\n\t\r\n\tNode *k_th_largest(std::size_t\
-    \ k) const {\r\n\t\treturn k_th_largest_(k);\r\n\t}\r\n\t\r\n\tNode *next(Node\
-    \ *Q) const {\r\n\t\tif (Q) return move(Q, true);\r\n\t\treturn e_ptr[0];\r\n\t\
-    }\r\n\t\r\n\tNode *prev(Node *Q) const {\r\n\t\tif (Q) return move(Q, false);\r\
-    \n\t\treturn e_ptr[1];\r\n\t}\r\n\t\r\nprivate:\r\n\tstd::size_t size_ {};\r\n\
-    \tNode *root_node {};\r\n\tNode *e_ptr[2] {};\r\n\t\r\n\tvoid clear_dfs(Node*\
-    \ Q) {\r\n\t\tif (!Q) return;\r\n\t\tclear_dfs(Q->child[0]);\r\n\t\tclear_dfs(Q->child[1]);\r\
-    \n\t\tdelete Q;\r\n\t}\r\n\t\r\n\tvoid enumerate_dfs(const Node *Q, std::vector<T>\
-    \ &elements) const {\r\n\t\tif (!Q) return;\r\n\t\tenumerate_dfs(Q->child[0],\
+    \n\r\n/*\r\nlast-updated: 2020/08/29\r\n\r\n# \u4ED5\u69D8\r\n\u30A4\u30C6\u30EC\
+    \u30FC\u30BF\u306F\u5B9F\u88C5\u3057\u3066\u3044\u306A\u3044\u306E\u3067\u30DD\
+    \u30A4\u30F3\u30BF\u3067\u30CE\u30FC\u30C9\u3092\u6271\u3046\r\n\r\nAVL_Tree()\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u7A7A\u306E\u6728\u3092\
+    \u4F5C\u6210\u3059\u308B\r\n\r\nAVL_Tree(const AVL_Tree &rhs) :\r\nAVL_Tree &operator=(const\
+    \ AVL_Tree &rhs) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u6728\
+    \u306E\u30B3\u30D4\u30FC\u3092\u884C\u3046\r\n\tenumerate() \u3067\u5F97\u305F\
+    \u5404\u8981\u7D20\u3092 insert() \u3057\u3066\u3044\u308B\u306E\u3067\u9045\u3044\
+    \r\n\r\nbool empty() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\
+    \t\u6728\u304C\u7A7A\u304C\u3069\u3046\u304B\u5224\u5B9A\u3059\u308B\r\n\r\nstd::size_t\
+    \ size() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u306E\
+    \u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(n)\r\n\t\u5168\u3066\u306E\u8981\u7D20\u3092\u524A\u9664\u3059\
+    \u308B\r\n\r\nstd::vector<T> enumerate() const :\r\n\t\u6642\u9593\u8A08\u7B97\
+    \u91CF: \u0398(n)\r\n\t\u6728\u306E\u5168\u3066\u306E\u8981\u7D20\u3092\u6607\u9806\
+    \u306B std::vector \u306B\u5165\u308C\u3066\u8FD4\u3059\r\n\r\nNode *begin() const\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6700\u3082\u5C0F\u3055\
+    \u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode\
+    \ *end() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6700\u3082\
+    \u5927\u304D\u3044\u8981\u7D20\u306E\u6B21\u306E\u8981\u7D20(?)\u306E\u30DD\u30A4\
+    \u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *find(const T &x) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u691C\u7D22\u3057\
+    \u3066\u305D\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\t\u8907\u6570\
+    \u5B58\u5728\u3059\u308B\u5834\u5408\u30DD\u30A4\u30F3\u30BF\u3067\u6700\u5C0F\
+    \u306E\u30DD\u30A4\u30F3\u30BF\r\n\r\nNode *insert(const T &x) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u633F\u5165\u3057\
+    \u3001\u633F\u5165\u5F8C\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\
+    \u8FD4\u3059\r\n\r\nNode *erase(const T &x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(log n)\r\n\t\u8981\u7D20 x \u3092\u524A\u9664\u3059\u308B\r\n\r\nNode\
+    \ *erase(Node *Q) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u30DD\
+    \u30A4\u30F3\u30BF Q \u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\n\
+    Node *lower_bound(const T &x) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (log n)\r\n\tx \u4EE5\u4E0A\u306E\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\
+    \u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *upper_bound(const T &x) const :\r\n\
+    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tx \u3088\u308A\u5927\u304D\
+    \u3044\u6700\u5C0F\u306E\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
+    \u3059\r\n\r\nNode *k_th_smallest(std::size_t k) const :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\u306B\u5C0F\u3055\u3044\u8981\u7D20\
+    \u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *k_th_largest(std::size_t\
+    \ k) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\tk \u756A\u76EE\
+    \u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
+    \u3059\r\n\r\nNode *next(Node *Q) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : O(log n)\r\n\tQ \u306E\u6B21\u306B\u5927\u304D\u3044\u8981\u7D20\u306E\u30DD\
+    \u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\nNode *prev(Node *Q) const :\r\n\t\u6642\
+    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u3088\u308A 1 \u3064\u5C0F\u3055\u3044\
+    \u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\
+    \r\nhttps://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19\r\n*/\r\n\r\n#include\
+    \ <algorithm>\r\n#include <vector>\r\n\r\ntemplate<typename T> struct AVL_Tree\
+    \ {\r\npublic:\r\n\t\r\n\t// private \u306B, \u3057\u305F\u304F\u306A\u3044\u2026\
+    ??\r\n\tstruct Node {\r\n\t\tT value;\r\n\t\tNode *child[2] {}, *par = nullptr;\r\
+    \n\t\tbool is_r;\r\n\t\tstd::size_t size[2] {}, height[2] {};\r\n\t\t\r\n\t\t\
+    Node(T x, Node *par, bool is_r)\r\n\t\t\t: value(x), par(par), is_r(is_r) {}\r\
+    \n\t};\r\n\t\r\n\tAVL_Tree() : size_(0), root_node(nullptr) {}\r\n\t~AVL_Tree()\
+    \ {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\tAVL_Tree(const AVL_Tree &rhs) {\r\n\t\t\
+    *this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree &operator=(const AVL_Tree &rhs) {\r\n\t\
+    \tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\n\t\t\tstd::vector<T> tmp = rhs.enumerate();\r\
+    \n\t\t\tfor (const T &elm : tmp) this->insert(elm);\r\n\t\t}\r\n\t\treturn *this;\r\
+    \n\t}\r\n\t\r\n\tbool empty() const {\r\n\t\treturn size_ == 0;\r\n\t}\r\n\t\r\
+    \n\tstd::size_t size() const {\r\n\t\treturn size_;\r\n\t}\r\n\t\r\n\tvoid clear()\
+    \ {\r\n\t\tclear_dfs(root_node);\r\n\t\troot_node = nullptr;\r\n\t\tsize_ = 0;\r\
+    \n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\n\t}\r\n\t\r\n\tstd::vector<T> enumerate()\
+    \ const {\r\n\t\tstd::vector<T> elements;\r\n\t\telements.reserve(size_);\r\n\t\
+    \tenumerate_dfs(root_node, elements);\r\n\t\treturn elements;\r\n\t}\r\n\t\r\n\
+    \tNode *begin() const {\r\n\t\treturn begin_();\r\n\t}\r\n\t\r\n\tNode *end()\
+    \ const {\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\tNode *find(const T &x) {\r\n\
+    \t\treturn find_(x);\r\n\t}\r\n\t\r\n\tNode *insert(const T &x) {\r\n\t\tsize_++;\r\
+    \n\t\tbool ef[2] {};\r\n\t\t\r\n\t\tNode *Q = root_node, *R = nullptr;\r\n\t\t\
+    bool d = false;\r\n\t\twhile (Q) {\r\n\t\t\tR = Q;\r\n\t\t\td = Q->value <= x;\r\
+    \n\t\t\tef[!d] = true;\r\n\t\t\tQ = Q->child[d];\r\n\t\t}\r\n\t\tQ = new Node(x,\
+    \ R, d);\r\n\t\tif (!ef[0]) e_ptr[0] = Q;\r\n\t\tif (!ef[1]) e_ptr[1] = Q;\r\n\
+    \t\t\r\n\t\tif (R) {\r\n\t\t\tR->size[d] = 1;\r\n\t\t\tR->height[d] = 1;\r\n\t\
+    \t\tR->child[d] = Q;\r\n\t\t\tupdate(R);\r\n\t\t}\r\n\t\telse root_node = Q;\r\
+    \n\t\treturn Q;\r\n\t}\r\n\t\r\n\tNode *erase(const T &x) {\r\n\t\tNode *Q = find_(x);\r\
+    \n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\tNode *erase(Node\
+    \ *Q) {\r\n\t\tif (Q) return erase_(Q);\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\
+    \tNode *lower_bound(const T &x) const {\r\n\t\treturn lower_bound_(x);\r\n\t}\r\
+    \n\t\r\n\tNode *upper_bound(const T &x) const {\r\n\t\treturn upper_bound_(x);\r\
+    \n\t}\r\n\t\r\n\tNode *k_th_smallest(std::size_t k) const {\r\n\t\treturn k_th_smallest_(k);\r\
+    \n\t}\r\n\t\r\n\tNode *k_th_largest(std::size_t k) const {\r\n\t\treturn k_th_largest_(k);\r\
+    \n\t}\r\n\t\r\n\tNode *next(Node *Q) const {\r\n\t\tif (Q) return move(Q, true);\r\
+    \n\t\treturn e_ptr[0];\r\n\t}\r\n\t\r\n\tNode *prev(Node *Q) const {\r\n\t\tif\
+    \ (Q) return move(Q, false);\r\n\t\treturn e_ptr[1];\r\n\t}\r\n\t\r\nprivate:\r\
+    \n\tstd::size_t size_ {};\r\n\tNode *root_node {};\r\n\tNode *e_ptr[2] {};\r\n\
+    \t\r\n\tvoid clear_dfs(Node* Q) {\r\n\t\tif (!Q) return;\r\n\t\tclear_dfs(Q->child[0]);\r\
+    \n\t\tclear_dfs(Q->child[1]);\r\n\t\tdelete Q;\r\n\t}\r\n\t\r\n\tvoid enumerate_dfs(const\
+    \ Node *Q, std::vector<T> &elements) const {\r\n\t\tif (!Q) return;\r\n\t\tenumerate_dfs(Q->child[0],\
     \ elements);\r\n\t\telements.push_back(Q->value);\r\n\t\tenumerate_dfs(Q->child[1],\
     \ elements);\r\n\t}\r\n\t\r\n\t Node *begin_() const {\r\n\t\treturn e_ptr[0];\r\
     \n\t}\r\n\t\r\n\tNode *end_() const {\r\n\t\treturn nullptr;\r\n\t}\r\n\t\r\n\t\
@@ -354,7 +354,7 @@ data:
   isVerificationFile: false
   path: DataStructure/AVL_Tree.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/AVL_Tree.test.cpp

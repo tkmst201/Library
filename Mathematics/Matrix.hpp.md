@@ -12,14 +12,11 @@ data:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://drken1215.hatenablog.com/entry/2019/03/20/202800
-  bundledCode: "#line 1 \"Mathematics/Matrix.hpp\"\n\n\n\r\n#include <iostream>\r\n\
-    #include <cassert>\r\n#include <vector>\r\n#include <utility>\r\n#include <type_traits>\r\
-    \n#include <initializer_list>\r\n#include <algorithm>\r\n#include <cmath>\r\n\r\
-    \n/*\r\nlast-updated: 2020/04/13\r\n\r\n# \u4ED5\u69D8\r\nMatrix() : \u7A7A\u306E\
-    \u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(size_type h, size_type w, const value_type\
-    \ & x = 0) : \u578B(h, w) \u521D\u671F\u5024 x \u306E\u884C\u5217\u3092\u4F5C\u6210\
-    \r\nMatrix(std::vector<std::vector<value_type>> val) : 2\u6B21\u5143 vector \u304B\
-    \u3089\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::initializer_list<std::vector<value_type>>\
+  bundledCode: "#line 1 \"Mathematics/Matrix.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/04/13\r\
+    \n\r\n# \u4ED5\u69D8\r\nMatrix() : \u7A7A\u306E\u884C\u5217\u3092\u4F5C\u6210\r\
+    \nMatrix(size_type h, size_type w, const value_type & x = 0) : \u578B(h, w) \u521D\
+    \u671F\u5024 x \u306E\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::vector<std::vector<value_type>>\
+    \ val) : 2\u6B21\u5143 vector \u304B\u3089\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::initializer_list<std::vector<value_type>>\
     \ init) : initializer_list \u304B\u3089\u884C\u5217\u3092\u4F5C\u6210\r\n\r\n\
     std::vector<value_type> & operator [](size_type i) noexcept\r\nconst std::vector<value_type>\
     \ & operator [](size_type i) const noexcept\r\nvalue_type & operator ()(size_type\
@@ -58,12 +55,15 @@ data:
     \u30FC\u30BF\u306F\u58CA\u308C\u308B)\r\n\t(rank, determinant) \u3092\u8FD4\u3059\
     \r\nfriend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) :\
     \ \u884C\u5217\u3092\u51FA\u529B\u3067\u304D\u308B\r\n\r\n# \u53C2\u8003\r\nhttps://drken1215.hatenablog.com/entry/2019/03/20/202800\r\
-    \n*/\r\n\r\ntemplate<typename T>\r\nstruct Matrix {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tMatrix() {}\r\n\tMatrix(size_type\
-    \ h, size_type w, const value_type & x = 0) : h(h), w(w), val(h, std::vector<value_type>(w,\
-    \ x)) {\r\n\t\tassert(h > 0 && w > 0);\r\n\t}\r\n\tMatrix(std::vector<std::vector<value_type>>\
-    \ val) : h(val.size()), w(val.size() ? val[0].size() : 0), val(val) {\r\n\t\t\
-    assert(h > 0 && w > 0);\r\n\t\tfor (size_type i = 1; i < h; ++i) assert(val[i].size()\
+    \n*/\r\n\r\n#include <iostream>\r\n#include <cassert>\r\n#include <vector>\r\n\
+    #include <utility>\r\n#include <type_traits>\r\n#include <initializer_list>\r\n\
+    #include <algorithm>\r\n#include <cmath>\r\n\r\ntemplate<typename T>\r\nstruct\
+    \ Matrix {\r\npublic:\r\n\tusing value_type = T;\r\n\tusing size_type = std::size_t;\r\
+    \n\t\r\n\tMatrix() {}\r\n\tMatrix(size_type h, size_type w, const value_type &\
+    \ x = 0) : h(h), w(w), val(h, std::vector<value_type>(w, x)) {\r\n\t\tassert(h\
+    \ > 0 && w > 0);\r\n\t}\r\n\tMatrix(std::vector<std::vector<value_type>> val)\
+    \ : h(val.size()), w(val.size() ? val[0].size() : 0), val(val) {\r\n\t\tassert(h\
+    \ > 0 && w > 0);\r\n\t\tfor (size_type i = 1; i < h; ++i) assert(val[i].size()\
     \ == w);\r\n\t}\r\n\tMatrix(std::initializer_list<std::vector<value_type>> init)\
     \ : val(init.begin(), init.end()) {\r\n\t\th = val.size();\r\n\t\tw = val.size()\
     \ ? val[0].size() : 0;\r\n\t\tassert(h > 0 && w > 0);\r\n\t\tfor (size_type i\
@@ -151,13 +151,11 @@ data:
     ;\r\n\t}\r\n\t\r\nprivate:\r\n\tsize_type h, w;\r\n\tstd::vector<std::vector<value_type>>\
     \ val;\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_MATRIX_HPP\r\n#define INCLUDE_GUARD_MATRIX_HPP\r\n\r\
-    \n#include <iostream>\r\n#include <cassert>\r\n#include <vector>\r\n#include <utility>\r\
-    \n#include <type_traits>\r\n#include <initializer_list>\r\n#include <algorithm>\r\
-    \n#include <cmath>\r\n\r\n/*\r\nlast-updated: 2020/04/13\r\n\r\n# \u4ED5\u69D8\
-    \r\nMatrix() : \u7A7A\u306E\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(size_type\
-    \ h, size_type w, const value_type & x = 0) : \u578B(h, w) \u521D\u671F\u5024\
-    \ x \u306E\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::vector<std::vector<value_type>>\
-    \ val) : 2\u6B21\u5143 vector \u304B\u3089\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::initializer_list<std::vector<value_type>>\
+    \n/*\r\nlast-updated: 2020/04/13\r\n\r\n# \u4ED5\u69D8\r\nMatrix() : \u7A7A\u306E\
+    \u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(size_type h, size_type w, const value_type\
+    \ & x = 0) : \u578B(h, w) \u521D\u671F\u5024 x \u306E\u884C\u5217\u3092\u4F5C\u6210\
+    \r\nMatrix(std::vector<std::vector<value_type>> val) : 2\u6B21\u5143 vector \u304B\
+    \u3089\u884C\u5217\u3092\u4F5C\u6210\r\nMatrix(std::initializer_list<std::vector<value_type>>\
     \ init) : initializer_list \u304B\u3089\u884C\u5217\u3092\u4F5C\u6210\r\n\r\n\
     std::vector<value_type> & operator [](size_type i) noexcept\r\nconst std::vector<value_type>\
     \ & operator [](size_type i) const noexcept\r\nvalue_type & operator ()(size_type\
@@ -196,12 +194,15 @@ data:
     \u30FC\u30BF\u306F\u58CA\u308C\u308B)\r\n\t(rank, determinant) \u3092\u8FD4\u3059\
     \r\nfriend std::ostream & operator <<(std::ostream & os, const Matrix & rhs) :\
     \ \u884C\u5217\u3092\u51FA\u529B\u3067\u304D\u308B\r\n\r\n# \u53C2\u8003\r\nhttps://drken1215.hatenablog.com/entry/2019/03/20/202800\r\
-    \n*/\r\n\r\ntemplate<typename T>\r\nstruct Matrix {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tMatrix() {}\r\n\tMatrix(size_type\
-    \ h, size_type w, const value_type & x = 0) : h(h), w(w), val(h, std::vector<value_type>(w,\
-    \ x)) {\r\n\t\tassert(h > 0 && w > 0);\r\n\t}\r\n\tMatrix(std::vector<std::vector<value_type>>\
-    \ val) : h(val.size()), w(val.size() ? val[0].size() : 0), val(val) {\r\n\t\t\
-    assert(h > 0 && w > 0);\r\n\t\tfor (size_type i = 1; i < h; ++i) assert(val[i].size()\
+    \n*/\r\n\r\n#include <iostream>\r\n#include <cassert>\r\n#include <vector>\r\n\
+    #include <utility>\r\n#include <type_traits>\r\n#include <initializer_list>\r\n\
+    #include <algorithm>\r\n#include <cmath>\r\n\r\ntemplate<typename T>\r\nstruct\
+    \ Matrix {\r\npublic:\r\n\tusing value_type = T;\r\n\tusing size_type = std::size_t;\r\
+    \n\t\r\n\tMatrix() {}\r\n\tMatrix(size_type h, size_type w, const value_type &\
+    \ x = 0) : h(h), w(w), val(h, std::vector<value_type>(w, x)) {\r\n\t\tassert(h\
+    \ > 0 && w > 0);\r\n\t}\r\n\tMatrix(std::vector<std::vector<value_type>> val)\
+    \ : h(val.size()), w(val.size() ? val[0].size() : 0), val(val) {\r\n\t\tassert(h\
+    \ > 0 && w > 0);\r\n\t\tfor (size_type i = 1; i < h; ++i) assert(val[i].size()\
     \ == w);\r\n\t}\r\n\tMatrix(std::initializer_list<std::vector<value_type>> init)\
     \ : val(init.begin(), init.end()) {\r\n\t\th = val.size();\r\n\t\tw = val.size()\
     \ ? val[0].size() : 0;\r\n\t\tassert(h > 0 && w > 0);\r\n\t\tfor (size_type i\
@@ -292,7 +293,7 @@ data:
   isVerificationFile: false
   path: Mathematics/Matrix.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/Matrix_Determinant.test.cpp

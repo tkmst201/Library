@@ -14,21 +14,20 @@ data:
     links:
     - https://judge.yosupo.jp/problem/associative_array
   bundledCode: "#line 1 \"Test/AVL_Tree.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\
-    \r\n\r\n#line 1 \"DataStructure/AVL_Tree.hpp\"\n\n\n\r\n#include <algorithm>\r\
-    \n#include <vector>\r\n\r\n/*\r\nlast-updated: 2020/08/29\r\n\r\n# \u4ED5\u69D8\
-    \r\n\u30A4\u30C6\u30EC\u30FC\u30BF\u306F\u5B9F\u88C5\u3057\u3066\u3044\u306A\u3044\
-    \u306E\u3067\u30DD\u30A4\u30F3\u30BF\u3067\u30CE\u30FC\u30C9\u3092\u6271\u3046\
-    \r\n\r\nAVL_Tree() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u7A7A\
-    \u306E\u6728\u3092\u4F5C\u6210\u3059\u308B\r\n\r\nAVL_Tree(const AVL_Tree &rhs)\
-    \ :\r\nAVL_Tree &operator=(const AVL_Tree &rhs) :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(n log n)\r\n\t\u6728\u306E\u30B3\u30D4\u30FC\u3092\u884C\u3046\r\
-    \n\tenumerate() \u3067\u5F97\u305F\u5404\u8981\u7D20\u3092 insert() \u3057\u3066\
-    \u3044\u308B\u306E\u3067\u9045\u3044\r\n\r\nbool empty() const :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u304C\u7A7A\u304C\u3069\u3046\u304B\u5224\
-    \u5B9A\u3059\u308B\r\n\r\nstd::size_t size() const :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u6728\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\n\
-    void clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u5168\u3066\
-    \u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\nstd::vector<T> enumerate()\
+    \r\n\r\n#line 1 \"DataStructure/AVL_Tree.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/08/29\r\
+    \n\r\n# \u4ED5\u69D8\r\n\u30A4\u30C6\u30EC\u30FC\u30BF\u306F\u5B9F\u88C5\u3057\
+    \u3066\u3044\u306A\u3044\u306E\u3067\u30DD\u30A4\u30F3\u30BF\u3067\u30CE\u30FC\
+    \u30C9\u3092\u6271\u3046\r\n\r\nAVL_Tree() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(1)\r\n\t\u7A7A\u306E\u6728\u3092\u4F5C\u6210\u3059\u308B\r\n\r\nAVL_Tree(const\
+    \ AVL_Tree &rhs) :\r\nAVL_Tree &operator=(const AVL_Tree &rhs) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u6728\u306E\u30B3\u30D4\u30FC\u3092\u884C\
+    \u3046\r\n\tenumerate() \u3067\u5F97\u305F\u5404\u8981\u7D20\u3092 insert() \u3057\
+    \u3066\u3044\u308B\u306E\u3067\u9045\u3044\r\n\r\nbool empty() const :\r\n\t\u6642\
+    \u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u6728\u304C\u7A7A\u304C\u3069\u3046\u304B\
+    \u5224\u5B9A\u3059\u308B\r\n\r\nstd::size_t size() const :\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(1)\r\n\t\u6728\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\
+    \n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u5168\
+    \u3066\u306E\u8981\u7D20\u3092\u524A\u9664\u3059\u308B\r\n\r\nstd::vector<T> enumerate()\
     \ const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u6728\u306E\u5168\
     \u3066\u306E\u8981\u7D20\u3092\u6607\u9806\u306B std::vector \u306B\u5165\u308C\
     \u3066\u8FD4\u3059\r\n\r\nNode *begin() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
@@ -62,22 +61,23 @@ data:
     \ *Q) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\tQ \u3088\u308A\
     \ 1 \u3064\u5C0F\u3055\u3044\u8981\u7D20\u306E\u30DD\u30A4\u30F3\u30BF\u3092\u8FD4\
     \u3059\r\n\r\n# \u53C2\u8003\r\nhttps://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19\r\
-    \n*/\r\n\r\ntemplate<typename T> struct AVL_Tree {\r\npublic:\r\n\t\r\n\t// private\
-    \ \u306B, \u3057\u305F\u304F\u306A\u3044\u2026??\r\n\tstruct Node {\r\n\t\tT value;\r\
-    \n\t\tNode *child[2] {}, *par = nullptr;\r\n\t\tbool is_r;\r\n\t\tstd::size_t\
-    \ size[2] {}, height[2] {};\r\n\t\t\r\n\t\tNode(T x, Node *par, bool is_r)\r\n\
-    \t\t\t: value(x), par(par), is_r(is_r) {}\r\n\t};\r\n\t\r\n\tAVL_Tree() : size_(0),\
-    \ root_node(nullptr) {}\r\n\t~AVL_Tree() {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\t\
-    AVL_Tree(const AVL_Tree &rhs) {\r\n\t\t*this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree\
-    \ &operator=(const AVL_Tree &rhs) {\r\n\t\tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\
-    \n\t\t\tstd::vector<T> tmp = rhs.enumerate();\r\n\t\t\tfor (const T &elm : tmp)\
-    \ this->insert(elm);\r\n\t\t}\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tbool empty()\
-    \ const {\r\n\t\treturn size_ == 0;\r\n\t}\r\n\t\r\n\tstd::size_t size() const\
-    \ {\r\n\t\treturn size_;\r\n\t}\r\n\t\r\n\tvoid clear() {\r\n\t\tclear_dfs(root_node);\r\
-    \n\t\troot_node = nullptr;\r\n\t\tsize_ = 0;\r\n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\
-    \n\t}\r\n\t\r\n\tstd::vector<T> enumerate() const {\r\n\t\tstd::vector<T> elements;\r\
-    \n\t\telements.reserve(size_);\r\n\t\tenumerate_dfs(root_node, elements);\r\n\t\
-    \treturn elements;\r\n\t}\r\n\t\r\n\tNode *begin() const {\r\n\t\treturn begin_();\r\
+    \n*/\r\n\r\n#include <algorithm>\r\n#include <vector>\r\n\r\ntemplate<typename\
+    \ T> struct AVL_Tree {\r\npublic:\r\n\t\r\n\t// private \u306B, \u3057\u305F\u304F\
+    \u306A\u3044\u2026??\r\n\tstruct Node {\r\n\t\tT value;\r\n\t\tNode *child[2]\
+    \ {}, *par = nullptr;\r\n\t\tbool is_r;\r\n\t\tstd::size_t size[2] {}, height[2]\
+    \ {};\r\n\t\t\r\n\t\tNode(T x, Node *par, bool is_r)\r\n\t\t\t: value(x), par(par),\
+    \ is_r(is_r) {}\r\n\t};\r\n\t\r\n\tAVL_Tree() : size_(0), root_node(nullptr) {}\r\
+    \n\t~AVL_Tree() {\r\n\t\tclear();\r\n\t}\r\n\t\r\n\tAVL_Tree(const AVL_Tree &rhs)\
+    \ {\r\n\t\t*this = rhs;\r\n\t}\r\n\t\r\n\tAVL_Tree &operator=(const AVL_Tree &rhs)\
+    \ {\r\n\t\tif (this != &rhs) {\r\n\t\t\tthis->clear();\r\n\t\t\tstd::vector<T>\
+    \ tmp = rhs.enumerate();\r\n\t\t\tfor (const T &elm : tmp) this->insert(elm);\r\
+    \n\t\t}\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tbool empty() const {\r\n\t\treturn\
+    \ size_ == 0;\r\n\t}\r\n\t\r\n\tstd::size_t size() const {\r\n\t\treturn size_;\r\
+    \n\t}\r\n\t\r\n\tvoid clear() {\r\n\t\tclear_dfs(root_node);\r\n\t\troot_node\
+    \ = nullptr;\r\n\t\tsize_ = 0;\r\n\t\te_ptr[0] = e_ptr[1] = nullptr;\r\n\t}\r\n\
+    \t\r\n\tstd::vector<T> enumerate() const {\r\n\t\tstd::vector<T> elements;\r\n\
+    \t\telements.reserve(size_);\r\n\t\tenumerate_dfs(root_node, elements);\r\n\t\t\
+    return elements;\r\n\t}\r\n\t\r\n\tNode *begin() const {\r\n\t\treturn begin_();\r\
     \n\t}\r\n\t\r\n\tNode *end() const {\r\n\t\treturn end_();\r\n\t}\r\n\t\r\n\t\
     Node *find(const T &x) {\r\n\t\treturn find_(x);\r\n\t}\r\n\t\r\n\tNode *insert(const\
     \ T &x) {\r\n\t\tsize_++;\r\n\t\tbool ef[2] {};\r\n\t\t\r\n\t\tNode *Q = root_node,\
@@ -206,7 +206,7 @@ data:
   isVerificationFile: true
   path: Test/AVL_Tree.test.cpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/AVL_Tree.test.cpp

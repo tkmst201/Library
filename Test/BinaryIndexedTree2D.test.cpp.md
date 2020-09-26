@@ -15,10 +15,9 @@ data:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842
   bundledCode: "#line 1 \"Test/BinaryIndexedTree2D.test.cpp\"\n#define PROBLEM \"\
     http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842\"\r\n\r\n#line 1\
-    \ \"DataStructure/BinaryIndexedTree2D.hpp\"\n\n\n\r\n#include <vector>\r\n#include\
-    \ <cassert>\r\n#include <functional>\r\n\r\n/*\r\nlast-updated: 2020/08/15\r\n\
-    \r\n# \u4ED5\u69D8\r\nBinaryIndexedTree2D(size_type h, size_type w) :\r\n\th \\\
-    times w \u306E\u8868\u3092\u69CB\u7BC9\r\n\r\nvoid add(size_type i, size_type\
+    \ \"DataStructure/BinaryIndexedTree2D.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/08/15\r\
+    \n\r\n# \u4ED5\u69D8\r\nBinaryIndexedTree2D(size_type h, size_type w) :\r\n\t\
+    h \\times w \u306E\u8868\u3092\u69CB\u7BC9\r\n\r\nvoid add(size_type i, size_type\
     \ j, const_reference x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log h log\
     \ w)\r\n\t\u70B9 (i, j) \u306B\u5024 x \u3092\u52A0\u7B97\r\n\r\nvalue_type sum(size_type\
     \ i, size_type j) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log h log\
@@ -27,7 +26,8 @@ data:
     \ i2, size_type j2) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(log h\
     \ log w)\r\n\t[i1, i2) \\times [j1, j2) \u306E\u5408\u8A08\u3092\u8FD4\u3059\r\
     \n\r\n# \u53C2\u8003\r\nhttps://algo-logic.info/binary-indexed-tree/, 2020/08/15\r\
-    \n*/\r\n\r\ntemplate<typename T>\r\nstruct BinaryIndexedTree2D {\r\n\tusing value_type\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include <functional>\r\
+    \n\r\ntemplate<typename T>\r\nstruct BinaryIndexedTree2D {\r\n\tusing value_type\
     \ = T;\r\n\tusing const_reference = const value_type &;\r\n\tusing size_type =\
     \ std::size_t;\r\n\t\r\n\tBinaryIndexedTree2D(size_type h, size_type w) : h(h),\
     \ w(w) {\r\n\t\tnode.resize(h + 1, std::vector<value_type>(w + 1));\r\n\t}\r\n\
@@ -88,7 +88,7 @@ data:
   isVerificationFile: true
   path: Test/BinaryIndexedTree2D.test.cpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/BinaryIndexedTree2D.test.cpp

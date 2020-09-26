@@ -2,27 +2,27 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Mathematics/TwoSat.hpp
     title: Mathematics/TwoSat.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/StronglyConnectedComponents.test.cpp
     title: Test/StronglyConnectedComponents.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/TwoSat.test.cpp
     title: Test/TwoSat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://mathtrain.jp/kyorenketsu,
   bundledCode: "#line 1 \"GraphTheory/StronglyConnectedComponents.hpp\"\n\n\n\r\n\
-    #include <vector>\r\n#include <cassert>\r\n#include <algorithm>\r\n\r\n/*\r\n\
-    last-updated: 2020/08/27\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type\
-    \ n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
-    \ n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
+    /*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\u3059\
+    \u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n) :\r\n\
+    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C n \u306E\
+    \u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
     \ g) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n + m)\r\n\t\u30B0\u30E9\u30D5\
     \ g \u3067\u521D\u671F\u5316\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\
     \u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9\u6570\u3092\u8FD4\u3059\r\
@@ -44,7 +44,8 @@ data:
     \ get_graph() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(n + m log m)\r\n\t\
     \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\u5F8C\u306E\u30B0\u30E9\u30D5\u3092\
     \u4F5C\u6210\u3057\u3066\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttps://mathtrain.jp/kyorenketsu,\
-    \ 2020/08/27\r\n*/\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
+    \ 2020/08/27\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
     \ = std::size_t;\r\n\t\r\nprivate:\r\n\tstd::vector<std::vector<size_type>> g,\
     \ rg;\r\n\tstd::vector<size_type> rank; // [i] := \u9802\u70B9 i \u304C\u5C5E\u3059\
     \u308B\u5F37\u9023\u7D50\u6210\u5206\u306E\u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\
@@ -85,9 +86,9 @@ data:
     \ end(res[i])), end(res[i]));\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\n\r\n\
     \n"
   code: "#ifndef INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP\r\n#define INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP\r\
-    \n\r\n#include <vector>\r\n#include <cassert>\r\n#include <algorithm>\r\n\r\n\
-    /*\r\nlast-updated: 2020/08/27\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type\
-    \ n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
+    \n\r\n/*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
+    \u3059\u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n)\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
     \ n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
     \ g) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n + m)\r\n\t\u30B0\u30E9\u30D5\
     \ g \u3067\u521D\u671F\u5316\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\
@@ -110,7 +111,8 @@ data:
     \ get_graph() const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(n + m log m)\r\n\t\
     \u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3\u5F8C\u306E\u30B0\u30E9\u30D5\u3092\
     \u4F5C\u6210\u3057\u3066\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttps://mathtrain.jp/kyorenketsu,\
-    \ 2020/08/27\r\n*/\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
+    \ 2020/08/27\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct StronglyConnectedComponents {\r\n\tusing size_type\
     \ = std::size_t;\r\n\t\r\nprivate:\r\n\tstd::vector<std::vector<size_type>> g,\
     \ rg;\r\n\tstd::vector<size_type> rank; // [i] := \u9802\u70B9 i \u304C\u5C5E\u3059\
     \u308B\u5F37\u9023\u7D50\u6210\u5206\u306E\u30C8\u30DD\u30ED\u30B8\u30AB\u30EB\
@@ -155,8 +157,8 @@ data:
   path: GraphTheory/StronglyConnectedComponents.hpp
   requiredBy:
   - Mathematics/TwoSat.hpp
-  timestamp: '2020-09-10 10:57:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - Test/StronglyConnectedComponents.test.cpp
   - Test/TwoSat.test.cpp

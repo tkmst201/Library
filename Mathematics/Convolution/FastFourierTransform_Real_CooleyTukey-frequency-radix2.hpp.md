@@ -14,13 +14,12 @@ data:
     - http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,
     - https://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79,
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp\"\
-    \n\n\n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\
-    \n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\r\n#\
-    \ \u89E3\u8AAC\r\n## \u5B9F\u6570\u5024\u95A2\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\nN \u3092 2 \u51AA\u3068\u3057\u3066\r\n f[0], f[1], \\ldots, f[N - 1], g[0],\
-    \ g[1], \\ldots, g[N - 1] \u304C\u65E2\u77E5\u3067 \"\u5B9F\u6570\"\r\n\r\n\\\
-    omega_N := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\
+    \u8FBC\u307F\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\
+    \n\r\n# \u89E3\u8AAC\r\n## \u5B9F\u6570\u5024\u95A2\u6570\u306E\u7573\u307F\u8FBC\
+    \u307F\r\nN \u3092 2 \u51AA\u3068\u3057\u3066\r\n f[0], f[1], \\ldots, f[N - 1],\
+    \ g[0], g[1], \\ldots, g[N - 1] \u304C\u65E2\u77E5\u3067 \"\u5B9F\u6570\"\r\n\r\
+    \n\\omega_N := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N\
     \ - 1} f[k] z^k\r\nF[\\omega_N^{-j}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-kj}\r\
     \n\r\nconj(z) \u306F z \u306E\u8907\u7D20\u5171\u5F79\u3092\u8868\u3059\u3002\r\
     \n\r\nf[j] \u306F\u5B9F\u6570\u306A\u306E\u3067 conj(f[j]) = f[j] \u3088\u308A\
@@ -60,16 +59,17 @@ data:
     \ std::vector<T> &B) :\r\n\t\u03B8(n log n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\
     \u306E\u4E57\u7B97\u3092\u884C\u3046\u3002\r\n\r\n# \u53C2\u8003\r\nhttps://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79,\
     \ 2020/05/01\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
-    \ 2020/08/01\r\n*/\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing\
-    \ value_type = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type\
-    \ = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty()\
-    \ || B.empty()) return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\
-    \tsize_type n = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst size_type\
-    \ m = n >> 1;\r\n\t\tconst std::vector<complex_type> zeta = _zeta(ni);\r\n\t\t\
-    \r\n\t\tstd::vector<complex_type> a;\r\n\t\ta.resize(n);\r\n\t\tfor (size_type\
-    \ i = 0; i < A.size(); ++i) a[i].real(A[i]);\r\n\t\tfor (size_type i = 0; i <\
-    \ B.size(); ++i) a[i].imag(B[i]);\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<complex_type>\
+    \ 2020/08/01\r\n*/\r\n\r\n#include <vector>\r\n#include <complex>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type\
+    \ = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
+    \n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type> multiply(const\
+    \ std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty() || B.empty())\
+    \ return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\tsize_type n\
+    \ = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst size_type m =\
+    \ n >> 1;\r\n\t\tconst std::vector<complex_type> zeta = _zeta(ni);\r\n\t\t\r\n\
+    \t\tstd::vector<complex_type> a;\r\n\t\ta.resize(n);\r\n\t\tfor (size_type i =\
+    \ 0; i < A.size(); ++i) a[i].real(A[i]);\r\n\t\tfor (size_type i = 0; i < B.size();\
+    \ ++i) a[i].imag(B[i]);\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<complex_type>\
     \ c;\r\n\t\tc.reserve(m + 1);\r\n\t\tc.emplace_back(a[0].real() * a[0].imag(),\
     \ 0);\r\n\t\tfor (size_type i = 1; i != m; ++i) {\r\n\t\t\tconst complex_type\
     \ a_conj = std::conj(a[n - i]);\r\n\t\t\tconst complex_type prod = (a[i] + a_conj)\
@@ -107,13 +107,12 @@ data:
     };\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP\r\
     \n#define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP\r\
-    \n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\n\
-    /*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\r\n#\
-    \ \u89E3\u8AAC\r\n## \u5B9F\u6570\u5024\u95A2\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\nN \u3092 2 \u51AA\u3068\u3057\u3066\r\n f[0], f[1], \\ldots, f[N - 1], g[0],\
-    \ g[1], \\ldots, g[N - 1] \u304C\u65E2\u77E5\u3067 \"\u5B9F\u6570\"\r\n\r\n\\\
-    omega_N := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N\
+    \n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\
+    \u307F\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\
+    \r\n# \u89E3\u8AAC\r\n## \u5B9F\u6570\u5024\u95A2\u6570\u306E\u7573\u307F\u8FBC\
+    \u307F\r\nN \u3092 2 \u51AA\u3068\u3057\u3066\r\n f[0], f[1], \\ldots, f[N - 1],\
+    \ g[0], g[1], \\ldots, g[N - 1] \u304C\u65E2\u77E5\u3067 \"\u5B9F\u6570\"\r\n\r\
+    \n\\omega_N := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N\
     \ - 1} f[k] z^k\r\nF[\\omega_N^{-j}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-kj}\r\
     \n\r\nconj(z) \u306F z \u306E\u8907\u7D20\u5171\u5F79\u3092\u8868\u3059\u3002\r\
     \n\r\nf[j] \u306F\u5B9F\u6570\u306A\u306E\u3067 conj(f[j]) = f[j] \u3088\u308A\
@@ -153,16 +152,17 @@ data:
     \ std::vector<T> &B) :\r\n\t\u03B8(n log n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\
     \u306E\u4E57\u7B97\u3092\u884C\u3046\u3002\r\n\r\n# \u53C2\u8003\r\nhttps://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79,\
     \ 2020/05/01\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
-    \ 2020/08/01\r\n*/\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing\
-    \ value_type = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type\
-    \ = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty()\
-    \ || B.empty()) return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\
-    \tsize_type n = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst size_type\
-    \ m = n >> 1;\r\n\t\tconst std::vector<complex_type> zeta = _zeta(ni);\r\n\t\t\
-    \r\n\t\tstd::vector<complex_type> a;\r\n\t\ta.resize(n);\r\n\t\tfor (size_type\
-    \ i = 0; i < A.size(); ++i) a[i].real(A[i]);\r\n\t\tfor (size_type i = 0; i <\
-    \ B.size(); ++i) a[i].imag(B[i]);\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<complex_type>\
+    \ 2020/08/01\r\n*/\r\n\r\n#include <vector>\r\n#include <complex>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type\
+    \ = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
+    \n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type> multiply(const\
+    \ std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty() || B.empty())\
+    \ return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\tsize_type n\
+    \ = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst size_type m =\
+    \ n >> 1;\r\n\t\tconst std::vector<complex_type> zeta = _zeta(ni);\r\n\t\t\r\n\
+    \t\tstd::vector<complex_type> a;\r\n\t\ta.resize(n);\r\n\t\tfor (size_type i =\
+    \ 0; i < A.size(); ++i) a[i].real(A[i]);\r\n\t\tfor (size_type i = 0; i < B.size();\
+    \ ++i) a[i].imag(B[i]);\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<complex_type>\
     \ c;\r\n\t\tc.reserve(m + 1);\r\n\t\tc.emplace_back(a[0].real() * a[0].imag(),\
     \ 0);\r\n\t\tfor (size_type i = 1; i != m; ++i) {\r\n\t\t\tconst complex_type\
     \ a_conj = std::conj(a[n - i]);\r\n\t\t\tconst complex_type prod = (a[i] + a_conj)\
@@ -202,7 +202,7 @@ data:
   isVerificationFile: false
   path: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp

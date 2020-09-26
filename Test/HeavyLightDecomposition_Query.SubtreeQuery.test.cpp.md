@@ -19,7 +19,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
     links:
     - https://judge.yosupo.jp/problem/vertex_add_subtree_sum
-  bundledCode: "#line 1 \"Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp\"\
+  bundledCode: "#line 1 \"Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\r\
     \n\r\n#line 1 \"DataStructure/SegmentTree.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/09/18\r\
     \n\r\nmax_right: verified(https://atcoder.jp/contests/practice2/submissions/16664880)\r\
@@ -389,8 +389,8 @@ data:
     \ {\r\n\t\treturn seg.fold(hld.in(v), hld.out(v));\r\n\t}\r\n\t\r\nprivate:\r\n\
     \tsize_type reverse_idx(size_type v) const {\r\n\t\tconst size_type id = hld.heavy_map(v);\r\
     \n\t\treturn (hld.in(hld.head(id)) << 1) + hld.heavy_size(id) - hld.in(v) - 1;\r\
-    \n\t}\r\n};\r\n\r\n\n#line 6 \"Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp\"\
-    \n\r\n#include <cstdio>\r\n#line 9 \"Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp\"\
+    \n\t}\r\n};\r\n\r\n\n#line 6 \"Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp\"\
+    \n\r\n#include <cstdio>\r\n#line 9 \"Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp\"\
     \n\r\nint main() {\r\n\tint N, Q;\r\n\tscanf(\"%d %d\", &N, &Q);\r\n\t\r\n\tstd::vector<int>\
     \ A(N);\r\n\tfor (int i = 0; i < N; ++i) scanf(\"%d\", &A[i]);\r\n\t\r\n\tHeavyLightDecomposition::Graph\
     \ g(N);\r\n\tfor (int i = 1; i < N; ++i) {\r\n\t\tint p;\r\n\t\tscanf(\"%d\",\
@@ -420,15 +420,15 @@ data:
   - GraphTheory/HeavyLightDecomposition.hpp
   - GraphTheory/HeavyLightDecomposition_Query.hpp
   isVerificationFile: true
-  path: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+  path: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   requiredBy: []
-  timestamp: '2020-09-18 18:14:57+09:00'
+  timestamp: '2020-09-21 15:28:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+documentation_of: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
 layout: document
 redirect_from:
-- /verify/Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
-- /verify/Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp.html
-title: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+- /verify/Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
+- /verify/Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp.html
+title: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
 ---

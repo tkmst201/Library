@@ -7,8 +7,8 @@ data:
     path: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
     title: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - icon: ':heavy_check_mark:'
-    path: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
-    title: Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+    path: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
+    title: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -258,7 +258,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
-  - Test/HeavyLightDecomposition_Query.Subtree_Query.test.cpp
+  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
 documentation_of: GraphTheory/HeavyLightDecomposition_Query.hpp
 layout: document
 redirect_from:

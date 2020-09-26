@@ -13,28 +13,28 @@ data:
     links:
     - http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
-    \n\n\n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\
-    \n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\
-    \u5F15\u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\u3057\
-    \u3066 f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N := 1\
-    \ \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1} f[k]\
-    \ z^k\r\nF[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\n\u3067\
-    \ i \u306E\u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i < N/2 \u3068\
-    \u3057\u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1} (f[k] + f[k\
-    \ + N/2]) \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k = 0}^{N/2\
-    \ - 1} (f[k] - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\u679C\
-    \u306F\u30D3\u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\u3063\
-    \u3066\u3044\u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\u3002\
-    \r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\
+    \u9593\u5F15\u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\
+    \u3057\u3066 f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N\
+    \ := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1}\
+    \ f[k] z^k\r\nF[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\
+    \n\u3067 i \u306E\u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i <\
+    \ N/2 \u3068\u3057\u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1}\
+    \ (f[k] + f[k + N/2]) \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k\
+    \ = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\
+    \u679C\u306F\u30D3\u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\
+    \u3063\u3066\u3044\u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\
+    \u3002\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
     \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
     \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
     \u3002\r\n\r\n# \u53C2\u8003\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
-    \ 2020/05/02\r\n*/\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing\
-    \ value_type = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type\
-    \ = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty()\
-    \ || B.empty()) return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\
-    \tsize_type n = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst std::vector<complex_type>\
+    \ 2020/05/02\r\n*/\r\n\r\n#include <vector>\r\n#include <complex>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type\
+    \ = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
+    \n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type> multiply(const\
+    \ std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty() || B.empty())\
+    \ return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\tsize_type n\
+    \ = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst std::vector<complex_type>\
     \ zeta = _zeta(ni);\r\n\t\t\r\n\t\tstd::vector<complex_type> a, b;\r\n\t\ta.reserve(n),\
     \ b.reserve(n);\r\n\t\tfor (size_type i = 0; i < A.size(); ++i) a.emplace_back(A[i],\
     \ 0);\r\n\t\tfor (size_type i = 0; i < B.size(); ++i) b.emplace_back(B[i], 0);\r\
@@ -68,24 +68,24 @@ data:
     };\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP\r\
     \n#define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP\r\
-    \n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\n\
-    /*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\u5F15\
-    \u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\u3057\u3066\
-    \ f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N := 1 \u306E\
-    \u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1} f[k] z^k\r\n\
-    F[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\n\u3067 i \u306E\
-    \u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i < N/2 \u3068\u3057\
-    \u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1} (f[k] + f[k + N/2])\
-    \ \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k = 0}^{N/2 - 1} (f[k]\
-    \ - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\u679C\u306F\u30D3\
-    \u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\u3063\u3066\u3044\
-    \u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\u3002\r\n\r\n# \u4ED5\
-    \u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type> multiply(const\
-    \ std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log n)\r\n\t2 \u3064\
-    \u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\u3002\r\n\r\n# \u53C2\
-    \u8003\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/05/02\r\
-    \n*/\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type = double;\r\
-    \n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
+    \n\r\n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\
+    \u5F15\u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\u3057\
+    \u3066 f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N := 1\
+    \ \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1} f[k]\
+    \ z^k\r\nF[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\n\u3067\
+    \ i \u306E\u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i < N/2 \u3068\
+    \u3057\u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1} (f[k] + f[k\
+    \ + N/2]) \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k = 0}^{N/2\
+    \ - 1} (f[k] - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\u679C\
+    \u306F\u30D3\u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\u3063\
+    \u3066\u3044\u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\u3002\
+    \r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
+    \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
+    \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
+    \u3002\r\n\r\n# \u53C2\u8003\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
+    \ 2020/05/02\r\n*/\r\n\r\n#include <vector>\r\n#include <complex>\r\n#include\
+    \ <algorithm>\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type\
+    \ = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
     \n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type> multiply(const\
     \ std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty() || B.empty())\
     \ return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\tsize_type n\
@@ -125,7 +125,7 @@ data:
   isVerificationFile: false
   path: Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp

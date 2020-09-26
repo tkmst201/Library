@@ -18,40 +18,40 @@ data:
     - https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
   bundledCode: "#line 1 \"Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
-    \r\n\r\n#line 1 \"GraphTheory/CentroidDecomposition.hpp\"\n\n\n\r\n#include <vector>\r\
-    \n#include <cassert>\r\n\r\n/*\r\nlast-updated: 2020/09/03\r\n\r\n\u30B3\u30F3\
-    \u30B9\u30C8\u30E9\u30AF\u30BF\u3067\u6E21\u3057\u305F g \u306F\u5909\u66F4\u3057\
-    \u3066\u306F\u3044\u3051\u306A\u3044\r\nused \u30D5\u30E9\u30B0\u306E\u5909\u66F4\
-    \u306F set \u3092\u901A\u3057\u3066\u884C\u3046\r\n\r\n# \u4ED5\u69D8\r\n\r\n\
-    CentroidDecomposition(const Graph & g) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF:\
-    \ \u0398(n)\r\n\t\u91CD\u5FC3\u5206\u89E3\u3092\u884C\u3046\u30B0\u30E9\u30D5\
-    \ g \u3067\u521D\u671F\u5316\u3059\u308B\r\n\r\nbool operator [](size_type v)\
-    \ const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\tused \u30D5\u30E9\
-    \u30B0\u306E\u5024\u3092\u8FD4\u3059\r\n\r\nbool operator at(size_type v) const\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\tused \u30D5\u30E9\u30B0\
-    \u306E\u5024\u3092\u8FD4\u3059\r\n\tassert \u30C1\u30A7\u30C3\u30AF\u3042\u308A\
-    \r\n\r\nstd::vector<size_type> get_centroid(size_type root) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(k)\r\n\tused \u30D5\u30E9\u30B0\u304C\u7ACB\u3063\u3066\
-    \u3044\u308B\u9802\u70B9\u3092\u53D6\u308A\u9664\u3044\u305F\u68EE\u4E0A\u3067\
-    \u9802\u70B9 root \u304C\u5C5E\u3059\u308B\u6728(\u9802\u70B9\u6570\u3092 k \u3068\
-    \u3059\u308B) \u306E\u91CD\u5FC3\u3092\u6C42\u3081\u308B\r\n\r\nvoid set(size_type\
-    \ v) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 v \u306E\
-    \ used \u30D5\u30E9\u30B0\u3092 true \u306B\u5909\u66F4\u3059\u308B\r\n\r\nvoid\
-    \ clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\tused \u30D5\u30E9\
-    \u30B0\u3092\u30EA\u30BB\u30C3\u30C8\u3059\u308B\r\n\r\n# \u4F7F\u7528\u4F8B\r\
-    \nsize_type get_centroid_decomposition_tree(const Graph & g, Graph & cdg) :\r\n\
-    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u91CD\u5FC3\u5206\u89E3\
-    \u3092\u518D\u5E30\u7684\u306B\u884C\u3044\u3001\u5404\u90E8\u5206\u6728\u306E\
-    \u91CD\u5FC3\u306B\u8FBA\u3092\u5F35\u3063\u305F\u30B0\u30E9\u30D5\u3092 cdg \u306B\
-    \u683C\u7D0D\u3059\u308B\r\n\t\u6839\u306E index(g \u306E\u91CD\u5FC3\u306E 1\
-    \ \u3064) \u3092\u8FD4\u3059\r\n\t\r\n\tverified(2020/09/02) : https://codeforces.com/contest/321/submission/91621846\r\
-    \n\r\nlong long get_tree_diameter(\r\n\t\tconst std::vector<std::vector<std::pair<size_type,\
-    \ int>>> & wg,\r\n\t\tstd::vector<size_type> & path\r\n\t)\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(n log n)\r\n\t\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u4E0A\
-    \u3067\u6700\u9060\u9802\u70B9\u5BFE\u3092\u6C42\u3081\u308B\r\n\t\u6700\u9060\
-    \u9802\u70B9\u5BFE (u, v) \u306E\u9577\u3055\u3092\u8FD4\u3057\u3001\u305D\u306E\
-    \u30D1\u30B9\u3092 path \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u5B9A\u6570\u500D\
-    \u304C\u3059\u3054\u304F\u91CD\u3044(\r\n\t\t\u63D0\u51FA: https://judge.yosupo.jp/submission/20914\r\
+    \r\n\r\n#line 1 \"GraphTheory/CentroidDecomposition.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
+    \ 2020/09/03\r\n\r\n\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3067\u6E21\u3057\
+    \u305F g \u306F\u5909\u66F4\u3057\u3066\u306F\u3044\u3051\u306A\u3044\r\nused\
+    \ \u30D5\u30E9\u30B0\u306E\u5909\u66F4\u306F set \u3092\u901A\u3057\u3066\u884C\
+    \u3046\r\n\r\n# \u4ED5\u69D8\r\n\r\nCentroidDecomposition(const Graph & g) :\r\
+    \n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u91CD\u5FC3\u5206\u89E3\u3092\
+    \u884C\u3046\u30B0\u30E9\u30D5 g \u3067\u521D\u671F\u5316\u3059\u308B\r\n\r\n\
+    bool operator [](size_type v) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (1)\r\n\tused \u30D5\u30E9\u30B0\u306E\u5024\u3092\u8FD4\u3059\r\n\r\nbool operator\
+    \ at(size_type v) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\
+    used \u30D5\u30E9\u30B0\u306E\u5024\u3092\u8FD4\u3059\r\n\tassert \u30C1\u30A7\
+    \u30C3\u30AF\u3042\u308A\r\n\r\nstd::vector<size_type> get_centroid(size_type\
+    \ root) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(k)\r\n\tused \u30D5\u30E9\
+    \u30B0\u304C\u7ACB\u3063\u3066\u3044\u308B\u9802\u70B9\u3092\u53D6\u308A\u9664\
+    \u3044\u305F\u68EE\u4E0A\u3067\u9802\u70B9 root \u304C\u5C5E\u3059\u308B\u6728\
+    (\u9802\u70B9\u6570\u3092 k \u3068\u3059\u308B) \u306E\u91CD\u5FC3\u3092\u6C42\
+    \u3081\u308B\r\n\r\nvoid set(size_type v) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(1)\r\n\t\u9802\u70B9 v \u306E used \u30D5\u30E9\u30B0\u3092 true \u306B\
+    \u5909\u66F4\u3059\u308B\r\n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(n)\r\n\tused \u30D5\u30E9\u30B0\u3092\u30EA\u30BB\u30C3\u30C8\u3059\u308B\
+    \r\n\r\n# \u4F7F\u7528\u4F8B\r\nsize_type get_centroid_decomposition_tree(const\
+    \ Graph & g, Graph & cdg) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log\
+    \ n)\r\n\t\u91CD\u5FC3\u5206\u89E3\u3092\u518D\u5E30\u7684\u306B\u884C\u3044\u3001\
+    \u5404\u90E8\u5206\u6728\u306E\u91CD\u5FC3\u306B\u8FBA\u3092\u5F35\u3063\u305F\
+    \u30B0\u30E9\u30D5\u3092 cdg \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u6839\u306E\
+    \ index(g \u306E\u91CD\u5FC3\u306E 1 \u3064) \u3092\u8FD4\u3059\r\n\t\r\n\tverified(2020/09/02)\
+    \ : https://codeforces.com/contest/321/submission/91621846\r\n\r\nlong long get_tree_diameter(\r\
+    \n\t\tconst std::vector<std::vector<std::pair<size_type, int>>> & wg,\r\n\t\t\
+    std::vector<size_type> & path\r\n\t)\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (n log n)\r\n\t\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u4E0A\u3067\u6700\u9060\
+    \u9802\u70B9\u5BFE\u3092\u6C42\u3081\u308B\r\n\t\u6700\u9060\u9802\u70B9\u5BFE\
+    \ (u, v) \u306E\u9577\u3055\u3092\u8FD4\u3057\u3001\u305D\u306E\u30D1\u30B9\u3092\
+    \ path \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u5B9A\u6570\u500D\u304C\u3059\u3054\
+    \u304F\u91CD\u3044(\r\n\t\t\u63D0\u51FA: https://judge.yosupo.jp/submission/20914\r\
     \n\t\t\u624B\u5143\u3067\u306F line \u30B0\u30E9\u30D5\u306E\u51E6\u7406\u304C\
     \ max_random \u306B\u6BD4\u3079\u3066 4 \u500D\u7A0B\u5EA6\u9045\u3044\u304C library-checker\
     \ \u4E0A\u3067\u306F\u306F\u3084\u304B\u3063\u305F(\u306A\u305C?)\r\n\t)\u3002\
@@ -87,10 +87,10 @@ data:
     \u307F\u8FBC\u307F\r\n\t\t\u5168 O(log n) \u5C64\u306A\u306E\u3067\u5168\u4F53\
     \u3067 O(n log^2 n)\r\n\r\n# \u53C2\u8003\r\nhttps://ferin-tech.hatenablog.com/entry/2020/03/06/162311,\
     \ 2020/09/02\r\nhttps://qiita.com/drken/items/4b4c3f1824339b090202, 2020/09/02\r\
-    \n*/\r\n\r\nclass CentroidDecomposition {\r\npublic:\r\n\tusing size_type = std::size_t;\r\
-    \n\tusing Graph = std::vector<std::vector<size_type>>;\r\n\t\r\nprivate:\r\n\t\
-    const Graph & g;\r\n\tstd::vector<bool> used;\r\n\tstd::vector<size_type> sz;\r\
-    \n\t\r\npublic:\r\n\tCentroidDecomposition() = delete;\r\n\tCentroidDecomposition(const\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n\r\nclass CentroidDecomposition\
+    \ {\r\npublic:\r\n\tusing size_type = std::size_t;\r\n\tusing Graph = std::vector<std::vector<size_type>>;\r\
+    \n\t\r\nprivate:\r\n\tconst Graph & g;\r\n\tstd::vector<bool> used;\r\n\tstd::vector<size_type>\
+    \ sz;\r\n\t\r\npublic:\r\n\tCentroidDecomposition() = delete;\r\n\tCentroidDecomposition(const\
     \ Graph & g) : g(g) {\r\n\t\tused.resize(size(), false);\r\n\t\tsz.resize(size());\r\
     \n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn g.size();\r\n\
     \t}\r\n\t\r\n\tbool operator [](size_type v) const {\r\n\t\treturn used[v];\r\n\
@@ -182,29 +182,29 @@ data:
     \n\tfor (size_type i = 1; i < res.size(); ++i) res[i] >>= 1;\r\n\tif (res.size()\
     \ < n) res.resize(n);\r\n\tres[0] = n;\r\n\treturn res;\r\n}\r\n\r\n\n#line 1\
     \ \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
-    \n\n\n\r\n#line 5 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
-    \n#include <complex>\r\n#line 7 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
-    \n\r\n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\u9593\
-    \u5F15\u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\u3057\
-    \u3066 f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N := 1\
-    \ \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1} f[k]\
-    \ z^k\r\nF[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\n\u3067\
-    \ i \u306E\u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i < N/2 \u3068\
-    \u3057\u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1} (f[k] + f[k\
-    \ + N/2]) \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k = 0}^{N/2\
-    \ - 1} (f[k] - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\u679C\
-    \u306F\u30D3\u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\u3063\
-    \u3066\u3044\u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\u3002\
-    \r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 \u5468\u6CE2\u6570\
+    \u9593\u5F15\u304D Cooley-Tukey\r\n\r\n# \u89E3\u8AAC\r\nN \u3092 2 \u51AA\u3068\
+    \u3057\u3066 f[0], f[1], \\ldots, f[N - 1] \u304C\u65E2\u77E5\r\n\r\n\\omega_N\
+    \ := 1 \u306E\u539F\u59CB N \u4E57\u6839\r\n\r\nF[z] := \\Sum_{k = 0}^{N - 1}\
+    \ f[k] z^k\r\nF[\\omega_N^{-i}] = \\Sum_{k = 0}^{N - 1} f[k] \\omega_N^{-ki}\r\
+    \n\u3067 i \u306E\u5076\u5947\u3067\u5206\u3051\u308B\u3002\r\n\r\n0 \\leq i <\
+    \ N/2 \u3068\u3057\u3066\r\nF[\\omega_N^{-2i}]       = \\Sum_{k = 0}^{N/2 - 1}\
+    \ (f[k] + f[k + N/2]) \\omega_{N/2}^{-ki}\r\nF[\\omega_N^{-(2i + 1)}] = \\Sum_{k\
+    \ = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \\omega_{N/2}^{-ki}\r\n\r\n\u8A08\u7B97\u7D50\
+    \u679C\u306F\u30D3\u30C3\u30C8\u53CD\u8EE2\u3057\u305F\u4F4D\u7F6E\u306B\u306A\
+    \u3063\u3066\u3044\u308B\u306E\u3067\u6700\u5F8C\u306B\u4FEE\u6B63\u3059\u308B\
+    \u3002\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
     \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
     \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
     \u3002\r\n\r\n# \u53C2\u8003\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
-    \ 2020/05/02\r\n*/\r\n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing\
-    \ value_type = double;\r\n\tusing size_type = std::size_t;\r\n\tusing complex_type\
-    \ = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty()\
-    \ || B.empty()) return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\
-    \tsize_type n = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst std::vector<complex_type>\
+    \ 2020/05/02\r\n*/\r\n\r\n#line 35 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
+    \n#include <complex>\r\n#line 37 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\
+    \n\r\nstruct FastFourierTransform {\r\npublic:\r\n\tusing value_type = double;\r\
+    \n\tusing size_type = std::size_t;\r\n\tusing complex_type = std::complex<value_type>;\r\
+    \n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type> multiply(const\
+    \ std::vector<T> &A, const std::vector<T> &B) {\r\n\t\tif (A.empty() || B.empty())\
+    \ return {};\r\n\t\tsize_type n_ = A.size() + B.size() - 1;\r\n\t\tsize_type n\
+    \ = 1, ni = 0;\r\n\t\twhile (n < n_) n <<= 1, ++ni;\r\n\t\tconst std::vector<complex_type>\
     \ zeta = _zeta(ni);\r\n\t\t\r\n\t\tstd::vector<complex_type> a, b;\r\n\t\ta.reserve(n),\
     \ b.reserve(n);\r\n\t\tfor (size_type i = 0; i < A.size(); ++i) a.emplace_back(A[i],\
     \ 0);\r\n\t\tfor (size_type i = 0; i < B.size(); ++i) b.emplace_back(B[i], 0);\r\
@@ -259,7 +259,7 @@ data:
   isVerificationFile: true
   path: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 15:23:36+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp

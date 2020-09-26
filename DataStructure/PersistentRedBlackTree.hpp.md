@@ -3,23 +3,22 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/PersistentRedBlackTree.test.cpp
     title: Test/PersistentRedBlackTree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://algoogle.hadrori.jp/algorithm/rbtree_merge.html,
     - http://blog.mitaki28.info/1447078746296/,
     - https://www.ioi-jp.org/camp/2012/2012-sp-tasks/2012-sp-day4-copypaste-slides.pdf,
-  bundledCode: "#line 1 \"DataStructure/PersistentRedBlackTree.hpp\"\n\n\n\r\n#include\
-    \ <cassert>\r\n#include <memory>\r\n#include <utility>\r\n#include <vector>\r\n\
-    \r\n/*\r\nlast-updated: 2020/09/01\r\n\r\nmerge/split \u30D9\u30FC\u30B9\u306E\
-    \u5B8C\u5168\u6C38\u7D9A\u8D64\u9ED2\u6728\r\n\r\nTODO: \u30E1\u30E2\u30EA\u30D7\
-    \u30FC\u30EB\u3092\u4F7F\u7528\u3057\u3066\u9AD8\u901F\u5316(\u3067\u304D\u308B\
-    \u304B\u306F\u308F\u304B\u3089\u306A\u3044)\r\n\r\n# \u4ED5\u69D8\r\nPersistentRedBlackTree()\
+  bundledCode: "#line 1 \"DataStructure/PersistentRedBlackTree.hpp\"\n\n\n\r\n/*\r\
+    \nlast-updated: 2020/09/01\r\n\r\nmerge/split \u30D9\u30FC\u30B9\u306E\u5B8C\u5168\
+    \u6C38\u7D9A\u8D64\u9ED2\u6728\r\n\r\nTODO: \u30E1\u30E2\u30EA\u30D7\u30FC\u30EB\
+    \u3092\u4F7F\u7528\u3057\u3066\u9AD8\u901F\u5316(\u3067\u304D\u308B\u304B\u306F\
+    \u308F\u304B\u3089\u306A\u3044)\r\n\r\n# \u4ED5\u69D8\r\nPersistentRedBlackTree()\
     \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\n\t\u7A7A\u306E\u6728\u3092\u4F5C\
     \u6210\r\n\r\nPersistentRedBlackTree(const std::vector<value_type> & v) :\r\n\t\
     \u6642\u9593\u8A08\u7B97\u91CF: O(n)\r\n\t\u914D\u5217 v \u3067\u521D\u671F\u5316\
@@ -56,7 +55,8 @@ data:
     \ k) :\r\nstatic const_reference get(const PersistentRedBlackTree & a, size_type\
     \ k) :\r\n\r\n# \u53C2\u8003\r\nhttps://www.ioi-jp.org/camp/2012/2012-sp-tasks/2012-sp-day4-copypaste-slides.pdf,\
     \ 2020/08/30\r\nhttp://blog.mitaki28.info/1447078746296/, 2020/08/30\r\nhttp://algoogle.hadrori.jp/algorithm/rbtree_merge.html,\
-    \ 2020/08/30\r\n*/\r\n\r\ntemplate<typename T>\r\nstruct PersistentRedBlackTree\
+    \ 2020/08/30\r\n*/\r\n\r\n#include <cassert>\r\n#include <memory>\r\n#include\
+    \ <utility>\r\n#include <vector>\r\n\r\ntemplate<typename T>\r\nstruct PersistentRedBlackTree\
     \ {\r\npublic:\r\n\tstatic constexpr bool red = true;\r\n\tstatic constexpr bool\
     \ black = false;\r\n\tusing value_type = T;\r\n\tusing const_reference = const\
     \ value_type &;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tstruct Node;\r\n\
@@ -138,20 +138,19 @@ data:
     \ -= a->left->size;\r\n\t\t\t\ta = a->right;\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn\
     \ a->val;\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_PERSISTENT_RED_BLACK_TREE_HPP\r\n#define INCLUDE_GUARD_PERSISTENT_RED_BLACK_TREE_HPP\r\
-    \n\r\n#include <cassert>\r\n#include <memory>\r\n#include <utility>\r\n#include\
-    \ <vector>\r\n\r\n/*\r\nlast-updated: 2020/09/01\r\n\r\nmerge/split \u30D9\u30FC\
-    \u30B9\u306E\u5B8C\u5168\u6C38\u7D9A\u8D64\u9ED2\u6728\r\n\r\nTODO: \u30E1\u30E2\
-    \u30EA\u30D7\u30FC\u30EB\u3092\u4F7F\u7528\u3057\u3066\u9AD8\u901F\u5316(\u3067\
-    \u304D\u308B\u304B\u306F\u308F\u304B\u3089\u306A\u3044)\r\n\r\n# \u4ED5\u69D8\r\
-    \nPersistentRedBlackTree() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\n\t\u7A7A\
-    \u306E\u6728\u3092\u4F5C\u6210\r\n\r\nPersistentRedBlackTree(const std::vector<value_type>\
-    \ & v) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(n)\r\n\t\u914D\u5217 v \u3067\u521D\
-    \u671F\u5316\r\n\r\nPersistentRedBlackTree(size_type n, const_reference x) :\r\
-    \n\t\u6642\u9593\u8A08\u7B97\u91CF: O(n)\r\n\tn \u500B\u306E\u5024 x \u3067\u521D\
-    \u671F\u5316\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: O(1)\r\n\t\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nbool empty() const\
-    \ noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\n\t\u6728\u304C\u7A7A\
-    \u3067\u3042\u308B\u304B\u3069\u3046\u304B\u5224\u5B9A\u3059\u308B\r\n\r\nPersistentRedBlackTree\
+    \n\r\n/*\r\nlast-updated: 2020/09/01\r\n\r\nmerge/split \u30D9\u30FC\u30B9\u306E\
+    \u5B8C\u5168\u6C38\u7D9A\u8D64\u9ED2\u6728\r\n\r\nTODO: \u30E1\u30E2\u30EA\u30D7\
+    \u30FC\u30EB\u3092\u4F7F\u7528\u3057\u3066\u9AD8\u901F\u5316(\u3067\u304D\u308B\
+    \u304B\u306F\u308F\u304B\u3089\u306A\u3044)\r\n\r\n# \u4ED5\u69D8\r\nPersistentRedBlackTree()\
+    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\n\t\u7A7A\u306E\u6728\u3092\u4F5C\
+    \u6210\r\n\r\nPersistentRedBlackTree(const std::vector<value_type> & v) :\r\n\t\
+    \u6642\u9593\u8A08\u7B97\u91CF: O(n)\r\n\t\u914D\u5217 v \u3067\u521D\u671F\u5316\
+    \r\n\r\nPersistentRedBlackTree(size_type n, const_reference x) :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: O(n)\r\n\tn \u500B\u306E\u5024 x \u3067\u521D\u671F\u5316\r\
+    \n\r\nsize_type size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\
+    \n\t\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nbool empty() const noexcept :\r\
+    \n\t\u6642\u9593\u8A08\u7B97\u91CF: O(1)\r\n\t\u6728\u304C\u7A7A\u3067\u3042\u308B\
+    \u304B\u3069\u3046\u304B\u5224\u5B9A\u3059\u308B\r\n\r\nPersistentRedBlackTree\
     \ merge(const PersistentRedBlackTree & a) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
     : O(|root.rank - a.rank|)\r\n\t\u8D64\u9ED2\u6728 a \u3092 merge \u3057\u305F\u8D64\
     \u9ED2\u6728\u3092\u8FD4\u3059\r\n\r\nstd::pair<PersistentRedBlackTree, PersistentRedBlackTree>\
@@ -179,7 +178,8 @@ data:
     \ k) :\r\nstatic const_reference get(const PersistentRedBlackTree & a, size_type\
     \ k) :\r\n\r\n# \u53C2\u8003\r\nhttps://www.ioi-jp.org/camp/2012/2012-sp-tasks/2012-sp-day4-copypaste-slides.pdf,\
     \ 2020/08/30\r\nhttp://blog.mitaki28.info/1447078746296/, 2020/08/30\r\nhttp://algoogle.hadrori.jp/algorithm/rbtree_merge.html,\
-    \ 2020/08/30\r\n*/\r\n\r\ntemplate<typename T>\r\nstruct PersistentRedBlackTree\
+    \ 2020/08/30\r\n*/\r\n\r\n#include <cassert>\r\n#include <memory>\r\n#include\
+    \ <utility>\r\n#include <vector>\r\n\r\ntemplate<typename T>\r\nstruct PersistentRedBlackTree\
     \ {\r\npublic:\r\n\tstatic constexpr bool red = true;\r\n\tstatic constexpr bool\
     \ black = false;\r\n\tusing value_type = T;\r\n\tusing const_reference = const\
     \ value_type &;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tstruct Node;\r\n\
@@ -264,8 +264,8 @@ data:
   isVerificationFile: false
   path: DataStructure/PersistentRedBlackTree.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - Test/PersistentRedBlackTree.test.cpp
 documentation_of: DataStructure/PersistentRedBlackTree.hpp

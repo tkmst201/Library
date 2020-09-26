@@ -18,8 +18,7 @@ data:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G
   bundledCode: "#line 1 \"Test/BinaryIndexedTree_RangeAdd.test.cpp\"\n#define PROBLEM\
     \ \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G\"\r\n\r\n\
-    #line 1 \"DataStructure/BinaryIndexedTree.hpp\"\n\n\n\r\n#include <vector>\r\n\
-    #include <cassert>\r\n#include <functional>\r\n\r\n/*\r\nlast-updated: 2020/08/15\r\
+    #line 1 \"DataStructure/BinaryIndexedTree.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/08/15\r\
     \n\r\n# \u4ED5\u69D8\r\nSegmentTree(size_type n_, const F & f, const_reference\
     \ id_elem) :\r\n\t\u8981\u7D20\u6570 n_, \u4E8C\u9805\u6F14\u7B97 f, \u5358\u4F4D\
     \u5143 id_elem\r\n\r\n\r\nvoid add(size_type i, const_reference x) :\r\n\t\u6642\
@@ -31,11 +30,12 @@ data:
     \u6700\u5C0F\u306E r \u3092\u8FD4\u3059 (\u5B58\u5728\u3057\u306A\u3051\u308C\u3070\
     \ size())\r\n\t\u5404\u8981\u7D20\u306F\u975E\u8CA0\u3067\u3042\u308B\u5FC5\u8981\
     \u304C\u3042\u308B\r\n\r\n# \u53C2\u8003\r\nhttps://algo-logic.info/binary-indexed-tree/,\
-    \ 2020/08/15\r\n*/\r\n\r\ntemplate<typename T>\r\nstruct BinaryIndexedTree {\r\
-    \n\tusing value_type = T;\r\n\tusing const_reference = const value_type &;\r\n\
-    \tusing F = std::function<value_type(const_reference, const_reference)>;\r\n\t\
-    using size_type = std::size_t;\r\n\t\r\n\tBinaryIndexedTree(size_type n, const\
-    \ F & f, const_reference id_elem) : n(n), f(f), id_elem(id_elem) {\r\n\t\tnode.resize(n\
+    \ 2020/08/15\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
+    \ <functional>\r\n\r\ntemplate<typename T>\r\nstruct BinaryIndexedTree {\r\n\t\
+    using value_type = T;\r\n\tusing const_reference = const value_type &;\r\n\tusing\
+    \ F = std::function<value_type(const_reference, const_reference)>;\r\n\tusing\
+    \ size_type = std::size_t;\r\n\t\r\n\tBinaryIndexedTree(size_type n, const F &\
+    \ f, const_reference id_elem) : n(n), f(f), id_elem(id_elem) {\r\n\t\tnode.resize(n\
     \ + 1, id_elem);\r\n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn\
     \ n;\r\n\t}\r\n\t\r\n\tvoid add(size_type i, const_reference x) {\r\n\t\tassert(i\
     \ < size());\r\n\t\t++i;\r\n\t\tfor (; i <= size(); i += i & -i) node[i] = f(node[i],\
@@ -50,12 +50,11 @@ data:
     if (cur < x) {\r\n\t\t\t\t\tres += w;\r\n\t\t\t\t\ts = cur;\r\n\t\t\t\t}\r\n\t\
     \t\t}\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n\t\r\nprivate:\r\n\tsize_type n;\r\
     \n\tF f;\r\n\tvalue_type id_elem;\r\n\tstd::vector<value_type> node;\r\n};\r\n\
-    \r\n\n#line 1 \"DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n\n\n\r\n#line\
-    \ 7 \"DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n\r\n/*\r\nlast-updated:\
-    \ 2020/08/15\r\n\r\nBIT \u3092\u7528\u3044\u305F\u533A\u9593\u52A0\u7B97\u304C\
-    \u884C\u3048\u308B\u30C7\u30FC\u30BF\u69CB\u9020\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename\
-    \ T, template<typename> class U> :\r\n\tT: \u5404\u8981\u7D20\u306E\u30C7\u30FC\
-    \u30BF\u578B\r\n\tU: BinaryIndexedTree\r\n\tex. BinaryIndexedTree_RangeAdd<long\
+    \r\n\n#line 1 \"DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\n\n\n\r\n/*\r\n\
+    last-updated: 2020/08/15\r\n\r\nBIT \u3092\u7528\u3044\u305F\u533A\u9593\u52A0\
+    \u7B97\u304C\u884C\u3048\u308B\u30C7\u30FC\u30BF\u69CB\u9020\r\n\r\n# \u4ED5\u69D8\
+    \r\ntemplate<typename T, template<typename> class U> :\r\n\tT: \u5404\u8981\u7D20\
+    \u306E\u30C7\u30FC\u30BF\u578B\r\n\tU: BinaryIndexedTree\r\n\tex. BinaryIndexedTree_RangeAdd<long\
     \ long, BinaryIndexedTree> bit(...)\r\n\r\nsize_type size() const noexcept :\r\
     \n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u8981\u7D20\u6570\u3092\u53D6\
     \u5F97\r\n\r\nvoid add(size_type l, size_type r, const_reference x) :\r\n\t\u6642\
@@ -65,10 +64,11 @@ data:
     \u3092\u53D6\u5F97\r\n\r\nvalue_type sum(size_type l, size_type r) :\r\n\t\u6642\
     \u9593\u8A08\u7B97\u91CF: \u0398(log n)\r\n\t\u533A\u9593 [l, r) \u306E\u5408\u8A08\
     \u3092\u53D6\u5F97\r\n\r\n# \u53C2\u8003\r\nhttps://algo-logic.info/binary-indexed-tree/,\
-    \ 2020/08/15\r\n*/\r\n\r\ntemplate<typename T, template<typename> class U>\r\n\
-    struct BinaryIndexedTree_RangeAdd {\r\n\tusing bit_type = U<T>;\r\n\tusing value_type\
-    \ = typename bit_type::value_type;\r\n\tusing const_reference = typename bit_type::const_reference;\r\
-    \n\tusing size_type = typename bit_type::size_type;\r\n\t\r\n\tBinaryIndexedTree_RangeAdd(size_type\
+    \ 2020/08/15\r\n*/\r\n\r\n#line 38 \"DataStructure/BinaryIndexedTree_RangeAdd.hpp\"\
+    \n\r\ntemplate<typename T, template<typename> class U>\r\nstruct BinaryIndexedTree_RangeAdd\
+    \ {\r\n\tusing bit_type = U<T>;\r\n\tusing value_type = typename bit_type::value_type;\r\
+    \n\tusing const_reference = typename bit_type::const_reference;\r\n\tusing size_type\
+    \ = typename bit_type::size_type;\r\n\t\r\n\tBinaryIndexedTree_RangeAdd(size_type\
     \ n) : n(n) {\r\n\t\tbit.resize(2, bit_type(n, [](auto && x, auto && y) { return\
     \ x + y; }, 0));\r\n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn\
     \ n;\r\n\t}\r\n\t\r\n\t// [l, r) += x\r\n\tvoid add(size_type l, size_type r,\
@@ -102,7 +102,7 @@ data:
   isVerificationFile: true
   path: Test/BinaryIndexedTree_RangeAdd.test.cpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/BinaryIndexedTree_RangeAdd.test.cpp

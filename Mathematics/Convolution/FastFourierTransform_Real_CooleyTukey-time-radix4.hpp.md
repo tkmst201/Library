@@ -12,15 +12,15 @@ data:
     '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp\"\
-    \n\n\n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\
-    \n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\r\n\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F(\u306E\u306F\
-    \u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\
+    \u8FBC\u307F\r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\
+    \n\r\n\u30E9\u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F\
+    (\u306E\u306F\u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
     \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
     \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
     \u3002\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
-    \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\nstruct FastFourierTransform\
+    \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\n#include <vector>\r\
+    \n#include <complex>\r\n#include <algorithm>\r\n\r\nstruct FastFourierTransform\
     \ {\r\npublic:\r\n\tusing value_type = double;\r\n\tusing size_type = std::size_t;\r\
     \n\tusing complex_type = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename\
     \ T>\r\n\tstatic std::vector<value_type> multiply(const std::vector<T> &A, const\
@@ -75,15 +75,15 @@ data:
     \n\t\treturn zeta;\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP\r\
     \n#define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP\r\
-    \n\r\n#include <vector>\r\n#include <complex>\r\n#include <algorithm>\r\n\r\n\
-    /*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\
-    \r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\r\n\u30E9\
-    \u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F(\u306E\u306F\
-    \u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
+    \n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\
+    \u307F\r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\
+    \r\n\u30E9\u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F(\u306E\
+    \u306F\u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
     \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
     \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
     \u3002\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
-    \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\nstruct FastFourierTransform\
+    \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\n#include <vector>\r\
+    \n#include <complex>\r\n#include <algorithm>\r\n\r\nstruct FastFourierTransform\
     \ {\r\npublic:\r\n\tusing value_type = double;\r\n\tusing size_type = std::size_t;\r\
     \n\tusing complex_type = std::complex<value_type>;\r\n\t\r\n\ttemplate<typename\
     \ T>\r\n\tstatic std::vector<value_type> multiply(const std::vector<T> &A, const\
@@ -140,7 +140,7 @@ data:
   isVerificationFile: false
   path: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp

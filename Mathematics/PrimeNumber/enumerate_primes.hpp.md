@@ -5,34 +5,34 @@ data:
   - icon: ':warning:'
     path: Mathematics/PrimeNumber/prime_sum.hpp
     title: Mathematics/PrimeNumber/prime_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Mathematics/PrimeNumber/counting_primes.hpp
     title: Mathematics/PrimeNumber/counting_primes.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/PrimeNumber.enumerate_primes.test.cpp
     title: Test/PrimeNumber.enumerate_primes.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: Test/PrimeNumber.counting_primes.test.cpp
     title: Test/PrimeNumber.counting_primes.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,
     - https://qiita.com/peria/items/a4ff4ddb3336f7b81d50,
   bundledCode: "#line 1 \"Mathematics/PrimeNumber/enumerate_primes.hpp\"\n\n\n\r\n\
-    #include <vector>\r\n#include <cstdint>\r\n#include <algorithm>\r\n\r\n/*\r\n\
-    last-updated: 2020/09/08\r\n\r\n# \u4ED5\u69D8\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
-    \ n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n / loglog n)\r\n\u7A7A\u9593\u8A08\
-    \u7B97\u91CF: \u7D20\u6570\u306E\u500B\u6570 + \u0398(n^(1/2))\r\n\r\nn \u4EE5\
-    \u4E0B\u306E\u7D20\u6570\u3092\u6607\u9806\u306B\u4E26\u3079\u305F\u914D\u5217\
-    \u3092\u8FD4\u3059\r\n\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\u30B9\u306E\u7BE9\u306E\
-    \ {2, 3, 5} \u306E\u500D\u6570\u3092\u9664\u3044\u305F\u9AD8\u901F\u5316\u7248\
-    \r\n\r\n\r\n# \u53C2\u8003\r\nhttps://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,\
+    /*\r\nlast-updated: 2020/09/08\r\n\r\n# \u4ED5\u69D8\r\nstd::vector<std::uint32_t>\
+    \ enumerate_primes(std::uint32_t n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n /\
+    \ loglog n)\r\n\u7A7A\u9593\u8A08\u7B97\u91CF: \u7D20\u6570\u306E\u500B\u6570\
+    \ + \u0398(n^(1/2))\r\n\r\nn \u4EE5\u4E0B\u306E\u7D20\u6570\u3092\u6607\u9806\u306B\
+    \u4E26\u3079\u305F\u914D\u5217\u3092\u8FD4\u3059\r\n\u30A8\u30E9\u30C8\u30B9\u30C6\
+    \u30CD\u30B9\u306E\u7BE9\u306E {2, 3, 5} \u306E\u500D\u6570\u3092\u9664\u3044\u305F\
+    \u9AD8\u901F\u5316\u7248\r\n\r\n\r\n# \u53C2\u8003\r\nhttps://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,\
     \ 2020/09/07\r\nhttps://qiita.com/peria/items/a4ff4ddb3336f7b81d50, 2020/09/08\r\
-    \n*/\r\n\r\nnamespace tk {\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cstdint>\r\n#include <algorithm>\r\n\
+    \r\nnamespace tk {\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
     \ n) {\r\n\tif (n < 2) return {};\r\n\tusing byte = std::uint8_t;\r\n\tusing uint32\
     \ = std::uint32_t;\r\n\t\r\n\tconstexpr byte m[8] = {1, 7, 11, 13, 17, 19, 23,\
     \ 29};\r\n\tconstexpr byte diff[8] = {6, 4, 2, 4, 2, 4, 6, 2}; // [i] := m[i +\
@@ -86,8 +86,7 @@ data:
     \ + i) * 30 + m[b_idx[j & -j]]);\r\n\t\t}\r\n\t}\r\n\treturn primes;\r\n}\r\n\
     } // namespace tk\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_ENUMERATE_PRIMES_HPP\r\n#define INCLUDE_GUARD_ENUMERATE_PRIMES_HPP\r\
-    \n\r\n#include <vector>\r\n#include <cstdint>\r\n#include <algorithm>\r\n\r\n\
-    /*\r\nlast-updated: 2020/09/08\r\n\r\n# \u4ED5\u69D8\r\nstd::vector<std::uint32_t>\
+    \n\r\n/*\r\nlast-updated: 2020/09/08\r\n\r\n# \u4ED5\u69D8\r\nstd::vector<std::uint32_t>\
     \ enumerate_primes(std::uint32_t n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n /\
     \ loglog n)\r\n\u7A7A\u9593\u8A08\u7B97\u91CF: \u7D20\u6570\u306E\u500B\u6570\
     \ + \u0398(n^(1/2))\r\n\r\nn \u4EE5\u4E0B\u306E\u7D20\u6570\u3092\u6607\u9806\u306B\
@@ -95,7 +94,8 @@ data:
     \u30CD\u30B9\u306E\u7BE9\u306E {2, 3, 5} \u306E\u500D\u6570\u3092\u9664\u3044\u305F\
     \u9AD8\u901F\u5316\u7248\r\n\r\n\r\n# \u53C2\u8003\r\nhttps://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,\
     \ 2020/09/07\r\nhttps://qiita.com/peria/items/a4ff4ddb3336f7b81d50, 2020/09/08\r\
-    \n*/\r\n\r\nnamespace tk {\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cstdint>\r\n#include <algorithm>\r\n\
+    \r\nnamespace tk {\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
     \ n) {\r\n\tif (n < 2) return {};\r\n\tusing byte = std::uint8_t;\r\n\tusing uint32\
     \ = std::uint32_t;\r\n\t\r\n\tconstexpr byte m[8] = {1, 7, 11, 13, 17, 19, 23,\
     \ 29};\r\n\tconstexpr byte diff[8] = {6, 4, 2, 4, 2, 4, 6, 2}; // [i] := m[i +\
@@ -154,8 +154,8 @@ data:
   requiredBy:
   - Mathematics/PrimeNumber/prime_sum.hpp
   - Mathematics/PrimeNumber/counting_primes.hpp
-  timestamp: '2020-09-08 16:59:22+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - Test/PrimeNumber.enumerate_primes.test.cpp
   - Test/PrimeNumber.counting_primes.test.cpp

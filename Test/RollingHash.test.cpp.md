@@ -1,60 +1,60 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: String/RollingHash.hpp
     title: String/RollingHash.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
     links:
     - http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B
   bundledCode: "#line 1 \"Test/RollingHash.test.cpp\"\n#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
-    \r\n\r\n#line 1 \"String/RollingHash.hpp\"\n\n\n\r\n#include <vector>\r\n#include\
-    \ <string>\r\n#include <random>\r\n#include <functional>\r\n#include <cassert>\r\
-    \n\r\n/*\r\nlast-updated: 2020/08/22\r\n\r\nRolling Hash\r\nmod 2^61 - 1\r\n\u5B9F\
-    \u884C\u6642\u306B\u57FA\u6570(\u539F\u59CB\u6839)\u3092\u30E9\u30F3\u30C0\u30E0\
-    \u751F\u6210\r\n\r\nTODO: basep \u3082\u30AF\u30E9\u30B9\u5171\u901A\u306B\u3059\
-    \u308B(\u30C7\u30B9\u30C8\u30E9\u30AF\u30BF\u5B9F\u88C5\uFF1F)\r\n\r\n# \u4ED5\
-    \u69D8\r\nRollingHash(string_type s) :\r\n\tbuild(s)\r\n\t\u57FA\u6570\u304C\u672A\
-    \u751F\u6210\u306A\u3089 set_base() \u3067\u751F\u6210\r\n\r\nsize_type size()\
-    \ const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u30CF\u30C3\
-    \u30B7\u30E5\u3092\u8A08\u7B97\u3057\u305F\u6587\u5B57\u5217\u306E\u30B5\u30A4\
-    \u30BA\u3092\u8FD4\u3059\r\n\r\nvoid build(string_type s) :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(|s|)\r\n\t\u6587\u5B57\u5217 s \u306E\u3059\u3079\u3066\u306E\
-    \u4F4D\u7F6E i \u306B\u3064\u3044\u3066 s[0, i) \u306E\u30CF\u30C3\u30B7\u30E5\
-    \u5024\u3092\u8A08\u7B97\u3059\u308B\r\n\r\nuint64 hash(size_type i, size_type\
-    \ l, size_type r) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\
-    i \u756A\u76EE\u306E\u57FA\u6570\u3067\u8A08\u7B97\u3057\u305F s[l, r) \u306E\u30CF\
-    \u30C3\u30B7\u30E5\u5024\u3092\u8FD4\u3059\r\n\r\nstd::vector<uint64> hash(size_type\
-    \ l, size_type r) const :\r\n\t\u6642\u9593\u8A08\u7B97\u5E33: \u0398(|base|)\r\
-    \n\t\u305D\u308C\u305E\u308C\u306E\u57FA\u6570\u3067\u8A08\u7B97\u3057\u305F s[l,\
-    \ r) \u306E\u30CF\u30C3\u30B7\u30E5\u5024\u306E\u914D\u5217\u3092\u8FD4\u3059\r\
-    \n\r\nbool match(size_type l1, size_type r1, size_type l2, size_type r2) const\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(|base|)\r\n\ts[l1, r1) \u3068\
-    \ s[l2, r2) \u306E\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u6BD4\u8F03\u3057\u3066\
-    \u4E00\u81F4\u3059\u308C\u3070 true \u3092\u8FD4\u3059\r\n\r\nprivate:\r\nstatic\
-    \ void set_base() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: ??(\u8EFD\u305D\u3046\
-    )\r\n\t\u57FA\u6570\u3092\u30BB\u30C3\u30C8\u3059\u308B\r\n\tgen_cnt \u306E\u6570\
-    \u3060\u3051\u57FA\u6570\u3092\u30E9\u30F3\u30C0\u30E0\u751F\u6210\r\n\r\n# \u53C2\
-    \u8003\r\nhttps://qiita.com/keymoon/items/11fac5627672a6d6a9f6#fnref1, 2020/08/22\r\
-    \nhttps://trap.jp/post/1036/, 2020/08/22\r\n*/\r\n\r\nstruct RollingHash {\r\n\
-    public:\r\n\tusing size_type = std::size_t;\r\n\tusing string_type = std::string;\r\
-    \n\tusing uint64 = std::uint64_t;\r\n\t\r\nprivate:\r\n\tstatic constexpr uint64\
-    \ mod = (1ull << 61) - 1;\r\n\tstatic constexpr uint64 mask31 = (1ull << 31) -\
-    \ 1;\r\n\tstatic constexpr uint64 mask30 = (1ull << 30) - 1;\r\n\tstatic constexpr\
-    \ uint64 mask61 = (1ull << 61) - 1;\r\n\t\r\npublic:\r\n\tRollingHash(string_type\
-    \ s) {\r\n\t\tif (base().empty()) set_base();\r\n\t\tbuild(s);\r\n\t}\r\n\t\r\n\
-    \tsize_type size() const noexcept {\r\n\t\treturn n;\r\n\t}\r\n\t\r\n\tvoid build(string_type\
-    \ s) {\r\n\t\tn = s.size();\r\n\t\thashv.clear();\r\n\t\tbasep.clear();\r\n\t\t\
-    for (size_type i = 0; i < base().size(); ++i) {\r\n\t\t\thashv.emplace_back();\r\
-    \n\t\t\tbasep.emplace_back();\r\n\t\t\thashv[i].emplace_back(0);\r\n\t\t\tbasep[i].emplace_back(1);\r\
-    \n\t\t\tfor (size_type j = 0; j < size(); ++j) {\r\n\t\t\t\tuint64 nh = mul(hashv[i].back(),\
-    \ base()[i]) + static_cast<uint64>(s[j]);\r\n\t\t\t\thashv[i].emplace_back(modulo(nh));\r\
+    \r\n\r\n#line 1 \"String/RollingHash.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/08/22\r\
+    \n\r\nRolling Hash\r\nmod 2^61 - 1\r\n\u5B9F\u884C\u6642\u306B\u57FA\u6570(\u539F\
+    \u59CB\u6839)\u3092\u30E9\u30F3\u30C0\u30E0\u751F\u6210\r\n\r\nTODO: basep \u3082\
+    \u30AF\u30E9\u30B9\u5171\u901A\u306B\u3059\u308B(\u30C7\u30B9\u30C8\u30E9\u30AF\
+    \u30BF\u5B9F\u88C5\uFF1F)\r\n\r\n# \u4ED5\u69D8\r\nRollingHash(string_type s)\
+    \ :\r\n\tbuild(s)\r\n\t\u57FA\u6570\u304C\u672A\u751F\u6210\u306A\u3089 set_base()\
+    \ \u3067\u751F\u6210\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u30CF\u30C3\u30B7\u30E5\u3092\u8A08\u7B97\u3057\
+    \u305F\u6587\u5B57\u5217\u306E\u30B5\u30A4\u30BA\u3092\u8FD4\u3059\r\n\r\nvoid\
+    \ build(string_type s) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(|s|)\r\n\t\
+    \u6587\u5B57\u5217 s \u306E\u3059\u3079\u3066\u306E\u4F4D\u7F6E i \u306B\u3064\
+    \u3044\u3066 s[0, i) \u306E\u30CF\u30C3\u30B7\u30E5\u5024\u3092\u8A08\u7B97\u3059\
+    \u308B\r\n\r\nuint64 hash(size_type i, size_type l, size_type r) const :\r\n\t\
+    \u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\ti \u756A\u76EE\u306E\u57FA\u6570\
+    \u3067\u8A08\u7B97\u3057\u305F s[l, r) \u306E\u30CF\u30C3\u30B7\u30E5\u5024\u3092\
+    \u8FD4\u3059\r\n\r\nstd::vector<uint64> hash(size_type l, size_type r) const :\r\
+    \n\t\u6642\u9593\u8A08\u7B97\u5E33: \u0398(|base|)\r\n\t\u305D\u308C\u305E\u308C\
+    \u306E\u57FA\u6570\u3067\u8A08\u7B97\u3057\u305F s[l, r) \u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u306E\u914D\u5217\u3092\u8FD4\u3059\r\n\r\nbool match(size_type l1,\
+    \ size_type r1, size_type l2, size_type r2) const :\r\n\t\u6642\u9593\u8A08\u7B97\
+    \u91CF: \u0398(|base|)\r\n\ts[l1, r1) \u3068 s[l2, r2) \u306E\u30CF\u30C3\u30B7\
+    \u30E5\u5024\u3092\u6BD4\u8F03\u3057\u3066\u4E00\u81F4\u3059\u308C\u3070 true\
+    \ \u3092\u8FD4\u3059\r\n\r\nprivate:\r\nstatic void set_base() :\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: ??(\u8EFD\u305D\u3046)\r\n\t\u57FA\u6570\u3092\u30BB\u30C3\
+    \u30C8\u3059\u308B\r\n\tgen_cnt \u306E\u6570\u3060\u3051\u57FA\u6570\u3092\u30E9\
+    \u30F3\u30C0\u30E0\u751F\u6210\r\n\r\n# \u53C2\u8003\r\nhttps://qiita.com/keymoon/items/11fac5627672a6d6a9f6#fnref1,\
+    \ 2020/08/22\r\nhttps://trap.jp/post/1036/, 2020/08/22\r\n*/\r\n\r\n#include <vector>\r\
+    \n#include <string>\r\n#include <random>\r\n#include <functional>\r\n#include\
+    \ <cassert>\r\n\r\nstruct RollingHash {\r\npublic:\r\n\tusing size_type = std::size_t;\r\
+    \n\tusing string_type = std::string;\r\n\tusing uint64 = std::uint64_t;\r\n\t\r\
+    \nprivate:\r\n\tstatic constexpr uint64 mod = (1ull << 61) - 1;\r\n\tstatic constexpr\
+    \ uint64 mask31 = (1ull << 31) - 1;\r\n\tstatic constexpr uint64 mask30 = (1ull\
+    \ << 30) - 1;\r\n\tstatic constexpr uint64 mask61 = (1ull << 61) - 1;\r\n\t\r\n\
+    public:\r\n\tRollingHash(string_type s) {\r\n\t\tif (base().empty()) set_base();\r\
+    \n\t\tbuild(s);\r\n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn\
+    \ n;\r\n\t}\r\n\t\r\n\tvoid build(string_type s) {\r\n\t\tn = s.size();\r\n\t\t\
+    hashv.clear();\r\n\t\tbasep.clear();\r\n\t\tfor (size_type i = 0; i < base().size();\
+    \ ++i) {\r\n\t\t\thashv.emplace_back();\r\n\t\t\tbasep.emplace_back();\r\n\t\t\
+    \thashv[i].emplace_back(0);\r\n\t\t\tbasep[i].emplace_back(1);\r\n\t\t\tfor (size_type\
+    \ j = 0; j < size(); ++j) {\r\n\t\t\t\tuint64 nh = mul(hashv[i].back(), base()[i])\
+    \ + static_cast<uint64>(s[j]);\r\n\t\t\t\thashv[i].emplace_back(modulo(nh));\r\
     \n\t\t\t\tbasep[i].emplace_back(modulo(mul(basep[i].back(), base()[i])));\r\n\t\
     \t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tuint64 hash(size_type i, size_type l, size_type\
     \ r) const {\r\n\t\tassert(i < base().size());\r\n\t\tassert(l < r);\r\n\t\tassert(r\
@@ -109,8 +109,8 @@ data:
   isVerificationFile: true
   path: Test/RollingHash.test.cpp
   requiredBy: []
-  timestamp: '2020-09-07 16:22:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2020-09-21 15:29:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: Test/RollingHash.test.cpp
 layout: document

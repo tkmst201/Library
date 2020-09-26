@@ -15,39 +15,39 @@ data:
     - https://judge.yosupo.jp/problem/tree_diameter
   bundledCode: "#line 1 \"Test/CentroidDecomposition.test.cpp\"\n#define PROBLEM \"\
     https://judge.yosupo.jp/problem/tree_diameter\"\r\n\r\n#line 1 \"GraphTheory/CentroidDecomposition.hpp\"\
-    \n\n\n\r\n#include <vector>\r\n#include <cassert>\r\n\r\n/*\r\nlast-updated: 2020/09/03\r\
-    \n\r\n\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3067\u6E21\u3057\u305F g \u306F\
-    \u5909\u66F4\u3057\u3066\u306F\u3044\u3051\u306A\u3044\r\nused \u30D5\u30E9\u30B0\
-    \u306E\u5909\u66F4\u306F set \u3092\u901A\u3057\u3066\u884C\u3046\r\n\r\n# \u4ED5\
-    \u69D8\r\n\r\nCentroidDecomposition(const Graph & g) :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(n)\r\n\t\u91CD\u5FC3\u5206\u89E3\u3092\u884C\u3046\u30B0\u30E9\
-    \u30D5 g \u3067\u521D\u671F\u5316\u3059\u308B\r\n\r\nbool operator [](size_type\
-    \ v) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\tused \u30D5\u30E9\
-    \u30B0\u306E\u5024\u3092\u8FD4\u3059\r\n\r\nbool operator at(size_type v) const\
-    \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\tused \u30D5\u30E9\u30B0\
-    \u306E\u5024\u3092\u8FD4\u3059\r\n\tassert \u30C1\u30A7\u30C3\u30AF\u3042\u308A\
-    \r\n\r\nstd::vector<size_type> get_centroid(size_type root) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(k)\r\n\tused \u30D5\u30E9\u30B0\u304C\u7ACB\u3063\u3066\
-    \u3044\u308B\u9802\u70B9\u3092\u53D6\u308A\u9664\u3044\u305F\u68EE\u4E0A\u3067\
-    \u9802\u70B9 root \u304C\u5C5E\u3059\u308B\u6728(\u9802\u70B9\u6570\u3092 k \u3068\
-    \u3059\u308B) \u306E\u91CD\u5FC3\u3092\u6C42\u3081\u308B\r\n\r\nvoid set(size_type\
-    \ v) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 v \u306E\
-    \ used \u30D5\u30E9\u30B0\u3092 true \u306B\u5909\u66F4\u3059\u308B\r\n\r\nvoid\
-    \ clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\tused \u30D5\u30E9\
-    \u30B0\u3092\u30EA\u30BB\u30C3\u30C8\u3059\u308B\r\n\r\n# \u4F7F\u7528\u4F8B\r\
-    \nsize_type get_centroid_decomposition_tree(const Graph & g, Graph & cdg) :\r\n\
-    \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log n)\r\n\t\u91CD\u5FC3\u5206\u89E3\
-    \u3092\u518D\u5E30\u7684\u306B\u884C\u3044\u3001\u5404\u90E8\u5206\u6728\u306E\
-    \u91CD\u5FC3\u306B\u8FBA\u3092\u5F35\u3063\u305F\u30B0\u30E9\u30D5\u3092 cdg \u306B\
-    \u683C\u7D0D\u3059\u308B\r\n\t\u6839\u306E index(g \u306E\u91CD\u5FC3\u306E 1\
-    \ \u3064) \u3092\u8FD4\u3059\r\n\t\r\n\tverified(2020/09/02) : https://codeforces.com/contest/321/submission/91621846\r\
-    \n\r\nlong long get_tree_diameter(\r\n\t\tconst std::vector<std::vector<std::pair<size_type,\
-    \ int>>> & wg,\r\n\t\tstd::vector<size_type> & path\r\n\t)\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(n log n)\r\n\t\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u4E0A\
-    \u3067\u6700\u9060\u9802\u70B9\u5BFE\u3092\u6C42\u3081\u308B\r\n\t\u6700\u9060\
-    \u9802\u70B9\u5BFE (u, v) \u306E\u9577\u3055\u3092\u8FD4\u3057\u3001\u305D\u306E\
-    \u30D1\u30B9\u3092 path \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u5B9A\u6570\u500D\
-    \u304C\u3059\u3054\u304F\u91CD\u3044(\r\n\t\t\u63D0\u51FA: https://judge.yosupo.jp/submission/20914\r\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/09/03\r\n\r\n\u30B3\u30F3\u30B9\u30C8\u30E9\
+    \u30AF\u30BF\u3067\u6E21\u3057\u305F g \u306F\u5909\u66F4\u3057\u3066\u306F\u3044\
+    \u3051\u306A\u3044\r\nused \u30D5\u30E9\u30B0\u306E\u5909\u66F4\u306F set \u3092\
+    \u901A\u3057\u3066\u884C\u3046\r\n\r\n# \u4ED5\u69D8\r\n\r\nCentroidDecomposition(const\
+    \ Graph & g) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u91CD\u5FC3\
+    \u5206\u89E3\u3092\u884C\u3046\u30B0\u30E9\u30D5 g \u3067\u521D\u671F\u5316\u3059\
+    \u308B\r\n\r\nbool operator [](size_type v) const :\r\n\t\u6642\u9593\u8A08\u7B97\
+    \u91CF: \u0398(1)\r\n\tused \u30D5\u30E9\u30B0\u306E\u5024\u3092\u8FD4\u3059\r\
+    \n\r\nbool operator at(size_type v) const :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(1)\r\n\tused \u30D5\u30E9\u30B0\u306E\u5024\u3092\u8FD4\u3059\r\n\tassert\
+    \ \u30C1\u30A7\u30C3\u30AF\u3042\u308A\r\n\r\nstd::vector<size_type> get_centroid(size_type\
+    \ root) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(k)\r\n\tused \u30D5\u30E9\
+    \u30B0\u304C\u7ACB\u3063\u3066\u3044\u308B\u9802\u70B9\u3092\u53D6\u308A\u9664\
+    \u3044\u305F\u68EE\u4E0A\u3067\u9802\u70B9 root \u304C\u5C5E\u3059\u308B\u6728\
+    (\u9802\u70B9\u6570\u3092 k \u3068\u3059\u308B) \u306E\u91CD\u5FC3\u3092\u6C42\
+    \u3081\u308B\r\n\r\nvoid set(size_type v) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(1)\r\n\t\u9802\u70B9 v \u306E used \u30D5\u30E9\u30B0\u3092 true \u306B\
+    \u5909\u66F4\u3059\u308B\r\n\r\nvoid clear() :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : \u0398(n)\r\n\tused \u30D5\u30E9\u30B0\u3092\u30EA\u30BB\u30C3\u30C8\u3059\u308B\
+    \r\n\r\n# \u4F7F\u7528\u4F8B\r\nsize_type get_centroid_decomposition_tree(const\
+    \ Graph & g, Graph & cdg) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n log\
+    \ n)\r\n\t\u91CD\u5FC3\u5206\u89E3\u3092\u518D\u5E30\u7684\u306B\u884C\u3044\u3001\
+    \u5404\u90E8\u5206\u6728\u306E\u91CD\u5FC3\u306B\u8FBA\u3092\u5F35\u3063\u305F\
+    \u30B0\u30E9\u30D5\u3092 cdg \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u6839\u306E\
+    \ index(g \u306E\u91CD\u5FC3\u306E 1 \u3064) \u3092\u8FD4\u3059\r\n\t\r\n\tverified(2020/09/02)\
+    \ : https://codeforces.com/contest/321/submission/91621846\r\n\r\nlong long get_tree_diameter(\r\
+    \n\t\tconst std::vector<std::vector<std::pair<size_type, int>>> & wg,\r\n\t\t\
+    std::vector<size_type> & path\r\n\t)\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
+    (n log n)\r\n\t\u91CD\u307F\u4ED8\u304D\u30B0\u30E9\u30D5\u4E0A\u3067\u6700\u9060\
+    \u9802\u70B9\u5BFE\u3092\u6C42\u3081\u308B\r\n\t\u6700\u9060\u9802\u70B9\u5BFE\
+    \ (u, v) \u306E\u9577\u3055\u3092\u8FD4\u3057\u3001\u305D\u306E\u30D1\u30B9\u3092\
+    \ path \u306B\u683C\u7D0D\u3059\u308B\r\n\t\u5B9A\u6570\u500D\u304C\u3059\u3054\
+    \u304F\u91CD\u3044(\r\n\t\t\u63D0\u51FA: https://judge.yosupo.jp/submission/20914\r\
     \n\t\t\u624B\u5143\u3067\u306F line \u30B0\u30E9\u30D5\u306E\u51E6\u7406\u304C\
     \ max_random \u306B\u6BD4\u3079\u3066 4 \u500D\u7A0B\u5EA6\u9045\u3044\u304C library-checker\
     \ \u4E0A\u3067\u306F\u306F\u3084\u304B\u3063\u305F(\u306A\u305C?)\r\n\t)\u3002\
@@ -83,10 +83,10 @@ data:
     \u307F\u8FBC\u307F\r\n\t\t\u5168 O(log n) \u5C64\u306A\u306E\u3067\u5168\u4F53\
     \u3067 O(n log^2 n)\r\n\r\n# \u53C2\u8003\r\nhttps://ferin-tech.hatenablog.com/entry/2020/03/06/162311,\
     \ 2020/09/02\r\nhttps://qiita.com/drken/items/4b4c3f1824339b090202, 2020/09/02\r\
-    \n*/\r\n\r\nclass CentroidDecomposition {\r\npublic:\r\n\tusing size_type = std::size_t;\r\
-    \n\tusing Graph = std::vector<std::vector<size_type>>;\r\n\t\r\nprivate:\r\n\t\
-    const Graph & g;\r\n\tstd::vector<bool> used;\r\n\tstd::vector<size_type> sz;\r\
-    \n\t\r\npublic:\r\n\tCentroidDecomposition() = delete;\r\n\tCentroidDecomposition(const\
+    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n\r\nclass CentroidDecomposition\
+    \ {\r\npublic:\r\n\tusing size_type = std::size_t;\r\n\tusing Graph = std::vector<std::vector<size_type>>;\r\
+    \n\t\r\nprivate:\r\n\tconst Graph & g;\r\n\tstd::vector<bool> used;\r\n\tstd::vector<size_type>\
+    \ sz;\r\n\t\r\npublic:\r\n\tCentroidDecomposition() = delete;\r\n\tCentroidDecomposition(const\
     \ Graph & g) : g(g) {\r\n\t\tused.resize(size(), false);\r\n\t\tsz.resize(size());\r\
     \n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn g.size();\r\n\
     \t}\r\n\t\r\n\tbool operator [](size_type v) const {\r\n\t\treturn used[v];\r\n\
@@ -203,7 +203,7 @@ data:
   isVerificationFile: true
   path: Test/CentroidDecomposition.test.cpp
   requiredBy: []
-  timestamp: '2020-09-16 15:23:36+09:00'
+  timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/CentroidDecomposition.test.cpp
