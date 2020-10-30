@@ -1,77 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: Mathematics/ModInt.hpp
-    title: Mathematics/ModInt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/PrimeNumber/counting_primes.hpp
     title: Mathematics/PrimeNumber/counting_primes.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/PrimeNumber/enumerate_primes.hpp
     title: Mathematics/PrimeNumber/enumerate_primes.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/counting_primes
     links:
     - https://judge.yosupo.jp/problem/counting_primes
   bundledCode: "#line 1 \"Test/PrimeNumber.counting_primes.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/counting_primes\"\r\n\r\n#line 1 \"Mathematics/ModInt.hpp\"\
-    \n\n\n\r\n/*\r\nlast-updated: 2020/02/26\r\n\r\n# \u4ED5\u69D8\r\nModInt(long\
-    \ long val = 0) : \u8CA0\u306E\u6574\u6570\u306B\u3082\u5BFE\u5FDC\u3057\u305F\
-    \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\r\n\r\nModInt pow(long long n) const\
-    \ : O(log n) n \u4E57\u3057\u305F\u5024\u3092\u8FD4\u3059(\u8CA0\u306E\u6574\u6570\
-    \u3082\u5BFE\u5FDC)\r\nModInt inverse() const : O(log n) \u6CD5 M \u306E\u5143\
-    \u3067\u306E\u9006\u5143\u3092\u8FD4\u3059\r\n\r\nconst value_type & get() const\
-    \ noexcept\r\nvalue_type & get() noexcept : \u5024\u3092\u8FD4\u3059\r\n\r\nstatic\
-    \ decltype(M) get_mod() noexcept : \u6CD5 M \u3092\u8FD4\u3059\r\n\r\nexplicit\
-    \ operator bool() const noexcept : bool\u3078\u578B\u5909\u63DB 0\u4EE5\u5916\u306E\
-    \u3068\u304DTrue\r\noperator ==() const noexcept\r\noperator !=() const noexcept\r\
-    \noperator +() const noexept\r\noperator -() const noexept\r\noperator +(const\
-    \ ModInt & rhs) const noexept\r\noperator -(const ModInt & rhs) const noexept\r\
-    \noperator *(const ModInt & rhs) const noexept\r\noperator /(const ModInt & rhs)\
-    \ const noexept\r\nModInt & operator +=(const ModInt & rhs) const noexept\r\n\
-    ModInt & operator +=(const ModInt & rhs) const noexept :\r\n\r\nfriend std::ostream\
-    \ & operator <<(std::ostream & os, const ModInt & rhs)\r\nfriend std::istream\
-    \ & operator >>(std::istream & is, ModInt & rhs) :\r\n\t\u5165\u51FA\u529B\u7528\
-    \r\n\r\n# \u53C2\u8003\r\nhttps://noshi91.hatenablog.com/entry/2019/03/31/174006\r\
-    \n*/\r\n\r\n#include <cassert>\r\n#include <iostream>\r\n\r\ntemplate<int M>\r\
-    \nstruct ModInt {\r\npublic:\r\n\tusing value_type = long long;\r\n\t\r\n\tModInt(value_type\
-    \ val = 0) : val(val < 0 ? (M - (-val % M)) % M : val % M) {}\r\n\t\r\n\texplicit\
-    \ operator bool() const noexcept { return val; }\r\n\tbool operator ==(const ModInt\
-    \ & rhs) const noexcept { return val == rhs.val; }\r\n\tbool operator !=(const\
-    \ ModInt & rhs) const noexcept { return !(*this == rhs); }\r\n\tModInt operator\
-    \ +() const noexcept { return ModInt(*this); }\r\n\tModInt operator -() const\
-    \ noexcept { return ModInt(0) -= *this; }\r\n\tModInt operator +(const ModInt\
-    \ & rhs) const noexcept { return ModInt(*this) += rhs; }\r\n\tModInt operator\
-    \ -(const ModInt & rhs) const noexcept { return ModInt(*this) -= rhs; }\r\n\t\
-    ModInt operator *(const ModInt & rhs) const noexcept { return ModInt(*this) *=\
-    \ rhs; }\r\n\tModInt operator /(const ModInt & rhs) const noexcept { return ModInt(*this)\
-    \ /= rhs; }\r\n\t\r\n\tModInt & operator +=(const ModInt & rhs) noexcept {\r\n\
-    \t\tval += rhs.val;\r\n\t\tif (val >= M) val -= M;\r\n\t\treturn *this;\r\n\t\
-    }\r\n\tModInt & operator -=(const ModInt & rhs) noexcept {\r\n\t\tif (val < rhs.val)\
-    \ val += M;\r\n\t\tval -= rhs.val;\r\n\t\treturn *this;\r\n\t}\r\n\tModInt & operator\
-    \ *=(const ModInt & rhs) noexcept {\r\n\t\tval = val * rhs.val % M;\r\n\t\treturn\
-    \ *this;\r\n\t}\r\n\tModInt & operator /=(const ModInt & rhs) noexcept {\r\n\t\
-    \t*this *= rhs.inverse();\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tModInt pow(value_type\
-    \ n) const {\r\n\t\tModInt res = 1, x = val;\r\n\t\tif (n < 0) { x = x.inverse();\
-    \ n = -n; }\r\n\t\twhile (n) { if (n & 1) res *= x; x *= x; n >>= 1; }\r\n\t\t\
-    return res;\r\n\t}\r\n\t\r\n\tModInt inverse() const {\r\n\t\tlong long a = val,\
-    \ a1 = 1, a2 = 0, b = M, b1 = 0, b2 = 1;\r\n\t\twhile (b > 0) {\r\n\t\t\tvalue_type\
-    \ q = a / b, r = a % b;\r\n\t\t\tvalue_type nb1 = a1 - q * b1, nb2 = a2 - q *\
-    \ b2;\r\n\t\t\ta = b; b = r;\r\n\t\t\ta1 = b1; b1 = nb1;\r\n\t\t\ta2 = b2; b2\
-    \ = nb2;\r\n\t\t}\r\n\t\tassert(a == 1);\r\n\t\treturn a1;\r\n\t}\r\n\t\r\n\t\
-    const value_type & get() const noexcept { return val; }\r\n\tstatic decltype(M)\
-    \ get_mod() noexcept { return M; }\r\n\t\r\n\tfriend std::ostream & operator <<(std::ostream\
-    \ & os, const ModInt & rhs) { return os << rhs.val; }\r\n\tfriend std::istream\
-    \ & operator >>(std::istream & is, ModInt & rhs) {\r\n\t\tvalue_type x;\r\n\t\t\
-    is >> x;\r\n\t\trhs = ModInt(x);\r\n\t\treturn is;\r\n\t}\r\nprivate:\r\n\tvalue_type\
-    \ val;\r\n};\r\n\r\n\n#line 1 \"Mathematics/PrimeNumber/counting_primes.hpp\"\n\
-    \n\n\r\n/*\r\nlast-updated: 2020/09/07\r\n\r\n# \u4ED5\u69D8\r\nstd::uint64_t\
+    \ \"https://judge.yosupo.jp/problem/counting_primes\"\r\n\r\n#line 1 \"Mathematics/PrimeNumber/counting_primes.hpp\"\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/09/07\r\n\r\n# \u4ED5\u69D8\r\nstd::uint64_t\
     \ counting_primes(std::uint64_t n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n^(3/4))\r\
     \n\u7A7A\u9593\u8A08\u7B97\u91CF: \u0398(n^(1/2))\r\n\r\nn \u4EE5\u4E0B\u306E\u7D20\
     \u6570\u306E\u500B\u6570\u3092\u8FD4\u3059\r\nn \\leq 10^11 \u306A\u3089 1 sec\
@@ -157,23 +104,21 @@ data:
     \ break;\r\n\t\t\tconst uint64 d = m / primes[j];\r\n\t\t\tconst uint32 idx =\
     \ d <= s ? d - 1 : div.size() - n / d;\r\n\t\t\tdp[i - 1] -= dp[idx] - j;\r\n\t\
     \t}\r\n\t}\r\n\t\r\n\treturn dp.back();\r\n}\r\n} // namespace tk\r\n\r\n\n#line\
-    \ 5 \"Test/PrimeNumber.counting_primes.test.cpp\"\n\r\n#include <cstdio>\r\n\r\
+    \ 4 \"Test/PrimeNumber.counting_primes.test.cpp\"\n\r\n#include <cstdio>\r\n\r\
     \nint main() {\r\n\tlong long N;\r\n\tscanf(\"%lld\", &N);\r\n\tprintf(\"%lld\\\
     n\", tk::counting_primes(N));\r\n\treturn 0;\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n\r\
-    \n#include \"Mathematics/ModInt.hpp\"\r\n#include \"Mathematics/PrimeNumber/counting_primes.hpp\"\
-    \r\n\r\n#include <cstdio>\r\n\r\nint main() {\r\n\tlong long N;\r\n\tscanf(\"\
-    %lld\", &N);\r\n\tprintf(\"%lld\\n\", tk::counting_primes(N));\r\n\treturn 0;\r\
-    \n}"
+    \n#include \"Mathematics/PrimeNumber/counting_primes.hpp\"\r\n\r\n#include <cstdio>\r\
+    \n\r\nint main() {\r\n\tlong long N;\r\n\tscanf(\"%lld\", &N);\r\n\tprintf(\"\
+    %lld\\n\", tk::counting_primes(N));\r\n\treturn 0;\r\n}"
   dependsOn:
-  - Mathematics/ModInt.hpp
   - Mathematics/PrimeNumber/counting_primes.hpp
   - Mathematics/PrimeNumber/enumerate_primes.hpp
   isVerificationFile: true
   path: Test/PrimeNumber.counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-30 18:50:11+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/PrimeNumber.counting_primes.test.cpp
 layout: document

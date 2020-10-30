@@ -4,30 +4,26 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/LazySegmentTree.test.cpp
-    title: Test/LazySegmentTree.test.cpp
+    path: Test/DynamicSegmentTree.test.cpp
+    title: Test/DynamicSegmentTree.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
     title: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Test/LazySegmentTree.test.cpp
+    title: Test/LazySegmentTree.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Test/Matrix_Determinant.test.cpp
     title: Test/Matrix_Determinant.test.cpp
-  - icon: ':x:'
-    path: Test/PrimeNumber.counting_primes.test.cpp
-    title: Test/PrimeNumber.counting_primes.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Test/DynamicSegmentTree.test.cpp
-    title: Test/DynamicSegmentTree.test.cpp
-  - icon: ':x:'
-    path: Test/SlidingWindowAggregation.test.cpp
-    title: Test/SlidingWindowAggregation.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/SegmentTree.fold.test.cpp
     title: Test/SegmentTree.fold.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/SlidingWindowAggregation.test.cpp
+    title: Test/SlidingWindowAggregation.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://noshi91.hatenablog.com/entry/2019/03/31/174006
   bundledCode: "#line 1 \"Mathematics/ModInt.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/02/26\r\
@@ -136,15 +132,14 @@ data:
   path: Mathematics/ModInt.hpp
   requiredBy: []
   timestamp: '2020-09-17 16:57:57+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/LazySegmentTree.test.cpp
-  - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
-  - Test/Matrix_Determinant.test.cpp
-  - Test/PrimeNumber.counting_primes.test.cpp
   - Test/DynamicSegmentTree.test.cpp
-  - Test/SlidingWindowAggregation.test.cpp
   - Test/SegmentTree.fold.test.cpp
+  - Test/Matrix_Determinant.test.cpp
+  - Test/LazySegmentTree.test.cpp
+  - Test/SlidingWindowAggregation.test.cpp
+  - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document
 redirect_from:

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://beet-aizu.hatenablog.com/entry/2019/07/08/174727,
     - https://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7,

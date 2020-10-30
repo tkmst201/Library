@@ -12,7 +12,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/abc133/submissions/16817431
   bundledCode: "#line 1 \"GraphTheory/HeavyLightDecomposition_Query.hpp\"\n\n\n\r\n\

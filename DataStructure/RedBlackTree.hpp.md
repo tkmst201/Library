@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/RedBlackTree.test.cpp
     title: Test/RedBlackTree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://www.nct9.ne.jp/m_hiroi/light/pyalgo16.html,
     - http://wwwa.pikara.ne.jp/okojisan/rb-tree/index.html,
@@ -450,7 +449,7 @@ data:
   path: DataStructure/RedBlackTree.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/RedBlackTree.test.cpp
 documentation_of: DataStructure/RedBlackTree.hpp

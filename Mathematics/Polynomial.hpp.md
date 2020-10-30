@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"Mathematics/Polynomial.hpp\"\n\n\n\r\n#include <vector>\r\
     \n\r\n// poly / (x - d) \u3092\u8FD4\u3059\r\ntemplate<typename T>\r\nstd::vector<T>\

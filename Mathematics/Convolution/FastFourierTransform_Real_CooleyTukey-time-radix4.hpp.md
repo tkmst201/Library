@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp\"\
     \n\n\n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\

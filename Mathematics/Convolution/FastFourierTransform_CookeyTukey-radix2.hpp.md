@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-radix2.hpp\"\
     \n\n\n\r\n/*\r\nlast-updated: 2020/08/02\r\n\r\n\u57FA\u6570 2 Cooley-Tukey\r\n\

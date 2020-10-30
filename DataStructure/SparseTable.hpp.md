@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/SparseTable.test.cpp
     title: Test/SparseTable.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://tookunn.hatenablog.com/entry/2016/07/13/211148,
   bundledCode: "#line 1 \"DataStructure/SparseTable.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
@@ -81,7 +80,7 @@ data:
   path: DataStructure/SparseTable.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/SparseTable.test.cpp
 documentation_of: DataStructure/SparseTable.hpp

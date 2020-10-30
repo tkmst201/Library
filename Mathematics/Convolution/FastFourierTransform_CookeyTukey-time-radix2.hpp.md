@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,
     - https://qiita.com/ageprocpp/items/0d63d4ed80de4a35fe79,

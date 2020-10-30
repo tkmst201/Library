@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://qiita.com/HNJ/items/564f15316719209df73c,
     - https://twitter.com/kyopro_friends/status/1304063876019793921?s=20,

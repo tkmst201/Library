@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://noshi91.hatenablog.com/entry/2019/02/04/175100,
   bundledCode: "#line 1 \"DataStructure/PersistentStack.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

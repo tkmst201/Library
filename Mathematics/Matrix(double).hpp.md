@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://drken1215.hatenablog.com/entry/2019/03/20/202800
   bundledCode: "#line 1 \"Mathematics/Matrix(double).hpp\"\n\n\n\r\n/*\r\nlast-updated:\

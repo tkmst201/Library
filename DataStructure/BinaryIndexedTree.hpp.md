@@ -4,15 +4,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/BinaryIndexedTree_RangeAdd.test.cpp
-    title: Test/BinaryIndexedTree_RangeAdd.test.cpp
-  - icon: ':heavy_check_mark:'
     path: Test/BinaryIndexedTree.test.cpp
     title: Test/BinaryIndexedTree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/BinaryIndexedTree_RangeAdd.test.cpp
+    title: Test/BinaryIndexedTree_RangeAdd.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://algo-logic.info/binary-indexed-tree/,
   bundledCode: "#line 1 \"DataStructure/BinaryIndexedTree.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

@@ -15,7 +15,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/blog/entry/53170,
     - https://math314.hateblo.jp/entry/2014/06/24/220107,

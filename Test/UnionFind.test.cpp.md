@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: DataStructure/UnionFind.hpp
     title: DataStructure/UnionFind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -58,7 +58,7 @@ data:
   path: Test/UnionFind.test.cpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/UnionFind.test.cpp
 layout: document

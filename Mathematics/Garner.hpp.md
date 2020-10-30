@@ -10,15 +10,14 @@ data:
     title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/NumberTheoreticTransform_AnyMod.test.cpp
-    title: Test/NumberTheoreticTransform_AnyMod.test.cpp
-  - icon: ':heavy_check_mark:'
     path: Test/Garner.test.cpp
     title: Test/Garner.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/NumberTheoreticTransform_AnyMod.test.cpp
+    title: Test/NumberTheoreticTransform_AnyMod.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://qiita.com/drken/items/ae02240cd1f8edfc86fd,
   bundledCode: "#line 1 \"Mathematics/Garner.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/09/21\r\
@@ -131,8 +130,8 @@ data:
   timestamp: '2020-09-21 16:44:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/NumberTheoreticTransform_AnyMod.test.cpp
   - Test/Garner.test.cpp
+  - Test/NumberTheoreticTransform_AnyMod.test.cpp
 documentation_of: Mathematics/Garner.hpp
 layout: document
 redirect_from:

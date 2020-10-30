@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/PersistentRedBlackTree.test.cpp
     title: Test/PersistentRedBlackTree.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://algoogle.hadrori.jp/algorithm/rbtree_merge.html,
     - http://blog.mitaki28.info/1447078746296/,
@@ -265,7 +264,7 @@ data:
   path: DataStructure/PersistentRedBlackTree.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/PersistentRedBlackTree.test.cpp
 documentation_of: DataStructure/PersistentRedBlackTree.hpp

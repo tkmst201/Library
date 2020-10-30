@@ -1,9 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: Mathematics/ModInt.hpp
-    title: Mathematics/ModInt.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: DataStructure/SegmentTree.hpp
@@ -13,6 +10,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: GraphTheory/HeavyLightDecomposition_Query.hpp
     title: GraphTheory/HeavyLightDecomposition_Query.hpp
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/ModInt.hpp
+    title: Mathematics/ModInt.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://noshi91.hatenablog.com/entry/2019/03/31/174006
   bundledCode: "#line 1 \"Mathematics/RuntimeModInt.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

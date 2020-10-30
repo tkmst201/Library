@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://hos.ac/slides/20150319_flow.pdf,
   bundledCode: "#line 1 \"GraphTheory/EdmondsKarp.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

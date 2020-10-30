@@ -2,24 +2,23 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/TwoSat.hpp
     title: Mathematics/TwoSat.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/StronglyConnectedComponents.test.cpp
     title: Test/StronglyConnectedComponents.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/TwoSat.test.cpp
     title: Test/TwoSat.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://mathtrain.jp/kyorenketsu,
   bundledCode: "#line 1 \"GraphTheory/StronglyConnectedComponents.hpp\"\n\n\n\r\n\
-    /*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\u3059\
+    /*\r\nlast-updated: 2020/10/30\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\u3059\
     \u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n) :\r\n\
     \t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C n \u306E\
     \u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
@@ -75,18 +74,19 @@ data:
     \ continue;\r\n\t\t\trdfs(rdfs, u);\r\n\t\t\t++c;\r\n\t\t}\r\n\t\t\r\n\t\tif (build_idx_map)\
     \ {\r\n\t\t\tidx_map.assign(c, {});\r\n\t\t\tfor (size_type i = 0; i < size();\
     \ ++i) idx_map[rank[i]].emplace_back(i);\r\n\t\t}\r\n\t\tisbuilt = true;\r\n\t\
-    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) {\r\n\t\tassert(isbuilt);\r\
-    \n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\r\n\tconst std::vector<size_type>\
-    \ & get_map(size_type i) {\r\n\t\tassert(isbuilt);\r\n\t\tassert(i < idx_map.size());\r\
-    \n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\tstd::vector<std::vector<size_type>>\
-    \ get_graph() const {\r\n\t\tassert(isbuilt);\r\n\t\tstd::vector<std::vector<size_type>>\
-    \ res(idx_map.size());\r\n\t\tfor (size_type i = 0; i < idx_map.size(); ++i) {\r\
-    \n\t\t\tfor (size_type j : idx_map[i]) {\r\n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(v);\r\
-    \n\t\t\t}\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
+    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) const {\r\n\t\t\
+    assert(isbuilt);\r\n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\
+    \r\n\tconst std::vector<size_type> & get_map(size_type i) const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tassert(i < idx_map.size());\r\n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\t\
+    std::vector<std::vector<size_type>> get_graph() const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tstd::vector<std::vector<size_type>> res(idx_map.size());\r\n\t\tfor (size_type\
+    \ i = 0; i < idx_map.size(); ++i) {\r\n\t\t\tfor (size_type j : idx_map[i]) {\r\
+    \n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(get_rank(v));\r\n\t\t\t\
+    }\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
     \ end(res[i])), end(res[i]));\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\n\r\n\
     \n"
   code: "#ifndef INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP\r\n#define INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP\r\
-    \n\r\n/*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
+    \n\r\n/*\r\nlast-updated: 2020/10/30\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
     \u3059\u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n)\
     \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
     \ n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
@@ -142,14 +142,15 @@ data:
     \ continue;\r\n\t\t\trdfs(rdfs, u);\r\n\t\t\t++c;\r\n\t\t}\r\n\t\t\r\n\t\tif (build_idx_map)\
     \ {\r\n\t\t\tidx_map.assign(c, {});\r\n\t\t\tfor (size_type i = 0; i < size();\
     \ ++i) idx_map[rank[i]].emplace_back(i);\r\n\t\t}\r\n\t\tisbuilt = true;\r\n\t\
-    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) {\r\n\t\tassert(isbuilt);\r\
-    \n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\r\n\tconst std::vector<size_type>\
-    \ & get_map(size_type i) {\r\n\t\tassert(isbuilt);\r\n\t\tassert(i < idx_map.size());\r\
-    \n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\tstd::vector<std::vector<size_type>>\
-    \ get_graph() const {\r\n\t\tassert(isbuilt);\r\n\t\tstd::vector<std::vector<size_type>>\
-    \ res(idx_map.size());\r\n\t\tfor (size_type i = 0; i < idx_map.size(); ++i) {\r\
-    \n\t\t\tfor (size_type j : idx_map[i]) {\r\n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(v);\r\
-    \n\t\t\t}\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
+    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) const {\r\n\t\t\
+    assert(isbuilt);\r\n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\
+    \r\n\tconst std::vector<size_type> & get_map(size_type i) const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tassert(i < idx_map.size());\r\n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\t\
+    std::vector<std::vector<size_type>> get_graph() const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tstd::vector<std::vector<size_type>> res(idx_map.size());\r\n\t\tfor (size_type\
+    \ i = 0; i < idx_map.size(); ++i) {\r\n\t\t\tfor (size_type j : idx_map[i]) {\r\
+    \n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(get_rank(v));\r\n\t\t\t\
+    }\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
     \ end(res[i])), end(res[i]));\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\n\r\n\
     #endif // INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP"
   dependsOn: []
@@ -157,11 +158,11 @@ data:
   path: GraphTheory/StronglyConnectedComponents.hpp
   requiredBy:
   - Mathematics/TwoSat.hpp
-  timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2020-10-30 18:50:11+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/StronglyConnectedComponents.test.cpp
   - Test/TwoSat.test.cpp
+  - Test/StronglyConnectedComponents.test.cpp
 documentation_of: GraphTheory/StronglyConnectedComponents.hpp
 layout: document
 redirect_from:

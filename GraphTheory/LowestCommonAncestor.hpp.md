@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"GraphTheory/LowestCommonAncestor.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
     \ 2020/08/27\r\n\r\n\u6728\u30B0\u30E9\u30D5\u3067\u306E\u6700\u8FD1\u5171\u901A\

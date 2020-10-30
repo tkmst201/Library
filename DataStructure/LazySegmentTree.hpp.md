@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://beet-aizu.hatenablog.com/entry/2017/12/01/225955,
     - https://ei1333.github.io/luzhiled/snippets/structure/segment-tree.html,

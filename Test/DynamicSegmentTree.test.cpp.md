@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DynamicSegmentTree.hpp
     title: DataStructure/DynamicSegmentTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/ModInt.hpp
     title: Mathematics/ModInt.hpp
   _extendedRequiredBy: []

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_CookeyTukey-frequency-radix2.hpp\"\

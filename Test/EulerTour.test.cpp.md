@@ -2,11 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: GraphTheory/EulerTour.hpp
-    title: GraphTheory/EulerTour.hpp
-  - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: DataStructure/SegmentTree.hpp
+  - icon: ':heavy_check_mark:'
+    path: GraphTheory/EulerTour.hpp
+    title: GraphTheory/EulerTour.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

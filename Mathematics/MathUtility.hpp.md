@@ -3,31 +3,30 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
-    title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
-  - icon: ':heavy_check_mark:'
     path: Mathematics/Convolution/NumberTheoreticTransform.hpp
     title: Mathematics/Convolution/NumberTheoreticTransform.hpp
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
+    title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   - icon: ':heavy_check_mark:'
     path: Mathematics/Garner.hpp
     title: Mathematics/Garner.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/NumberTheoreticTransform.test.cpp
-    title: Test/NumberTheoreticTransform.test.cpp
+    path: Test/Garner.test.cpp
+    title: Test/Garner.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/MathUtility.chinese_remainder.test.cpp
     title: Test/MathUtility.chinese_remainder.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Test/NumberTheoreticTransform.test.cpp
+    title: Test/NumberTheoreticTransform.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Test/NumberTheoreticTransform_AnyMod.test.cpp
     title: Test/NumberTheoreticTransform_AnyMod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: Test/Garner.test.cpp
-    title: Test/Garner.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://noshi91.hatenablog.com/entry/2019/04/01/184957,
   bundledCode: "#line 1 \"Mathematics/MathUtility.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
@@ -138,16 +137,16 @@ data:
   isVerificationFile: false
   path: Mathematics/MathUtility.hpp
   requiredBy:
-  - Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   - Mathematics/Convolution/NumberTheoreticTransform.hpp
+  - Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   - Mathematics/Garner.hpp
   timestamp: '2020-09-21 16:44:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/NumberTheoreticTransform.test.cpp
   - Test/MathUtility.chinese_remainder.test.cpp
-  - Test/NumberTheoreticTransform_AnyMod.test.cpp
   - Test/Garner.test.cpp
+  - Test/NumberTheoreticTransform_AnyMod.test.cpp
 documentation_of: Mathematics/MathUtility.hpp
 layout: document
 redirect_from:

@@ -1,18 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/PrimeNumber/enumerate_primes.hpp
     title: Mathematics/PrimeNumber/enumerate_primes.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/PrimeNumber.counting_primes.test.cpp
     title: Test/PrimeNumber.counting_primes.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://math314.hateblo.jp/entry/2016/06/05/004332,
   bundledCode: "#line 1 \"Mathematics/PrimeNumber/counting_primes.hpp\"\n\n\n\r\n\
@@ -134,7 +133,7 @@ data:
   path: Mathematics/PrimeNumber/counting_primes.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/PrimeNumber.counting_primes.test.cpp
 documentation_of: Mathematics/PrimeNumber/counting_primes.hpp

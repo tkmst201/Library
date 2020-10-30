@@ -2,23 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/PrimeNumber/counting_primes.hpp
+    title: Mathematics/PrimeNumber/counting_primes.hpp
   - icon: ':warning:'
     path: Mathematics/PrimeNumber/prime_sum.hpp
     title: Mathematics/PrimeNumber/prime_sum.hpp
-  - icon: ':x:'
-    path: Mathematics/PrimeNumber/counting_primes.hpp
-    title: Mathematics/PrimeNumber/counting_primes.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: Test/PrimeNumber.enumerate_primes.test.cpp
-    title: Test/PrimeNumber.enumerate_primes.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/PrimeNumber.counting_primes.test.cpp
     title: Test/PrimeNumber.counting_primes.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/PrimeNumber.enumerate_primes.test.cpp
+    title: Test/PrimeNumber.enumerate_primes.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,
     - https://qiita.com/peria/items/a4ff4ddb3336f7b81d50,
@@ -152,13 +151,13 @@ data:
   isVerificationFile: false
   path: Mathematics/PrimeNumber/enumerate_primes.hpp
   requiredBy:
-  - Mathematics/PrimeNumber/prime_sum.hpp
   - Mathematics/PrimeNumber/counting_primes.hpp
+  - Mathematics/PrimeNumber/prime_sum.hpp
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/PrimeNumber.enumerate_primes.test.cpp
   - Test/PrimeNumber.counting_primes.test.cpp
+  - Test/PrimeNumber.enumerate_primes.test.cpp
 documentation_of: Mathematics/PrimeNumber/enumerate_primes.hpp
 layout: document
 redirect_from:

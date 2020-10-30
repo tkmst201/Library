@@ -18,7 +18,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/practice2/submissions/16664880)
     - https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf,
@@ -179,10 +178,10 @@ data:
   timestamp: '2020-09-18 18:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/SegmentTree.fold.test.cpp
   - Test/EulerTour.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
-  - Test/SegmentTree.fold.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

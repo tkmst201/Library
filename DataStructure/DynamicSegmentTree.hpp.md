@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://kazuma8128.hatenablog.com/entry/2018/11/29/093827,
   bundledCode: "#line 1 \"DataStructure/DynamicSegmentTree.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

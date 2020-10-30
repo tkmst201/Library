@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/UnionFind.test.cpp
     title: Test/UnionFind.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://atcoder.jp/contests/abc157/submissions/12223429
     - https://en.wikipedia.org/wiki/Disjoint-set_data_structure,
@@ -75,7 +74,7 @@ data:
   path: DataStructure/UnionFind.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/UnionFind.test.cpp
 documentation_of: DataStructure/UnionFind.hpp

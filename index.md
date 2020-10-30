@@ -24,37 +24,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/LazySegmentTree.hpp
       title: DataStructure/LazySegmentTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PersistentArray.hpp
       title: DataStructure/PersistentArray.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PersistentRedBlackTree.hpp
       title: DataStructure/PersistentRedBlackTree.hpp
     - icon: ':warning:'
       path: DataStructure/PersistentStack.hpp
       title: DataStructure/PersistentStack.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PersistentUnionFind.hpp
       title: DataStructure/PersistentUnionFind.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/PotentializedUnionFind.hpp
       title: DataStructure/PotentializedUnionFind.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/RedBlackTree.hpp
       title: DataStructure/RedBlackTree.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/SegmentTree.hpp
       title: DataStructure/SegmentTree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SlidingWindowAggregation.hpp
       title: DataStructure/SlidingWindowAggregation.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: DataStructure/SparseTable.hpp
     - icon: ':x:'
       path: DataStructure/SuccintBitVector.hpp
       title: DataStructure/SuccintBitVector.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/UnionFind.hpp
       title: DataStructure/UnionFind.hpp
     - icon: ':x:'
@@ -86,7 +86,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: GraphTheory/LowestCommonAncestor.hpp
       title: GraphTheory/LowestCommonAncestor.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: GraphTheory/StronglyConnectedComponents.hpp
       title: GraphTheory/StronglyConnectedComponents.hpp
   - name: Mathematics
@@ -106,7 +106,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Mathematics/Matrix.hpp
       title: Mathematics/Matrix.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/ModInt.hpp
       title: Mathematics/ModInt.hpp
     - icon: ':warning:'
@@ -115,7 +115,7 @@ data:
     - icon: ':warning:'
       path: Mathematics/RuntimeModInt.hpp
       title: Mathematics/RuntimeModInt.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/TwoSat.hpp
       title: Mathematics/TwoSat.hpp
     - icon: ':x:'
@@ -146,10 +146,10 @@ data:
       title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   - name: Mathematics/PrimeNumber
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/PrimeNumber/counting_primes.hpp
       title: Mathematics/PrimeNumber/counting_primes.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/PrimeNumber/enumerate_primes.hpp
       title: Mathematics/PrimeNumber/enumerate_primes.hpp
     - icon: ':warning:'
@@ -160,10 +160,10 @@ data:
     - icon: ':warning:'
       path: String/KMP.hpp
       title: String/KMP.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: String/RollingHash.hpp
       title: String/RollingHash.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: String/SuffixArray.hpp
       title: String/SuffixArray.hpp
   verificationCategories:
@@ -247,52 +247,52 @@ data:
     - icon: ':heavy_check_mark:'
       path: Test/NumberTheoreticTransform_AnyMod.test.cpp
       title: Test/NumberTheoreticTransform_AnyMod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/PersistentRedBlackTree.test.cpp
       title: Test/PersistentRedBlackTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/PersistentUnionFind.test.cpp
       title: Test/PersistentUnionFind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/PotentializedUnionFind.test.cpp
       title: Test/PotentializedUnionFind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/PrimeNumber.counting_primes.test.cpp
       title: Test/PrimeNumber.counting_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/PrimeNumber.enumerate_primes.test.cpp
       title: Test/PrimeNumber.enumerate_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/RedBlackTree.test.cpp
       title: Test/RedBlackTree.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/RollingHash.test.cpp
       title: Test/RollingHash.test.cpp
     - icon: ':heavy_check_mark:'
       path: Test/SegmentTree.fold.test.cpp
       title: Test/SegmentTree.fold.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/SlidingWindowAggregation.test.cpp
       title: Test/SlidingWindowAggregation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/SparseTable.test.cpp
       title: Test/SparseTable.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/StronglyConnectedComponents.test.cpp
       title: Test/StronglyConnectedComponents.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/SuffixArray.lcp.test.cpp
       title: Test/SuffixArray.lcp.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/SuffixArray.sa_is.test.cpp
       title: Test/SuffixArray.sa_is.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/SuffixArray.search.test.cpp
       title: Test/SuffixArray.search.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/TwoSat.test.cpp
       title: Test/TwoSat.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/UnionFind.test.cpp
       title: Test/UnionFind.test.cpp
     - icon: ':x:'

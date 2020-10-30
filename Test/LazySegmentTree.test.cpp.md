@@ -1,12 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: Mathematics/ModInt.hpp
-    title: Mathematics/ModInt.hpp
   - icon: ':heavy_check_mark:'
     path: DataStructure/LazySegmentTree.hpp
     title: DataStructure/LazySegmentTree.hpp
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/ModInt.hpp
+    title: Mathematics/ModInt.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp

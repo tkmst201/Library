@@ -2,17 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
-    title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
-  - icon: ':heavy_check_mark:'
     path: Mathematics/Convolution/NumberTheoreticTransform.hpp
     title: Mathematics/Convolution/NumberTheoreticTransform.hpp
   - icon: ':heavy_check_mark:'
-    path: Mathematics/MathUtility.hpp
-    title: Mathematics/MathUtility.hpp
+    path: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
+    title: Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
   - icon: ':heavy_check_mark:'
     path: Mathematics/Garner.hpp
     title: Mathematics/Garner.hpp
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/MathUtility.hpp
+    title: Mathematics/MathUtility.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
@@ -50,8 +50,10 @@ data:
     \u306E 2 \u51AA\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(N log N)\r\n\t\u5236\
     \u7D04:\r\n\t\ttwo_exp := (mod - 1) \u306B\u542B\u307E\u308C\u308B\u7D20\u56E0\
     \u6570 2 \u306E\u500B\u6570\r\n\t\tN \\leq 2^min(two_exp) ( N \u4E57\u6839\u3092\
-    \u6C42\u3081\u308B\u305F\u3081)\r\n\r\n# \u53C2\u8003\r\nhttps://math314.hateblo.jp/entry/2015/05/07/014908,\
-    \ 2020/07/27\r\nhttps://ja.wikibooks.org/wiki/%E5%88%9D%E7%AD%89%E6%95%B4%E6%95%B0%E8%AB%96/%E5%8E%9F%E5%A7%8B%E6%A0%B9%E3%81%A8%E6%8C%87%E6%95%B0,\
+    \u6C42\u3081\u308B\u305F\u3081)\r\n\t\tT \u306F mod^2 \u3092\u8868\u73FE\u3067\
+    \u304D\u308B\u578B(ex. long long) \u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308B\
+    \ (TODO: int \u3084 ModInt \u306B\u3082\u5BFE\u5FDC\u3059\u308B)\r\n\r\n# \u53C2\
+    \u8003\r\nhttps://math314.hateblo.jp/entry/2015/05/07/014908, 2020/07/27\r\nhttps://ja.wikibooks.org/wiki/%E5%88%9D%E7%AD%89%E6%95%B4%E6%95%B0%E8%AB%96/%E5%8E%9F%E5%A7%8B%E6%A0%B9%E3%81%A8%E6%8C%87%E6%95%B0,\
     \ 2020/07/27\r\nhttp://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html,\
     \ 2020/07/27\r\n*/\r\n\r\n#line 1 \"Mathematics/MathUtility.hpp\"\n\n\n\r\n/*\r\
     \nlast-updated: 2020/09/21\r\n\r\n# \u4ED5\u69D8\r\nT gcd(T a, T b)\r\n\t\u6642\
@@ -104,8 +106,8 @@ data:
     \ y);\r\n\tconst T pm2 = m2 / g;\r\n\tx = (x % pm2 + pm2) % pm2;\r\n\t\r\n\tif\
     \ ((b2 - b1) % g != 0) return {0, 0};\r\n\tconst T t = ((b2 - b1) / g % pm2 +\
     \ pm2) % pm2 * x % pm2;\r\n\treturn {b1 + t * m1, m1 * pm2};\r\n}\r\n} // namespace\
-    \ tk\r\n\r\n\n#line 36 \"Mathematics/Convolution/NumberTheoreticTransform.hpp\"\
-    \n\r\n#include <vector>\r\n#line 40 \"Mathematics/Convolution/NumberTheoreticTransform.hpp\"\
+    \ tk\r\n\r\n\n#line 37 \"Mathematics/Convolution/NumberTheoreticTransform.hpp\"\
+    \n\r\n#include <vector>\r\n#line 41 \"Mathematics/Convolution/NumberTheoreticTransform.hpp\"\
     \n#include <cstdint>\r\n\r\ntemplate<int MOD, int PRIMITIVE_ROOT>\r\nstruct NumberTheoreticTransform\
     \ {\r\npublic:\r\n\tusing value_type = long long;\r\n\tusing size_type = std::uint_fast32_t;\r\
     \n\tstatic_assert(MOD > 0);\r\n\t\r\n\ttemplate<typename T>\r\n\tstatic std::vector<value_type>\
@@ -226,7 +228,7 @@ data:
   isVerificationFile: true
   path: Test/NumberTheoreticTransform_AnyMod.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 16:44:41+09:00'
+  timestamp: '2020-10-30 18:50:11+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/NumberTheoreticTransform_AnyMod.test.cpp

@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://qiita.com/itomomoti/items/5e95aeef3f17a29a41cd,
     - https://snuke.hatenablog.com/entry/2014/12/01/235807,

@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://ikatakos.com/pot/programming_algorithm/graph_theory/bipartite_matching,
     - https://snuke.hatenablog.com/entry/2019/05/07/013609,

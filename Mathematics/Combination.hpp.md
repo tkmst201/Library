@@ -6,7 +6,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links: []
   bundledCode: "#line 1 \"Mathematics/Combination.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
     \ 2020/01/15\r\n\r\n# \u4ED5\u69D8\r\ntemplate\u5F15\u6570 \u306B\u306F ModInt\

@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/SegmentTree.hpp
     title: DataStructure/SegmentTree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/ModInt.hpp
     title: Mathematics/ModInt.hpp
   _extendedRequiredBy: []

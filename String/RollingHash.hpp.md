@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/RollingHash.test.cpp
     title: Test/RollingHash.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://qiita.com/keymoon/items/11fac5627672a6d6a9f6#fnref1,
     - https://trap.jp/post/1036/,
@@ -173,7 +172,7 @@ data:
   path: String/RollingHash.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/RollingHash.test.cpp
 documentation_of: String/RollingHash.hpp

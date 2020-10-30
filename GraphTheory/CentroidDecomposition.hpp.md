@@ -4,27 +4,26 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
-    title: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
-  - icon: ':heavy_check_mark:'
     path: Test/CentroidDecomposition.test.cpp
     title: Test/CentroidDecomposition.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
     title: Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
   - icon: ':heavy_check_mark:'
-    path: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
-    title: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+    path: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+    title: Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+    title: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
   - icon: ':heavy_check_mark:'
     path: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
     title: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
   - icon: ':heavy_check_mark:'
-    path: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
-    title: Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+    path: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+    title: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://codeforces.com/contest/321/submission/91621846
     - https://ferin-tech.hatenablog.com/entry/2020/03/06/162311,
@@ -364,12 +363,12 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
-  - Test/CentroidDecomposition.test.cpp
-  - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
-  - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
   - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
+  - Test/CentroidDecomposition.test.cpp
   - Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+  - Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+  - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+  - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
 documentation_of: GraphTheory/CentroidDecomposition.hpp
 layout: document
 redirect_from:

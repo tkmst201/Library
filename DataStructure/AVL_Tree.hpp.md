@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://ja.wikipedia.org/wiki/AVL%E6%9C%A8,
   bundledCode: "#line 1 \"DataStructure/AVL_Tree.hpp\"\n\n\n\r\n/*\r\nlast-updated:\

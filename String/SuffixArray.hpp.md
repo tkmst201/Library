@@ -3,19 +3,18 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/SuffixArray.lcp.test.cpp
     title: Test/SuffixArray.lcp.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/SuffixArray.sa_is.test.cpp
     title: Test/SuffixArray.sa_is.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/SuffixArray.search.test.cpp
     title: Test/SuffixArray.search.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://blog.shibayu36.org/entry/2017/01/06/103956,
     - https://mametter.hatenablog.com/entry/20180130/p1,
@@ -376,11 +375,11 @@ data:
   path: String/SuffixArray.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/SuffixArray.lcp.test.cpp
-  - Test/SuffixArray.sa_is.test.cpp
   - Test/SuffixArray.search.test.cpp
+  - Test/SuffixArray.sa_is.test.cpp
 documentation_of: String/SuffixArray.hpp
 layout: document
 redirect_from:

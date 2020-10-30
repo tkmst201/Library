@@ -3,13 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/PersistentUnionFind.test.cpp
     title: Test/PersistentUnionFind.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://qiita.com/hotman78/items/9c643feae1de087e6fc5,
   bundledCode: "#line 1 \"DataStructure/PersistentUnionFind.hpp\"\n\n\n\r\n/*\r\n\
@@ -165,7 +164,7 @@ data:
   path: DataStructure/PersistentUnionFind.hpp
   requiredBy: []
   timestamp: '2020-09-26 12:14:19+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/PersistentUnionFind.test.cpp
 documentation_of: DataStructure/PersistentUnionFind.hpp

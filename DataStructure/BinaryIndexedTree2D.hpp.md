@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://algo-logic.info/binary-indexed-tree/,
   bundledCode: "#line 1 \"DataStructure/BinaryIndexedTree2D.hpp\"\n\n\n\r\n/*\r\n\

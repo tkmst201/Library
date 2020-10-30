@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Mathematics/PrimeNumber/enumerate_primes.hpp
     title: Mathematics/PrimeNumber/enumerate_primes.hpp
   _extendedRequiredBy: []
@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://math314.hateblo.jp/entry/2016/06/05/004332,
   bundledCode: "#line 1 \"Mathematics/PrimeNumber/prime_sum.hpp\"\n\n\n\r\n/*\r\n\

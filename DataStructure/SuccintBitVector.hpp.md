@@ -4,21 +4,20 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: Test/WaveletMatrix.range_frequency.test.cpp
-    title: Test/WaveletMatrix.range_frequency.test.cpp
-  - icon: ':x:'
     path: Test/WaveletMatrix.next_prev_value.test.cpp
     title: Test/WaveletMatrix.next_prev_value.test.cpp
   - icon: ':x:'
     path: Test/WaveletMatrix.quantile.test.cpp
     title: Test/WaveletMatrix.quantile.test.cpp
   - icon: ':x:'
+    path: Test/WaveletMatrix.range_frequency.test.cpp
+    title: Test/WaveletMatrix.range_frequency.test.cpp
+  - icon: ':x:'
     path: Test/WaveletMatrix.select.test.cpp
     title: Test/WaveletMatrix.select.test.cpp
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://misteer.hatenablog.com/entry/bit-vector,
     - https://miti-7.hatenablog.com/entry/2018/04/15/155638,
@@ -230,9 +229,9 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - Test/WaveletMatrix.range_frequency.test.cpp
-  - Test/WaveletMatrix.next_prev_value.test.cpp
-  - Test/WaveletMatrix.quantile.test.cpp
   - Test/WaveletMatrix.select.test.cpp
+  - Test/WaveletMatrix.quantile.test.cpp
+  - Test/WaveletMatrix.next_prev_value.test.cpp
 documentation_of: DataStructure/SuccintBitVector.hpp
 layout: document
 redirect_from:

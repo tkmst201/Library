@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
-    path: Mathematics/TwoSat.hpp
-    title: Mathematics/TwoSat.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: GraphTheory/StronglyConnectedComponents.hpp
     title: GraphTheory/StronglyConnectedComponents.hpp
+  - icon: ':heavy_check_mark:'
+    path: Mathematics/TwoSat.hpp
+    title: Mathematics/TwoSat.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
@@ -38,7 +38,7 @@ data:
     \u306E\u5024\u306E\u7D44\u307F\u5408\u308F\u305B\u3067\u3001\u5909\u6570 i \u306E\
     \u771F\u507D\u5024\u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\n\"AC Library\" https://atcoder.jp/posts/517m,\
     \ 2020/09/10\r\n*/\r\n\r\n#line 1 \"GraphTheory/StronglyConnectedComponents.hpp\"\
-    \n\n\n\r\n/*\r\nlast-updated: 2020/08/27\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/10/30\r\n\r\nTODO: SCC: \u975E\u518D\u5E30\u306B\
     \u3059\u308B\r\n\r\n# \u4ED5\u69D8\r\nStronglyConnectedComponents(size_type n)\
     \ :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C\
     \ n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\nStronglyConnectedComponentx(std::vector<std::vector<size_type>>\
@@ -94,14 +94,15 @@ data:
     \ continue;\r\n\t\t\trdfs(rdfs, u);\r\n\t\t\t++c;\r\n\t\t}\r\n\t\t\r\n\t\tif (build_idx_map)\
     \ {\r\n\t\t\tidx_map.assign(c, {});\r\n\t\t\tfor (size_type i = 0; i < size();\
     \ ++i) idx_map[rank[i]].emplace_back(i);\r\n\t\t}\r\n\t\tisbuilt = true;\r\n\t\
-    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) {\r\n\t\tassert(isbuilt);\r\
-    \n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\r\n\tconst std::vector<size_type>\
-    \ & get_map(size_type i) {\r\n\t\tassert(isbuilt);\r\n\t\tassert(i < idx_map.size());\r\
-    \n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\tstd::vector<std::vector<size_type>>\
-    \ get_graph() const {\r\n\t\tassert(isbuilt);\r\n\t\tstd::vector<std::vector<size_type>>\
-    \ res(idx_map.size());\r\n\t\tfor (size_type i = 0; i < idx_map.size(); ++i) {\r\
-    \n\t\t\tfor (size_type j : idx_map[i]) {\r\n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(v);\r\
-    \n\t\t\t}\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
+    \treturn c;\r\n\t}\r\n\t\r\n\tsize_type get_rank(size_type i) const {\r\n\t\t\
+    assert(isbuilt);\r\n\t\tassert(i < size());\r\n\t\treturn rank[i];\r\n\t}\r\n\t\
+    \r\n\tconst std::vector<size_type> & get_map(size_type i) const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tassert(i < idx_map.size());\r\n\t\treturn idx_map[i];\r\n\t}\r\n\t\r\n\t\
+    std::vector<std::vector<size_type>> get_graph() const {\r\n\t\tassert(isbuilt);\r\
+    \n\t\tstd::vector<std::vector<size_type>> res(idx_map.size());\r\n\t\tfor (size_type\
+    \ i = 0; i < idx_map.size(); ++i) {\r\n\t\t\tfor (size_type j : idx_map[i]) {\r\
+    \n\t\t\t\tfor (size_type v : g[j]) res[i].emplace_back(get_rank(v));\r\n\t\t\t\
+    }\r\n\t\t\tstd::sort(begin(res[i]), end(res[i]));\r\n\t\t\tres[i].erase(unique(begin(res[i]),\
     \ end(res[i])), end(res[i]));\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\n\r\n\
     \n#line 38 \"Mathematics/TwoSat.hpp\"\n\r\n#line 41 \"Mathematics/TwoSat.hpp\"\
     \n\r\nstruct TwoSat {\r\n\tusing size_type = std::size_t;\r\n\t\r\nprivate:\r\n\
@@ -152,8 +153,8 @@ data:
   isVerificationFile: true
   path: Test/TwoSat.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2020-10-30 18:50:11+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/TwoSat.test.cpp
 layout: document

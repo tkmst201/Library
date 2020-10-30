@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - http://hos.ac/slides/20150319_flow.pdf,
     - http://vartkw.hatenablog.com/entry/2016/12/02/002703,

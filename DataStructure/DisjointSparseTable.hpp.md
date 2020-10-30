@@ -9,7 +9,6 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    '*NOT_SPECIAL_COMMENTS*': ''
     links:
     - https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b,
   bundledCode: "#line 1 \"DataStructure/DisjointSparseTable.hpp\"\n\n\n\r\n/*\r\n\
