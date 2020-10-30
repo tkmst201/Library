@@ -25,6 +25,7 @@ static std::vector<value_type> multiply(const std::vector<T> & A, const std::vec
 	制約:
 		two_exp := (mod - 1) に含まれる素因数 2 の個数
 		N \leq 2^min(two_exp) ( N 乗根を求めるため)
+		T は mod^2 を表現できる型(ex. long long) である必要がある (TODO: int や ModInt にも対応する)
 
 # 参考
 https://math314.hateblo.jp/entry/2015/05/07/014908, 2020/07/27

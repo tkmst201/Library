@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_STRONGLY_CONNECTED_COMPONENTS_HPP
 
 /*
-last-updated: 2020/08/27
+last-updated: 2020/10/30
 
 TODO: SCC: 非再帰にする
 
@@ -122,13 +122,13 @@ public:
 		return c;
 	}
 	
-	size_type get_rank(size_type i) {
+	size_type get_rank(size_type i) const {
 		assert(isbuilt);
 		assert(i < size());
 		return rank[i];
 	}
 	
-	const std::vector<size_type> & get_map(size_type i) {
+	const std::vector<size_type> & get_map(size_type i) const {
 		assert(isbuilt);
 		assert(i < idx_map.size());
 		return idx_map[i];
@@ -139,7 +139,7 @@ public:
 		std::vector<std::vector<size_type>> res(idx_map.size());
 		for (size_type i = 0; i < idx_map.size(); ++i) {
 			for (size_type j : idx_map[i]) {
-				for (size_type v : g[j]) res[i].emplace_back(v);
+				for (size_type v : g[j]) res[i].emplace_back(get_rank(v));
 			}
 			std::sort(begin(res[i]), end(res[i]));
 			res[i].erase(unique(begin(res[i]), end(res[i])), end(res[i]));
