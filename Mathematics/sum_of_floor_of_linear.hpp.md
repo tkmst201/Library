@@ -3,11 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/sum_of_floor_of_linear.test.cpp
     title: Test/sum_of_floor_of_linear.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://qiita.com/HNJ/items/564f15316719209df73c,
@@ -53,7 +53,7 @@ data:
   path: Mathematics/sum_of_floor_of_linear.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/sum_of_floor_of_linear.test.cpp
 documentation_of: Mathematics/sum_of_floor_of_linear.hpp

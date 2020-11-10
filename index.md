@@ -51,13 +51,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: DataStructure/SparseTable.hpp
       title: DataStructure/SparseTable.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/SuccintBitVector.hpp
       title: DataStructure/SuccintBitVector.hpp
     - icon: ':heavy_check_mark:'
       path: DataStructure/UnionFind.hpp
       title: DataStructure/UnionFind.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: DataStructure/WaveletMatrix.hpp
       title: DataStructure/WaveletMatrix.hpp
   - name: GraphTheory
@@ -118,7 +118,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Mathematics/TwoSat.hpp
       title: Mathematics/TwoSat.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/sum_of_floor_of_linear.hpp
       title: Mathematics/sum_of_floor_of_linear.hpp
   - name: Mathematics/Convolution
@@ -295,19 +295,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: Test/UnionFind.test.cpp
       title: Test/UnionFind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/WaveletMatrix.next_prev_value.test.cpp
       title: Test/WaveletMatrix.next_prev_value.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/WaveletMatrix.quantile.test.cpp
       title: Test/WaveletMatrix.quantile.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/WaveletMatrix.range_frequency.test.cpp
       title: Test/WaveletMatrix.range_frequency.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/WaveletMatrix.select.test.cpp
       title: Test/WaveletMatrix.select.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/sum_of_floor_of_linear.test.cpp
       title: Test/sum_of_floor_of_linear.test.cpp
 layout: toppage

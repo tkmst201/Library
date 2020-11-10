@@ -3,20 +3,20 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/WaveletMatrix.next_prev_value.test.cpp
     title: Test/WaveletMatrix.next_prev_value.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/WaveletMatrix.quantile.test.cpp
     title: Test/WaveletMatrix.quantile.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/WaveletMatrix.range_frequency.test.cpp
     title: Test/WaveletMatrix.range_frequency.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: Test/WaveletMatrix.select.test.cpp
     title: Test/WaveletMatrix.select.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://algoogle.hadrori.jp/algorithm/wavelet.html,
@@ -411,7 +411,7 @@ data:
   path: DataStructure/WaveletMatrix.hpp
   requiredBy: []
   timestamp: '2020-09-21 15:29:04+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/WaveletMatrix.range_frequency.test.cpp
   - Test/WaveletMatrix.select.test.cpp

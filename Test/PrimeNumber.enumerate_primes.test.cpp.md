@@ -16,12 +16,12 @@ data:
   bundledCode: "#line 1 \"Test/PrimeNumber.enumerate_primes.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/enumerate_primes\"\r\n\r\n#line 1 \"Mathematics/PrimeNumber/enumerate_primes.hpp\"\
     \n\n\n\r\n/*\r\nlast-updated: 2020/09/08\r\n\r\n# \u4ED5\u69D8\r\nstd::vector<std::uint32_t>\
-    \ enumerate_primes(std::uint32_t n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n /\
-    \ loglog n)\r\n\u7A7A\u9593\u8A08\u7B97\u91CF: \u7D20\u6570\u306E\u500B\u6570\
-    \ + \u0398(n^(1/2))\r\n\r\nn \u4EE5\u4E0B\u306E\u7D20\u6570\u3092\u6607\u9806\u306B\
-    \u4E26\u3079\u305F\u914D\u5217\u3092\u8FD4\u3059\r\n\u30A8\u30E9\u30C8\u30B9\u30C6\
-    \u30CD\u30B9\u306E\u7BE9\u306E {2, 3, 5} \u306E\u500D\u6570\u3092\u9664\u3044\u305F\
-    \u9AD8\u901F\u5316\u7248\r\n\r\n\r\n# \u53C2\u8003\r\nhttps://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,\
+    \ enumerate_primes(std::uint32_t n) :\r\n\u6642\u9593\u8A08\u7B97\u91CF: O(n loglog\
+    \ n)\r\n\u7A7A\u9593\u8A08\u7B97\u91CF: \u7D20\u6570\u306E\u500B\u6570 + \u0398\
+    (n^(1/2))\r\n\r\nn \u4EE5\u4E0B\u306E\u7D20\u6570\u3092\u6607\u9806\u306B\u4E26\
+    \u3079\u305F\u914D\u5217\u3092\u8FD4\u3059\r\n\u30A8\u30E9\u30C8\u30B9\u30C6\u30CD\
+    \u30B9\u306E\u7BE9\u306E {2, 3, 5} \u306E\u500D\u6570\u3092\u9664\u3044\u305F\u9AD8\
+    \u901F\u5316\u7248\r\n\r\n\r\n# \u53C2\u8003\r\nhttps://en.wikipedia.org/wiki/Sieve_of_Eratosthenes,\
     \ 2020/09/07\r\nhttps://qiita.com/peria/items/a4ff4ddb3336f7b81d50, 2020/09/08\r\
     \n*/\r\n\r\n#include <vector>\r\n#include <cstdint>\r\n#include <algorithm>\r\n\
     \r\nnamespace tk {\r\nstd::vector<std::uint32_t> enumerate_primes(std::uint32_t\
@@ -97,7 +97,7 @@ data:
   isVerificationFile: true
   path: Test/PrimeNumber.enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2020-11-10 21:09:37+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/PrimeNumber.enumerate_primes.test.cpp
