@@ -7,6 +7,8 @@ last-updated: 2020/01/15
 # 仕様
 template引数 には ModInt を渡す。(require get_mod())
 
+TODO: r or n - r が小さいときの愚直計算の追加
+
 Construct : Amortized Θ(max k + (logM)^2 ) ??
 Query : Amortized Θ(1) ?? 謎
 

@@ -6,7 +6,7 @@ last-updated: 2020/09/08
 
 # 仕様
 std::vector<std::uint32_t> enumerate_primes(std::uint32_t n) :
-時間計算量: O(n / loglog n)
+時間計算量: O(n loglog n)
 空間計算量: 素数の個数 + Θ(n^(1/2))
 
 n 以下の素数を昇順に並べた配列を返す
