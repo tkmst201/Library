@@ -6,7 +6,7 @@
 			"** VS Code ユーザースニペット一覧 **",
 			"https://github.com/tkmst201/Library の抜粋 + Utility",
 			"",
-			"last-updated: 2020/11/10",
+			"last-updated: 2020/11/11",
 			"最新版はこちら: https://github.com/tkmst201/Library/blob/master/cpp.json",
 			"手動で作成しているので更新し忘れがあるかもしれません",
 			"",
@@ -20,9 +20,9 @@
 			"2020/11/07 compress2: 2 つの vector を合わせた座標圧縮 O(NlogN)", // TODO: compress2: cx を生成して返すように変更
 			"2020/11/10 gcd：最大公約数",
 			"2020/11/10 lcm：最小公倍数",
-			"2020/11/10 prime_factorization: 素因数分解 O(√N)", // TODO: prime_factorization: より高速なものに変更
-			"2020/11/10 find_divisor: 約数列挙 O(√N)", // TODO: find_divisor 整理して git で管理する
-			"2020/11/10 sieve: 素数列挙(エラトステネスの篩) O(NloglogN)",
+			"2020/11/11 prime_factorization: 素因数分解 O(√N)", // TODO: prime_factorization: より高速なものに変更
+			"2020/11/11 find_divisor: 約数列挙 O(√N)", // TODO: find_divisor: 整理して git で管理する
+			"2020/11/11 sieve: 素数列挙(エラトステネスの篩) O(NloglogN)",
 			"2020/11/11 sieve_smallest_prime_factor: [i] := i の最小の素因数 となるようなテーブルを作成 O(n loglog n)",
 			"2020/11/11 fast_prime_factorization: smallest_prime_factor テーブルを用いて素因数分解を行う O(log n)",
 			"",
@@ -59,7 +59,7 @@
 		],
 		"description": [
 			"ユーザスニペット一覧",
-			"2020/11/10",
+			"2020/11/11",
 		]
 	},
 	
@@ -176,7 +176,7 @@
 			"}\n",
 		],
 		"description": [
-			"最大公倍数",
+			"最大公約数",
 			"2020/11/10",
 		]
 	},
@@ -197,25 +197,19 @@
 	"prime_factorization": {
 		"prefix": "prime_factorization",
 		"body": [
-			"using pll = std::pair<ll, ll>;",
-			"std::vector<pll> prime_factorization(ll n) {",
-			"\tstd::vector<pll> res;",
-			"\t",
+			"std::vector<std::pair<ll, ll>> prime_factorization(ll n) {",
+			"\tstd::vector<std::pair<ll, ll>> res;",
 			"\tfor (ll i = 2; i * i <= n; i++) {",
-			"\t\tif (n % i == 0) res.emplace_back(i, 0);",
-			"\t\twhile (n % i == 0) {",
-			"\t\t\tn /= i;",
-			"\t\t\t++res.back().second;",
-			"\t\t}",
+			"\t\tif (n % i == 0) res.emplace_back(i, 1), n /= i;",
+			"\t\twhile (n % i == 0) ++res.back().second, n /= i;",
 			"\t}",
 			"\tif (n > 1) res.emplace_back(n, 1);",
-			"\t",
 			"\treturn res;",
-			"}\n",
+			"}",
 		],
 		"description": [
 			"素因数分解 O(√N)",
-			"2020/11/10",
+			"2020/11/11",
 		]
 	},
 	
@@ -224,19 +218,17 @@
 		"body": [
 			"std::vector<ll> find_divisor(ll n) {",
 			"\tstd::vector<ll> divisor;",
-			"\t",
 			"\tll i = 1;",
 			"\tfor (; i * i <= n; i++) if (n % i == 0) divisor.push_back(i);",
 			"\ti--;",
 			"\tif (i * i == n) i--;",
 			"\tfor (; i >= 1; i--) if (n % i == 0) divisor.push_back(n / i);",
-			"\t",
 			"\treturn divisor;",
 			"}\n",
 		],
 		"description": [
 			"約数列挙 O(√N)",
-			"2020/11/10",
+			"2020/11/11",
 		]
 	},
 	
@@ -246,21 +238,18 @@
 			"std::vector<int> sieve(int n) {",
 			"\tstd::vector<int> res;",
 			"\tstd::vector<bool> is_prime(n + 1, true);",
-			"\t",
 			"\tis_prime[0] = is_prime[1] = false;",
-			"\t",
-			"\tfor (ll i = 2; i * i <= n; i++) if (is_prime[i]) {",
-			"\t\tres.push_back(i);",
-			"\t\tfor (ll j = 1; i * j <= n; j++) is_prime[i * j] = false;",
+			"\tfor (int i = 2; i * i <= n; i++) {",
+			"\t\tif (!is_prime[i]) continue;",
+			"\t\tfor (int j = i * i; j <= n; j += i) is_prime[j] = false;",
 			"\t}",
-			"\t",
-			"\tfor (int i = 0; i <= n; ++i) if (is_prime[i]) res.push_back(i);",
+			"\tfor (int i = 2; i <= n; ++i) if (is_prime[i]) res.emplace_back(i);",
 			"\treturn res;",
-			"}\n",
+			"}",
 		],
 		"description": [
 			"素数列挙(エラトステネスの篩)",
-			"2020/11/10",
+			"2020/11/11",
 		]
 	},
 	
@@ -292,6 +281,7 @@
 		"prefix": "fast_prime_factorization",
 		"body": [
 			"std::vector<std::pair<int, int>> fast_prime_factorization(int n, const std::vector<int> & smallest_prime_factor) {",
+			"\tassert(n >= 0);",
 			"\tassert(n <= smallest_prime_factor.size());",
 			"\tstd::vector<std::pair<int, int>> res;",
 			"\tfor (; n > 1; n /= smallest_prime_factor[n]) {",
