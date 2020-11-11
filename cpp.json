@@ -4,9 +4,10 @@
 		"body": [
 			"/*",
 			"** VS Code ユーザースニペット一覧 **",
+			"https://github.com/tkmst201/Library の抜粋 + Utility",
 			"",
 			"last-updated: 2020/11/10",
-			"https://github.com/tkmst201/Library の抜粋 + Utility",
+			"最新版はこちら: https://github.com/tkmst201/Library/blob/master/cpp.json",
 			"手動で作成しているので更新し忘れがあるかもしれません",
 			"",
 			"# Utility (git で管理していない詰め合わせ)",
@@ -21,7 +22,9 @@
 			"2020/11/10 lcm：最小公倍数",
 			"2020/11/10 prime_factorization: 素因数分解 O(√N)", // TODO: prime_factorization: より高速なものに変更
 			"2020/11/10 find_divisor: 約数列挙 O(√N)", // TODO: find_divisor 整理して git で管理する
-			"2020/11/10 sieve: 素数列挙(エラトステネスの篩) O(NloglogN)", // TODO: sieve: osa_k 法に変更(最小の素因数)
+			"2020/11/10 sieve: 素数列挙(エラトステネスの篩) O(NloglogN)",
+			"2020/11/11 sieve_smallest_prime_factor: [i] := i の最小の素因数 となるようなテーブルを作成 O(n loglog n)",
+			"2020/11/11 fast_prime_factorization: smallest_prime_factor テーブルを用いて素因数分解を行う O(log n)",
 			"",
 			"# DataStructure",
 			"2020/09/18 SegmentTree: セグ木",
@@ -51,7 +54,7 @@
 			"",
 			"# String",
 			"2020/08/22 RollingHash: ローリングハッシュ",
-			"",
+			"2020/08/25 SuffixArray: SuffixArray(SA-IS, LCP)",
 			"*/\n",
 		],
 		"description": [
@@ -261,6 +264,49 @@
 		]
 	},
 	
+	"sieve_smallest_prime_factor": {
+		"prefix": "sieve_smallest_prime_factor",
+		"body": [
+			"std::vector<int> sieve_smallest_prime_factor(int n) {",
+			"\tassert(n >= 0);",
+			"\tstd::vector<int> res(n + 1);",
+			"\tstd::iota(begin(res), end(res), 0);",
+			"\t",
+			"\tfor (int i = 2; i * i <= n; ++i) {",
+			"\t\tif (res[i] < i) continue;",
+			"\t\tfor (int j = i * i; j <= n; j += i) {",
+			"\t\t\tif (res[j] == j) res[j] = i;",
+			"\t\t}",
+			"\t}",
+			"\t",
+			"\treturn res;",
+			"}\n",
+		],
+		"description": [
+			"[i] := i の最小の素因数 となるようなテーブルを作成 O(n loglog n)",
+			"2020/11/11",
+		]
+	},
+	
+	"fast_prime_factorization": {
+		"prefix": "fast_prime_factorization",
+		"body": [
+			"std::vector<std::pair<int, int>> fast_prime_factorization(int n, const std::vector<int> & smallest_prime_factor) {",
+			"\tassert(n <= smallest_prime_factor.size());",
+			"\tstd::vector<std::pair<int, int>> res;",
+			"\tfor (; n > 1; n /= smallest_prime_factor[n]) {",
+			"\t\tif (res.empty() || res.back().first != smallest_prime_factor[n]) res.emplace_back(smallest_prime_factor[n], 1);",
+			"\t\telse ++res.back().second;",
+			"\t}",
+			"\treturn res;",
+			"}\n",
+		],
+		"description": [
+			"smallest_prime_factor テーブルを用いて素因数分解を行う O(log n)",
+			"2020/11/11",
+		]
+	},
+
 	
 	/* DataStructure */
 	"SegmentTree": {
@@ -2796,7 +2842,7 @@
 			"};\n",
 		],
 		"description": [
-			"SuffixArray",
+			"SuffixArray(SA-IS, LCP)",
 			"https://github.com/tkmst201/Library/blob/master/String/SuffixArray.hpp",
 			"2020/08/25"
 		]
