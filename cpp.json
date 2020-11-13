@@ -21,7 +21,7 @@
 			"2020/11/10 gcd：最大公約数",
 			"2020/11/10 lcm：最小公倍数",
 			"2020/11/11 prime_factorization: 素因数分解 O(√N)", // TODO: prime_factorization: より高速なものに変更
-			"2020/11/11 find_divisor: 約数列挙 O(√N)", // TODO: find_divisor: 整理して git で管理する
+			"2020/11/13 find_divisor: 約数列挙 O(√N)", // TODO: find_divisor: 整理して git で管理する
 			"2020/11/11 sieve: 素数列挙(エラトステネスの篩) O(NloglogN)",
 			"2020/11/11 sieve_smallest_prime_factor: [i] := i の最小の素因数 となるようなテーブルを作成 O(n loglog n)",
 			"2020/11/11 fast_prime_factorization: smallest_prime_factor テーブルを用いて素因数分解を行う O(log n)",
@@ -217,18 +217,19 @@
 		"prefix": "find_divisor",
 		"body": [
 			"std::vector<ll> find_divisor(ll n) {",
+			"\tassert(n > 0);",
 			"\tstd::vector<ll> divisor;",
 			"\tll i = 1;",
-			"\tfor (; i * i <= n; i++) if (n % i == 0) divisor.push_back(i);",
-			"\ti--;",
-			"\tif (i * i == n) i--;",
-			"\tfor (; i >= 1; i--) if (n % i == 0) divisor.push_back(n / i);",
+			"\tfor (; i * i <= n; i++) if (n % i == 0) divisor.emplace_back(i);",
+			"\tint p = divisor.size() - 1;",
+			"\tif (divisor[p] * divisor[p]) --p;",
+			"\tfor (; p >= 0; --p) divisor.emplace_back(n / divisor[p]);",
 			"\treturn divisor;",
 			"}\n",
 		],
 		"description": [
 			"約数列挙 O(√N)",
-			"2020/11/11",
+			"2020/11/13",
 		]
 	},
 	
