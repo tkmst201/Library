@@ -411,7 +411,7 @@
 		],
 		"description": [
 			"セグ木",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/SegmentTree.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp",
 			"2020/09/18",
 		]
 	},
@@ -540,7 +540,7 @@
 		],
 		"description": [
 			"遅延伝搬セグ木",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/LazySegmentTree.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp",
 			"2020/09/16",
 		]
 	},
@@ -603,7 +603,7 @@
 		],
 		"description": [
 			"BIT",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/BinaryIndexedTree.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/BinaryIndexedTree2D.hpp",
 			"2020/08/15",
 		]
 	},
@@ -649,7 +649,7 @@
 		],
 		"description": [
 			"UnionFind",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/UnionFind.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/UnionFind.hpp",
 			"2020/04/22",
 		]
 	},
@@ -823,7 +823,7 @@
 		],
 		"description": [
 			"SuccintBitVector",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/SuccintBitVector.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/SuccintBitVector.hpp",
 			"2020/09/07",
 		]
 	},
@@ -1102,7 +1102,7 @@
 		],
 		"description": [
 			"WaveletMatrix",
-			"https://github.com/tkmst201/Library/blob/master/DataStructure/WaveletMatrix.hpp",
+			"https://tkmst201.github.io/Library/DataStructure/WaveletMatrix.hpp",
 			"2020/09/07",
 		]
 	},
@@ -1302,7 +1302,7 @@
 		],
 		"description": [
 			"重軽分解",
-			"https://github.com/tkmst201/Library/blob/master/GraphTheory/HeavyLightDecomposition.hpp",
+			"https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp",
 			"2020/09/18",
 		]
 	},
@@ -1437,7 +1437,7 @@
 		],
 		"description": [
 			"重軽分解を用いた (パス or 部分木) クエリ処理",
-			"https://github.com/tkmst201/Library/blob/master/GraphTheory/HeavyLightDecomposition_Query.hpp",
+			"https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition_Query.hpp",
 			"2020/09/18",
 		]
 	},
@@ -1546,7 +1546,7 @@
 		],
 		"description": [
 			"強連結成分分解",
-			"https://github.com/tkmst201/Library/blob/master/GraphTheory/StronglyConnectedComponents.hpp",
+			"https://tkmst201.github.io/Library/GraphTheory/StronglyConnectedComponents.hpp",
 			"2020/10/30",
 		]
 	},
@@ -1629,7 +1629,7 @@
 		],
 		"description": [
 			"ModInt",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/ModInt.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/ModInt.hpp",
 			"2020/02/26"
 		]
 	},
@@ -1681,7 +1681,7 @@
 		],
 		"description": [
 			"組み合わせ, 階乗, 階乗逆元, 逆元 (動的構築)",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/Combination.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/Combination.hpp",
 			"2020/02/12",
 		]
 	},
@@ -1733,7 +1733,7 @@
 		],
 		"description": [
 			"組み合わせ, 階乗, 階乗逆元, 逆元 (動的構築) ac-library ver.",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/Combination.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/Combination.hpp",
 			"2020/02/12",
 		]
 	},
@@ -1823,7 +1823,7 @@
 		],
 		"description": [
 			"便利数学関数詰め合わせ (gcd, lcm, ext_gcd, mod_pow, mod_inv, chinese_remainder)",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/MathUtility.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/MathUtility.hpp",
 			"2020/09/21"
 		]
 	},
@@ -1954,7 +1954,7 @@
 		],
 		"description": [
 			"素数列挙(高速化されたエラトステネスの篩)",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/PrimeNumber/enumerate_primes.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/PrimeNumber/enumerate_primes.hpp",
 			"2020/09/08"
 		]
 	},
@@ -2161,7 +2161,7 @@
 		],
 		"description": [
 			"行列(mint)",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/Matrix.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/Matrix.hpp",
 			"2020/04/13"
 		]
 	},
@@ -2285,7 +2285,7 @@
 		],
 		"description": [
 			"実数の畳み込み",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp",
 			"2020/08/04"
 		]
 	},
@@ -2352,7 +2352,7 @@
 		"description": [
 			"2-SAT ソルバ",
 			"StronglyConnectedConponents が必要",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/TwoSat.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/TwoSat.hpp",
 			"2020/09/10"
 		]
 	},
@@ -2401,7 +2401,7 @@
 		],
 		"description": [
 			"Sum_{i = 0}^{N - 1} floor((A * i + B) / M) を求める",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/sum_of_floor_of_linear.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/sum_of_floor_of_linear.hpp",
 			"2020/09/11"
 		]
 	},
@@ -2441,7 +2441,7 @@
 		],
 		"description": [
 			"多項式と 1 次式の乗除",
-			"https://github.com/tkmst201/Library/blob/master/Mathematics/Polynomial.hpp",
+			"https://tkmst201.github.io/Library/Mathematics/Polynomial.hpp",
 			"2020/11/02"
 		]
 	},
@@ -2580,7 +2580,7 @@
 		],
 		"description": [
 			"ローリングハッシュ",
-			"https://github.com/tkmst201/Library/blob/master/String/RollingHash.hpp",
+			"https://tkmst201.github.io/Library/String/RollingHash.hpp",
 			"2020/08/22"
 		]
 	},
@@ -2834,7 +2834,7 @@
 		],
 		"description": [
 			"SuffixArray(SA-IS, LCP)",
-			"https://github.com/tkmst201/Library/blob/master/String/SuffixArray.hpp",
+			"https://tkmst201.github.io/Library/String/SuffixArray.hpp",
 			"2020/08/25"
 		]
 	},
