@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_NUMBER_THEORETIC_TRANSFORM_ANY_MOD_HPP
 
 /*
-last-updated: 2020/09/21
+last-updated: 2020/11/19
 
 # 解説
 A, B それぞれの要素の最大値を M として、max(|A|, |B|) * M^2 \leq \prod mods となるように mod を選ぶ必要がある
@@ -16,9 +16,11 @@ NumberTheoreticTransform<167'772'161, 3> // 2^25 | (mod - 1)
 template 引数:
 	int MOD: mod を取りたい値
 
-static std::vector<value_type> multiply(const std::vector<T> & A, const std::vector<T> & B)
-	時間計算量: Θ(N log N)
-	A, B の畳み込み modulo. mod を返す
+static std::vector<T> multiply(const std::vector<T> & A, const std::vector<T> & B)
+	時間計算量: Θ(N log N) (N := |A| + |B| - 1 以上の最小の 2 冪)
+	A, B の法 mod の元での畳み込み(サイズ |A| + |B| - 1) を返す
+	
+	制約は NumberTheoreticTransform と同じ
 */
 
 #include "Mathematics/Convolution/NumberTheoreticTransform.hpp"
@@ -36,7 +38,7 @@ public:
 	static_assert(MOD > 0);
 	
 	template<typename T>
-	static std::vector<value_type> multiply(const std::vector<T> & A, const std::vector<T> & B) {
+	static std::vector<T> multiply(const std::vector<T> & A, const std::vector<T> & B) {
 		std::vector<value_type> m;
 		auto ntt1_res = NumberTheoreticTransform<1'224'736'769, 3>::multiply(A, B);
 		m.emplace_back(1'224'736'769);
@@ -48,7 +50,7 @@ public:
 		// m.emplace_back(998'244'353);
 		
 		std::vector<value_type> b(m.size());
-		std::vector<value_type> res(ntt1_res.size());
+		std::vector<T> res(ntt1_res.size());
 		for (size_type i = 0; i < res.size(); ++i) {
 			b[0] = ntt1_res[i];
 			b[1] = ntt2_res[i];
