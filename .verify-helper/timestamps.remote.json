@@ -45,5 +45,6 @@
 "Test/WaveletMatrix.quantile.test.cpp": "2020-09-21 15:29:04 +0900",
 "Test/WaveletMatrix.range_frequency.test.cpp": "2020-09-21 15:29:04 +0900",
 "Test/WaveletMatrix.select.test.cpp": "2020-09-21 15:29:04 +0900",
-"Test/sum_of_floor_of_linear.test.cpp": "2020-09-21 15:29:04 +0900"
+"Test/sum_of_floor_of_linear.test.cpp": "2020-09-21 15:29:04 +0900",
+"Test/zeta_moebius_transform.set.1.test.cpp": "2020-11-19 18:21:01 +0900"
 }
