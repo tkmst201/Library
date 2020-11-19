@@ -2,9 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: Test/zeta_moebius_transform.set.1.test.cpp
+    title: Test/zeta_moebius_transform.set.1.test.cpp
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://aprilganmo.hatenablog.com/entry/2020/02/27/170239
@@ -186,8 +189,9 @@ data:
   path: Mathematics/zeta_moebius_transform.hpp
   requiredBy: []
   timestamp: '2020-11-19 17:25:25+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - Test/zeta_moebius_transform.set.1.test.cpp
 documentation_of: Mathematics/zeta_moebius_transform.hpp
 layout: document
 redirect_from:

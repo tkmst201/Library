@@ -121,7 +121,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Mathematics/sum_of_floor_of_linear.hpp
       title: Mathematics/sum_of_floor_of_linear.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: Mathematics/zeta_moebius_transform.hpp
       title: Mathematics/zeta_moebius_transform.hpp
   - name: Mathematics/Convolution
@@ -313,7 +313,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: Test/sum_of_floor_of_linear.test.cpp
       title: Test/sum_of_floor_of_linear.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: Test/zeta_moebius_transform.set.1.test.cpp
       title: Test/zeta_moebius_transform.set.1.test.cpp
 layout: toppage
