@@ -1,7 +1,7 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2446?year=2012"
 #define ERROR "1e-7"
 
-#include "MatheMatics/zeta_moebius_transform.hpp"
+#include "Mathematics/zeta_moebius_transform.hpp"
 #include "Mathematics/MathUtility.hpp"
 
 #include <vector>
