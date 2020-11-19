@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_RADIX2_HPP
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/11/19
 
 基数 2 Cooley-Tukey
 
@@ -12,9 +12,12 @@ last-updated: 2020/08/02
 
 # 仕様
 template<typename T>
-static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) :
-	θ(n log n)
+static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B)
+	時間計算量: Θ(N log N) (N := |A| + |B| - 1 以上の最小の 2 冪)
 	2 つの多項式の乗算を行う。
+	制約:
+		T: int | double
+		戻り値は double 型の配列(サイズ |A| + |B| - 1)
 	
 # 参考
 周波数間引き FFT と 時間間引き FFT それぞれ参照
@@ -53,6 +56,7 @@ public:
 		std::vector<value_type> res;
 		res.reserve(n);
 		for (size_type i = 0; i < n; ++i) res.emplace_back(std::conj(c[i]).real() / static_cast<value_type>(n));
+		res.resize(A.size() + B.size() - 1);
 		return res;
 	}
 	

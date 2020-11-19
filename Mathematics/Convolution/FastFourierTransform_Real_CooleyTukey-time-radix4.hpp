@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP
 
 /*
-last-updated: 2020/08/04
+last-updated: 2020/11/19
 
 実数の畳み込み
 基数 4 周波数間引き Cooley-Tukey
@@ -11,9 +11,12 @@ last-updated: 2020/08/04
 
 # 仕様
 template<typename T>
-static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) :
-	θ(n log n)
+static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B)
+	時間計算量: Θ(N log N) (N := |A| + |B| - 1 以上の最小の 2 冪)
 	2 つの多項式の乗算を行う。
+	制約:
+		T: int | double
+		戻り値は double 型の配列(サイズ |A| + |B| - 1)
 
 # 参考
 基数 4 の時間間引き FFT
@@ -70,6 +73,7 @@ public:
 			res.emplace_back(a[i].real() / static_cast<value_type>(m));
 			res.emplace_back(-a[i].imag() / static_cast<value_type>(m));
 		}
+		res.resize(A.size() + B.size() - 1);
 		return res;
 	}
 	

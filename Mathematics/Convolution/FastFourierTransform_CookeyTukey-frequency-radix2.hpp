@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_COOLEY_TUKEY_FREQUENCY_RADIX2_HPP
 
 /*
-last-updated: 2020/08/02
+last-updated: 2020/11/19
 
 基数 2 周波数間引き Cooley-Tukey
 
@@ -23,9 +23,12 @@ F[\omega_N^{-(2i + 1)}] = \Sum_{k = 0}^{N/2 - 1} (f[k] - f[k + N/2]) \omega_{N/2
 
 # 仕様
 template<typename T>
-static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) :
-	θ(n log n)
+static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B)
+	時間計算量: Θ(N log N) (N := |A| + |B| - 1 以上の最小の 2 冪)
 	2 つの多項式の乗算を行う。
+	制約:
+		T: int | double
+		戻り値は double 型の配列(サイズ |A| + |B| - 1)
 
 # 参考
 http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/05/02
@@ -64,6 +67,7 @@ public:
 		std::vector<value_type> res;
 		res.reserve(n);
 		for (size_type i = 0; i < n; ++i) res.emplace_back(std::conj(c[i]).real() / static_cast<value_type>(n));
+		res.resize(A.size() + B.size() - 1);
 		return res;
 	}
 	

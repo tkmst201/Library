@@ -48,7 +48,7 @@
 			"2020/09/21 MathUtility: 便利数学関数詰め合わせ (gcd, lcm, ext_gcd, mod_pow, mod_inv, chinese_remainder)",
 			"2020/09/08 enumerate_primes: 素数列挙(高速化されたエラトステネスの篩)",
 			"2020/04/13 Matrix: 行列(mint)",
-			"2020/08/04 FastFourierTransform: 実数の畳み込み",
+			"2020/11/19 FastFourierTransform: 実数の畳み込み",
 			"2020/09/10 TwoSat: 2-SAT ソルバ [StronglyConnectedConponents が必要]",
 			"2020/09/11 sum_of_floor_of_linear: Sum_{i = 0}^{N - 1} floor((A * i + B) / M) を求める",
 			"2020/11/02 Polynomial: 多項式と 1 次式の乗除",
@@ -2302,6 +2302,7 @@
 			"\t\t\tres.emplace_back(a[i].real() / static_cast<value_type>(m));",
 			"\t\t\tres.emplace_back(-a[i].imag() / static_cast<value_type>(m));",
 			"\t\t}",
+			"\t\tres.resize(A.size() + B.size() - 1);",
 			"\t\treturn res;",
 			"\t}",
 			"\t",
@@ -2373,7 +2374,7 @@
 		"description": [
 			"実数の畳み込み",
 			"https://tkmst201.github.io/Library/Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp",
-			"2020/08/04"
+			"2020/11/19"
 		]
 	},
 	
