@@ -137,16 +137,16 @@ data:
   isVerificationFile: false
   path: Mathematics/MathUtility.hpp
   requiredBy:
-  - Mathematics/Convolution/NumberTheoreticTransform.hpp
   - Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp
+  - Mathematics/Convolution/NumberTheoreticTransform.hpp
   - Mathematics/Garner.hpp
   timestamp: '2020-09-21 16:44:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/NumberTheoreticTransform.test.cpp
-  - Test/MathUtility.chinese_remainder.test.cpp
   - Test/Garner.test.cpp
   - Test/NumberTheoreticTransform_AnyMod.test.cpp
+  - Test/MathUtility.chinese_remainder.test.cpp
+  - Test/NumberTheoreticTransform.test.cpp
 documentation_of: Mathematics/MathUtility.hpp
 layout: document
 redirect_from:

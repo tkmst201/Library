@@ -134,12 +134,12 @@ data:
   timestamp: '2020-09-17 16:57:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/DynamicSegmentTree.test.cpp
-  - Test/SegmentTree.fold.test.cpp
-  - Test/Matrix_Determinant.test.cpp
   - Test/LazySegmentTree.test.cpp
-  - Test/SlidingWindowAggregation.test.cpp
+  - Test/SegmentTree.fold.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+  - Test/SlidingWindowAggregation.test.cpp
+  - Test/Matrix_Determinant.test.cpp
+  - Test/DynamicSegmentTree.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document
 redirect_from:

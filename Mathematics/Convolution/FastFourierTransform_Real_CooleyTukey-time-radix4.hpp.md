@@ -11,13 +11,16 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp\"\
-    \n\n\n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/11/19\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\
     \u8FBC\u307F\r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\
     \n\r\n\u30E9\u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F\
     (\u306E\u306F\u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
-    \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
-    \u3002\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
+    \ multiply(const std::vector<T> &A, const std::vector<T> &B)\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(N log N) (N := |A| + |B| - 1 \u4EE5\u4E0A\u306E\u6700\
+    \u5C0F\u306E 2 \u51AA)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\
+    \u3092\u884C\u3046\u3002\r\n\t\u5236\u7D04:\r\n\t\tT: int | double\r\n\t\t\u623B\
+    \u308A\u5024\u306F double \u578B\u306E\u914D\u5217(\u30B5\u30A4\u30BA |A| + |B|\
+    \ - 1)\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
     \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\n#include <vector>\r\
     \n#include <complex>\r\n#include <algorithm>\r\n\r\nstruct FastFourierTransform\
     \ {\r\npublic:\r\n\tusing value_type = double;\r\n\tusing size_type = std::size_t;\r\
@@ -41,23 +44,23 @@ data:
     \n\t\t}\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<value_type> res;\r\n\t\
     \tres.reserve(n);\r\n\t\tfor (size_type i = 0; i < m; ++i) {\r\n\t\t\tres.emplace_back(a[i].real()\
     \ / static_cast<value_type>(m));\r\n\t\t\tres.emplace_back(-a[i].imag() / static_cast<value_type>(m));\r\
-    \n\t\t}\r\n\t\treturn res;\r\n\t}\r\n\t\r\nprivate:\r\n\tstatic void fft(std::vector<complex_type>\
-    \ &A, const std::vector<complex_type> &zeta) {\r\n\t\tconst size_type N = A.size();\r\
-    \n\t\tconst value_type PI = std::acos(static_cast<value_type>(-1));\r\n\t\t\r\n\
-    \t\tsize_type zi = 0;\r\n\t\tfor (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);\r\
-    \n\t\t\r\n\t\tbit_reverse(A);\r\n\t\tsize_type n;\r\n\t\tfor (n = 4; n <= N; n\
-    \ <<= 2) {\r\n\t\t\tzi -= 2;\r\n\t\t\tsize_type m = n >> 2;\r\n\t\t\t// \\omega_n^k\
-    \ = zeta[k << zi]\r\n\t\t\tsize_type p;\r\n\t\t\tfor (p = 0; p < N; p += n) {\r\
-    \n\t\t\t\tfor (size_type i = p, ei = p + m; i != ei; ++i) {\r\n\t\t\t\t\tcomplex_type\
-    \ a0 = A[i], a2 = A[i + m] * zeta[(i - p) << (zi + 1)];\r\n\t\t\t\t\tcomplex_type\
-    \ a1 = A[i + (m << 1)] * zeta[(i - p) << zi], a3 = A[i + n - m] * zeta[3 * (i\
-    \ - p) << zi];\r\n\t\t\t\t\t\r\n\t\t\t\t\tcomplex_type lp = a0 + a2, ln = a0 -\
-    \ a2;\r\n\t\t\t\t\tcomplex_type rp = a1 + a3, rn = a1 - a3;\r\n\t\t\t\t\tA[i]\
-    \ = lp + rp;\r\n\t\t\t\t\tA[i + m] = complex_type(ln.real() + rn.imag(), ln.imag()\
-    \ - rn.real());\r\n\t\t\t\t\tA[i + (m << 1)] = lp - rp;\r\n\t\t\t\t\tA[i + n -\
-    \ m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());\r\n\t\t\t\t\
-    }\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\tif (n >> 2 < N) {\r\n\t\t\t--zi;\r\n\t\t\t\
-    for (size_type i = 0, m = N >> 1; i != m; ++i) {\r\n\t\t\t\tconst complex_type\
+    \n\t\t}\r\n\t\tres.resize(A.size() + B.size() - 1);\r\n\t\treturn res;\r\n\t}\r\
+    \n\t\r\nprivate:\r\n\tstatic void fft(std::vector<complex_type> &A, const std::vector<complex_type>\
+    \ &zeta) {\r\n\t\tconst size_type N = A.size();\r\n\t\tconst value_type PI = std::acos(static_cast<value_type>(-1));\r\
+    \n\t\t\r\n\t\tsize_type zi = 0;\r\n\t\tfor (size_type i = 1; i < zeta.size();\
+    \ i <<= 1, ++zi);\r\n\t\t\r\n\t\tbit_reverse(A);\r\n\t\tsize_type n;\r\n\t\tfor\
+    \ (n = 4; n <= N; n <<= 2) {\r\n\t\t\tzi -= 2;\r\n\t\t\tsize_type m = n >> 2;\r\
+    \n\t\t\t// \\omega_n^k = zeta[k << zi]\r\n\t\t\tsize_type p;\r\n\t\t\tfor (p =\
+    \ 0; p < N; p += n) {\r\n\t\t\t\tfor (size_type i = p, ei = p + m; i != ei; ++i)\
+    \ {\r\n\t\t\t\t\tcomplex_type a0 = A[i], a2 = A[i + m] * zeta[(i - p) << (zi +\
+    \ 1)];\r\n\t\t\t\t\tcomplex_type a1 = A[i + (m << 1)] * zeta[(i - p) << zi], a3\
+    \ = A[i + n - m] * zeta[3 * (i - p) << zi];\r\n\t\t\t\t\t\r\n\t\t\t\t\tcomplex_type\
+    \ lp = a0 + a2, ln = a0 - a2;\r\n\t\t\t\t\tcomplex_type rp = a1 + a3, rn = a1\
+    \ - a3;\r\n\t\t\t\t\tA[i] = lp + rp;\r\n\t\t\t\t\tA[i + m] = complex_type(ln.real()\
+    \ + rn.imag(), ln.imag() - rn.real());\r\n\t\t\t\t\tA[i + (m << 1)] = lp - rp;\r\
+    \n\t\t\t\t\tA[i + n - m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());\r\
+    \n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\tif (n >> 2 < N) {\r\n\t\t\t--zi;\r\
+    \n\t\t\tfor (size_type i = 0, m = N >> 1; i != m; ++i) {\r\n\t\t\t\tconst complex_type\
     \ a = A[i], b = A[i + m] * zeta[i << zi];\r\n\t\t\t\tA[i] = a + b;\r\n\t\t\t\t\
     A[i + m] = a - b;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tstatic void bit_reverse(std::vector<complex_type>\
     \ &A) {\r\n\t\tconst size_type N = A.size();\r\n\t\tfor (size_type i = 1, j =\
@@ -74,13 +77,16 @@ data:
     \n\t\treturn zeta;\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP\r\
     \n#define INCLUDE_GUARD_FAST_FOURIER_TRANSFORM_REAL_COOLEY_TUKEY_TIME_RADIX4_HPP\r\
-    \n\r\n/*\r\nlast-updated: 2020/08/04\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\
+    \n\r\n/*\r\nlast-updated: 2020/11/19\r\n\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\
     \u307F\r\n\u57FA\u6570 4 \u5468\u6CE2\u6570\u9593\u5F15\u304D Cooley-Tukey\r\n\
     \r\n\u30E9\u30A4\u30D6\u30E9\u30EA\u5185\u3067\u306F\u4E00\u756A\u9AD8\u901F(\u306E\
     \u306F\u305A)\r\n\r\n# \u4ED5\u69D8\r\ntemplate<typename T>\r\nstatic std::vector<value_type>\
-    \ multiply(const std::vector<T> &A, const std::vector<T> &B) :\r\n\t\u03B8(n log\
-    \ n)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\u3092\u884C\u3046\
-    \u3002\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
+    \ multiply(const std::vector<T> &A, const std::vector<T> &B)\r\n\t\u6642\u9593\
+    \u8A08\u7B97\u91CF: \u0398(N log N) (N := |A| + |B| - 1 \u4EE5\u4E0A\u306E\u6700\
+    \u5C0F\u306E 2 \u51AA)\r\n\t2 \u3064\u306E\u591A\u9805\u5F0F\u306E\u4E57\u7B97\
+    \u3092\u884C\u3046\u3002\r\n\t\u5236\u7D04:\r\n\t\tT: int | double\r\n\t\t\u623B\
+    \u308A\u5024\u306F double \u578B\u306E\u914D\u5217(\u30B5\u30A4\u30BA |A| + |B|\
+    \ - 1)\r\n\r\n# \u53C2\u8003\r\n\u57FA\u6570 4 \u306E\u6642\u9593\u9593\u5F15\u304D\
     \ FFT\r\n\u5B9F\u6570\u306E\u7573\u307F\u8FBC\u307F\r\n*/\r\n\r\n#include <vector>\r\
     \n#include <complex>\r\n#include <algorithm>\r\n\r\nstruct FastFourierTransform\
     \ {\r\npublic:\r\n\tusing value_type = double;\r\n\tusing size_type = std::size_t;\r\
@@ -104,23 +110,23 @@ data:
     \n\t\t}\r\n\t\tfft(a, zeta);\r\n\t\t\r\n\t\tstd::vector<value_type> res;\r\n\t\
     \tres.reserve(n);\r\n\t\tfor (size_type i = 0; i < m; ++i) {\r\n\t\t\tres.emplace_back(a[i].real()\
     \ / static_cast<value_type>(m));\r\n\t\t\tres.emplace_back(-a[i].imag() / static_cast<value_type>(m));\r\
-    \n\t\t}\r\n\t\treturn res;\r\n\t}\r\n\t\r\nprivate:\r\n\tstatic void fft(std::vector<complex_type>\
-    \ &A, const std::vector<complex_type> &zeta) {\r\n\t\tconst size_type N = A.size();\r\
-    \n\t\tconst value_type PI = std::acos(static_cast<value_type>(-1));\r\n\t\t\r\n\
-    \t\tsize_type zi = 0;\r\n\t\tfor (size_type i = 1; i < zeta.size(); i <<= 1, ++zi);\r\
-    \n\t\t\r\n\t\tbit_reverse(A);\r\n\t\tsize_type n;\r\n\t\tfor (n = 4; n <= N; n\
-    \ <<= 2) {\r\n\t\t\tzi -= 2;\r\n\t\t\tsize_type m = n >> 2;\r\n\t\t\t// \\omega_n^k\
-    \ = zeta[k << zi]\r\n\t\t\tsize_type p;\r\n\t\t\tfor (p = 0; p < N; p += n) {\r\
-    \n\t\t\t\tfor (size_type i = p, ei = p + m; i != ei; ++i) {\r\n\t\t\t\t\tcomplex_type\
-    \ a0 = A[i], a2 = A[i + m] * zeta[(i - p) << (zi + 1)];\r\n\t\t\t\t\tcomplex_type\
-    \ a1 = A[i + (m << 1)] * zeta[(i - p) << zi], a3 = A[i + n - m] * zeta[3 * (i\
-    \ - p) << zi];\r\n\t\t\t\t\t\r\n\t\t\t\t\tcomplex_type lp = a0 + a2, ln = a0 -\
-    \ a2;\r\n\t\t\t\t\tcomplex_type rp = a1 + a3, rn = a1 - a3;\r\n\t\t\t\t\tA[i]\
-    \ = lp + rp;\r\n\t\t\t\t\tA[i + m] = complex_type(ln.real() + rn.imag(), ln.imag()\
-    \ - rn.real());\r\n\t\t\t\t\tA[i + (m << 1)] = lp - rp;\r\n\t\t\t\t\tA[i + n -\
-    \ m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());\r\n\t\t\t\t\
-    }\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\tif (n >> 2 < N) {\r\n\t\t\t--zi;\r\n\t\t\t\
-    for (size_type i = 0, m = N >> 1; i != m; ++i) {\r\n\t\t\t\tconst complex_type\
+    \n\t\t}\r\n\t\tres.resize(A.size() + B.size() - 1);\r\n\t\treturn res;\r\n\t}\r\
+    \n\t\r\nprivate:\r\n\tstatic void fft(std::vector<complex_type> &A, const std::vector<complex_type>\
+    \ &zeta) {\r\n\t\tconst size_type N = A.size();\r\n\t\tconst value_type PI = std::acos(static_cast<value_type>(-1));\r\
+    \n\t\t\r\n\t\tsize_type zi = 0;\r\n\t\tfor (size_type i = 1; i < zeta.size();\
+    \ i <<= 1, ++zi);\r\n\t\t\r\n\t\tbit_reverse(A);\r\n\t\tsize_type n;\r\n\t\tfor\
+    \ (n = 4; n <= N; n <<= 2) {\r\n\t\t\tzi -= 2;\r\n\t\t\tsize_type m = n >> 2;\r\
+    \n\t\t\t// \\omega_n^k = zeta[k << zi]\r\n\t\t\tsize_type p;\r\n\t\t\tfor (p =\
+    \ 0; p < N; p += n) {\r\n\t\t\t\tfor (size_type i = p, ei = p + m; i != ei; ++i)\
+    \ {\r\n\t\t\t\t\tcomplex_type a0 = A[i], a2 = A[i + m] * zeta[(i - p) << (zi +\
+    \ 1)];\r\n\t\t\t\t\tcomplex_type a1 = A[i + (m << 1)] * zeta[(i - p) << zi], a3\
+    \ = A[i + n - m] * zeta[3 * (i - p) << zi];\r\n\t\t\t\t\t\r\n\t\t\t\t\tcomplex_type\
+    \ lp = a0 + a2, ln = a0 - a2;\r\n\t\t\t\t\tcomplex_type rp = a1 + a3, rn = a1\
+    \ - a3;\r\n\t\t\t\t\tA[i] = lp + rp;\r\n\t\t\t\t\tA[i + m] = complex_type(ln.real()\
+    \ + rn.imag(), ln.imag() - rn.real());\r\n\t\t\t\t\tA[i + (m << 1)] = lp - rp;\r\
+    \n\t\t\t\t\tA[i + n - m] = complex_type(ln.real() - rn.imag(), ln.imag() + rn.real());\r\
+    \n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\tif (n >> 2 < N) {\r\n\t\t\t--zi;\r\
+    \n\t\t\tfor (size_type i = 0, m = N >> 1; i != m; ++i) {\r\n\t\t\t\tconst complex_type\
     \ a = A[i], b = A[i + m] * zeta[i << zi];\r\n\t\t\t\tA[i] = a + b;\r\n\t\t\t\t\
     A[i + m] = a - b;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tstatic void bit_reverse(std::vector<complex_type>\
     \ &A) {\r\n\t\tconst size_type N = A.size();\r\n\t\tfor (size_type i = 1, j =\
@@ -139,7 +145,7 @@ data:
   isVerificationFile: false
   path: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-time-radix4.hpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2020-11-19 14:06:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp

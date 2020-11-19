@@ -378,8 +378,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/SuffixArray.lcp.test.cpp
-  - Test/SuffixArray.search.test.cpp
   - Test/SuffixArray.sa_is.test.cpp
+  - Test/SuffixArray.search.test.cpp
 documentation_of: String/SuffixArray.hpp
 layout: document
 redirect_from:
