@@ -36,7 +36,7 @@ int main() {
 			scanf("%d %d", &b, &c);
 			seg.update(l, r, {b, c});
 		}
-		else printf("%lld\n", seg.fold(l, r).get());
+		else printf("%d\n", seg.fold(l, r).val());
 	}
 	
 	return 0;

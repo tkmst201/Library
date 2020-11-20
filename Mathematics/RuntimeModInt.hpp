@@ -4,6 +4,8 @@
 /*
 last-updated: 2020/02/26
 
+TODO: ModInt の仕様変更に合わせる
+
 # 仕様
 RuntimeModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
 

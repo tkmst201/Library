@@ -30,7 +30,7 @@ int main() {
 			int x;
 			scanf("%d", &x);
 			auto res = swag.fold_all();
-			printf("%lld\n", (res.first * x + res.second).get());
+			printf("%d\n", (res.first * x + res.second).val());
 		}
 	}
 }

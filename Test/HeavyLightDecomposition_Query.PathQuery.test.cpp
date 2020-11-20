@@ -47,7 +47,7 @@ int main() {
 			int u, v, x;
 			scanf("%d %d %d", &u, &v, &x);
 			auto res = hld.fold(u, v);
-			printf("%lld\n", (res.first * x + res.second).get());
+			printf("%d\n", (res.first * x + res.second).val());
 		}
 	}
 	return 0;

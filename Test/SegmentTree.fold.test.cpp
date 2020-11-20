@@ -31,7 +31,7 @@ int main() {
 		else {
 			pmm v = seg.fold(a, b);
 			mint ans = v.first * c + v.second;
-			printf("%lld\n", ans.get());
+			printf("%d\n", ans.val());
 		}
 	}
 }

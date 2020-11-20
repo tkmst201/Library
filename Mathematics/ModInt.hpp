@@ -2,34 +2,35 @@
 #define INCLUDE_GUARD_MOD_INT_HPP
 
 /*
-last-updated: 2020/02/26
+last-updated: 2020/11/20
+
+自動で mod を取ってくれる便利なもの
 
 # 仕様
-ModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
+基本的な演算はだいたい対応している。
+標準入出力ストリーム std::cin, std::cout にも対応している。
 
-ModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
-ModInt inverse() const : O(log n) 法 M の元での逆元を返す
+constexpr ModInt(std::int_fast64_t val = 0)
+	時間計算量: Θ(1)
+	負の整数にも対応したコンストラクタ
 
-const value_type & get() const noexcept
-value_type & get() noexcept : 値を返す
+constexpr static decltype(M) mod() noexcept
+	時間計算量: Θ(1)
+	法 M を返す
 
-static decltype(M) get_mod() noexcept : 法 M を返す
+constexpr const value_type & val() noexcept
+	時間計算量: Θ(1)
+	値を int で返す
 
-explicit operator bool() const noexcept : boolへ型変換 0以外のときTrue
-operator ==() const noexcept
-operator !=() const noexcept
-operator +() const noexept
-operator -() const noexept
-operator +(const ModInt & rhs) const noexept
-operator -(const ModInt & rhs) const noexept
-operator *(const ModInt & rhs) const noexept
-operator /(const ModInt & rhs) const noexept
-ModInt & operator +=(const ModInt & rhs) const noexept
-ModInt & operator +=(const ModInt & rhs) const noexept :
+constexpr ModInt pow(std::int_fast64_t n) const noexcept
+	時間計算量: O(log n)
+	制約: n < 0 のとき、inv() の制約に従う。
+	n 乗した値を返す(n < 0 にも対応)
 
-friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs)
-friend std::istream & operator >>(std::istream & is, ModInt & rhs) :
-	入出力用
+constexpr ModInt inv() const noexcept
+	時間計算量: O(log M)
+	制約: 値と M が互いに素である必要がある(M が素数なら問題はない)。
+	法 M の元での逆元を返す
 
 # 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
@@ -37,52 +38,54 @@ https://noshi91.hatenablog.com/entry/2019/03/31/174006
 
 #include <cassert>
 #include <iostream>
+#include <cstdint>
 
 template<int M>
 struct ModInt {
+	static_assert(M > 0);
+	
 public:
-	using value_type = long long;
+	using value_type = int;
+	using calc_type = std::int_fast64_t;
 	
-	ModInt(value_type val = 0) : val(val < 0 ? (M - (-val % M)) % M : val % M) {}
+private:
+	value_type val_;
 	
-	explicit operator bool() const noexcept { return val; }
-	bool operator ==(const ModInt & rhs) const noexcept { return val == rhs.val; }
-	bool operator !=(const ModInt & rhs) const noexcept { return !(*this == rhs); }
-	ModInt operator +() const noexcept { return ModInt(*this); }
-	ModInt operator -() const noexcept { return ModInt(0) -= *this; }
-	ModInt operator +(const ModInt & rhs) const noexcept { return ModInt(*this) += rhs; }
-	ModInt operator -(const ModInt & rhs) const noexcept { return ModInt(*this) -= rhs; }
-	ModInt operator *(const ModInt & rhs) const noexcept { return ModInt(*this) *= rhs; }
-	ModInt operator /(const ModInt & rhs) const noexcept { return ModInt(*this) /= rhs; }
+public:
+	constexpr ModInt(calc_type val = 0) : val_(val < 0 ? (val % M + M) % M : val % M) {}
+	constexpr const value_type & val() const noexcept { return val_; }
+	constexpr static decltype(M) mod() noexcept { return M; }
 	
-	ModInt & operator +=(const ModInt & rhs) noexcept {
-		val += rhs.val;
-		if (val >= M) val -= M;
-		return *this;
-	}
-	ModInt & operator -=(const ModInt & rhs) noexcept {
-		if (val < rhs.val) val += M;
-		val -= rhs.val;
-		return *this;
-	}
-	ModInt & operator *=(const ModInt & rhs) noexcept {
-		val = val * rhs.val % M;
-		return *this;
-	}
-	ModInt & operator /=(const ModInt & rhs) noexcept {
-		*this *= rhs.inverse();
-		return *this;
-	}
+	explicit constexpr operator bool() const noexcept { return val_; }
+	constexpr bool operator !() const noexcept { return !static_cast<bool>(*this); }
+	constexpr ModInt operator +() const noexcept { return ModInt(*this); }
+	constexpr ModInt operator -() const noexcept { return ModInt(-val_); }
+	constexpr ModInt operator ++(int) noexcept { ModInt res = *this; ++*this; return res; }
+	constexpr ModInt operator --(int) noexcept { ModInt res = *this; --*this; return res; }
+	constexpr ModInt & operator ++() noexcept { val_ = val_ + 1 == M ? 0 : val_ + 1; return *this; }
+	constexpr ModInt & operator --() noexcept { val_ = val_ == 0 ? M - 1 : val_ - 1; return *this; }
+	constexpr ModInt & operator +=(const ModInt & rhs) noexcept { val_ += val_ < M - rhs.val_ ? rhs.val_ : rhs.val_ - M; return *this; }
+	constexpr ModInt & operator -=(const ModInt & rhs) noexcept { val_ += val_ >= rhs.val_ ? -rhs.val_ : M - rhs.val_; return *this; }
+	constexpr ModInt & operator *=(const ModInt & rhs) noexcept { val_ = static_cast<calc_type>(val_) * rhs.val_ % M; return *this; }
+	constexpr ModInt & operator /=(const ModInt & rhs) noexcept { return *this *= rhs.inv(); }
+	friend constexpr ModInt operator +(const ModInt & lhs, const ModInt & rhs) noexcept { return ModInt(lhs) += rhs; }
+	friend constexpr ModInt operator -(const ModInt & lhs, const ModInt & rhs) noexcept { return ModInt(lhs) -= rhs; }
+	friend constexpr ModInt operator *(const ModInt & lhs, const ModInt & rhs) noexcept { return ModInt(lhs) *= rhs; }
+	friend constexpr ModInt operator /(const ModInt & lhs, const ModInt & rhs) noexcept { return ModInt(lhs) /= rhs; }
+	friend constexpr bool operator ==(const ModInt & lhs, const ModInt & rhs) noexcept { return lhs.val_ == rhs.val_; }
+	friend constexpr bool operator !=(const ModInt & lhs, const ModInt & rhs) noexcept { return !(lhs == rhs); }
+	friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs) { return os << rhs.val_; }
+	friend std::istream & operator >>(std::istream & is, ModInt & rhs) { calc_type x; is >> x; rhs = ModInt(x); return is; }
 	
-	ModInt pow(value_type n) const {
-		ModInt res = 1, x = val;
-		if (n < 0) { x = x.inverse(); n = -n; }
+	constexpr ModInt pow(calc_type n) const noexcept {
+		ModInt res = 1, x = val_;
+		if (n < 0) { x = x.inv(); n = -n; }
 		while (n) { if (n & 1) res *= x; x *= x; n >>= 1; }
 		return res;
 	}
 	
-	ModInt inverse() const {
-		long long a = val, a1 = 1, a2 = 0, b = M, b1 = 0, b2 = 1;
+	constexpr ModInt inv() const noexcept {
+		value_type a = val_, a1 = 1, a2 = 0, b = M, b1 = 0, b2 = 1;
 		while (b > 0) {
 			value_type q = a / b, r = a % b;
 			value_type nb1 = a1 - q * b1, nb2 = a2 - q * b2;
@@ -93,19 +96,6 @@ public:
 		assert(a == 1);
 		return a1;
 	}
-	
-	const value_type & get() const noexcept { return val; }
-	static decltype(M) get_mod() noexcept { return M; }
-	
-	friend std::ostream & operator <<(std::ostream & os, const ModInt & rhs) { return os << rhs.val; }
-	friend std::istream & operator >>(std::istream & is, ModInt & rhs) {
-		value_type x;
-		is >> x;
-		rhs = ModInt(x);
-		return is;
-	}
-private:
-	value_type val;
 };
 
 #endif // INCLUDE_GUARD_MOD_INT_HPP
