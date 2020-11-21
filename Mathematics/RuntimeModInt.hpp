@@ -2,37 +2,42 @@
 #define INCLUDE_GUARD_RUNTIME_MOD_INT_HPP
 
 /*
-last-updated: 2020/02/26
+last-updated: 2020/11/21
 
-TODO: ModInt の仕様変更に合わせる
+自動で mod を取ってくれる便利なもの
+実行時に mod を指定できる。
 
 # 仕様
-RuntimeModInt(long long val = 0) : 負の整数にも対応したコンストラクタ
+基本的な演算はだいたい対応している。
+標準入出力ストリーム std::cin, std::cout にも対応している。
+template 引数の ID によりそれぞれ異なる mod を取ることができる。
 
-RuntimeModInt pow(long long n) const : O(log n) n 乗した値を返す(負の整数も対応)
-RuntimeModInt inverse() const : O(log n) 法 M の元での逆元を返す
+constexpr ModInt(std::int_fast64_t val = 0)
+	時間計算量: Θ(1)
+	負の整数にも対応したコンストラクタ
 
-const value_type & get() const noexcept
-value_type & get() noexcept : 値を返す
+static void set_mod(int M) noexcept
+	時間計算量: Θ(1)
+	法 M に変更(default は 2)
+	必ず使用前に set_mod する必要がある。
 
-static void set_mod(int M) noexcept { mod() = M; } : 法 M をセットする
-static int get_mod() noexcept { return mod(); } : 法 M を返す
+static int mod() noexcept
+	時間計算量: Θ(1)
+	法 M を返す
 
-explicit operator bool() const noexcept : boolへ型変換 0以外のときTrue
-operator ==() const noexcept
-operator !=() const noexcept
-operator +() const noexept
-operator -() const noexept
-operator +(const RuntimeModInt & rhs) const noexept
-operator -(const RuntimeModInt & rhs) const noexept
-operator *(const RuntimeModInt & rhs) const noexept
-operator /(const RuntimeModInt & rhs) const noexept
-RuntimeModInt & operator +=(const RuntimeModInt & rhs) const noexept
-RuntimeModInt & operator +=(const RuntimeModInt & rhs) const noexept :
+constexpr const value_type & val() noexcept
+	時間計算量: Θ(1)
+	値を int で返す
 
-friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs)
-friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) :
-	入出力用
+constexpr ModInt pow(std::int_fast64_t n) const noexcept
+	時間計算量: O(log n)
+	制約: n < 0 のとき、inv() の制約に従う。
+	n 乗した値を返す(n < 0 にも対応)
+
+constexpr ModInt inv() const noexcept
+	時間計算量: O(log M)
+	制約: 値と M が互いに素である必要がある(M が素数なら問題はない)。
+	法 M の元での逆元を返す
 
 # 参考
 https://noshi91.hatenablog.com/entry/2019/03/31/174006
@@ -40,51 +45,54 @@ https://noshi91.hatenablog.com/entry/2019/03/31/174006
 
 #include <cassert>
 #include <iostream>
+#include <cstdint>
 
+template<int ID>
 struct RuntimeModInt {
 public:
-	using value_type = long long;
+	using value_type = int;
+	using calc_type = std::int_fast64_t;
 	
-	RuntimeModInt(value_type val = 0) : val(val < 0 ? (mod() - (-val % mod())) % mod() : val % mod()) {}
+private:
+	value_type val_;
+	static int & mod_() noexcept { static int M = 2; return M; }
 	
-	explicit operator bool() const noexcept { return val; }
-	bool operator ==(const RuntimeModInt & rhs) const noexcept { return val == rhs.val; }
-	bool operator !=(const RuntimeModInt & rhs) const noexcept { return !(*this == rhs); }
+public:
+	RuntimeModInt(calc_type val = 0) : val_(val < 0 ? (val % mod() + mod()) % mod() : val % mod()) {}
+	const value_type & val() const noexcept { return val_; }
+	static void set_mod(int M) noexcept { assert(M > 0); mod_() = M; }
+	static int mod() noexcept { return mod_(); }
+	
+	explicit operator bool() const noexcept { return val_; }
+	bool operator !() const noexcept { return !static_cast<bool>(*this); }
 	RuntimeModInt operator +() const noexcept { return RuntimeModInt(*this); }
-	RuntimeModInt operator -() const noexcept { return RuntimeModInt(0) -= *this; }
-	RuntimeModInt operator +(const RuntimeModInt & rhs) const noexcept { return RuntimeModInt(*this) += rhs; }
-	RuntimeModInt operator -(const RuntimeModInt & rhs) const noexcept { return RuntimeModInt(*this) -= rhs; }
-	RuntimeModInt operator *(const RuntimeModInt & rhs) const noexcept { return RuntimeModInt(*this) *= rhs; }
-	RuntimeModInt operator /(const RuntimeModInt & rhs) const noexcept { return RuntimeModInt(*this) /= rhs; }
+	RuntimeModInt operator -() const noexcept { return RuntimeModInt(-val_); }
+	RuntimeModInt operator ++(int) noexcept { RuntimeModInt res = *this; ++*this; return res; }
+	RuntimeModInt operator --(int) noexcept { RuntimeModInt res = *this; --*this; return res; }
+	RuntimeModInt & operator ++() noexcept { val_ = val_ + 1 == mod() ? 0 : val_ + 1; return *this; }
+	RuntimeModInt & operator --() noexcept { val_ = val_ == 0 ? mod() - 1 : val_ - 1; return *this; }
+	RuntimeModInt & operator +=(const RuntimeModInt & rhs) noexcept { val_ += val_ < mod() - rhs.val_ ? rhs.val_ : rhs.val_ - mod(); return *this; }
+	RuntimeModInt & operator -=(const RuntimeModInt & rhs) noexcept { val_ += val_ >= rhs.val_ ? -rhs.val_ : mod() - rhs.val_; return *this; }
+	RuntimeModInt & operator *=(const RuntimeModInt & rhs) noexcept { val_ = static_cast<calc_type>(val_) * rhs.val_ % mod(); return *this; }
+	RuntimeModInt & operator /=(const RuntimeModInt & rhs) noexcept { return *this *= rhs.inv(); }
+	friend RuntimeModInt operator +(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return RuntimeModInt(lhs) += rhs; }
+	friend RuntimeModInt operator -(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return RuntimeModInt(lhs) -= rhs; }
+	friend RuntimeModInt operator *(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return RuntimeModInt(lhs) *= rhs; }
+	friend RuntimeModInt operator /(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return RuntimeModInt(lhs) /= rhs; }
+	friend bool operator ==(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return lhs.val_ == rhs.val_; }
+	friend bool operator !=(const RuntimeModInt & lhs, const RuntimeModInt & rhs) noexcept { return !(lhs == rhs); }
+	friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs) { return os << rhs.val_; }
+	friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) { calc_type x; is >> x; rhs = RuntimeModInt(x); return is; }
 	
-	RuntimeModInt & operator +=(const RuntimeModInt & rhs) noexcept {
-		val += rhs.val;
-		if (val >= mod()) val -= mod();
-		return *this;
-	}
-	RuntimeModInt & operator -=(const RuntimeModInt & rhs) noexcept {
-		if (val < rhs.val) val += mod();
-		val -= rhs.val;
-		return *this;
-	}
-	RuntimeModInt & operator *=(const RuntimeModInt & rhs) noexcept {
-		val = val * rhs.val % mod();
-		return *this;
-	}
-	RuntimeModInt & operator /=(const RuntimeModInt & rhs) noexcept {
-		*this *= rhs.inverse();
-		return *this;
-	}
-	
-	RuntimeModInt pow(value_type n) const {
-		RuntimeModInt res = 1, x = val;
-		if (n < 0) { x = x.inverse(); n = -n; }
+	RuntimeModInt pow(calc_type n) const noexcept {
+		RuntimeModInt res = 1, x = val_;
+		if (n < 0) { x = x.inv(); n = -n; }
 		while (n) { if (n & 1) res *= x; x *= x; n >>= 1; }
 		return res;
 	}
 	
-	RuntimeModInt inverse() const {
-		long long a = val, a1 = 1, a2 = 0, b = mod(), b1 = 0, b2 = 1;
+	RuntimeModInt inv() const noexcept {
+		value_type a = val_, a1 = 1, a2 = 0, b = mod(), b1 = 0, b2 = 1;
 		while (b > 0) {
 			value_type q = a / b, r = a % b;
 			value_type nb1 = a1 - q * b1, nb2 = a2 - q * b2;
@@ -94,25 +102,6 @@ public:
 		}
 		assert(a == 1);
 		return a1;
-	}
-	
-	const value_type & get() const noexcept { return val; }
-	static void set_mod(int M) noexcept { mod() = M; }
-	static int get_mod() noexcept { return mod(); }
-	
-	friend std::ostream & operator <<(std::ostream & os, const RuntimeModInt & rhs) { return os << rhs.val; }
-	friend std::istream & operator >>(std::istream & is, RuntimeModInt & rhs) {
-		value_type x;
-		is >> x;
-		rhs = RuntimeModInt(x);
-		return is;
-	}
-private:
-	value_type val;
-	
-	static int & mod() {
-		static int M = 2;
-		return M;
 	}
 };
 
