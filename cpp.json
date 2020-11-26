@@ -6,14 +6,14 @@
 			"** VS Code ユーザースニペット一覧 **",
 			"https://github.com/tkmst201/Library の抜粋 + Utility",
 			"",
-			"last-updated: 2020/11/21",
+			"last-updated: 2020/11/26",
 			"最新版はこちら: https://github.com/tkmst201/Library/blob/master/cpp.json",
 			"手動で作成しているので更新し忘れがあるかもしれません",
 			"",
 			"# Utility (git で管理していない詰め合わせ)",
-			"2020/11/10 template: デフォルト実装",
+			"2020/11/26 template: デフォルト実装",
 			"2019/11/09 db: if (debug) {}",
-			"2019/12/13 pyn: Yes No 出力",
+			"2020/11/26 pyn: Yes No 出力",
 			"2020/08/01 fori: for (i = 0; i < n; ++i) {}",
 			"2020/08/01 forr: for (i = n - 1; i >= 0; --i) {}",
 			"2020/09/04 compress: 座標圧縮 O(NlogN)", // TODO: compress: cx を生成して返すように変更
@@ -74,24 +74,23 @@
 			"#define FOR(i,a,b) for(int i=(a);i<(b);++i)",
 			"#define REP(i,n) FOR(i,0,n)",
 			"#define ALL(v) begin(v),end(v)",
-			"template<typename A, typename B> inline bool chmax(A &a, B b) { if (a<b) { a=b; return 1; } return 0; }",
-			"template<typename A, typename B> inline bool chmin(A &a, B b) { if (a>b) { a=b; return 1; } return 0; }",
+			"template<typename A, typename B> inline bool chmax(A & a, const B & b) { if (a < b) { a = b; return true; } return false; }",
+			"template<typename A, typename B> inline bool chmin(A & a, const B & b) { if (a > b) { a = b; return true; } return false; }",
 			"using ll = long long;",
 			"using pii = pair<int, int>;",
 			"constexpr ll INF = 1ll<<30;",
 			"constexpr ll longINF = 1ll<<60;",
 			"constexpr ll MOD = 1000000007;",
-			"constexpr bool debug = 0;",
+			"constexpr bool debug = false;",
 			"//---------------------------------//",
 			"",
 			"int main() {",
 			"\t$0",
-			"\treturn 0;",
 			"}",
 		],
 		"description": [
 			"デフォルト実装",
-			"2020/11/10",
+			"2020/11/26",
 		]
 	},
 	
@@ -114,13 +113,13 @@
 	"putsY/N": {
 		"prefix": "pyn",
 		"body": [
-			"puts([&] {",
+			"puts([&]() -> bool {",
 			"\t$0",
 			"}() ? \"Yes\": \"No\");",
 		],
 		"description": [
 			"Yes No 出力",
-			"2019/12/13"
+			"2020/11/26"
 		]
 	},
 
