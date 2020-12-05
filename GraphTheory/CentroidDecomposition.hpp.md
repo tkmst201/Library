@@ -364,11 +364,11 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
-  - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
-  - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
-  - Test/CentroidDecomposition.test.cpp
   - Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+  - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
+  - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
   - Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+  - Test/CentroidDecomposition.test.cpp
 documentation_of: GraphTheory/CentroidDecomposition.hpp
 layout: document
 redirect_from:

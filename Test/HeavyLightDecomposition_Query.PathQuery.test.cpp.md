@@ -24,57 +24,69 @@ data:
     - https://judge.yosupo.jp/problem/vertex_set_path_composite
   bundledCode: "#line 1 \"Test/HeavyLightDecomposition_Query.PathQuery.test.cpp\"\n\
     #define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\r\
-    \n\r\n#line 1 \"Mathematics/ModInt.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/02/26\r\
-    \n\r\n# \u4ED5\u69D8\r\nModInt(long long val = 0) : \u8CA0\u306E\u6574\u6570\u306B\
-    \u3082\u5BFE\u5FDC\u3057\u305F\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\r\n\r\
-    \nModInt pow(long long n) const : O(log n) n \u4E57\u3057\u305F\u5024\u3092\u8FD4\
-    \u3059(\u8CA0\u306E\u6574\u6570\u3082\u5BFE\u5FDC)\r\nModInt inverse() const :\
-    \ O(log n) \u6CD5 M \u306E\u5143\u3067\u306E\u9006\u5143\u3092\u8FD4\u3059\r\n\
-    \r\nconst value_type & get() const noexcept\r\nvalue_type & get() noexcept : \u5024\
-    \u3092\u8FD4\u3059\r\n\r\nstatic decltype(M) get_mod() noexcept : \u6CD5 M \u3092\
-    \u8FD4\u3059\r\n\r\nexplicit operator bool() const noexcept : bool\u3078\u578B\
-    \u5909\u63DB 0\u4EE5\u5916\u306E\u3068\u304DTrue\r\noperator ==() const noexcept\r\
-    \noperator !=() const noexcept\r\noperator +() const noexept\r\noperator -() const\
-    \ noexept\r\noperator +(const ModInt & rhs) const noexept\r\noperator -(const\
-    \ ModInt & rhs) const noexept\r\noperator *(const ModInt & rhs) const noexept\r\
-    \noperator /(const ModInt & rhs) const noexept\r\nModInt & operator +=(const ModInt\
-    \ & rhs) const noexept\r\nModInt & operator +=(const ModInt & rhs) const noexept\
-    \ :\r\n\r\nfriend std::ostream & operator <<(std::ostream & os, const ModInt &\
-    \ rhs)\r\nfriend std::istream & operator >>(std::istream & is, ModInt & rhs) :\r\
-    \n\t\u5165\u51FA\u529B\u7528\r\n\r\n# \u53C2\u8003\r\nhttps://noshi91.hatenablog.com/entry/2019/03/31/174006\r\
-    \n*/\r\n\r\n#include <cassert>\r\n#include <iostream>\r\n\r\ntemplate<int M>\r\
-    \nstruct ModInt {\r\npublic:\r\n\tusing value_type = long long;\r\n\t\r\n\tModInt(value_type\
-    \ val = 0) : val(val < 0 ? (M - (-val % M)) % M : val % M) {}\r\n\t\r\n\texplicit\
-    \ operator bool() const noexcept { return val; }\r\n\tbool operator ==(const ModInt\
-    \ & rhs) const noexcept { return val == rhs.val; }\r\n\tbool operator !=(const\
-    \ ModInt & rhs) const noexcept { return !(*this == rhs); }\r\n\tModInt operator\
-    \ +() const noexcept { return ModInt(*this); }\r\n\tModInt operator -() const\
-    \ noexcept { return ModInt(0) -= *this; }\r\n\tModInt operator +(const ModInt\
-    \ & rhs) const noexcept { return ModInt(*this) += rhs; }\r\n\tModInt operator\
-    \ -(const ModInt & rhs) const noexcept { return ModInt(*this) -= rhs; }\r\n\t\
-    ModInt operator *(const ModInt & rhs) const noexcept { return ModInt(*this) *=\
-    \ rhs; }\r\n\tModInt operator /(const ModInt & rhs) const noexcept { return ModInt(*this)\
-    \ /= rhs; }\r\n\t\r\n\tModInt & operator +=(const ModInt & rhs) noexcept {\r\n\
-    \t\tval += rhs.val;\r\n\t\tif (val >= M) val -= M;\r\n\t\treturn *this;\r\n\t\
-    }\r\n\tModInt & operator -=(const ModInt & rhs) noexcept {\r\n\t\tif (val < rhs.val)\
-    \ val += M;\r\n\t\tval -= rhs.val;\r\n\t\treturn *this;\r\n\t}\r\n\tModInt & operator\
-    \ *=(const ModInt & rhs) noexcept {\r\n\t\tval = val * rhs.val % M;\r\n\t\treturn\
-    \ *this;\r\n\t}\r\n\tModInt & operator /=(const ModInt & rhs) noexcept {\r\n\t\
-    \t*this *= rhs.inverse();\r\n\t\treturn *this;\r\n\t}\r\n\t\r\n\tModInt pow(value_type\
-    \ n) const {\r\n\t\tModInt res = 1, x = val;\r\n\t\tif (n < 0) { x = x.inverse();\
-    \ n = -n; }\r\n\t\twhile (n) { if (n & 1) res *= x; x *= x; n >>= 1; }\r\n\t\t\
-    return res;\r\n\t}\r\n\t\r\n\tModInt inverse() const {\r\n\t\tlong long a = val,\
-    \ a1 = 1, a2 = 0, b = M, b1 = 0, b2 = 1;\r\n\t\twhile (b > 0) {\r\n\t\t\tvalue_type\
-    \ q = a / b, r = a % b;\r\n\t\t\tvalue_type nb1 = a1 - q * b1, nb2 = a2 - q *\
-    \ b2;\r\n\t\t\ta = b; b = r;\r\n\t\t\ta1 = b1; b1 = nb1;\r\n\t\t\ta2 = b2; b2\
-    \ = nb2;\r\n\t\t}\r\n\t\tassert(a == 1);\r\n\t\treturn a1;\r\n\t}\r\n\t\r\n\t\
-    const value_type & get() const noexcept { return val; }\r\n\tstatic decltype(M)\
-    \ get_mod() noexcept { return M; }\r\n\t\r\n\tfriend std::ostream & operator <<(std::ostream\
-    \ & os, const ModInt & rhs) { return os << rhs.val; }\r\n\tfriend std::istream\
-    \ & operator >>(std::istream & is, ModInt & rhs) {\r\n\t\tvalue_type x;\r\n\t\t\
-    is >> x;\r\n\t\trhs = ModInt(x);\r\n\t\treturn is;\r\n\t}\r\nprivate:\r\n\tvalue_type\
-    \ val;\r\n};\r\n\r\n\n#line 1 \"DataStructure/SegmentTree.hpp\"\n\n\n\r\n/*\r\n\
-    last-updated: 2020/09/18\r\n\r\nmax_right: verified(https://atcoder.jp/contests/practice2/submissions/16664880)\r\
+    \n\r\n#line 1 \"Mathematics/ModInt.hpp\"\n\n\n\r\n/*\r\nlast-updated: 2020/11/20\r\
+    \n\r\n\u81EA\u52D5\u3067 mod \u3092\u53D6\u3063\u3066\u304F\u308C\u308B\u4FBF\u5229\
+    \u306A\u3082\u306E\r\n\r\n# \u4ED5\u69D8\r\n\u57FA\u672C\u7684\u306A\u6F14\u7B97\
+    \u306F\u3060\u3044\u305F\u3044\u5BFE\u5FDC\u3057\u3066\u3044\u308B\u3002\r\n\u6A19\
+    \u6E96\u5165\u51FA\u529B\u30B9\u30C8\u30EA\u30FC\u30E0 std::cin, std::cout \u306B\
+    \u3082\u5BFE\u5FDC\u3057\u3066\u3044\u308B\u3002\r\n\r\nconstexpr ModInt(std::int_fast64_t\
+    \ val = 0)\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u8CA0\u306E\u6574\
+    \u6570\u306B\u3082\u5BFE\u5FDC\u3057\u305F\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\
+    \u30BF\r\n\r\nconstexpr static decltype(M) mod() noexcept\r\n\t\u6642\u9593\u8A08\
+    \u7B97\u91CF: \u0398(1)\r\n\t\u6CD5 M \u3092\u8FD4\u3059\r\n\r\nconstexpr const\
+    \ value_type & val() noexcept\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\
+    \n\t\u5024\u3092 int \u3067\u8FD4\u3059\r\n\r\nconstexpr ModInt pow(std::int_fast64_t\
+    \ n) const noexcept\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u5236\u7D04\
+    : n < 0 \u306E\u3068\u304D\u3001inv() \u306E\u5236\u7D04\u306B\u5F93\u3046\u3002\
+    \r\n\tn \u4E57\u3057\u305F\u5024\u3092\u8FD4\u3059(n < 0 \u306B\u3082\u5BFE\u5FDC\
+    )\r\n\r\nconstexpr ModInt inv() const noexcept\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
+    : O(log M)\r\n\t\u5236\u7D04: \u5024\u3068 M \u304C\u4E92\u3044\u306B\u7D20\u3067\
+    \u3042\u308B\u5FC5\u8981\u304C\u3042\u308B(M \u304C\u7D20\u6570\u306A\u3089\u554F\
+    \u984C\u306F\u306A\u3044)\u3002\r\n\t\u6CD5 M \u306E\u5143\u3067\u306E\u9006\u5143\
+    \u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttps://noshi91.hatenablog.com/entry/2019/03/31/174006\r\
+    \n*/\r\n\r\n#include <cassert>\r\n#include <iostream>\r\n#include <cstdint>\r\n\
+    \r\ntemplate<int M>\r\nstruct ModInt {\r\n\tstatic_assert(M > 0);\r\n\t\r\npublic:\r\
+    \n\tusing value_type = int;\r\n\tusing calc_type = std::int_fast64_t;\r\n\t\r\n\
+    private:\r\n\tvalue_type val_;\r\n\t\r\npublic:\r\n\tconstexpr ModInt(calc_type\
+    \ val = 0) : val_(val < 0 ? (val % M + M) % M : val % M) {}\r\n\tconstexpr const\
+    \ value_type & val() const noexcept { return val_; }\r\n\tconstexpr static decltype(M)\
+    \ mod() noexcept { return M; }\r\n\t\r\n\texplicit constexpr operator bool() const\
+    \ noexcept { return val_; }\r\n\tconstexpr bool operator !() const noexcept {\
+    \ return !static_cast<bool>(*this); }\r\n\tconstexpr ModInt operator +() const\
+    \ noexcept { return ModInt(*this); }\r\n\tconstexpr ModInt operator -() const\
+    \ noexcept { return ModInt(-val_); }\r\n\tconstexpr ModInt operator ++(int) noexcept\
+    \ { ModInt res = *this; ++*this; return res; }\r\n\tconstexpr ModInt operator\
+    \ --(int) noexcept { ModInt res = *this; --*this; return res; }\r\n\tconstexpr\
+    \ ModInt & operator ++() noexcept { val_ = val_ + 1 == M ? 0 : val_ + 1; return\
+    \ *this; }\r\n\tconstexpr ModInt & operator --() noexcept { val_ = val_ == 0 ?\
+    \ M - 1 : val_ - 1; return *this; }\r\n\tconstexpr ModInt & operator +=(const\
+    \ ModInt & rhs) noexcept { val_ += val_ < M - rhs.val_ ? rhs.val_ : rhs.val_ -\
+    \ M; return *this; }\r\n\tconstexpr ModInt & operator -=(const ModInt & rhs) noexcept\
+    \ { val_ += val_ >= rhs.val_ ? -rhs.val_ : M - rhs.val_; return *this; }\r\n\t\
+    constexpr ModInt & operator *=(const ModInt & rhs) noexcept { val_ = static_cast<calc_type>(val_)\
+    \ * rhs.val_ % M; return *this; }\r\n\tconstexpr ModInt & operator /=(const ModInt\
+    \ & rhs) noexcept { return *this *= rhs.inv(); }\r\n\tfriend constexpr ModInt\
+    \ operator +(const ModInt & lhs, const ModInt & rhs) noexcept { return ModInt(lhs)\
+    \ += rhs; }\r\n\tfriend constexpr ModInt operator -(const ModInt & lhs, const\
+    \ ModInt & rhs) noexcept { return ModInt(lhs) -= rhs; }\r\n\tfriend constexpr\
+    \ ModInt operator *(const ModInt & lhs, const ModInt & rhs) noexcept { return\
+    \ ModInt(lhs) *= rhs; }\r\n\tfriend constexpr ModInt operator /(const ModInt &\
+    \ lhs, const ModInt & rhs) noexcept { return ModInt(lhs) /= rhs; }\r\n\tfriend\
+    \ constexpr bool operator ==(const ModInt & lhs, const ModInt & rhs) noexcept\
+    \ { return lhs.val_ == rhs.val_; }\r\n\tfriend constexpr bool operator !=(const\
+    \ ModInt & lhs, const ModInt & rhs) noexcept { return !(lhs == rhs); }\r\n\tfriend\
+    \ std::ostream & operator <<(std::ostream & os, const ModInt & rhs) { return os\
+    \ << rhs.val_; }\r\n\tfriend std::istream & operator >>(std::istream & is, ModInt\
+    \ & rhs) { calc_type x; is >> x; rhs = ModInt(x); return is; }\r\n\t\r\n\tconstexpr\
+    \ ModInt pow(calc_type n) const noexcept {\r\n\t\tModInt res = 1, x = val_;\r\n\
+    \t\tif (n < 0) { x = x.inv(); n = -n; }\r\n\t\twhile (n) { if (n & 1) res *= x;\
+    \ x *= x; n >>= 1; }\r\n\t\treturn res;\r\n\t}\r\n\t\r\n\tconstexpr ModInt inv()\
+    \ const noexcept {\r\n\t\tvalue_type a = val_, a1 = 1, a2 = 0, b = M, b1 = 0,\
+    \ b2 = 1;\r\n\t\twhile (b > 0) {\r\n\t\t\tvalue_type q = a / b, r = a % b;\r\n\
+    \t\t\tvalue_type nb1 = a1 - q * b1, nb2 = a2 - q * b2;\r\n\t\t\ta = b; b = r;\r\
+    \n\t\t\ta1 = b1; b1 = nb1;\r\n\t\t\ta2 = b2; b2 = nb2;\r\n\t\t}\r\n\t\tassert(a\
+    \ == 1);\r\n\t\treturn a1;\r\n\t}\r\n};\r\n\r\n\n#line 1 \"DataStructure/SegmentTree.hpp\"\
+    \n\n\n\r\n/*\r\nlast-updated: 2020/09/18\r\n\r\nmax_right: verified(https://atcoder.jp/contests/practice2/submissions/16664880)\r\
     \nmin_left: unverified\r\n\r\n# \u4ED5\u69D8\r\nSegmentTree()\r\n\t\u6642\u9593\
     \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u7A7A\u306E\u30BB\u30B0\u6728\u3092\u4F5C\u6210\
     \r\n\t\u4F55\u304B\u64CD\u4F5C\u3092\u884C\u3063\u305F\u5834\u5408\u306E\u52D5\
@@ -219,47 +231,46 @@ data:
     \u304D\u3001\u6700\u521D\u306B\u5230\u9054\u3059\u308B\u9802\u70B9\r\n\r\n\r\n\
     # \u53C2\u8003\r\nhttps://qiita.com/ageprocpp/items/8dfe768218da83314989, 2020/04/19\r\
     \nhttps://math314.hateblo.jp/entry/2014/06/24/220107, 2020/04/19\r\nhttps://codeforces.com/blog/entry/53170,\
-    \ 2020/09/18\r\n*/\r\n\r\n#line 86 \"GraphTheory/HeavyLightDecomposition.hpp\"\
-    \n#include <cstdint>\r\n#include <stack>\r\n#include <utility>\r\n#line 90 \"\
-    GraphTheory/HeavyLightDecomposition.hpp\"\n\r\nstruct HeavyLightDecomposition\
-    \ {\r\n\tusing size_type = std::uint_fast32_t;\r\n\tusing Graph = std::vector<std::vector<size_type>>;\r\
-    \n\t\r\nprivate:\r\n\tsize_type bf_n; // \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\
-    \r\n\t\r\n\tstd::vector<size_type> par_; // [v] := \u9802\u70B9 v \u306E\u89AA\
-    \u306E\u9802\u70B9\u756A\u53F7(\u5B58\u5728\u3057\u306A\u3051\u308C\u3070\u81EA\
-    \u5206\u81EA\u8EAB)\r\n\tstd::vector<size_type> sub_size_; // [v] := \u9802\u70B9\
-    \ v \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\u6728\u306E\u30B5\u30A4\u30BA\r\
-    \n\tstd::vector<size_type> depth_; // [v] := \u9802\u70B9 v \u306E\u5143\u306E\
-    \u30B0\u30E9\u30D5\u3067\u306E\u6DF1\u3055\r\n\t\r\n\tstd::vector<size_type> tree_id_;\
-    \ // [v] := \u9802\u70B9 v \u304C\u5C5E\u3059\u308B\u6728\u306E id\r\n\tstd::vector<size_type>\
-    \ roots_; // [i] := i \u756A\u76EE\u306E\u6728\u306E root\r\n\t\r\n\tstd::vector<size_type>\
-    \ heavy_map_; // [v] := \u9802\u70B9 v \u304C\u5C5E\u3059\u308B heavy-path id\r\
-    \n\tstd::vector<size_type> head_; // [i] := heavy-path i \u306E\u6700\u3082\u6839\
-    \u306B\u8FD1\u3044\u9802\u70B9\u756A\u53F7\r\n\tstd::vector<size_type> heavy_size_\
-    \ ; // [i] := heavy-path i \u306B\u5C5E\u3059\u308B\u9802\u70B9\u306E\u500B\u6570\
-    \r\n\tstd::vector<size_type> heavy_depth_; // [i] := heavy-path i \u304B\u3089\
-    \u6839\u307E\u3067\u306B\u901A\u308B light-edge \u306E\u500B\u6570\r\n\t\r\n\t\
-    // euler-tour\r\n\tstd::vector<size_type> in_; // [v] := \u9802\u70B9 v \u306E\
-    \ EulerTour \u9806\u5E8F(\u540C\u4E00 heavy-path \u5185\u3067\u306F\u9023\u7D9A\
-    )\r\n\tstd::vector<size_type> out_; // [v] := \u9802\u70B9 v \u304B\u3089\u51FA\
-    \u308B\u3068\u304D\u306E EulerTour \u9806\u5E8F\r\n\tstd::vector<size_type> euler_map_;\
-    \ // [i] := EulerTour \u9806\u5E8F\u304C i \u3067\u3042\u308B\u3088\u3046\u306A\
-    \u9802\u70B9\r\n\t\r\n\t// heavy-path doubling\r\n\tstd::vector<std::vector<size_type>>\
-    \ par_dblng_; // [k][i] := heavy-path i \u304B\u3089 2^k \u56DE light-edge \u3092\
-    \u4E0A\u3063\u305F\u5148\u306E\u9802\u70B9\r\n\t\r\npublic:\r\n\tHeavyLightDecomposition(const\
-    \ Graph & g, bool use_lca = false) : HeavyLightDecomposition(g, g.size(), use_lca)\
-    \ {}\r\n\tHeavyLightDecomposition(const Graph & g, size_type root, bool use_lca)\
-    \ : bf_n(g.size()) {\r\n\t\tpar_.resize(bf_size());\r\n\t\tsub_size_.resize(bf_size());\r\
-    \n\t\tdepth_.resize(bf_size());\r\n\t\ttree_id_.assign(bf_size(), bf_size());\r\
-    \n\t\tstd::vector<size_type> next(bf_size()); // [v] := \u9802\u70B9 v \u3068\u540C\
-    \u4E00 heavy-path \u5185\u3067 v \u3088\u308A 1 \u3064\u8449\u5074\u306E\u9802\
-    \u70B9(\u5B58\u5728\u3057\u306A\u3051\u308C\u3070\u81EA\u5206\u81EA\u8EAB)\r\n\
-    \t\t\r\n\t\tfor (size_type i = 0; i < bf_size(); ++i) {\r\n\t\t\tif (tree_id_[i]\
-    \ != bf_size()) continue;\r\n\t\t\tif (root != bf_size() && i != root) continue;\r\
-    \n\t\t\t\r\n\t\t\tstd::stack<std::pair<size_type, size_type>> stk;\r\n\t\t\tpar_[i]\
-    \ = i;\r\n\t\t\tdepth_[i] = 0;\r\n\t\t\ttree_id_[i] = roots_.size();\r\n\t\t\t\
-    stk.emplace(i, 0);\r\n\t\t\t\r\n\t\t\twhile (!stk.empty()) {\r\n\t\t\t\tconst\
-    \ size_type u = stk.top().first, i = stk.top().second; stk.pop();\r\n\t\t\t\t\
-    if (i < g[u].size()) {\r\n\t\t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\t\tconst\
+    \ 2020/09/18\r\n*/\r\n\r\n#line 87 \"GraphTheory/HeavyLightDecomposition.hpp\"\
+    \n#include <stack>\r\n#include <utility>\r\n#line 90 \"GraphTheory/HeavyLightDecomposition.hpp\"\
+    \n\r\nstruct HeavyLightDecomposition {\r\n\tusing size_type = std::uint_fast32_t;\r\
+    \n\tusing Graph = std::vector<std::vector<size_type>>;\r\n\t\r\nprivate:\r\n\t\
+    size_type bf_n; // \u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\r\n\t\r\n\tstd::vector<size_type>\
+    \ par_; // [v] := \u9802\u70B9 v \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7(\u5B58\
+    \u5728\u3057\u306A\u3051\u308C\u3070\u81EA\u5206\u81EA\u8EAB)\r\n\tstd::vector<size_type>\
+    \ sub_size_; // [v] := \u9802\u70B9 v \u3092\u6839\u3068\u3059\u308B\u90E8\u5206\
+    \u6728\u306E\u30B5\u30A4\u30BA\r\n\tstd::vector<size_type> depth_; // [v] := \u9802\
+    \u70B9 v \u306E\u5143\u306E\u30B0\u30E9\u30D5\u3067\u306E\u6DF1\u3055\r\n\t\r\n\
+    \tstd::vector<size_type> tree_id_; // [v] := \u9802\u70B9 v \u304C\u5C5E\u3059\
+    \u308B\u6728\u306E id\r\n\tstd::vector<size_type> roots_; // [i] := i \u756A\u76EE\
+    \u306E\u6728\u306E root\r\n\t\r\n\tstd::vector<size_type> heavy_map_; // [v] :=\
+    \ \u9802\u70B9 v \u304C\u5C5E\u3059\u308B heavy-path id\r\n\tstd::vector<size_type>\
+    \ head_; // [i] := heavy-path i \u306E\u6700\u3082\u6839\u306B\u8FD1\u3044\u9802\
+    \u70B9\u756A\u53F7\r\n\tstd::vector<size_type> heavy_size_ ; // [i] := heavy-path\
+    \ i \u306B\u5C5E\u3059\u308B\u9802\u70B9\u306E\u500B\u6570\r\n\tstd::vector<size_type>\
+    \ heavy_depth_; // [i] := heavy-path i \u304B\u3089\u6839\u307E\u3067\u306B\u901A\
+    \u308B light-edge \u306E\u500B\u6570\r\n\t\r\n\t// euler-tour\r\n\tstd::vector<size_type>\
+    \ in_; // [v] := \u9802\u70B9 v \u306E EulerTour \u9806\u5E8F(\u540C\u4E00 heavy-path\
+    \ \u5185\u3067\u306F\u9023\u7D9A)\r\n\tstd::vector<size_type> out_; // [v] :=\
+    \ \u9802\u70B9 v \u304B\u3089\u51FA\u308B\u3068\u304D\u306E EulerTour \u9806\u5E8F\
+    \r\n\tstd::vector<size_type> euler_map_; // [i] := EulerTour \u9806\u5E8F\u304C\
+    \ i \u3067\u3042\u308B\u3088\u3046\u306A\u9802\u70B9\r\n\t\r\n\t// heavy-path\
+    \ doubling\r\n\tstd::vector<std::vector<size_type>> par_dblng_; // [k][i] := heavy-path\
+    \ i \u304B\u3089 2^k \u56DE light-edge \u3092\u4E0A\u3063\u305F\u5148\u306E\u9802\
+    \u70B9\r\n\t\r\npublic:\r\n\tHeavyLightDecomposition(const Graph & g, bool use_lca\
+    \ = false) : HeavyLightDecomposition(g, g.size(), use_lca) {}\r\n\tHeavyLightDecomposition(const\
+    \ Graph & g, size_type root, bool use_lca) : bf_n(g.size()) {\r\n\t\tpar_.resize(bf_size());\r\
+    \n\t\tsub_size_.resize(bf_size());\r\n\t\tdepth_.resize(bf_size());\r\n\t\ttree_id_.assign(bf_size(),\
+    \ bf_size());\r\n\t\tstd::vector<size_type> next(bf_size()); // [v] := \u9802\u70B9\
+    \ v \u3068\u540C\u4E00 heavy-path \u5185\u3067 v \u3088\u308A 1 \u3064\u8449\u5074\
+    \u306E\u9802\u70B9(\u5B58\u5728\u3057\u306A\u3051\u308C\u3070\u81EA\u5206\u81EA\
+    \u8EAB)\r\n\t\t\r\n\t\tfor (size_type i = 0; i < bf_size(); ++i) {\r\n\t\t\tif\
+    \ (tree_id_[i] != bf_size()) continue;\r\n\t\t\tif (root != bf_size() && i !=\
+    \ root) continue;\r\n\t\t\t\r\n\t\t\tstd::stack<std::pair<size_type, size_type>>\
+    \ stk;\r\n\t\t\tpar_[i] = i;\r\n\t\t\tdepth_[i] = 0;\r\n\t\t\ttree_id_[i] = roots_.size();\r\
+    \n\t\t\tstk.emplace(i, 0);\r\n\t\t\t\r\n\t\t\twhile (!stk.empty()) {\r\n\t\t\t\
+    \tconst size_type u = stk.top().first, i = stk.top().second; stk.pop();\r\n\t\t\
+    \t\tif (i < g[u].size()) {\r\n\t\t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\t\tconst\
     \ size_type v = g[u][i];\r\n\t\t\t\t\tif (v == par_[u]) continue;\r\n\t\t\t\t\t\
     par_[v] = u;\r\n\t\t\t\t\tdepth_[v] = depth_[u] + 1;\r\n\t\t\t\t\ttree_id_[v]\
     \ = roots_.size();\r\n\t\t\t\t\tstk.emplace(v, 0);\r\n\t\t\t\t}\r\n\t\t\t\telse\
@@ -456,7 +467,7 @@ data:
     %d\", &q);\r\n\t\tif (q == 0) {\r\n\t\t\tint p, c, d;\r\n\t\t\tscanf(\"%d %d %d\"\
     , &p, &c, &d);\r\n\t\t\thld.set(p, {c, d});\r\n\t\t}\r\n\t\telse {\r\n\t\t\tint\
     \ u, v, x;\r\n\t\t\tscanf(\"%d %d %d\", &u, &v, &x);\r\n\t\t\tauto res = hld.fold(u,\
-    \ v);\r\n\t\t\tprintf(\"%lld\\n\", (res.first * x + res.second).get());\r\n\t\t\
+    \ v);\r\n\t\t\tprintf(\"%d\\n\", (res.first * x + res.second).val());\r\n\t\t\
     }\r\n\t}\r\n\treturn 0;\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \r\n\r\n#include \"Mathematics/ModInt.hpp\"\r\n#include \"DataStructure/SegmentTree.hpp\"\
@@ -475,7 +486,7 @@ data:
     %d\", &q);\r\n\t\tif (q == 0) {\r\n\t\t\tint p, c, d;\r\n\t\t\tscanf(\"%d %d %d\"\
     , &p, &c, &d);\r\n\t\t\thld.set(p, {c, d});\r\n\t\t}\r\n\t\telse {\r\n\t\t\tint\
     \ u, v, x;\r\n\t\t\tscanf(\"%d %d %d\", &u, &v, &x);\r\n\t\t\tauto res = hld.fold(u,\
-    \ v);\r\n\t\t\tprintf(\"%lld\\n\", (res.first * x + res.second).get());\r\n\t\t\
+    \ v);\r\n\t\t\tprintf(\"%d\\n\", (res.first * x + res.second).val());\r\n\t\t\
     }\r\n\t}\r\n\treturn 0;\r\n}"
   dependsOn:
   - Mathematics/ModInt.hpp
@@ -485,7 +496,7 @@ data:
   isVerificationFile: true
   path: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   requiredBy: []
-  timestamp: '2020-09-18 18:14:57+09:00'
+  timestamp: '2020-11-20 23:55:35+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/HeavyLightDecomposition_Query.PathQuery.test.cpp

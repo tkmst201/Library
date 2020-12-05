@@ -256,8 +256,8 @@ data:
   timestamp: '2020-09-18 18:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
 documentation_of: GraphTheory/HeavyLightDecomposition_Query.hpp
 layout: document
 redirect_from:
