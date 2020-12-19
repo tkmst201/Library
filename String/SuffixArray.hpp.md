@@ -377,9 +377,9 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/SuffixArray.sa_is.test.cpp
   - Test/SuffixArray.lcp.test.cpp
   - Test/SuffixArray.search.test.cpp
+  - Test/SuffixArray.sa_is.test.cpp
 documentation_of: String/SuffixArray.hpp
 layout: document
 redirect_from:

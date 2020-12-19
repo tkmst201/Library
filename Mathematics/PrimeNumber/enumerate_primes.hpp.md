@@ -151,8 +151,8 @@ data:
   isVerificationFile: false
   path: Mathematics/PrimeNumber/enumerate_primes.hpp
   requiredBy:
-  - Mathematics/PrimeNumber/counting_primes.hpp
   - Mathematics/PrimeNumber/prime_sum.hpp
+  - Mathematics/PrimeNumber/counting_primes.hpp
   timestamp: '2020-11-10 21:09:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

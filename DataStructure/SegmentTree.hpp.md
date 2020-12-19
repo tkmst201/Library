@@ -178,10 +178,10 @@ data:
   timestamp: '2020-09-18 18:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/EulerTour.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/SegmentTree.fold.test.cpp
-  - Test/EulerTour.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

@@ -413,10 +413,10 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/WaveletMatrix.range_frequency.test.cpp
-  - Test/WaveletMatrix.next_prev_value.test.cpp
   - Test/WaveletMatrix.quantile.test.cpp
+  - Test/WaveletMatrix.next_prev_value.test.cpp
   - Test/WaveletMatrix.select.test.cpp
+  - Test/WaveletMatrix.range_frequency.test.cpp
 documentation_of: DataStructure/WaveletMatrix.hpp
 layout: document
 redirect_from:

@@ -190,8 +190,8 @@ data:
   timestamp: '2020-11-19 12:38:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/NumberTheoreticTransform_AnyMod.test.cpp
   - Test/NumberTheoreticTransform.test.cpp
+  - Test/NumberTheoreticTransform_AnyMod.test.cpp
 documentation_of: Mathematics/Convolution/NumberTheoreticTransform.hpp
 layout: document
 redirect_from:
