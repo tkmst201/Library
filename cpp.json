@@ -6,7 +6,7 @@
 			"** VS Code ユーザースニペット一覧 **",
 			"https://github.com/tkmst201/Library の抜粋 + Utility",
 			"",
-			"last-updated: 2020/11/26",
+			"last-updated: 2020/12/20",
 			"最新版はこちら: https://github.com/tkmst201/Library/blob/master/cpp.json",
 			"手動で作成しているので更新し忘れがあるかもしれません",
 			"",
@@ -27,7 +27,7 @@
 			"2020/11/11 fast_prime_factorization: smallest_prime_factor テーブルを用いて素因数分解を行う O(log n)",
 			"",
 			"# DataStructure",
-			"2020/09/18 SegmentTree: セグ木",
+			"2020/12/20 SegmentTree: セグ木",
 			"2020/09/16 LazySegmentTree: 遅延伝搬セグ木",
 			"2020/08/15 BinaryIndexedTree: BIT",
 			"2020/04/22 UnionFind: UnionFind",
@@ -386,7 +386,7 @@
 			"\t}",
 			"\t",
 			"\tsize_type min_left(size_type r, std::function<bool(const_reference)> g) const {",
-			"\tcassert(r <= size());",
+			"\t\tassert(r <= size());",
 			"\t\tassert(g(id_elem));",
 			"\t\tif (r == 0) return 0;",
 			"\t\tr += n_;",
@@ -412,7 +412,7 @@
 		"description": [
 			"セグ木",
 			"https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp",
-			"2020/09/18",
+			"2020/12/20",
 		]
 	},
 	
