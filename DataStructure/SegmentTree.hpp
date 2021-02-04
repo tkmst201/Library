@@ -1,81 +1,19 @@
 #ifndef INCLUDE_GUARD_SEGMENT_TREE_HPP
 #define INCLUDE_GUARD_SEGMENT_TREE_HPP
 
-/*
-last-updated: 2020/09/18
-
-max_right: verified(https://atcoder.jp/contests/practice2/submissions/16664880)
-min_left: unverified
-
-# 仕様
-SegmentTree()
-	時間計算量: Θ(1)
-	空のセグ木を作成
-	何か操作を行った場合の動作は未定義
-
-SegmentTree(size_type n, const_reference id_elem, const F & f)
-	時間計算量: Θ(n)
-	要素数 n, 単位元 id_elem, 二項演算 f で初期化
-
-SegmentTree(std::vector<value_type> v, const_reference id_elem, const F & f)
-	時間計算量: Θ(n)
-	配列 v で初期化
-	他の引数については上記の通り
-
-size_type size() const noexcept
-	時間計算量: Θ(1)
-	要素数を返す(\neq 内部のノード数)
-
-void set(size_type i, const_reference x)
-	時間計算量: Θ(log n)
-	i 番目(0 \leq i < n) の要素に x を代入
-
-const_reference get(size_type i) const
-	時間計算量: Θ(1)
-	i 番目(0 \leq i < n) の要素を返す
-
-value_type fold(size_type l, size_type r) const
-	時間計算量: O(log n)
-	[l, r) (0 \leq l \leq r \leq n) を fold した結果を返す
-	l = r のときは id_elem を返す
-
-const_reference fold_all() const
-	時間計算量: Θ(1)
-	fold(0, n) の結果を返す
-
-size_type max_right(size_type l, std::function<bool(const_reference)> g) const
-	時間計算量: O(log n)
-	0 \leq l \leq n
-	g は単調な関数
-	次の条件を満たす最小の r を返す
-		l \leq i \leq r では g(fold(l, i)) = true
-		g(fold(l, r + 1)) = false
-	g(fold(l, n)) = true のときは r = n
-
-size_type min_left(size_type r, std::function<bool(const_reference)> g) const
-	時間計算量: O(log n)
-	0 \leq r \leq n
-	g は単調な関数
-	次の条件を満たす最大の l を返す
-		l \leq i \leq r では g(fold(i, r)) = true
-		g(fold(l - 1, r)) = false
-	g(fold(0, r)) = true のときは l = 0
-
-# 参考
-https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf, 2020/04/08
-AC Library, 2020/09/13
-*/
-
 #include <vector>
 #include <algorithm>
 #include <cassert>
 #include <functional>
 
+/**
+ * @brief https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp
+ */
 template<typename T>
 struct SegmentTree {
 	using value_type = T;
 	using const_reference = const value_type &;
-	using F = std::function<value_type(const_reference, const_reference)>;
+	using F = std::function<value_type (const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
 private:
@@ -87,14 +25,15 @@ private:
 public:
 	SegmentTree() = default;
 	
-	SegmentTree(size_type n, const_reference id_elem, const F & f) : n(n), id_elem(id_elem), f(f) {
+	SegmentTree(size_type n, const_reference id_elem, const F & f)
+		: n(n), id_elem(id_elem), f(f) {
 		n_ = 1;
 		while (n_ < n) n_ <<= 1;
 		node.resize(2 * n_, id_elem);
 	}
 	
-	SegmentTree(std::vector<value_type> v, const_reference id_elem, const F & f) :
-			SegmentTree(v.size(), id_elem, f) {
+	SegmentTree(const std::vector<value_type> & v, const_reference id_elem, const F & f)
+		: SegmentTree(v.size(), id_elem, f) {
 		for (size_type i = 0; i < v.size(); ++i) node[i + n_] = v[i];
 		for (size_type i = n_ - 1; i > 0; --i) node[i] = f(node[i << 1], node[i << 1 | 1]);
 	}
@@ -132,7 +71,7 @@ public:
 		return node[1];
 	}
 	
-	size_type max_right(size_type l, std::function<bool(const_reference)> g) const {
+	size_type max_right(size_type l, std::function<bool (const_reference)> g) const {
 		assert(l <= size());
 		assert(g(id_elem));
 		if (l == size()) return size();
@@ -153,7 +92,7 @@ public:
 		return l - n_;
 	}
 	
-	size_type min_left(size_type r, std::function<bool(const_reference)> g) const {
+	size_type min_left(size_type r, std::function<bool (const_reference)> g) const {
 		assert(r <= size());
 		assert(g(id_elem));
 		if (r == 0) return 0;

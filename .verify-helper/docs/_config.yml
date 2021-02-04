@@ -1,0 +1,8 @@
+plugins:
+  - jekyll-relative-links
+  - jemoji
+markdown: kramdown
+
+theme: jekyll-theme-minimal
+title: tkmst201's Library
+author: tkmst201
