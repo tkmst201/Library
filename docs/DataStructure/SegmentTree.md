@@ -1,23 +1,33 @@
 ---
-title: セグメント木 (Segment Tree)
+title: セグメント木
 documentation_of: //DataStructure/SegmentTree.hpp
 ---
 
 # 概要
+
 配列を扱うデータ構造です。  
-大きさ $N$ の配列に対し、1 点更新や区間に対する演算をそれぞれ $\Theta(\log{N})$、1 点取得を $\Theta(1)$ で効率的に行うことができます。  
-区間に対して一意に値が定まり、区間をまとめて計算できるような演算が扱えます。例: `+, xor, gcd, 関数の合成` など。  
+大きさ $N$ の配列に対し、1 点更新や区間に対する演算をそれぞれ $\Theta(\log{N})$、1 点取得を $\Theta(1)$ で行うことができます。  
+区間に対して一意に値が定まり、区間をまとめて計算できるような演算が扱えます。例: `+`, `xor`, `gcd`, `関数の合成` など。  
 区間更新を行いたい場合は、[遅延伝搬セグメント木](https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp)を使用して下さい。  
 
-- `SegmentTree(size_t n, const T & id_elem, const F & f)` : 要素数 $n$ で初期化
-- `SegmentTree(const vector<T> & v, const T & id_elem, const F & f)` : v で初期化
-- `size_t size()` : $\Theta(1)$ 要素数を返す
-- `void set(size_t i, const T & x)` : $i$ 番目に $x$ を代入
-- `const T & get(size_t i)` : $i$ 番目の要素を返す
-- `T fold(size_t l, size_t r)` : $[l, r)$ を畳み込んだ結果を返す
-- `const T & fold_all()` : $fold(0, size())$ を返す
-- `max_right(size_t l, std::function<bool (const T &)> g)` : $g(fold(l, r)) = true$ となる最大の $r$ を返す
-- `size_t min_left(size_t r, std::function<bool (const T &)> g)` : $g(fold(l, r)) = true$ となる最小の $l$ を返す
+- `SegmentTree(size_t n, const T & id_elem, const F & f)`
+	- $\Theta(n)$ 要素数 $n$ で初期化
+- `SegmentTree(const vector<T> & v, const T & id_elem, const F & f)`
+	- $\Theta(\|v\|)$ v で初期化
+- `size_t size()`
+	- $\Theta(1)$ 要素数を返す
+- `void set(size_t i, const T & x)`
+	- $\Theta(\log{N})$ $i$ 番目に $x$ を代入
+- `const T & get(size_t i)`
+	- $\Theta(1)$ $i$ 番目の要素を返す
+- `T fold(size_t l, size_t r)`
+	- $\Theta(\log{N})$ $[l, r)$ を畳み込んだ結果を返す
+- `const T & fold_all()`
+	- $\Theta(1)$ $fold(0, size())$ を返す
+- `max_right(size_t l, std::function<bool (const T &)> g)`
+	- $\Theta(\log{N})$ $g(fold(l, r)) = true$ となる最大の $r$ を返す
+- `size_t min_left(size_t r, std::function<bool (const T &)> g)`
+	- $\Theta(\log{N})$ $g(fold(l, r)) = true$ となる最小の $l$ を返す
 
 <br>
 
@@ -59,6 +69,8 @@ documentation_of: //DataStructure/SegmentTree.hpp
 **計算量**
 
 - $\Theta(1)$
+
+---
 
 <br>
 
@@ -130,7 +142,7 @@ $fold(0,N)$ の計算結果 $f(A_0, f(A_1, f(\ldots, f(A_{N-2}, A_{N-1}))\ldots)
 
 ---
 
-### :warning: size_t max_right(size_t l, std::function<bool (const T &)> g)
+### :warning: size_t max_right(size_t l, std::function&lt; bool (const T &amp;)&gt; g)
 
 $g(fold(l, r)) = true$ となるような最小の $r$ を返します。$g(fold(l, N)) = true$ または $l = N$ のときは $N$ を返します。  
 
@@ -153,7 +165,7 @@ $g(fold(l, r)) = true$ となるような最小の $r$ を返します。$g(fold
 
 ---
 
-### :warning: size_t min_left(size_t r, std::function<bool (const T &)> g)
+### :warning: size_t min_left(size_t r, std::function&lt; bool (const T &amp;)&gt; g)
 
 $g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold(0, r)) = true$ または $l = 0$ のときは $0$ を返します。  
 
@@ -177,7 +189,7 @@ $g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold
 
 # 使用例
 
-和を扱うセグメント木の例です。オーバーフローには注意してください。総和 $2^{31}$ 以上になる場合は `long long` を使いましょう。  
+和を扱うセグメント木の例です。オーバーフローには注意してください。総和が $2^{31}$ 以上になる場合は `long long` を使いましょう。  
 
 ```cpp
 #include <bits/stdc++.h>
@@ -248,7 +260,7 @@ int main() {
 }
 ```
 
-一般的に使いそうなセグメント木の定義を載せておきます。  
+よく使いそうなセグメント木の定義をいくつか載せておきます。  
 
 `xor` セグメント木  
 
@@ -281,10 +293,11 @@ $A_l, (\ldots)$ を含むノード ($A_{l-1}$ は含まない) 最も根側の�
 
 <br>
 
-
 # TODO
 
-TODO: `max_right`, `min_left` の test を追加する
+TODO: `max_right`, `min_left` の test を追加する  
+
+<br>
 
 # 参考
 2020/04/08: [https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf](https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf)  
