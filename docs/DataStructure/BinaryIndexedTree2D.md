@@ -6,7 +6,7 @@ documentation_of: //DataStructure/BinaryIndexedTree2D.hpp
 # 概要
 
 二次元になった Binary Indexed Tree です。  
-二次元グリッド上で $1$ 点加算と任意の矩形領域和の計算が $\mathcal{O}(\log{N})$ で行えます。
+大きさ $H \times W$ の二次元グリッド上で $1$ 点加算と任意の矩形領域和の計算が $\mathcal{O}(\log{H} \log{W})$ で行えます。  
 
 - `BinaryIndexedTree_Ragne2d(size_t h, size_t w)`
 	- $\Theta(hw)$ $h \times w$ のテーブルで初期化
@@ -153,6 +153,6 @@ TODO: `sum` の引数を `i1, i2, j1, j2` の順に変更
 <br>
 
 # 参考
-2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)
+2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)  
 
 <br>

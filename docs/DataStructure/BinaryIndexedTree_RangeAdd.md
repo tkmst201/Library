@@ -135,6 +135,6 @@ int main() {
 <br>
 
 # 参考
-2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)
+2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)  
 
 <br>

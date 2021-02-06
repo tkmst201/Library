@@ -12,7 +12,7 @@ template<typename T>
 struct BinaryIndexedTree {
 	using value_type = T;
 	using const_reference = const value_type &;
-	using F = std::function<value_type(const_reference, const_reference)>;
+	using F = std::function<value_type (const_reference, const_reference)>;
 	using size_type = std::size_t;
 	
 private:

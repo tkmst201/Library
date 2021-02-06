@@ -8,7 +8,7 @@ documentation_of: //DataStructure/SegmentTree.hpp
 配列を扱うデータ構造です。  
 大きさ $N$ の配列に対し、1 点更新や区間に対する演算をそれぞれ $\Theta(\log{N})$、1 点取得を $\Theta(1)$ で行うことができます。  
 区間に対して一意に値が定まり、区間をまとめて計算できるような演算が扱えます。例: `+`, `xor`, `gcd`, `関数の合成` など。  
-区間更新を行いたい場合は、[遅延伝搬セグメント木](https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp)を使用して下さい。  
+区間更新を行いたい場合は、[遅延伝搬セグメント木](https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp)を使用してください。  
 
 - `SegmentTree(size_t n, const T & id_elem, const F & f)`
 	- $\Theta(n)$ 要素数 $n$ で初期化
@@ -38,7 +38,7 @@ documentation_of: //DataStructure/SegmentTree.hpp
 **制約**
 
 - `F` の単位元は `id_elem`
-- $(T, F,$ `id_elem`$)$ はモノイド
+- $(T, f,$ `id_elem`$)$ はモノイド
 
 ---
 

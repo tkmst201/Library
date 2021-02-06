@@ -6,7 +6,7 @@ documentation_of: //DataStructure/BinaryIndexedTree.hpp
 # 概要
 
 配列の累積和を扱うデータ構造です。  
-大きさ $N$ の配列に対し、1 点更新や先頭からの累積和の計算を $\mathcal{O}(\log{N})$ で行うことができます。  
+大きさ $N$ の配列に対し、1 点更新や先頭からの和の計算を $\mathcal{O}(\log{N})$ で行うことができます。  
 区間に対して一意に値が定まり、区間をまとめて計算できるような**可換**な演算が扱えます。例: `+`, `xor`, `gcd` など。  
 逆元を持つ場合は任意の区間和の計算が可能です。  
 [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) に比べ、より省メモリで定数倍が良いです。  
@@ -81,7 +81,7 @@ $A_i = f(A_i, x)$ をします。
 
 ### T sum(size_t i)
 
-半開区間 $[0, i)$ の和 $f(A_0, f(A_1, f(\ldots, f(A_{i-2}, A_{i-1}))\ldots))$ を返します。
+半開区間 $[0, i)$ の和 $f(A_0, A_1, \ldots, A_{i-1})$ を返します。
 計算順序は不定です。
 $i = 0$ のときは `id_elem` を返します。  
 
@@ -97,12 +97,12 @@ $i = 0$ のときは `id_elem` を返します。
 
 ### :warning: size_t lower_bound(const T & x)
 
-先頭からの累積和が $x$ 以上となる最小の index $r$ を返します。$sum(r) < x$ が成り立ちます。
+先頭からの和が $x$ 以上となる最小の index $r$ を返します。$sum(r) < x$ が成り立ちます。
 もしそのような index が存在しない場合は $N$ を返します。  
 
 **制約**
 
-- 先頭からの累積和が単調増加
+- 先頭からの和が単調増加
 
 **計算量**
 
@@ -152,7 +152,7 @@ int main() {
 
 xor を載せました。
 xor にも逆元が存在するので任意の区間 xor の計算が可能です。
-この場合 `lower_bound` を使用したときの動作は不定です。
+この場合 `lower_bound` を使用したときの動作は不定です。  
 
 ```cpp
 #include <bits/stdc++.h>

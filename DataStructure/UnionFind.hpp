@@ -1,41 +1,13 @@
 #ifndef INCLUDE_GUARD_UNION_FIND_HPP
 #define INCLUDE_GUARD_UNION_FIND_HPP
 
-/*
-last-updated: 2021/02/06
-
-size() verify : https://atcoder.jp/contests/abc157/submissions/12223429
-
-# 仕様
-UnionFind(size_type n) :
-	時間計算量: Θ(n)
-	要素数 n で初期化
-
-size_type size(size_type x) :
-	時間計算量: O(α(n))
-	要素 x が属するグループの要素数を返す
-
-size_type find(size_type x) :
-	時間計算量: O(α(n))
-	要素 x が属するグループの代表番号を返す
-
-void unite(size_type x, size_type y) :
-	時間計算量: O(α(n))
-	要素 x, y がそれぞれ属するグループを併合する
-
-bool issame(size_type x, size_type y) :
-	時間計算量: O(α(n))
-	要素 x, y が同一グループに属するかを返す
-
-# 参考
-https://en.wikipedia.org/wiki/Disjoint-set_data_structure, 2020/04/22
-https://qiita.com/kopricky/items/3e5847ab1451fe990367, 2020/04/22
-*/
-
 #include <vector>
 #include <utility>
 #include <cassert>
 
+/**
+ * @brief https://tkmst201.github.io/Library/DataStructure/UnionFind.hpp
+ */
 struct UnionFind {
 public:
 	using size_type = std::size_t;
