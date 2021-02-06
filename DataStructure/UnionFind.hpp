@@ -2,7 +2,7 @@
 #define INCLUDE_GUARD_UNION_FIND_HPP
 
 /*
-last-updated: 2020/04/22
+last-updated: 2021/02/06
 
 size() verify : https://atcoder.jp/contests/abc157/submissions/12223429
 
@@ -33,7 +33,6 @@ https://qiita.com/kopricky/items/3e5847ab1451fe990367, 2020/04/22
 */
 
 #include <vector>
-#include <numeric>
 #include <utility>
 #include <cassert>
 
@@ -41,37 +40,40 @@ struct UnionFind {
 public:
 	using size_type = std::size_t;
 	
-	UnionFind(size_type n) : n(n), size_(n, 1) {
-		par.resize(n);
-		std::iota(par.begin(), par.end(), 0);
-	}
+private:
+	size_type n;
+	std::vector<int> dat;
 	
-	size_type size(size_type x) { return size_[find(x)]; }
+public:
+	UnionFind(size_type n) : n(n), dat(n, -1) {}
+	
+	size_type size(size_type x) {
+		assert(x < n);
+		return -dat[find(x)];
+	}
 	
 	size_type find(size_type x) {
 		assert(x < n);
-		while (par[x] != x) {
-			par[x] = par[par[x]];
-			x = par[x];
-		}
-		return x;
+		if (dat[x] < 0) return x;
+		return dat[x] = find(dat[x]);
 	}
 	
 	void unite(size_type x, size_type y) {
+		assert(x < n);
+		assert(y < n);
 		x = find(x);
 		y = find(y);
 		if (x == y) return;
-		if (size(x) > size(y)) std::swap(x, y);
-		par[x] = y;
-		size_[y] += size_[x];
+		if (dat[x] < dat[y]) std::swap(x, y);
+		dat[x] += dat[y];
+		dat[y] = x;
 	}
 	
-	bool issame(size_type x, size_type y) { return find(x) == find(y); }
-	
-private:
-	size_type n;
-	std::vector<size_type> size_, par;
+	bool issame(size_type x, size_type y) {
+		assert(x < n);
+		assert(y < n);
+		return find(x) == find(y);
+	}
 };
-
 
 #endif // INCLUDE_GUARD_UNION_FIND_HPP
