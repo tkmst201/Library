@@ -25,7 +25,7 @@ documentation_of: //DataStructure/BinaryIndexedTree2D.hpp
 
 **制約**
 
-- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`
+- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`, `ModInt`
 
 ---
 

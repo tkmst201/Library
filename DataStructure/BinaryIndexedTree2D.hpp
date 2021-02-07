@@ -55,7 +55,7 @@ public:
 		assert(i2 <= h);
 		assert(j2 <= w);
 		if (i1 == i2 || j1 == j2) return 0;
-		return sum(i2, j2) - sum(i2, j1) - sum(i1, j2) + sum(i1, j1);
+		return sum(i2, j2) - sum(i2, j1) + sum(i1, j1) - sum(i1, j2);
 	}
 };
 

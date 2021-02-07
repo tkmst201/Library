@@ -25,7 +25,7 @@ documentation_of: //DataStructure/BinaryIndexedTree_RangeAdd.hpp
 
 **制約**
 
-- `T` は `int`, `long long`
+- `T` は `int`, `long long`, `ModInt`
 - `U` は `BinaryIndexedTree`
 
 ---
