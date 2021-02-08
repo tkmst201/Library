@@ -7,7 +7,7 @@ documentation_of: //DataStructure/SegmentTree.hpp
 
 配列を扱うデータ構造です。  
 大きさ $N$ の配列に対し、1 点更新や区間に対する演算をそれぞれ $\Theta(\log{N})$、1 点取得を $\Theta(1)$ で行うことができます。  
-区間に対して一意に値が定まり、区間をまとめて計算できるような演算が扱えます。例: `+`, `xor`, `gcd`, `関数の合成` など。  
+区間に対して一意に値が定まり、区間をまとめて計算できるような演算が扱えます。例: `+`, `xor`, `min`, `gcd`, `関数の合成` など。  
 区間更新を行いたい場合は、[遅延伝搬セグメント木](https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp)を使用してください。  
 
 - `SegmentTree(size_t n, const T & id_elem, const F & f)`
@@ -120,7 +120,7 @@ $A_i$ を返します。
 
 ### T fold(size_t l, size_t r)
 
-半開区間 $[l, r)$ の演算結果 $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-2}, A_{r-1}))\ldots))$ を返します。$l = r$ のときは単位元を返します。  
+半開区間 $[l, r)$ の演算結果 $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-2}, A_{r-1}))\ldots)$ を返します。$l = r$ のときは単位元を返します。  
 
 **制約**
 
@@ -296,6 +296,7 @@ $A_l, (\ldots)$ を含むノード ($A_{l-1}$ は含まない) 最も根側の�
 # TODO
 
 TODO: `max_right`, `min_left` の test を追加する  
+TODO: `InputIterator` コンストラクタに変更  
 
 <br>
 

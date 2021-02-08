@@ -8,6 +8,7 @@ documentation_of: //Mathematics/Combination.hpp
 `ModInt` 構造体に対して組み合わせを計算する構造体です。  
 $5 \times 10^7$ 未満の $n$ や $r$ に対して $_nC_r \bmod{M}$ を ならし $\Theta(1)$ で計算します。  
 [AC Library](https://github.com/atcoder/ac-library) の `Modint` 構造体を使用することもできます  
+全体で $\max(n)$ の空間計算量がかかります。  
 
 - `Combination(size_t sz = 1)`
 	- $\Theta(sz + \log{M})$ $sz$ を指定することにより事前にテーブルを構築
@@ -144,4 +145,5 @@ int main() {
 
 # TODO
 
+TODO: test の追加  
 TODO: $r$ が小さい場合の愚直計算を追加  

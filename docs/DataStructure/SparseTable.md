@@ -10,7 +10,7 @@ documentation_of: //DataStructure/SparseTable.hpp
 値の変更を行いたい場合は、[セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp)を使用してください。  
 
 - `SparseTable(InputIterator first, InputIterator last, const F & f)`
-	- $\Theta(N\log{N})$ $[first, last)$ でテーブルを構築  
+	- 時間/空間 $\Theta(N\log{N})$ $[first, last)$ でテーブルを構築  
 - `size_t size()`
 	- $\Theta(1)$ 配列の要素数 $N$ を返す  
 - `T fold(size_t l, size_t r)`
