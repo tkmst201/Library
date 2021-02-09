@@ -10,7 +10,7 @@ int main() {
 	int N, Q;
 	scanf("%d %d", &N, &Q);
 	
-	using PUF = PersistentUnionFind<PersistentArray<int, 6>>;
+	using PUF = PersistentUnionFind<PersistentArray, 6>;
 	std::vector<PUF> hist(Q + 1);
 	
 	for (int i = 0; i < Q; ++i) {

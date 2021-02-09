@@ -3,6 +3,9 @@
 
 #include <cstdint>
 
+/**
+ * @brief https://tkmst201.github.io/Library/Mathematics/bit_operation.hpp
+ */
 namespace tk {
 constexpr int pop_count(std::uint32_t x) {
 	x = (x & 0x55555555) + ((x >> 1) & 0x55555555);
