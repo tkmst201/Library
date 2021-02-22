@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/BipartiteMatching.test.cpp
     title: Test/BipartiteMatching.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

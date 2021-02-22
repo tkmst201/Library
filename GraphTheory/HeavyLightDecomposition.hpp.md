@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
     title: Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

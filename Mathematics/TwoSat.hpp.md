@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/TwoSat.test.cpp
     title: Test/TwoSat.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

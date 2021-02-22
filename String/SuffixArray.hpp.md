@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/SuffixArray.search.test.cpp
     title: Test/SuffixArray.search.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -9,6 +9,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/BinaryIndexedTree_RangeAdd.test.cpp
     title: Test/BinaryIndexedTree_RangeAdd.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -87,8 +88,8 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/BinaryIndexedTree_RangeAdd.test.cpp
   - Test/BinaryIndexedTree.test.cpp
+  - Test/BinaryIndexedTree_RangeAdd.test.cpp
 documentation_of: DataStructure/BinaryIndexedTree.hpp
 layout: document
 redirect_from:

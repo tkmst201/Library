@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/RedBlackTree.test.cpp
     title: Test/RedBlackTree.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

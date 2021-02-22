@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/zeta_moebius_transform.set.1.test.cpp
     title: Test/zeta_moebius_transform.set.1.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

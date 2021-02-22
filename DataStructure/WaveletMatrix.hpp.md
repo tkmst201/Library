@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/WaveletMatrix.select.test.cpp
     title: Test/WaveletMatrix.select.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -413,9 +414,9 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/WaveletMatrix.select.test.cpp
   - Test/WaveletMatrix.quantile.test.cpp
   - Test/WaveletMatrix.next_prev_value.test.cpp
-  - Test/WaveletMatrix.select.test.cpp
   - Test/WaveletMatrix.range_frequency.test.cpp
 documentation_of: DataStructure/WaveletMatrix.hpp
 layout: document

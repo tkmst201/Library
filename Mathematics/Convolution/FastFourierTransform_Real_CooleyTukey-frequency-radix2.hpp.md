@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
     title: Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

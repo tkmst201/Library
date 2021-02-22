@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/BinaryIndexedTree2D.test.cpp
     title: Test/BinaryIndexedTree2D.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/Matrix_Determinant.test.cpp
     title: Test/Matrix_Determinant.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

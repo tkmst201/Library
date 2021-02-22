@@ -12,6 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/TwoSat.test.cpp
     title: Test/TwoSat.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -161,8 +162,8 @@ data:
   timestamp: '2020-10-30 18:50:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/StronglyConnectedComponents.test.cpp
   - Test/TwoSat.test.cpp
+  - Test/StronglyConnectedComponents.test.cpp
 documentation_of: GraphTheory/StronglyConnectedComponents.hpp
 layout: document
 redirect_from:

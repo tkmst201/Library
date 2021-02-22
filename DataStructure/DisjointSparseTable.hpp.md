@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/DisjointSparseTable.test.cpp
     title: Test/DisjointSparseTable.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

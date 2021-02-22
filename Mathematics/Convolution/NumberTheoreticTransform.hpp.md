@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/NumberTheoreticTransform_AnyMod.test.cpp
     title: Test/NumberTheoreticTransform_AnyMod.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

@@ -15,6 +15,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/SegmentTree.fold.test.cpp
     title: Test/SegmentTree.fold.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -179,9 +180,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/EulerTour.test.cpp
+  - Test/SegmentTree.fold.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
-  - Test/SegmentTree.fold.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document
 redirect_from:

@@ -9,6 +9,7 @@ data:
     title: Mathematics/Convolution/FastFourierTransform_Real_CooleyTukey-frequency-radix2.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:

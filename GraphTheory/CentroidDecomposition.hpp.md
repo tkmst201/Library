@@ -21,6 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
     title: Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -363,12 +364,12 @@ data:
   timestamp: '2020-09-21 15:29:04+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
-  - Test/CentroidDecomposition.test.cpp
-  - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
   - Test/FastFourierTransform_CookeyTukey-radix2.test.cpp
+  - Test/CentroidDecomposition.test.cpp
   - Test/FastFourierTransform_CookeyTukey-frequency-radix2.test.cpp
+  - Test/FastFourierTransform_Real_CooleyTukey-frequency-radix2.test.cpp
   - Test/FastFourierTransform_CookeyTukey-time-radix2.test.cpp
+  - Test/FastFourierTransform_Real_CooleyTukey-time-radix4.test.cpp
 documentation_of: GraphTheory/CentroidDecomposition.hpp
 layout: document
 redirect_from:

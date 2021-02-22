@@ -21,6 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/SlidingWindowAggregation.test.cpp
     title: Test/SlidingWindowAggregation.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
@@ -158,12 +159,12 @@ data:
   timestamp: '2020-11-20 23:55:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/Matrix_Determinant.test.cpp
-  - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
-  - Test/DynamicSegmentTree.test.cpp
   - Test/LazySegmentTree.test.cpp
-  - Test/SlidingWindowAggregation.test.cpp
   - Test/SegmentTree.fold.test.cpp
+  - Test/SlidingWindowAggregation.test.cpp
+  - Test/DynamicSegmentTree.test.cpp
+  - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+  - Test/Matrix_Determinant.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document
 redirect_from:

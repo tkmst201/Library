@@ -6,6 +6,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: Test/LowestCommonAncestor.test.cpp
     title: Test/LowestCommonAncestor.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
