@@ -29,7 +29,7 @@ public:
 		: n(n), id_elem(id_elem), f(f) {
 		n_ = 1;
 		while (n_ < n) n_ <<= 1;
-		node.resize(2 * n_, id_elem);
+		node.assign(2 * n_, id_elem);
 	}
 	
 	SegmentTree(const std::vector<value_type> & v, const_reference id_elem, const F & f)

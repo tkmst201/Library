@@ -26,7 +26,7 @@ public:
 	
 	explicit operator bool() const noexcept { return val_; }
 	bool operator !() const noexcept { return !static_cast<bool>(*this); }
-	RuntimeModInt operator +() const noexcept { return RuntimeModInt(*this); }
+	RuntimeModInt operator +() const noexcept { return *this; }
 	RuntimeModInt operator -() const noexcept { return RuntimeModInt(-val_); }
 	RuntimeModInt operator ++(int) noexcept { RuntimeModInt res = *this; ++*this; return res; }
 	RuntimeModInt operator --(int) noexcept { RuntimeModInt res = *this; --*this; return res; }

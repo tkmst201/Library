@@ -19,7 +19,7 @@ private:
 	std::vector<bit_type> bit;
 	
 public:
-	BinaryIndexedTree_RangeAdd(size_type n)
+	explicit BinaryIndexedTree_RangeAdd(size_type n)
 		: bit(2, bit_type{n, [](value_type x, value_type y) { return x + y; }, 0}) {}
 	
 	size_type size() const noexcept {

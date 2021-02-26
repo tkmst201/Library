@@ -17,7 +17,7 @@ private:
 	std::vector<int> dat;
 	
 public:
-	UnionFind(size_type n) : n(n), dat(n, -1) {}
+	explicit UnionFind(size_type n) : n(n), dat(n, -1) {}
 	
 	size_type size(size_type x) {
 		assert(x < n);

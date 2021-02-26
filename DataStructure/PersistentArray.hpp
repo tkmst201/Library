@@ -34,7 +34,7 @@ private:
 	PersistentArray(const sptr_type & root, const_reference def_val) : root(root), def_val(def_val) {}
 	
 public:
-	PersistentArray(const_reference def_val = 0) : root(nullptr), def_val(def_val) {}
+	explicit PersistentArray(const_reference def_val = 0) : root(nullptr), def_val(def_val) {}
 	
 	PersistentArray set(size_type k, const_reference x) const {
 		const_ptr node = root.get();

@@ -6,7 +6,7 @@ documentation_of: //DataStructure/DisjointSparseTable.hpp
 # 概要
 
 配列を扱う静的データ構造です。  
-大きさ $N$ の配列に対し、任意の区間の最小値や総和などの計算を、事前計算 $\Theta(N\log{N})$ クエリ $\Theta(1)$ で行うことができます。  
+要素数 $N$ の配列に対し、任意の区間の最小値や総和などの計算を、事前計算 $\Theta(N\log{N})$ クエリ $\Theta(1)$ で行うことができます。  
 [Sparse Table](https://tkmst201.github.io/Library/DataStructure/SparseTable.hpp) で必要だった可換性や冪等性が要求されません。  
 
 - `DisjointSparseTable(InputIterator first, InputIterator last, const F & f)`

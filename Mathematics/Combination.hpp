@@ -17,7 +17,7 @@ private:
 	static constexpr size_type MAX_LIMIT = 50000000;
 	
 public:
-	Combination(size_type sz = 1) : fact_(1, 1), finv_(1, 1), inv_(1, 1) { build(sz); }
+	explicit Combination(size_type sz = 1) : fact_(1, 1), finv_(1, 1), inv_(1, 1) { build(sz); }
 	
 	T fact(size_type k) { if (k >= T::mod()) return 0; build(k); return fact_[k]; }
 	T finv(size_type k) { assert(k < T::mod()); build(k); return finv_[k]; }

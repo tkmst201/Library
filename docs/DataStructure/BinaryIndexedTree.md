@@ -6,7 +6,7 @@ documentation_of: //DataStructure/BinaryIndexedTree.hpp
 # 概要
 
 配列の累積和を扱うデータ構造です。  
-大きさ $N$ の配列に対し、1 点更新や先頭からの和の計算を $\mathcal{O}(\log{N})$ で行うことができます。  
+要素数 $N$ の配列に対し、1 点更新や先頭からの和の計算を $\mathcal{O}(\log{N})$ で行うことができます。  
 区間に対して一意に値が定まり、区間をまとめて計算できるような**可換**な演算が扱えます。例: `+`, `xor`, `min`, `gcd` など。  
 逆元を持つ場合は任意の区間和の計算が可能です。  
 [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) に比べ、より省メモリで定数倍が良いです。  
