@@ -235,7 +235,7 @@ constexpr int INF = 1<<30;
 
 int main() {
 	// 最小値を扱うセグメント木
-	SegmentTree<int> seg(5, INF, [](auto x, auto y) { return min(x, y); });
+	SegmentTree<int> seg(5, numeric_limits<int>::max(), [](auto x, auto y) { return min(x, y); });
 	seg.set(0, 1);
 	seg.set(1, 5);
 	seg.set(2, 3);

@@ -13,8 +13,8 @@ int main() {
 	using mint = ModInt<998244353>;
 	using P = std::pair<mint, mint>;
 	
-	SlidingWindowAggregation<P> swag({1, 0}, [](auto && x, auto && y) -> P {
-		return {x.first * y.first, x.second * y.first + y.second };
+	SlidingWindowAggregation<P> swag({1, 0}, [](const auto & x, const auto & y) -> P {
+		return {x.first * y.first, x.second * y.first + y.second};
 	});
 	
 	while (Q--) {
