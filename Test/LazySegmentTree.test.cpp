@@ -21,12 +21,11 @@ int main() {
 	
 	using P = std::pair<mint, mint>; // {first} x + {second}
 	
-	P id_lazy(1, 0);
-	LazySegmentTree<mint, P> seg(A, 0, id_lazy,
-		[](auto && a, auto && b) { return a + b; },
-		[](auto && a, auto && b) { return b.first * a + b.second; },
-		[](auto && a, auto && b) { return std::make_pair(a.first * b.first, a.second * b.first + b.second); },
-		[](auto && a, auto && k) { return std::make_pair(a.first, a.second * k); });
+	LazySegmentTree<mint, P> seg(A, 0, {1, 0},
+		[](const auto & x, const auto & y) { return x + y; },
+		[](const auto & x, const auto & e) { return e.first * x + e.second; },
+		[](const auto & e1, const auto & e2) { return std::make_pair(e1.first * e2.first, e1.second * e2.first + e2.second); },
+		[](const auto & e, auto k) { return std::make_pair(e.first, e.second * k); });
 	
 	while (Q--) {
 		int q, l, r;

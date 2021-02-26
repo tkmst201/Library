@@ -21,9 +21,9 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 - `size_t find(size_t x)
 	- $\mathcal{O}(\frac{(\log{N})^2}{\log{M}})$ 要素 $x$ が属する集合の代表元を返します。
 - `PersistentUnionFind unite(size_t x, size_t y)`
-	- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$ 空間 $\mathcal{O}(M \frac{log{N}}{\log{M}})$ 要素 $x$ が属する集合と要素 $y$ が属する集合を併合
+	- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$ 空間 $\mathcal{O}(M \frac{\log{N}}{\log{M}})$ 要素 $x$ が属する集合と要素 $y$ が属する集合を併合
 - `void destructive_unite(size_t x, size_t y)`
-	- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$ 空間 $\mathcal{O}(M \frac{log{N}}{\log{M}})$ 要素 $x$ が属する集合と要素 $y$ が属する集合を破壊的に併合
+	- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$ 空間 $\mathcal{O}(M \frac{\log{N}}{\log{M}})$ 要素 $x$ が属する集合と要素 $y$ が属する集合を破壊的に併合
 - `bool issame(size_t x, size_t y)`
 	- $\mathcal{O}(\frac{(\log{N})^2}{\log{M}})$ 要素 $x, y$ が同じ集合に属しているか判定
 
@@ -100,8 +100,8 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 
 **計算量**
 
-- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$
-- 空間 $\mathcal{O}(M \frac{log{N}}{\log{M}})$
+- 時間 $\mathcal{O}(\frac{(\log{N})^2}{\log{M}} + M \frac{\log{N}}{\log{M}})$
+- 空間 $\mathcal{O}(M \frac{\log{N}}{\log{M}})$
 
 ---
 
@@ -117,8 +117,8 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 
 **計算量**
 
-- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$
-- 空間 $\mathcal{O}(M \frac{log{N}}{\log{M}})$
+- 時間 $\mathcal{O}(\frac{(\log{N})^2}{\log{M}} + M \frac{\log{N}}{\log{M}})$
+- 空間 $\mathcal{O}(M \frac{\log{N}}{\log{M}})$
 
 ---
 

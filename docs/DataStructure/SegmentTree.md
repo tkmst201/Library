@@ -17,14 +17,14 @@ documentation_of: //DataStructure/SegmentTree.hpp
 - `size_t size()`
 	- $\Theta(1)$ 要素数を返す
 - `void set(size_t i, const T & x)`
-	- $\Theta(\log{N})$ $i$ 番目に $x$ を代入
+	- $\Theta(\log{N})$ $i$ 番目の要素に $x$ を代入
 - `const T & get(size_t i)`
 	- $\Theta(1)$ $i$ 番目の要素を返す
 - `T fold(size_t l, size_t r)`
 	- $\Theta(\log{N})$ $[l, r)$ を畳み込んだ結果を返す
 - `const T & fold_all()`
 	- $\Theta(1)$ $fold(0, size())$ を返す
-- `max_right(size_t l, std::function<bool (const T &)> g)`
+- `size_t max_right(size_t l, std::function<bool (const T &)> g)`
 	- $\Theta(\log{N})$ $g(fold(l, r)) = true$ となる最大の $r$ を返す
 - `size_t min_left(size_t r, std::function<bool (const T &)> g)`
 	- $\Theta(\log{N})$ $g(fold(l, r)) = true$ となる最小の $l$ を返す
@@ -128,7 +128,7 @@ $A_i$ を返します。
 
 **計算量**
 
-- $\Theta(\log N)$
+- $\Theta(\log{N})$
 
 ---
 
@@ -155,7 +155,7 @@ $g(fold(l, r)) = true$ となるような最小の $r$ を返します。$g(fold
 
 **計算量**
 
-- $\Theta(\log N)$
+- $\Theta(\log{N})$
 
 
 **Verified**
@@ -177,7 +177,7 @@ $g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold
 
 **計算量**
 
-- $\Theta(\log N)$
+- $\Theta(\log{N})$
 
 **Verified**
 
@@ -189,7 +189,7 @@ $g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold
 
 # 使用例
 
-和を扱うセグメント木の例です。オーバーフローには注意してください。総和が $2^{31}$ 以上になる場合は `long long` を使いましょう。  
+和を扱うセグメント木の例です。オーバーフローに注意してください。総和が $2^{31}$ 以上になる場合は `long long` を使いましょう。  
 
 ```cpp
 #include <bits/stdc++.h>
@@ -200,19 +200,19 @@ int main() {
 	const vector<int> A {1, 2, 3, 0, 0, 0, 4, 5};
 	
 	// 和を扱うセグメント木
-	SegmentTree<int> seg(A, 0, [](int x, int y) { return x + y; });
+	SegmentTree<int> seg(A, 0, [](auto x, auto y) { return x + y; });
 	cout << "N = " << seg.size() << endl; // 8 (= N)
 	cout << "sum = " << seg.fold_all() << endl; // 15
 	cout << "sum[0, 2) = " << seg.fold(0, 2) << endl; // 3
 	cout << "sum[0, 0) = " << seg.fold(0, 0) << endl; // 0 (= id_elem)
 	
 	// A[0..] で合計が 6 以下となるような最大の index を求める (index = r - 1)
-	int r = seg.max_right(0, [](int x) { return x <= 6; });
+	int r = seg.max_right(0, [](auto x) { return x <= 6; });
 	cout << "r = " << r << endl; // 6
 	cout << "sum[0, r) = " << seg.fold(0, r) << " (<= 6)" << endl; // 6
 	
 	// A[..4] で合計が 4 以下となるような最小の index を求める (index = l)
-	int l = seg.min_left(5, [](int x) { return x <= 4; });
+	int l = seg.min_left(5, [](auto x) { return x <= 4; });
 	cout << "l = " << l << endl; // 2
 	cout << "sum[l, 5) = " << seg.fold(l, 5) << " (<= 4)" << endl; // 3
 	
@@ -235,7 +235,7 @@ constexpr int INF = 1<<30;
 
 int main() {
 	// 最小値を扱うセグメント木
-	SegmentTree<int> seg(5, INF, [](int x, int y) { return min(x, y); });
+	SegmentTree<int> seg(5, INF, [](auto x, auto y) { return min(x, y); });
 	seg.set(0, 1);
 	seg.set(1, 5);
 	seg.set(2, 3);
@@ -265,14 +265,14 @@ int main() {
 `xor` セグメント木  
 
 ```cpp
-SegmentTree<int> seg(N, 0, [](int x, int y) { return x ^ y; });
+SegmentTree<int> seg(N, 0, [](auto x, auto y) { return x ^ y; });
 ```
 
 一次関数セグメント木。`mint` は `ModInt` 構造体の略記です。$Ax+B$ の $A$ が `first` に、$B$ が `second` に対応しています。演算は一次関数の合成です。  
 
 ```cpp
 using pmm = std::pair<mint, mint>;
-SegmentTree<pmm> seg(N, pmm(1, 0), [](const pmm & a, const pmm & b) -> pmm {
+SegmentTree<pmm> seg(N, pmm(1, 0), [](const auto & a, const auto & b) -> pmm {
 	return {a.first * b.first, b.first * a.second + b.second};
 });
 ```
