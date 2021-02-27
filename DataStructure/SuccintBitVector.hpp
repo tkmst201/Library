@@ -1,228 +1,142 @@
 #ifndef INCLUDE_GUARD_SUCCINT_BIT_VECTOR_HPP
 #define INCLUDE_GUARD_SUCCINT_BIT_VECTOR_HPP
 
-/*
-last-updated: 2020/09/07
-
-使用する前に必ず build() を呼ぶ
-高速化のために assert チェックを入れていないので注意
-
-TODO: O(1) select を調べる
-
-# 仕様
-n = 2^16 ~ 10^4.8 で計算量が保証されている実装
-空間計算量: n + o(n)
-
-SuccintBitVector(size_type n) :
-	時間計算量: Θ(n)
-	要素数 n で初期化
-
-SuccintBitVector(const std::vector<uint64> & v) :
-	時間計算量: Θ(n)
-	bit 配列 v で初期化
-
-size_type size() const noexcept :
-	時間計算量: O(1)
-	要素数 n を返す
-
-void set(size_type i) :
-	時間計算量: O(1)
-	i (0 \leq i < n) 番目のビットを立てる
-
-bool access(size_type i) const :
-	時間計算量: O(1)
-	i (0 \leq i < n) 番目のビットの値を返す
-
-size_type rank1(size_type i) const :
-	時間計算量: O(1)
-	(0 \leq i \leq n) [0, i) で 1 になっているビットの数を返す
-
-size_type rank0(size_type i) const :
-	時間計算量: O(1)
-	(0 \leq i \leq n) [0, i) で 0 になっているビットの数を返す
-
-size_type select1(size_type k) const :
-	時間計算量: O(log n)
-	rank1(i) = k を満たす最小の k を返す (k > 0 のとき k 番目[1-indexed] に 1 が出現する位置[1-indexed])
-	存在しなければ size() + 1 を返す
-
-size_type select0(size_type k) const :
-	時間計算量: O(log n)
-	rank0(i) = k を満たす最小の k を返す (k > 0 のとき k 番目[1-indexed] に 0 が出現する位置[1-indexed])
-	存在しなければ size() + 1 を返す
-
-# 参考
-https://misteer.hatenablog.com/entry/bit-vector, 2020/09/03
-https://miti-7.hatenablog.com/entry/2018/04/15/155638, 2020/09/03
-*/
-
 #include <vector>
 #include <cstdint>
 #include <algorithm>
 #include <cassert>
 
+/**
+ * @brief https://tkmst201.github.io/Library/DataStructure/SuccintBitVector.hpp
+ */
 struct SuccintBitVector {
 	using size_type = std::size_t;
-	using uint16 = std::uint16_t;
+	using uint8 = std::uint8_t;
 	using uint32 = std::uint32_t;
-	using uint64 = std::uint64_t;
 	
 private:
-	// optimized n = 2^16
-	static constexpr size_type LARGE = 8; // bits, log^2 n
-	static constexpr size_type SMALL = 3; // bits, (log n) / 2
-	static constexpr size_type DAT_B = 6; // bits (2^6 = 64 bit)
-	static constexpr size_type SMALL_S = 1ull << (1ull << SMALL);
+	static constexpr size_type LARGE = 8;
+	static constexpr size_type SMALL = 3;
 	
 private:
 	size_type n;
-	std::vector<uint64> bits;
+	std::vector<uint8> bits;
 	std::vector<uint32> large;
-	std::vector<uint16> small;
-	
-	static const uint16 table[SMALL_S];
+	std::vector<uint8> small;
 	
 public:
-	SuccintBitVector(size_type n) {
-		assert(n > 0);
-		n = (n + (1u << LARGE) - 1) >> LARGE << LARGE;
-		this->n = n;
-		bits.resize((n >> DAT_B) + 1);
-	}
+	explicit SuccintBitVector(size_type n)
+		: n(n), bits(n == 0 ? 0 : ((n - 1) >> SMALL) + 1, 0u) {}
 	
-	SuccintBitVector(const std::vector<uint64> & v) {
-		assert(!v.empty());
-		n = ((v.size() << DAT_B) + (1u << LARGE) - 1) >> LARGE << LARGE;
-		bits.resize((n >> DAT_B) + 1);
-		std::copy(std::begin(v), std::end(v), std::begin(bits));
-	}
+	explicit SuccintBitVector(const std::vector<uint8> & bits)
+		: n(bits.size() << SMALL), bits(bits) {}
 	
 	size_type size() const noexcept {
 		return n;
 	}
 	
-	void set(size_type i) {
-		bits[i >> DAT_B] |= 1ull << (i & ((1u << DAT_B) - 1));
+	void set(size_type i) noexcept {
+		assert(i < n);
+		bits[i >> SMALL] |= 1u << (i & ~(~0u << SMALL));
 	}
 	
-	bool access(size_type i) const {
-		return bits[i >> DAT_B] >> (i & ((1u << DAT_B) - 1)) & 1;
+	void reset(size_type i) noexcept {
+		assert(i < n);
+		bits[i >> SMALL] &= ~(1u << (i & ~(~0u << SMALL)));
 	}
 	
-	size_type rank1(size_type i) const {
-		return large[i >> LARGE] + small[i >> SMALL]
-			+ pop_count(
-				get_val(bits[i >> DAT_B], (i & ((1u << DAT_B) - 1)) >> SMALL)
-					& ((1u << (i & ((1u << SMALL) - 1))) - 1) );
-		// (i >> DAT_B) < bits.size() となるように +1 余分に確保
+	bool access(size_type i) const noexcept {
+		assert(i < n);
+		return bits[i >> SMALL] >> (i & ~(~0u << SMALL)) & 1u;
 	}
 	
-	size_type rank0(size_type i) const {
+	size_type rank1(size_type i) const noexcept {
+		assert(i <= n);
+		if (i == 0) return 0;
+		--i;
+		return large[i >> LARGE] + small[i >> SMALL] + pop_count(bits[i >> SMALL] & ~(~0u << ((i & (~(~0u << SMALL))) + 1u)));
+	}
+	
+	size_type rank0(size_type i) const noexcept {
+		assert(i <= n);
 		return i - rank1(i);
 	}
 	
-	size_type select1(size_type k) const {
+	size_type select1(size_type k) const noexcept {
 		if (k == 0) return 0;
-		
-		size_type l = 0, r = large.size() - 1; // (l, r]
-		while (r - l > 1) {
-			size_type m = (l + r) >> 1;
-			(large[m] >= k ? r : l) = m;
+		int l = 0, r = large.size();
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(large[m] < k ? l : r) = m;
 		}
-		
-		size_type res = (r - 1) << LARGE;
-		k -= large[r - 1];
-		size_type base = (r - 1) << (LARGE - SMALL);
-		l = 0; r = 1u << (LARGE - SMALL);
-		while (r - l > 1) {
-			size_type m = (l + r) >> 1;
-			(small[base + m] >= k ? r : l) = m;
+		int cnt = large[l];
+		l = l << (LARGE - SMALL); r = std::min<int>(small.size(), l + (1 << (LARGE - SMALL)));
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(cnt + small[m] < k ? l : r) = m;
 		}
-		
-		res += (r - 1) << SMALL;
-		base += r - 1;
-		k -= small[base];
-		base >>= DAT_B - SMALL;
-		for (size_type idx = ((r - 1) & ((1u << SMALL) - 1)) << SMALL; k; ++idx, ++res) {
-			if (bits[base] >> idx & 1) --k;
+		cnt += small[l];
+		const int idx = l;
+		l = 0; r = size() < l * (1u << SMALL) + 8 ? ((size() - 1) & ~(0 << SMALL)) + 1 : 8;
+		if (cnt + pop_count(bits[idx] & ~(~0 << r)) < k) return size() + 1;
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(cnt + pop_count(bits[idx] & ~(~0 << m)) < k ? l : r) = m;
 		}
-		return res;
+		return (idx << SMALL) + r;
 	}
 	
-	size_type select0(size_type k) const {
+	size_type select0(size_type k) const noexcept {
 		if (k == 0) return 0;
-		
-		size_type l = 0, r = large.size() - 1; // (l, r]
-		while (r - l > 1) {
-			size_type m = (l + r) >> 1;
-			((1u << LARGE) * m - large[m] >= k ? r : l) = m;
+		int l = 0, r = large.size();
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(m * (1 << LARGE) - large[m] < k ? l : r) = m;
 		}
-		
-		size_type res = (r - 1) << LARGE;
-		k -= (1u << LARGE) * (r - 1) - large[r - 1];
-		size_type base = (r - 1) << (LARGE - SMALL);
-		l = 0; r = 1u << (LARGE - SMALL);
-		while (r - l > 1) {
-			size_type m = (l + r) >> 1;
-			((1u << SMALL) * m - small[base + m] >= k ? r : l) = m;
+		int cnt = l * (1 << LARGE) - large[l];
+		l = l << (LARGE - SMALL); r = std::min<int>(small.size(), l + (1 << (LARGE - SMALL)));
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(cnt + (m & ~(~0 << (LARGE - SMALL))) * (1 << SMALL) - small[m] < k ? l : r) = m;
 		}
-		
-		res += (r - 1) << SMALL;
-		base += r - 1;
-		k -= (1u << SMALL) * (r - 1) - small[base];
-		base >>= DAT_B - SMALL;
-		for (size_type idx = ((r - 1) & ((1u << SMALL) - 1)) << SMALL; k; ++idx, ++res) {
-			if (~bits[base] >> idx & 1) --k;
+		cnt += (l & ~(~0 << (LARGE - SMALL))) * (1 << SMALL) - small[l];
+		const int idx = l;
+		l = 0; r = size() < l * (1 << SMALL) + 8 ? ((size() - 1) & ~(0 << SMALL)) + 1 : 8;
+		if (cnt + pop_count(~bits[idx] & ~(~0 << r)) < k) return size() + 1;
+		while (l + 1 < r) {
+			const int m = (l + r) >> 1;
+			(cnt + pop_count(~bits[idx] & ~(~0 << m)) < k ? l : r) = m;
 		}
-		return res;
+		return (idx << SMALL) + r;
 	}
 	
 	void build() {
-		large.assign((n >> LARGE) + 1, 0);
-		small.assign((n >> SMALL) + 1, 0);
-		
-		for (size_type i = 0, small_idx = 1; i < bits.size() - 1; ++i) {
-			if ((i & ((1u << (LARGE - DAT_B)) - 1)) == 0) small[small_idx] = pop_count(get_val(bits[i], 0));
-			else small[small_idx] = small[small_idx - 1] + pop_count(get_val(bits[i], 0));
-			++small_idx;
-			
-			for (size_type j = 1; j < (1u << (DAT_B - SMALL)); ++j, ++small_idx)
-				small[small_idx] = small[small_idx - 1] + pop_count(get_val(bits[i], j));
-		}
-		
-		for (size_type i = 1; i < large.size(); ++i) {
-			large[i] = large[i - 1] + small[i << (LARGE - SMALL)];
-			small[i << (LARGE - SMALL)] = 0;
+		large.assign(((n - 1) >> LARGE) + 1, 0);
+		small.assign(((n - 1) >> SMALL) + 1, 0);
+		for (int i = 0, lidx = 0; i < bits.size(); i += 1 << (LARGE - SMALL), ++lidx) {
+			if (lidx > 0) large[lidx] = large[lidx - 1] + small[i - 1] + pop_count(bits[i - 1]);
+			small[i] = 0;
+			for (int j = i + 1; j < std::min<int>(bits.size(), i + (1 << (LARGE - SMALL))); ++j) {
+				small[j] = small[j - 1] + pop_count(bits[j - 1]);
+			}
 		}
 	}
 	
 private:
-	uint16 get_val(uint64 x, size_type i) const {
-		return x >> ((1u << SMALL) * i) & (SMALL_S - 1);
-	}
+	static constexpr uint8 table[1u << (1u << SMALL)] {
+		0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
+		1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+		1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+		2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+		1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
+		2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+		2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
+		3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8
+	};
 	
-	uint16 pop_count(uint16 x) const {
+	static constexpr uint8 pop_count(uint8 x) noexcept {
 		return table[x];
 	}
-};
-
-constexpr SuccintBitVector::uint16 SuccintBitVector::table[256] = {
-	0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	1,2,2,3,2,3,3,4,2,3,3,4,3,4,4,5,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	2,3,3,4,3,4,4,5,3,4,4,5,4,5,5,6,
-	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	3,4,4,5,4,5,5,6,4,5,5,6,5,6,6,7,
-	4,5,5,6,5,6,6,7,5,6,6,7,6,7,7,8,
 };
 
 #endif // INCLUDE_GUARD_SUCCINT_BIT_VECTOR_HPP
