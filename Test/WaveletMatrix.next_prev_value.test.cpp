@@ -10,7 +10,7 @@ int main() {
 	int N;
 	scanf("%d", &N);
 	
-	int bias = 1'000'000;
+	const int bias = 1'000'000;
 	
 	std::vector<int> A(N);
 	for (int i = 0; i < N; ++i) scanf("%d", &A[i]), A[i] += bias;

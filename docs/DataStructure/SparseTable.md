@@ -128,6 +128,7 @@ $f$ は冪等性がある演算で可換なので、
 <br>
 
 # 参考
+
 2020/04/30: http://tookunn.hatenablog.com/entry/2016/07/13/211148  
 
 <br>

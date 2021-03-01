@@ -10,11 +10,11 @@ documentation_of: //DataStructure/DisjointSparseTable.hpp
 [Sparse Table](https://tkmst201.github.io/Library/DataStructure/SparseTable.hpp) で必要だった可換性や冪等性が要求されません。  
 
 - `DisjointSparseTable(InputIterator first, InputIterator last, const F & f)`
-	- 時間/空間 $\Theta(N\log{N})$ $[first, last)$ でテーブルを構築  
+	- 時間/空間 $\Theta(N\log{N})$ $[first, last)$ でテーブルを構築
 - `size_t size()`
-	- $\Theta(1)$ 配列の要素数 $N$ を返す  
+	- $\Theta(1)$ 配列の要素数 $N$ を返す
 - `T fold(size_t l, size_t r)`
-	- $\Theta(N\log{N})$ $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-1}, A_{r-1}))\ldots)$ を返す  
+	- $\Theta(N\log{N})$ $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-1}, A_{r-1}))\ldots)$ を返す
 
 <br>
 
@@ -102,6 +102,7 @@ $level$ は 1 つの累積和のサイズが $2^{level}$ 個であることを�
 <br>
 
 # 参考
+
 2020/04/30: https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b  
 
 <br>

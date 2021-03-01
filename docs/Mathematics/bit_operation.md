@@ -101,6 +101,7 @@ constexpr int pop_count(unsigned int x) {
 <br>
 
 # 参考
+
 2020/08/31: https://qiita.com/zawawahoge/items/8bbd4c2319e7f7746266  
 2021/02/08: http://www.nminoru.jp/~nminoru/programming/bitcount.html  
 

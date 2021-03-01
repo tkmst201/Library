@@ -144,6 +144,7 @@ int main() {
 TODO: `size` の test を追加する  
 
 # 参考
+
 2020/04/22: [https://en.wikipedia.org/wiki/Disjoint-set_data_structure](https://qiita.com/kopricky/items/3e5847ab1451fe990367)  
 2020/04/22: [https://qiita.com/kopricky/items/3e5847ab1451fe990367](https://qiita.com/kopricky/items/3e5847ab1451fe990367)  
 

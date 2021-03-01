@@ -344,6 +344,7 @@ TODO: `max_right`, `min_left` の追加
 <br>
 
 # 参考
+
 2020/09/11: [https://beet-aizu.hatenablog.com/entry/2017/12/01/225955](https://beet-aizu.hatenablog.com/entry/2017/12/01/225955)  
 2020/09/16: [https://smijake3.hatenablog.com/entry/2018/11/03/100133](https://smijake3.hatenablog.com/entry/2018/11/03/100133)  
 2020/09/16: [https://ei1333.github.io/luzhiled/snippets/structure/segment-tree.html](https://ei1333.github.io/luzhiled/snippets/structure/segment-tree.html)  

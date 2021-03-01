@@ -20,9 +20,9 @@ int main() {
 		for (auto &&u : v) cv.emplace_back(u);
 		cv.emplace_back(INF);
 		cv.emplace_back(-INF);
-		std::sort(std::begin(cv), std::end(cv));
-		cv.erase(std::unique(std::begin(cv), std::end(cv)), std::end(cv));
-		for (auto &&u : v) u = std::lower_bound(std::begin(cv), std::end(cv), u) - std::begin(cv);
+		std::sort(begin(cv), end(cv));
+		cv.erase(std::unique(begin(cv), end(cv)), std::end(cv));
+		for (auto &&u : v) u = std::lower_bound(begin(cv), end(cv), u) - std::begin(cv);
 	};
 	
 	compress(x, cx);
@@ -39,7 +39,7 @@ int main() {
 	WaveletMatrix<13, int, SuccintBitVector> wm(sy);
 	
 	auto compress_get = [](auto &&cv, auto &&x) {
-		return std::lower_bound(std::begin(cv), std::end(cv), x) - std::begin(cv);
+		return std::lower_bound(begin(cv), end(cv), x) - std::begin(cv);
 	};
 	
 	for (int i = 0; i < M; ++i) {
@@ -50,7 +50,7 @@ int main() {
 		stx = compress_get(cx, stx);
 		edy = compress_get(cy, edy);
 		edx = compress_get(cx, edx);
-		printf("%d\n", wm.range_frequency(sum[stx - 1], sum[edx - 1], sty, edy));
+		printf("%llu\n", wm.range_frequency(sum[stx - 1], sum[edx - 1], sty, edy));
 	}
 	
 	return 0;

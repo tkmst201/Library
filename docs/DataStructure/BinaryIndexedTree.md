@@ -188,6 +188,7 @@ TODO: `lower_bound` の test を追加する
 <br>
 
 # 参考
+
 2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)  
 
 <br>

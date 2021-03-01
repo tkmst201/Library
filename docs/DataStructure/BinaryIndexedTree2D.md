@@ -17,7 +17,7 @@ documentation_of: //DataStructure/BinaryIndexedTree2D.hpp
 - `T sum(size_t i, size_t j)`
 	- $\mathcal{O}(\log{H} \log{W})$ $\sum_{y=0}^{i-1} \sum_{x=0}^{j-1} A_{yx}$ を返す
 - `T sum(size_t i1, size_t j1, size_t i2, size_t j2)`
-- $\mathcal{O}(\log{H} \log{W})$ $\sum_{y=i1}^{i2-1} \sum_{x=j1}^{j2-1} A_{yx}$ を返す
+	- $\mathcal{O}(\log{H} \log{W})$ $\sum_{y=i1}^{i2-1} \sum_{x=j1}^{j2-1} A_{yx}$ を返す
 
 <br>
 
@@ -25,7 +25,7 @@ documentation_of: //DataStructure/BinaryIndexedTree2D.hpp
 
 **制約**
 
-- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`, `ModInt`
+- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`, [`ModInt`](https://tkmst201.github.io/Library/Mathematics/ModInt.hpp)
 
 ---
 
@@ -153,6 +153,7 @@ TODO: `sum` の引数を `i1, i2, j1, j2` の順に変更
 <br>
 
 # 参考
+
 2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)  
 
 <br>

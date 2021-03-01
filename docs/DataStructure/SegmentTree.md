@@ -44,7 +44,8 @@ documentation_of: //DataStructure/SegmentTree.hpp
 
 ### SegmentTree(size_t n, const T & id_elem, const F & f)
 
-要素数 $n$ で初期化します。初期値は単位元 `id_elem` です。  
+要素数 $n$ で初期化します。
+初期値は単位元 `id_elem` です。  
 
 **計算量**
 
@@ -76,7 +77,8 @@ documentation_of: //DataStructure/SegmentTree.hpp
 
 # メンバ関数
 
-以下、要素数 $N$ の配列 $A_0, A_1, \ldots, A_{N-1}$ を対象とします。二項演算は $f$ です。  
+以下、要素数 $N$ の配列 $A_0, A_1, \ldots, A_{N-1}$ を対象とします。
+二項演算は $f$ です。  
 
 ---
 
@@ -120,7 +122,8 @@ $A_i$ を返します。
 
 ### T fold(size_t l, size_t r)
 
-半開区間 $[l, r)$ の演算結果 $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-2}, A_{r-1}))\ldots)$ を返します。$l = r$ のときは単位元を返します。  
+半開区間 $[l, r)$ の演算結果 $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-2}, A_{r-1}))\ldots)$ を返します。
+$l = r$ のときは単位元を返します。  
 
 **制約**
 
@@ -144,7 +147,8 @@ $fold(0,N)$ の計算結果 $f(A_0, f(A_1, f(\ldots, f(A_{N-2}, A_{N-1}))\ldots)
 
 ### :warning: size_t max_right(size_t l, std::function&lt; bool (const T &amp;)&gt; g)
 
-$g(fold(l, r)) = true$ となるような最小の $r$ を返します。$g(fold(l, N)) = true$ または $l = N$ のときは $N$ を返します。  
+$g(fold(l, r)) = true$ となるような最小の $r$ を返します。
+$g(fold(l, N)) = true$ または $l = N$ のときは $N$ を返します。  
 
 
 **制約**
@@ -167,7 +171,8 @@ $g(fold(l, r)) = true$ となるような最小の $r$ を返します。$g(fold
 
 ### :warning: size_t min_left(size_t r, std::function&lt; bool (const T &amp;)&gt; g)
 
-$g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold(0, r)) = true$ または $l = 0$ のときは $0$ を返します。  
+$g(fold(l, r)) = true$ となるような最大の $l$ を返します。
+$g(fold(0, r)) = true$ または $l = 0$ のときは $0$ を返します。  
 
 **制約**
 
@@ -189,7 +194,8 @@ $g(fold(l, r)) = true$ となるような最大の $l$ を返します。$g(fold
 
 # 使用例
 
-和を扱うセグメント木の例です。オーバーフローに注意してください。総和が $2^{31}$ 以上になる場合は `long long` を使いましょう。  
+和を扱うセグメント木の例です。オーバーフローに注意してください。
+総和が $2^{31}$ 以上になる場合は `long long` を使いましょう。  
 
 ```cpp
 #include <bits/stdc++.h>
@@ -301,6 +307,7 @@ TODO: `InputIterator` コンストラクタに変更
 <br>
 
 # 参考
+
 2020/04/08: [https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf](https://hcpc-hokudai.github.io/archive/structure_segtree_001.pdf)  
 2020/09/13: [AC Library](https://github.com/atcoder/ac-library)  
 

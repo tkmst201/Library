@@ -4,6 +4,7 @@ documentation_of: //DataStructure/BinaryIndexedTree_RangeAdd.hpp
 ---
 
 # 概要
+
 [Binary Indexed Tree](https://tkmst201.github.io/Library/DataStructure/BinaryIndexedTree.hpp) を用いた配列の区間和を扱うデータ構造です。  
 要素数 $N$ の配列に対し、区間一樣加算や任意の区間和の計算を $\Theta(\log{N})$ で行うことができます。  
 [遅延セグメント木](https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp) に比べ、より省メモリで定数倍が良いです。  
@@ -25,8 +26,8 @@ documentation_of: //DataStructure/BinaryIndexedTree_RangeAdd.hpp
 
 **制約**
 
-- `T` は `int`, `long long`, `ModInt`
-- `U` は `BinaryIndexedTree`
+- `T` は `int`, `long long`, [`ModInt`](https://tkmst201.github.io/Library/Mathematics/ModInt.hpp)
+- `U` は [`BinaryIndexedTree`](https://tkmst201.github.io/Library/DataStructure/BinaryIndexedTree.hpp)
 
 ---
 
@@ -135,6 +136,7 @@ int main() {
 <br>
 
 # 参考
+
 2020/08/15: [https://algo-logic.info/binary-indexed-tree/](https://algo-logic.info/binary-indexed-tree/)  
 
 <br>

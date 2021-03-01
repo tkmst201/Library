@@ -12,24 +12,24 @@ documentation_of: //DataStructure/SuccintBitVector.hpp
 	- $\Theta(n)$ 要素数 $n$ で初期化
 - `SuccintBitVector(const std::vector<uint8> & bits)`
 	- $\Theta(\|$`bits`$\|)$ ビット列 `bits` で初期化
+- `void build()`
+	- 時間: $\Theta(N)$ 空間: $N + o(N)$ 事前計算を行う。`rank`、`select` を使用する前に呼ぶ
 - `size_t size()`
-	- $\Theta(1)$ ビット列の長さ $N$ を返す  
+	- $\Theta(1)$ ビット列の長さ $N$ を返す
 - `void set(size_t i)`
 	- $\Theta(1)$ $B_i = 1$
 - `void reset(size_t i)`
 	- $\Theta(1)$ $B_i = 0$
 - `bool access(size_t i)`
-	- $\Theta(1)$ $B_i$ を返す  
-- `size_t rank1(size_t i)`
+	- $\Theta(1)$ $B_i$ を返す
+- `uint32_t rank1(size_t i)`
 	- $\Theta(1)$ $B_0, \ldots, B_{i-1}$ に存在する $1$ の個数を返す
-- `size_t rank0(size_t i)`
+- `uint32_t rank0(size_t i)`
 	- $\Theta(1)$ $B_0, \ldots, B_{i-1}$ に存在する $0$ の個数を返す
 - `size_t select1(size_t k)`
-	- $\mathcal{O}(\log{N})$ 先頭から $k$ 番目の $1$ の位置を 1-indexed で返す。そのような位置が存在しなければ $N + 1$ を返す。  
+	- $\mathcal{O}(\log{N})$ 先頭から $k$ 番目の $1$ の位置を 1-indexed で返す。そのような位置が存在しなければ $N + 1$ を返す
 - `size_t select0(size_t k)`
-	- $\mathcal{O}(\log{N})$ 先頭から $k$ 番目の $0$ の位置を 1-indexed で返す。そのような位置が存在しなければ $N + 1$ を返す。  
-- `void build()`
-	- 時間: $\Theta(N)$ 空間: $N + o(N)$ 事前計算を行う。`rank`、`select` を使用する前に呼ぶ。
+	- $\mathcal{O}(\log{N})$ 先頭から $k$ 番目の $0$ の位置を 1-indexed で返す。そのような位置が存在しなければ $N + 1$ を返す
 
 <br>
 
@@ -61,6 +61,18 @@ documentation_of: //DataStructure/SuccintBitVector.hpp
 # メンバ関数
 
 以下、長さ $N$ のビット列 $B_0, B_1, \ldots, B_{N-1}$ を対象とします。  
+
+---
+
+### void build()
+
+事前計算を行います。
+`rank` 、`select` を呼ぶ前に必ず呼んでください。  
+
+**計算量**
+
+- 時間: $\Theta(N)$
+- 空間: $N + o(N)$ \[bit\]
 
 ---
 
@@ -118,7 +130,7 @@ $B_i$ を返します。
 
 ---
 
-### size_t rank1(size_t i)
+### uint32_t rank1(size_t i)
 
 $B_0, \ldots, B_{i-1}$ に存在する $1$ の個数を返します。
 ただし、$i = 0$ のときは $0$ を返します。  
@@ -133,7 +145,7 @@ $B_0, \ldots, B_{i-1}$ に存在する $1$ の個数を返します。
 
 ---
 
-### size_t rank0(size_t i)
+### uint32_t rank0(size_t i)
 
 $B_0, \ldots, B_{i-1}$ に存在する $0$ の個数を返します。
 ただし、$i = 0$ のときは $0$ を返します。  
@@ -151,7 +163,7 @@ $B_0, \ldots, B_{i-1}$ に存在する $0$ の個数を返します。
 ### size_t select1(size_t k)
 
 先頭から $k$ 番目の $1$ の位置を 1-indexed で返します。
-ただし、$k = 0$ のときは $0$ を、そのような位置が存在しなければ $N + 1$ を返します。  
+$k = 0$ または、そのような位置が存在しなければ $N + 1$ を返します。  
 
 **制約**
 
@@ -166,7 +178,7 @@ $B_0, \ldots, B_{i-1}$ に存在する $0$ の個数を返します。
 ### size_t select0(size_t k)
 
 先頭から $k$ 番目の $0$ の位置を 1-indexed で返します。
-ただし、$k = 0$ のときは $0$ を、そのような位置が存在しなければ $N + 1$ を返します。  
+$k = 0$ または、そのような位置が存在しなければ $N + 1$ を返します。  
 
 **制約**
 
@@ -175,18 +187,6 @@ $B_0, \ldots, B_{i-1}$ に存在する $0$ の個数を返します。
 **計算量**
 
 - $\mathcal{O}(\log{N})$
-
----
-
-### void build()
-
-事前計算を行います。
-`rank` 、`select` を呼ぶ前に必ず呼んでください。  
-
-**計算量**
-
-- 時間: $\Theta(N)$
-- 空間: $N + o(N)$
 
 ---
 
@@ -254,6 +254,7 @@ TODO: $\Theta(1)$ `rank` を調べる
 <br>
 
 # 参考
+
 2020/09/03: [https://misteer.hatenablog.com/entry/bit-vector](https://misteer.hatenablog.com/entry/bit-vector)  
 2020/09/03: [https://miti-7.hatenablog.com/entry/2018/04/15/155638](https://miti-7.hatenablog.com/entry/2018/04/15/155638)  
 

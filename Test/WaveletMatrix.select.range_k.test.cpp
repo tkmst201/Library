@@ -19,9 +19,9 @@ int main() {
 		for (auto &&u : v) cv.emplace_back(u);
 		cv.emplace_back(INF);
 		cv.emplace_back(-INF);
-		std::sort(std::begin(cv), std::end(cv));
-		cv.erase(std::unique(std::begin(cv), std::end(cv)), std::end(cv));
-		for (auto &&u : v) u = std::lower_bound(std::begin(cv), std::end(cv), u) - std::begin(cv);
+		std::sort(begin(cv), end(cv));
+		cv.erase(std::unique(begin(cv), end(cv)), std::end(cv));
+		for (auto &&u : v) u = std::lower_bound(begin(cv), end(cv), u) - std::begin(cv);
 	};
 	
 	compress(x, cx);
@@ -44,7 +44,7 @@ int main() {
 	WaveletMatrix<19, int, SuccintBitVector> wm(sy);
 	
 	auto compress_get = [](auto &&cv, auto &&x) {
-		return std::lower_bound(std::begin(cv), std::end(cv), x) - std::begin(cv);
+		return std::lower_bound(begin(cv), end(cv), x) - std::begin(cv);
 	};
 	
 	int Q;
@@ -59,11 +59,42 @@ int main() {
 		edx = compress_get(cx, edx); edx = sum[edx - 1];
 
 		auto points = wm.get_rect(stx, edx, sty, edy);
+		// test range_min_k
+		{
+			for (int j = 1; j < points.size(); ++j) {
+				assert(points[j - 1].first <= points[j].first);
+				if (points[j - 1].first == points[j].first) assert(points[j - 1].second < points[j].second);
+			}
+			for (const auto [v, idx] : points) {
+				assert(idx >= stx && idx < edx);
+				assert(wm.access(idx) == v);
+			}
+		}
 		std::vector<int> ans;
-		for (auto &p : points) ans.emplace_back(idx_map[p.first]);
+		for (auto &p : points) ans.emplace_back(idx_map[p.second]);
 		std::sort(begin(ans), end(ans));
-		for (int j = 0; j < ans.size(); ++j) printf("%d\n", ans[j], " \n"[j + 1 == ans.size()]);
+		for (int j = 0; j < ans.size(); ++j) printf("%d\n", ans[j]);
 		putchar('\n');
+		
+		// test range_max_k
+		{
+			auto t_points = wm.range_max_k(stx, edx, sty, edy, edx - stx);
+			using wm_type = WaveletMatrix<19, int, SuccintBitVector>;
+			std::vector<std::pair<wm_type::value_type, wm_type::size_type>> res;
+			for (const auto & p : t_points) {
+				const unsigned int c = wm.rank(0, stx, p.first);
+				for (int j = 0; j < p.second; ++j) res.emplace_back(p.first, wm.select(c + j + 1, p.first) - 1);
+			}
+			for (int j = 1; j < res.size(); ++j) {
+				assert(res[j - 1].first >= res[j].first);
+				if (res[j - 1].first == res[j].first) assert(res[j - 1].second < res[j].second);
+			}
+			for (const auto [v, idx] : res) {
+				assert(idx >= stx && idx < edx);
+				assert(wm.access(idx) == v);
+			}
+			assert(points.size() == res.size());
+		}
 	}
 	
 	return 0;

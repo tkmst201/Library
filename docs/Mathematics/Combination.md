@@ -27,7 +27,7 @@ $5 \times 10^7$ 未満の $n$ や $r$ に対して $_nC_r \bmod{M}$ を なら�
 
 **制約**
 
-- $T$ は `ModInt`
+- $T$ は [`ModInt`](https://tkmst201.github.io/Library/Mathematics/ModInt.hpp)
 - $T$ の法 $M$ は素数
 
 ---
