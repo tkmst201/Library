@@ -17,15 +17,15 @@ int main() {
 		int q;
 		ll k, v;
 		scanf("%d %lld", &q, &k);
-		auto it = avl.lower_bound(pll{k, 0});
+		auto it = avl.lower_bound({k, 0});
 		
 		if (q == 0) {
 			scanf("%lld", &v);
-			if (it != avl.end() && it->value.first == k) avl.erase(it);
-			avl.insert(pll{k, v});
+			if (it != avl.end() && it->val.first == k) avl.erase(it);
+			avl.insert({k, v});
 		}
 		else {
-			printf("%lld\n", it == avl.end() || it->value.first != k ? 0 : it->value.second);
+			printf("%lld\n", it == avl.end() || it->val.first != k ? 0 : it->val.second);
 		}
 	}
 	return 0;

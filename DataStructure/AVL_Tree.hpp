@@ -1,131 +1,91 @@
 #ifndef INCLUDE_GUARD_AVL_TREE_HPP
 #define INCLUDE_GUARD_AVL_TREE_HPP
 
-/*
-last-updated: 2020/08/29
-
-# 仕様
-イテレータは実装していないのでポインタでノードを扱う
-
-AVL_Tree() :
-	時間計算量: Θ(1)
-	空の木を作成する
-
-AVL_Tree(const AVL_Tree &rhs) :
-AVL_Tree &operator=(const AVL_Tree &rhs) :
-	時間計算量: Θ(n log n)
-	木のコピーを行う
-	enumerate() で得た各要素を insert() しているので遅い
-
-bool empty() const :
-	時間計算量: Θ(1)
-	木が空がどうか判定する
-
-std::size_t size() const :
-	時間計算量: Θ(1)
-	木の要素数を返す
-
-void clear() :
-	時間計算量: Θ(n)
-	全ての要素を削除する
-
-std::vector<T> enumerate() const :
-	時間計算量: Θ(n)
-	木の全ての要素を昇順に std::vector に入れて返す
-
-Node *begin() const :
-	時間計算量: Θ(1)
-	最も小さい要素のポインタを返す
-
-Node *end() const :
-	時間計算量: Θ(1)
-	最も大きい要素の次の要素(?)のポインタを返す
-
-Node *find(const T &x) :
-	時間計算量: Θ(log n)
-	要素 x を検索してそのポインタを返す
-	複数存在する場合ポインタで最小のポインタ
-
-Node *insert(const T &x) :
-	時間計算量: Θ(log n)
-	要素 x を挿入し、挿入後の要素のポインタを返す
-
-Node *erase(const T &x) :
-	時間計算量: Θ(log n)
-	要素 x を削除する
-
-Node *erase(Node *Q) :
-	時間計算量: Θ(log n)
-	ポインタ Q の要素を削除する
-
-Node *lower_bound(const T &x) const :
-	時間計算量: Θ(log n)
-	x 以上の最小の要素のポインタを返す
-
-Node *upper_bound(const T &x) const :
-	時間計算量: Θ(log n)
-	x より大きい最小の要素のポインタを返す
-
-Node *k_th_smallest(std::size_t k) const :
-	時間計算量: Θ(log n)
-	k 番目に小さい要素のポインタを返す
-
-Node *k_th_largest(std::size_t k) const :
-	時間計算量: Θ(log n)
-	k 番目に大きい要素のポインタを返す
-
-Node *next(Node *Q) const :
-	時間計算量: O(log n)
-	Q の次に大きい要素のポインタを返す
-
-Node *prev(Node *Q) const :
-	時間計算量: O(log n)
-	Q より 1 つ小さい要素のポインタを返す
-
-# 参考
-https://ja.wikipedia.org/wiki/AVL%E6%9C%A8, 2019/11/19
-*/
-
 #include <algorithm>
+#include <cstdint>
 #include <vector>
 
-template<typename T> struct AVL_Tree {
-public:
+/**
+ * @brief https://tkmst201.github.io/Library/DataStructure/AVL_Tree.hpp
+ */
+template<typename T>
+struct AVL_Tree {
+	using size_type = std::size_t;
+	using value_type = T;
+	using const_reference = const value_type &;
 	
-	// private に, したくない…??
+private:
+	using uint32 = std::uint32_t;
+	using int8 = std::int8_t;
+	
+public:
+	struct Node;
+	using node_ptr = Node *;
+	using const_ptr = const Node * const;
 	struct Node {
-		T value;
-		Node *child[2] {}, *par = nullptr;
+		value_type val;
+		node_ptr par, child[2] {nullptr, nullptr};
 		bool is_r;
-		std::size_t size[2] {}, height[2] {};
-		
-		Node(T x, Node *par, bool is_r)
-			: value(x), par(par), is_r(is_r) {}
+		int8 height[2] {};
+		uint32 size[2] {};
+		Node(const_reference x, node_ptr par, bool is_r) : val(x), par(par), is_r(is_r) {}
 	};
 	
-	AVL_Tree() : size_(0), root_node(nullptr) {}
+	
+private:
+	uint32 size_ = 0;
+	node_ptr root_node = nullptr;
+	node_ptr e_ptr[2] {nullptr, nullptr};
+	
+public:
+	AVL_Tree() {}
+	
+	AVL_Tree(const AVL_Tree & rhs) {
+		*this = rhs;
+	}
+	
+	AVL_Tree(AVL_Tree && rhs) {
+		size_ = rhs.size_;
+		rhs.size_ = 0;
+		root_node = rhs.root_node;
+		rhs.root_node = nullptr;
+		std::copy(rhs.e_ptr, rhs.e_ptr + 2, e_ptr);
+		std::fill(rhs.e_ptr, rhs.e_ptr + 2, nullptr);
+	}
+	
 	~AVL_Tree() {
 		clear();
 	}
 	
-	AVL_Tree(const AVL_Tree &rhs) {
-		*this = rhs;
-	}
-	
-	AVL_Tree &operator=(const AVL_Tree &rhs) {
+	AVL_Tree & operator =(const AVL_Tree & rhs) {
 		if (this != &rhs) {
 			this->clear();
-			std::vector<T> tmp = rhs.enumerate();
-			for (const T &elm : tmp) this->insert(elm);
+			root_node = copy_dfs(rhs.root_node, nullptr);
+			size_ = rhs.size_;
+			e_ptr[0] = e_ptr[1] = root_node;
+			if (root_node) for (int i = 0; i < 2; ++i) while (e_ptr[i]->child[i]) e_ptr[i] = e_ptr[i]->child[i];
 		}
 		return *this;
 	}
 	
-	bool empty() const {
+	AVL_Tree & operator =(AVL_Tree && rhs) {
+		if (this != &rhs) {
+			this->clear();
+			size_ = rhs.size_;
+			rhs.size_ = 0;
+			root_node = rhs.root_node;
+			rhs.root_node = nullptr;
+			std::copy(rhs.e_ptr, rhs.e_ptr + 2, e_ptr);
+			std::fill(rhs.e_ptr, rhs.e_ptr + 2, nullptr);
+		}
+		return *this;
+	}
+	
+	bool empty() const noexcept {
 		return size_ == 0;
 	}
 	
-	std::size_t size() const {
+	size_type size() const noexcept {
 		return size_;
 	}
 	
@@ -133,355 +93,248 @@ public:
 		clear_dfs(root_node);
 		root_node = nullptr;
 		size_ = 0;
-		e_ptr[0] = e_ptr[1] = nullptr;
+		std::fill(e_ptr, e_ptr + 2, nullptr);
 	}
 	
-	std::vector<T> enumerate() const {
-		std::vector<T> elements;
-		elements.reserve(size_);
+	std::vector<value_type> enumerate() const {
+		std::vector<value_type> elements;
+		elements.reserve(size());
 		enumerate_dfs(root_node, elements);
 		return elements;
 	}
 	
-	Node *begin() const {
-		return begin_();
-	}
-	
-	Node *end() const {
-		return end_();
-	}
-	
-	Node *find(const T &x) {
-		return find_(x);
-	}
-	
-	Node *insert(const T &x) {
-		size_++;
-		bool ef[2] {};
-		
-		Node *Q = root_node, *R = nullptr;
-		bool d = false;
-		while (Q) {
-			R = Q;
-			d = Q->value <= x;
-			ef[!d] = true;
-			Q = Q->child[d];
-		}
-		Q = new Node(x, R, d);
-		if (!ef[0]) e_ptr[0] = Q;
-		if (!ef[1]) e_ptr[1] = Q;
-		
-		if (R) {
-			R->size[d] = 1;
-			R->height[d] = 1;
-			R->child[d] = Q;
-			update(R);
-		}
-		else root_node = Q;
-		return Q;
-	}
-	
-	Node *erase(const T &x) {
-		Node *Q = find_(x);
-		if (Q) return erase_(Q);
-		return end_();
-	}
-	
-	Node *erase(Node *Q) {
-		if (Q) return erase_(Q);
-		return end_();
-	}
-	
-	Node *lower_bound(const T &x) const {
-		return lower_bound_(x);
-	}
-	
-	Node *upper_bound(const T &x) const {
-		return upper_bound_(x);
-	}
-	
-	Node *k_th_smallest(std::size_t k) const {
-		return k_th_smallest_(k);
-	}
-	
-	Node *k_th_largest(std::size_t k) const {
-		return k_th_largest_(k);
-	}
-	
-	Node *next(Node *Q) const {
-		if (Q) return move(Q, true);
+	node_ptr begin() const noexcept {
 		return e_ptr[0];
 	}
 	
-	Node *prev(Node *Q) const {
-		if (Q) return move(Q, false);
-		return e_ptr[1];
-	}
-	
-private:
-	std::size_t size_ {};
-	Node *root_node {};
-	Node *e_ptr[2] {};
-	
-	void clear_dfs(Node* Q) {
-		if (!Q) return;
-		clear_dfs(Q->child[0]);
-		clear_dfs(Q->child[1]);
-		delete Q;
-	}
-	
-	void enumerate_dfs(const Node *Q, std::vector<T> &elements) const {
-		if (!Q) return;
-		enumerate_dfs(Q->child[0], elements);
-		elements.push_back(Q->value);
-		enumerate_dfs(Q->child[1], elements);
-	}
-	
-	 Node *begin_() const {
-		return e_ptr[0];
-	}
-	
-	Node *end_() const {
+	node_ptr end() const noexcept {
 		return nullptr;
 	}
 	
-	Node *rotate(Node *Q, bool d) {
-		Node *R = Q->par, *P = Q->child[!d], *B = P->child[d];
-		
-		if (R) R->child[Q->is_r] = P;
-		else root_node = P;
-		
-		Q->child[!d] = B;
-		P->child[d] = Q;
-		
-		if (B) {
-			B->par = Q;
-			B->is_r = !d;
-		}
-		
-		P->par = Q->par;
-		P->is_r = Q->is_r;
-		
-		Q->par = P;
-		Q->is_r = d;
-		Q->size[!d] = P->size[d];
-		Q->height[!d] = P->height[d];
-		
-		P->size[d] = Q->size[0] + Q->size[1] + 1;
-		P->height[d] = std::max(Q->height[0], Q->height[1]) + 1;
-		return P;
+	node_ptr find(const_reference x) const noexcept {
+		const node_ptr q = lower_bound(x);
+		if (q != end() && q->val != x) return end();
+		return q;
 	}
 	
-	void update(Node *Q) {
-		bool done = false;
-		while (true) {
-			if (!done && std::abs(static_cast<int>(Q->height[0]) - static_cast<int>(Q->height[1])) > 1) {
-				bool d = Q->height[0] > Q->height[1];
-				Node *P = Q->child[!d];
-				if (P->height[!d] < P->height[d]) rotate(P, !d);
-				Q = rotate(Q, d);
-				done = true;
-			}
-			
-			Node *R = Q->par;
-			if (!R) break;
-			R->size[Q->is_r] = Q->size[0] + Q->size[1] + 1;
-			R->height[Q->is_r] = std::max(Q->height[0], Q->height[1]) + 1;
-			Q = R;
+	node_ptr insert(const_reference x) {
+		bool ef[2] {};
+		node_ptr q = root_node, r = nullptr;
+		bool d = false;
+		while (q) {
+			r = q;
+			d = q->val <= x;
+			q = q->child[d];
+			ef[!d] = true;
 		}
+		q = new Node(x, r, d);
+		++size_;
+		for (int i = 0; i < 2; ++i) if (!ef[i]) e_ptr[i] = q;
+		if (r) {
+			r->size[d] = 1;
+			r->height[d] = 1;
+			r->child[d] = q;
+			update(r);
+		}
+		else root_node = q;
+		return q;
 	}
 	
-	Node *find_(const T &x) {
-		Node *Q = lower_bound_(x);
-		if (Q && Q->value != x) Q = end_();
-		return Q;
+	node_ptr erase(const_reference x) noexcept {
+		node_ptr q = find(x);
+		if (q == end()) return end();
+		return erase(q);
 	}
 	
-	Node *erase_(Node *Q) {
-		size_--;
-		Node *ret = next(Q), *upd = nullptr;
-		
-		if (Q->child[0] && Q->child[1]) {
-			Node *P = Q->child[0];
-			while (P->child[1]) P = P->child[1];
-			Q->value = std::move(P->value);
-			Q = P;
+	node_ptr erase(node_ptr q) noexcept {
+		if (!q) return end();
+		const node_ptr ret = next(q);
+		if (e_ptr[0] == q) e_ptr[0] = next(q);
+		if (e_ptr[1] == q) e_ptr[1] = prev(q);
+		node_ptr upd = nullptr;
+		if (q->child[0] && q->child[1]) {
+			node_ptr p = q->child[0];
+			while (p->child[1]) p = p->child[1];
+			q->val = std::move(p->val);
+			q = p;
 		}
-		
-		Node *R = Q->par;
-		if (R) upd = R;
-		if (Q->child[0] || Q->child[1]) {
-			Node *P = Q->child[0] ? Q->child[0] : Q->child[1];
-			if (R) {
-				R->size[Q->is_r] = Q->size[P->is_r];
-				R->height[Q->is_r] = Q->height[P->is_r];
-				R->child[Q->is_r] = P;
-				P->par = R;
-				P->is_r = Q->is_r;
+		const node_ptr r = q->par;
+		if (r) upd = r;
+		if (q->child[0] || q->child[1]) {
+			const node_ptr p = q->child[0] ? q->child[0] : q->child[1];
+			if (r) {
+				r->size[q->is_r] = q->size[p->is_r];
+				r->height[q->is_r] = q->height[p->is_r];
+				r->child[q->is_r] = p;
+				p->par = r;
+				p->is_r = q->is_r;
 			}
 			else {
-				P->par = nullptr;
-				root_node = P;
+				p->par = nullptr;
+				root_node = p;
 			}
 		}
-		else {
-			if (R) {
-				R->size[Q->is_r] = 0;
-				R->height[Q->is_r] = 0;
-				R->child[Q->is_r] = nullptr;
-			}
-			else {
-				root_node = nullptr;
-			}
+		else if (r) {
+			r->size[q->is_r] = 0;
+			r->height[q->is_r] = 0;
+			r->child[q->is_r] = nullptr;
 		}
-		
-		if (e_ptr[0] == Q) e_ptr[0] = next(Q);
-		if (e_ptr[1] == Q) e_ptr[1] = prev(Q);
-		delete Q;
+		else root_node = nullptr;
+		delete q;
+		--size_;
 		if (upd) update(upd);
 		return ret;
 	}
 	
-	Node *lower_bound_(const T &x) const {
-		Node *Q = root_node;
-		if (!Q) return end_();
+	node_ptr lower_bound(const_reference x) const noexcept {
+		node_ptr q = root_node;
+		if (!q) return end();
+		while (q->child[q->val < x]) q = q->child[q->val < x];
+		if (q->val < x) q = next(q);
+		return q;
+	}
+	
+	node_ptr upper_bound(const_reference x) const noexcept {
+		node_ptr q = root_node;
+		if (!q) return end();
+		while (q->child[q->val <= x]) q = q->child[q->val <= x];
+		if (q->val <= x) q = next(q);
+		return q;
+	}
+	
+	size_type count_less_than(const_reference x) const noexcept {
+		size_type res = 0;
+		node_ptr q = root_node;
+		while (q != nullptr) {
+			bool r = q->val < x;
+			if (r) res += q->size[0] + 1;
+			q = q->child[r];
+		}
+		return res;
+	}
+	
+	size_type count_less_equal(const_reference x) const noexcept {
+		size_type res = 0;
+		node_ptr q = root_node;
+		while (q != nullptr) {
+			bool r = q->val <= x;
+			if (r) res += q->size[0] + 1;
+			q = q->child[r];
+		}
+		return res;
+	}
+	
+	size_type count_more_than(const_reference x) const noexcept {
+		return size() - count_less_equal(x);
+	}
+	
+	size_type count_more_equal(const_reference x) const noexcept {
+		return size() - count_less_than(x);
+	}
+	
+	size_type count(const_reference x) const noexcept {
+		return count_less_equal(x) - count_less_than(x);
+	}
+	
+	node_ptr k_th_smallest(uint32 k) const noexcept {
+		if (k == 0 || size_ < k) return end();
+		node_ptr q = root_node;
+		while (k != q->size[0] + 1) {
+			if (k > q->size[0] + 1) k -= q->size[0] + 1, q = q->child[1];
+			else q = q->child[0];
+		}
+		return q;
+	}
+	
+	node_ptr k_th_largest(uint32 k) const noexcept {
+		if (k == 0 || size_ < k) return end();
+		return k_th_smallest(size_ - k + 1);
+	}
+	
+	node_ptr next(node_ptr q) const noexcept {
+		if (q == end()) return begin();
+		return move(q, true);
+	}
+	
+	node_ptr prev(node_ptr q) const noexcept {
+		if (q == begin()) return end();
+		return move(q, false);
+	}
+	
+private:
+	node_ptr copy_dfs(const_ptr q, node_ptr r) {
+		if (!q) return nullptr;
+		node_ptr res = new Node(q->val, r, q->is_r);
+		for (int i = 0; i < 2; ++i) {
+			res->height[i] = q->height[i];
+			res->size[i] = q->size[i];
+			res->child[i] = copy_dfs(q->child[i], res);
+		}
+		return res;
+	}
+	
+	void clear_dfs(node_ptr q) {
+		if (!q) return;
+		clear_dfs(q->child[0]);
+		clear_dfs(q->child[1]);
+		delete q;
+	}
+	
+	void enumerate_dfs(const_ptr q, std::vector<value_type> & elements) const {
+		if (!q) return;
+		enumerate_dfs(q->child[0], elements);
+		elements.emplace_back(q->val);
+		enumerate_dfs(q->child[1], elements);
+	}
+	
+	node_ptr rotate(node_ptr q, bool d) noexcept {
+		node_ptr r = q->par, p = q->child[!d], b = p->child[d];
+		(r ? r->child[q->is_r] : root_node) = p;
+		q->child[!d] = b;
+		p->child[d] = q;
+		if (b) {
+			b->par = q;
+			b->is_r = !d;
+		}
+		p->par = q->par;
+		p->is_r = q->is_r;
+		q->par = p;
+		q->is_r = d;
+		q->size[!d] = p->size[d];
+		q->height[!d] = p->height[d];
+		p->size[d] = q->size[0] + q->size[1] + 1;
+		p->height[d] = std::max(q->height[0], q->height[1]) + 1;
+		return p;
+	}
+	
+	void update(node_ptr q) noexcept {
+		bool done = false;
 		while (true) {
-			Node *P = Q->child[Q->value < x];
-			if (!P) break;
-			Q = P;
-		}
-		if (!Q) return end_();
-		if (Q->value < x) Q = next(Q);
-		return Q;
-	}
-	
-	Node *upper_bound_(const T &x) const {
-		Node *Q = root_node;
-		if (!Q) return end_();
-		while (true) {
-			Node *P = Q->child[Q->value <= x];
-			if (!P) break;
-			Q = P;
-		}
-		if (!Q) return end_();
-		if (Q->value <= x) Q = next(Q);
-		return Q;
-	}
-	
-	Node *k_th_smallest_(std::size_t k) const {
-		if (k == 0 || size_ < k) return end_();
-		Node *Q = root_node;
-		std::size_t sum = 0;
-		while (sum < k) {
-			if (sum + Q->size[0] >= k) {
-				Q = Q->child[0];
+			if (!done && std::abs(q->height[0] - q->height[1]) > 1) {
+				const bool d = q->height[0] > q->height[1];
+				const node_ptr p = q->child[!d];
+				if (p->height[!d] < p->height[d]) rotate(p, !d);
+				q = rotate(q, d);
+				done = true;
 			}
-			else {
-				sum += Q->size[0];
-				++sum;
-				if (sum != k) Q = Q->child[1];
-			}
+			const node_ptr r = q->par;
+			if (!r) break;
+			r->size[q->is_r] = q->size[0] + q->size[1] + 1;
+			r->height[q->is_r] = std::max(q->height[0], q->height[1]) + 1;
+			q = r;
 		}
-		return Q;
 	}
 	
-	Node *k_th_largest_(std::size_t k) const {
-		if (k == 0 || size_ < k) return end_();
-		return k_th_smallest_(size_ - k + 1);
-	}
-	
-	Node *move(Node *Q, bool d) const {
-		if (Q->child[d]) {
-			Q = Q->child[d];
-			while (Q->child[!d]) Q = Q->child[!d];
-		}
+	node_ptr move(node_ptr q, bool d) const noexcept {
+		if (q == end()) return e_ptr[!d];
+		if (q == begin() && !d) return end();
+		if (q->child[d]) for (q = q->child[d]; q->child[!d]; q = q->child[!d]);
 		else {
-			while (Q && (d ^ !Q->is_r)) Q = Q->par;
-			if (Q) Q = Q->par;
+			while (q && (d ^ !q->is_r)) q = q->par;
+			if (q) q = q->par;
 		}
-		return Q;
+		return q;
 	}
 };
-
-/*
-int main() {
-	AVL_Tree<int> tree;
-	
-	const int queryNumber = 11;
-	std::string str[queryNumber] = {"clear", "kths", "kthl", "size", "print", "ins", "find", "era", "lower", "upper", "exit"};
-	std::set<std::string> ss;
-	REP(i, queryNumber) ss.insert(str[i]);
-	
-	while (true) {
-		std::string query;
-		std::cin >> query;
-		
-		if (ss.find(query) == ss.end()) {
-			puts("Please input again");
-			continue;
-		}
-		
-		if (query == "exit") {
-			break;
-		}
-		if (query == "clear") {
-			tree.clear();
-		}
-		else if (query == "size") {
-			printf("size: %d\n", tree.size());
-		}
-		else if (query == "print") {
-			std::vector<int> v = tree.enumerate();
-			REP(i, v.size()) printf("%d ", v[i]);
-			puts("");
-			
-		}
-		else {
-			int num;
-			std::cin >> num;
-			if (query == "ins") {
-				tree.insert(num);
-			}
-			else if (query == "find") {
-				
-				std::cout << std::boolalpha << (bool)tree.find(num) << std::endl;
-			}
-			else if (query == "era") {
-				tree.erase(num);
-			}
-			else if (query == "lower") {
-				auto *p = tree.lower_bound(num);
-				while (p) {
-					printf("%d ", p->value);
-					p = tree.next(p);
-				}
-				puts("");
-			}
-			else if (query == "upper") {
-				auto *p = tree.upper_bound(num);
-				while (p) {
-					printf("%d ", p->value);
-					p = tree.next(p);
-				}
-				puts("");
-			}
-			else if (query == "kths") {
-				auto *P = tree.k_th_smallest(num);
-				if (P) cout << P->value << endl;
-			}
-			else if (query == "kthl") {
-				auto *P = tree.k_th_largest(num);
-				if (P) cout << P->value << endl;
-			}
-		}
-		std::vector<int> v = tree.enumerate();
-		REP(i, v.size()) printf("%d ", v[i]); puts("");
-		if (!tree.empty()) printf("begin: %d, end: %d\n", tree.begin()->value, prev(tree.end())->value);
-		
-	}
-	
-	return 0;
-}
-*/
 
 #endif // INCLUDE_GUARD_AVL_TREE_HPP

@@ -289,7 +289,7 @@ SegmentTree<pmm> seg(N, pmm(1, 0), [](const auto & a, const auto & b) -> pmm {
 
 内部で扱っているノードの数を `n_` とし、ノードは 1-indexed で管理しています。  
 
-#### max_right
+### max_right
 
 `min_left` も同様なので `max_right` についてのみ書きます。  
 $A_l, (\ldots)$ を含むノード ($A_{l-1}$ は含まない) 最も根側のノードまで上りその値を加えて右上の部分木に移動することを繰り返すことにより $g(fold(l, r)) = false$ となるような $r$ を求めることが可能です。  

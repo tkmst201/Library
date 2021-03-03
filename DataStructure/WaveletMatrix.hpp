@@ -97,14 +97,23 @@ public:
 	}
 	
 	uint32 rank_less_than(size_type l, size_type r, const_reference x) const noexcept {
+		assert(l <= r);
+		assert(r <= n);
+		assert((x >> BITS) == 0);
 		return std::get<0>(rank_all(l, r, x));
 	}
 	
 	uint32 rank(size_type l, size_type r, const_reference x) const noexcept {
+		assert(l <= r);
+		assert(r <= n);
+		assert((x >> BITS) == 0);
 		return std::get<1>(rank_all(l, r, x));
 	}
 	
 	uint32 rank_more_than(size_type l, size_type r, const_reference x) const noexcept {
+		assert(l <= r);
+		assert(r <= n);
+		assert((x >> BITS) == 0);
 		return std::get<2>(rank_all(l, r, x));
 	}
 	

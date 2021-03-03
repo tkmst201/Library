@@ -199,7 +199,6 @@ $k = 0$ または、そのような位置が存在しなければ $N + 1$ を返
 #include <DataStructure/SuccintBitVector.hpp>
 using namespace std;
 
-
 int main() {
 	SuccintBitVector bit(10);
 	bit.set(0);
