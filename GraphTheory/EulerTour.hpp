@@ -78,13 +78,12 @@ struct EulerTour {
 	
 private:
 	size_type n;
-	const Tree & tree;
 	size_type root;
 	std::vector<size_type> in_, out_;
 	std::vector<size_type> par_, g_idx;
 	
 public:
-	EulerTour(const Tree & tree, size_type root) : n(tree.size()), tree(tree), root(root) {
+	EulerTour(const Tree & tree, size_type root) : n(tree.size()), root(root) {
 		in_.assign(size(), size());
 		out_.assign(size(), size());
 		par_.assign(n, n);

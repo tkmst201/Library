@@ -42,7 +42,7 @@ public:
 		return n;
 	}
 	
-	void set(size_type i, const_reference x) {
+	void set(size_type i, const_reference x) noexcept {
 		assert(i < size());
 		node[i += n_] = x;
 		while (i > 1) {
@@ -51,12 +51,12 @@ public:
 		}
 	}
 	
-	const_reference get(size_type i) const {
+	const_reference get(size_type i) const noexcept {
 		assert(i < size());
 		return node[i + n_];
 	}
 	
-	value_type fold(size_type l, size_type r) const {
+	value_type fold(size_type l, size_type r) const noexcept {
 		assert(l <= r);
 		assert(r <= size());
 		value_type lv = id_elem, rv = id_elem;
@@ -67,11 +67,11 @@ public:
 		return f(lv, rv);
 	}
 	
-	const_reference fold_all() const {
+	value_type fold_all() const noexcept {
 		return node[1];
 	}
 	
-	size_type max_right(size_type l, std::function<bool (const_reference)> g) const {
+	size_type max_right(size_type l, std::function<bool (const_reference)> g) const noexcept {
 		assert(l <= size());
 		assert(g(id_elem));
 		if (l == size()) return size();
@@ -92,7 +92,7 @@ public:
 		return l - n_;
 	}
 	
-	size_type min_left(size_type r, std::function<bool (const_reference)> g) const {
+	size_type min_left(size_type r, std::function<bool (const_reference)> g) const noexcept {
 		assert(r <= size());
 		assert(g(id_elem));
 		if (r == 0) return 0;

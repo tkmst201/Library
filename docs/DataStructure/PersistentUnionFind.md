@@ -18,7 +18,7 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 	- $\Theta(1)$ 初期化
 - `size_t size(size_t x)`
 	- $\mathcal{O}(\frac{(\log{N})^2}{\log{M}})$ 要素 $x$ が属する集合の要素数を返す
-- `size_t find(size_t x)
+- `size_t find(size_t x)`
 	- $\mathcal{O}(\frac{(\log{N})^2}{\log{M}})$ 要素 $x$ が属する集合の代表元を返します。
 - `PersistentUnionFind unite(size_t x, size_t y)`
 	- 時間 $\mathcal{O}(\frac{(log{N})^2}{\log{M}} + M \frac{log{N}}{\log{M}})$ 空間 $\mathcal{O}(M \frac{\log{N}}{\log{M}})$ 要素 $x$ が属する集合と要素 $y$ が属する集合を併合

@@ -26,7 +26,7 @@ public:
 		return {h, w};
 	}
 	
-	void add(size_type i, size_type j, value_type x) {
+	void add(size_type i, size_type j, value_type x) noexcept {
 		assert(i < h);
 		assert(j < w);
 		++i; ++j;
@@ -37,7 +37,7 @@ public:
 		}
 	}
 	
-	value_type sum(size_type i, size_type j) const {
+	value_type sum(size_type i, size_type j) const noexcept {
 		assert(i <= h);
 		assert(j <= w);
 		value_type res = 0;
@@ -49,7 +49,7 @@ public:
 		return res;
 	}
 	
-	value_type sum(size_type i1, size_type j1, size_type i2, size_type j2) const {
+	value_type sum(size_type i1, size_type j1, size_type i2, size_type j2) const noexcept {
 		assert(i1 <= i2);
 		assert(j1 <= j2);
 		assert(i2 <= h);

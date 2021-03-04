@@ -2,3 +2,6 @@ Gomi/
 
 DataStructure/BinarySearchTree(bug).cpp
 run.sh
+
+.verify-helper/cache/
+.verify-helper/markdown/

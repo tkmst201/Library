@@ -168,24 +168,28 @@ public:
 		return rank_less_than(l, r, val_r) - rank_less_than(l, r, val_l);
 	}
 	
+private:
+	struct Data {
+		int i;
+		uint32 l, r;
+		bool f;
+		value_type val;
+		Data(int i, uint32 l, uint32 r, bool f, const value_type & val)
+			: i(i), l(l), r(r), f(f), val(val) {}
+	};
+	
+public:
 	std::vector<std::pair<value_type, uint32>> range_min_k(
 		size_type l, size_type r, value_type val_l, value_type val_r, uint32 k) const {
 		assert(r <= size());
 		assert(((val_r - 1) >> BITS) == 0);
 		if (l >= r || val_l >= val_r || k == 0) return {};
 		std::vector<std::pair<value_type, uint32>> res;
-		struct Data {
-			int i;
-			uint32 l, r;
-			bool ismin;
-			value_type val;
-			Data(int i, uint32 l, uint32 r, bool ismin, const value_type & val)
-				: i(i), l(l), r(r), ismin(ismin), val(val) {}
-		};
 		std::stack<Data> stk;
 		stk.emplace(BITS - 1, l, r, true, 0);
 		while (!stk.empty()) {
-			const Data dat = stk.top(); stk.pop();
+			const Data dat = stk.top();
+			stk.pop();
 			if (dat.i == -1) {
 				if (dat.val < val_r) {
 					res.emplace_back(dat.val, dat.r - dat.l);
@@ -197,8 +201,8 @@ public:
 			const uint32 l1 = bit_vector[dat.i].rank1(dat.l), r1 = bit_vector[dat.i].rank1(dat.r);
 			const uint32 l0 = dat.l - l1, r0 = dat.r - r1;
 			const bool bit = val_l >> dat.i & 1;
-			if (l1 != r1) stk.emplace(dat.i - 1, l1 + zero[dat.i], r1 + zero[dat.i], dat.ismin & bit, dat.val | (1ull << dat.i));
-			if (!(dat.ismin && bit) && l0 != r0) stk.emplace(dat.i - 1, l0, r0, dat.ismin, dat.val);
+			if (l1 != r1) stk.emplace(dat.i - 1, l1 + zero[dat.i], r1 + zero[dat.i], dat.f & bit, dat.val | (1ull << dat.i));
+			if (!(dat.f && bit) && l0 != r0) stk.emplace(dat.i - 1, l0, r0, dat.f, dat.val);
 		}
 		return res;
 	}
@@ -210,18 +214,11 @@ public:
 		if (l >= r || val_l >= val_r || k == 0) return {};
 		--val_r;
 		std::vector<std::pair<value_type, size_type>> res;
-		struct Data {
-			int i;
-			uint32 l, r;
-			bool ismax;
-			value_type val;
-			Data(int i, uint32 l, uint32 r, bool ismax, const value_type & val)
-				: i(i), l(l), r(r), ismax(ismax), val(val) {}
-		};
 		std::stack<Data> stk;
 		stk.emplace(BITS - 1, l, r, true, 0);
 		while (!stk.empty()) {
-			const Data dat = stk.top(); stk.pop();
+			const Data dat = stk.top();
+			stk.pop();
 			if (dat.i == -1) {
 				if (dat.val >= val_l) {
 					res.emplace_back(dat.val, dat.r - dat.l);
@@ -233,8 +230,8 @@ public:
 			const uint32 l1 = bit_vector[dat.i].rank1(dat.l), r1 = bit_vector[dat.i].rank1(dat.r);
 			const uint32 l0 = dat.l - l1, r0 = dat.r - r1;
 			const bool bit = val_r >> dat.i & 1;
-			if (l0 != r0) stk.emplace(dat.i - 1, l0, r0, dat.ismax & !bit, dat.val);
-			if (!(dat.ismax && !bit) && l1 != r1) stk.emplace(dat.i - 1, l1 + zero[dat.i], r1 + zero[dat.i], dat.ismax, dat.val | (1ull << dat.i));
+			if (l0 != r0) stk.emplace(dat.i - 1, l0, r0, dat.f & !bit, dat.val);
+			if (!(dat.f && !bit) && l1 != r1) stk.emplace(dat.i - 1, l1 + zero[dat.i], r1 + zero[dat.i], dat.f, dat.val | (1ull << dat.i));
 		}
 		return res;
 	}

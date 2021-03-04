@@ -6,17 +6,13 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 # 概要
 
 順序付き集合を扱う AVL 木です。
-`merge` や `split` 以外の基本的な操作を $\Theta(\log{N})$ で行うことができます。  
+要素数 $N$ に対し、基本的な操作を $\Theta(\log{N})$ で行うことができます。  
 
 - `AVL_Tree()`
 	- $\Theta(1)$ 空の AVL 木を作成
 - `AVL_Tree(const AVL_Tree & rhs)`
-	- $\Theta(\|$`rhs`$\|)$ `rhs` を複製
-- `AVL_Tree(AVL_Tree && rhs)`
-	- $\Theta(1)$ `rhs` をムーブ
-- `AVL_Tree & operator =(const AVL_Tree & rhs)`
 	- $\Theta(\|$`rhs`$\|)$ `rhs` をコピー
-- `AVL_Tree & operator =(AVL_Tree && rhs)`
+- `AVL_Tree(AVL_Tree && rhs)`
 	- $\Theta(1)$ `rhs` をムーブ
 - `bool empty()`
 	- $\Theta(1)$ AVL 木が空であるか判定
@@ -65,6 +61,10 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 
 # コンストラクタ
 
+以降、要素数を $N$ とします。  
+
+---
+
 **制約**
 
 - `T` は比較可能
@@ -81,47 +81,24 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 
 ---
 
-コピーコンストラクタやムーブコンストラクタ、コピー代入、ムーブ代入が実装されています。  
-
 ### AVL_Tree(const AVL_Tree & rhs)
 
-`rhs` を複製します。  
+`rhs` をコピーします。  
 
 **計算量**
 
-- $\Theta(\|$`rhs`$\|)$
+- $\Theta(N + \|$`rhs`$\|)$
 
 ---
 
 ### AVL_Tree(AVL_Tree && rhs)
 
 `rhs` をムーブします。
-`rhs` は空の AVL 木となります。  
+ムーブ後の `rhs` は空の AVL 木となります。  
 
 **計算量**
 
-- $\Theta(1)$
-
----
-
-### AVL_Tree & operator =(const AVL_Tree & rhs)
-
-`rhs` をコピーします。  
-
-**計算量**
-
-- $\Theta(\|$`rhs`$\|)$
-
----
-
-### AVL_Tree & operator =(AVL_Tree && rhs)
-
-`rhs` をムーブします。
-`rhs` は空の AVL 木となります。  
-
-**計算量**
-
-- $\Theta(1)$
+- $\Theta(N)$
 
 ---
 
@@ -129,8 +106,7 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 
 # メンバ関数
 
-以下、要素数を $N$ とします。  
-また、すべての要素は値の昇順に、同じ値同士は追加した順に順序付けされているとします。  
+すべての要素は値の昇順に、同じ値同士は追加した順に順序付けされているとします。  
 
 ---
 
@@ -459,6 +435,7 @@ $$C_0 = 1, C_1 = 2, C_i = C_{i-1} + C_{i-2} + 1\ (i \geq 2)$$
 # TODO
 
 TODO: イテレータを実装(アドレス解決演算子やアロー演算子で `val` にアクセスしたい)  
+TODO: `k_th_smallest`, `k_th_largest` の test の追加  
 
 <br>
 

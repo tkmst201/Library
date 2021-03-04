@@ -44,12 +44,12 @@ public:
 		return PersistentStack{std::make_shared<Node>(x, top_node, size() + 1)};
 	}
 	
-	PersistentStack pop() const {
+	PersistentStack pop() const noexcept {
 		assert(!empty());
 		return PersistentStack{top_node->prev};
 	}
 	
-	const_reference top() const {
+	const_reference top() const noexcept {
 		assert(!empty());
 		return top_node->value;
 	}

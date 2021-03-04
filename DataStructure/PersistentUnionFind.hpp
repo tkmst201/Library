@@ -24,16 +24,16 @@ private:
 	PersistentUnionFind(const parray_type & dat) : dat(dat) {}
 	
 public:
-	size_type find(size_type x) const {
+	size_type find(size_type x) const noexcept {
 		return find_sub(x).first;
 	}
 	
-	size_type size(size_type x) const {
+	size_type size(size_type x) const noexcept {
 		return find_sub(x).second;
 	}
 	
 private:
-	std::pair<size_type, int> find_sub(size_type x) const {
+	std::pair<size_type, int> find_sub(size_type x) const noexcept {
 		int d;
 		for (d = dat.get(x); d >= 0; d = dat.get(x)) x = d;
 		return {x, -d};
@@ -57,7 +57,7 @@ public:
 		dat.destructive_set(py.first, -(px.second + py.second));
 	}
 	
-	bool issame(size_type x, size_type y) const {
+	bool issame(size_type x, size_type y) const noexcept {
 		return x == y ? true : find(x) == find(y);
 	}
 };

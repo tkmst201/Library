@@ -22,7 +22,7 @@ documentation_of: //DataStructure/SegmentTree.hpp
 	- $\Theta(1)$ $i$ 番目の要素を返す
 - `T fold(size_t l, size_t r)`
 	- $\Theta(\log{N})$ $[l, r)$ を畳み込んだ結果を返す
-- `const T & fold_all()`
+- `T fold_all()`
 	- $\Theta(1)$ $fold(0, size())$ を返す
 - `size_t max_right(size_t l, std::function<bool (const T &)> g)`
 	- $\Theta(\log{N})$ $g(fold(l, r)) = true$ となる最大の $r$ を返す
@@ -135,7 +135,7 @@ $l = r$ のときは単位元を返します。
 
 ---
 
-### const T & fold_all()
+### T fold_all()
 
 $fold(0,N)$ の計算結果 $f(A_0, f(A_1, f(\ldots, f(A_{N-2}, A_{N-1}))\ldots))$ を返します。  
 

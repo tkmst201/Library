@@ -50,7 +50,7 @@ public:
 		return n;
 	}
 	
-	void set(size_type k, const value_type & x) {
+	void set(size_type k, const value_type & x) noexcept {
 		assert(k < size());
 		k += n_;
 		thrust(k);
@@ -59,14 +59,14 @@ public:
 		recalc(k);
 	}
 	
-	value_type get(size_type k) {
+	value_type get(size_type k) noexcept {
 		assert(k < size());
 		k += n_;
 		thrust(k);
 		return reflect(k, 1);
 	}
 	
-	void update(size_type l, size_type r, const lazy_type & x) {
+	void update(size_type l, size_type r, const lazy_type & x) noexcept {
 		assert(l <= r);
 		assert(r <= size());
 		if (l == r) return;
@@ -82,7 +82,7 @@ public:
 		recalc(r - 1);
 	}
 	
-	value_type fold(size_type l, size_type r) {
+	value_type fold(size_type l, size_type r) noexcept {
 		assert(l <= r);
 		assert(r <= size());
 		if (l == r) return id_node;
@@ -103,11 +103,11 @@ public:
 	}
 	
 private:
-	value_type reflect(size_type k, size_type w) const {
+	value_type reflect(size_type k, size_type w) const noexcept {
 		return lazy[k] == id_lazy ? node[k] : g(node[k], p(lazy[k], w));
 	}
 	
-	void propagate(size_type k, size_type w) {
+	void propagate(size_type k, size_type w) noexcept {
 		if (lazy[k] == id_lazy) return;
 		if ((k << 1) < node.size()) {
 			lazy[k << 1] = h(lazy[k << 1], lazy[k]);
@@ -117,12 +117,12 @@ private:
 		lazy[k] = id_lazy;
 	}
 	
-	void recalc(size_type k) {
+	void recalc(size_type k) noexcept {
 		for (size_type i = k >> 1, cw = 1; i > 0; i >>= 1, cw <<= 1)
 			node[i] = f(reflect(i << 1, cw), reflect(i << 1 | 1, cw));
 	}
 	
-	void thrust(size_type k) {
+	void thrust(size_type k) noexcept {
 		for (size_type i = n_log, w = n_; i > 0; --i, w >>= 1) propagate(k >> i, w);
 	}
 };

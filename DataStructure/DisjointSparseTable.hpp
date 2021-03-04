@@ -35,7 +35,7 @@ public:
 		return table.empty() ? 0 : table.front().size();
 	}
 	
-	value_type fold(size_type l, size_type r) const {
+	value_type fold(size_type l, size_type r) const noexcept {
 		assert(l < r);
 		assert(r <= size());
 		--r;

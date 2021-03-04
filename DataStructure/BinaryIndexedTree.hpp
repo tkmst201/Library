@@ -29,20 +29,20 @@ public:
 		return n;
 	}
 	
-	void add(size_type i, const_reference x) {
+	void add(size_type i, const_reference x) noexcept {
 		assert(i < size());
 		++i;
 		for (; i <= size(); i += i & -i) node[i] = f(node[i], x);
 	}
 	
-	value_type sum(size_type i) const {
+	value_type sum(size_type i) const noexcept {
 		assert(i <= size());
 		value_type res = id_elem;
 		for (; i > 0; i -= i & -i) res = f(node[i], res);
 		return res;
 	}
 	
-	size_type lower_bound(const_reference x) const {
+	size_type lower_bound(const_reference x) const noexcept {
 		size_type res = 0;
 		size_type s = id_elem, w = 1;
 		while (w < size()) w <<= 1;

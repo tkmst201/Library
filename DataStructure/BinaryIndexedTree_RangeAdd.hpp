@@ -26,7 +26,7 @@ public:
 		return bit[0].size();
 	}
 	
-	void add(size_type l, size_type r, value_type x) {
+	void add(size_type l, size_type r, value_type x) noexcept {
 		assert(l <= r);
 		assert(r <= size());
 		if (l == r) return;
@@ -36,12 +36,12 @@ public:
 		bit[1].add(r - 1, x * r);
 	}
 	
-	value_type sum(size_type i) {
+	value_type sum(size_type i) noexcept {
 		assert(i <= size());
 		return bit[0].sum(i) * i + bit[1].sum(i);
 	}
 	
-	value_type sum(size_type l, size_type r) {
+	value_type sum(size_type l, size_type r) noexcept {
 		assert(l <= r);
 		assert(r <= size());
 		if (l == r) return 0;

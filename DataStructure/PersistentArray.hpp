@@ -66,7 +66,7 @@ public:
 		else node->childs[k] = std::make_shared<Node>(x);
 	}
 	
-	const_reference get(size_type k) const {
+	const_reference get(size_type k) const noexcept {
 		const_ptr node = root.get();
 		while (k > 0 && node) {
 			node = node->childs[k % M].get();

@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <cstdint>
 #include <vector>
+#include <utility>
+#include <stack>
 
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/AVL_Tree.hpp
@@ -45,12 +47,7 @@ public:
 	}
 	
 	AVL_Tree(AVL_Tree && rhs) {
-		size_ = rhs.size_;
-		rhs.size_ = 0;
-		root_node = rhs.root_node;
-		rhs.root_node = nullptr;
-		std::copy(rhs.e_ptr, rhs.e_ptr + 2, e_ptr);
-		std::fill(rhs.e_ptr, rhs.e_ptr + 2, nullptr);
+		*this = std::forward<AVL_Tree>(rhs);
 	}
 	
 	~AVL_Tree() {
@@ -59,7 +56,7 @@ public:
 	
 	AVL_Tree & operator =(const AVL_Tree & rhs) {
 		if (this != &rhs) {
-			this->clear();
+			clear();
 			root_node = copy_dfs(rhs.root_node, nullptr);
 			size_ = rhs.size_;
 			e_ptr[0] = e_ptr[1] = root_node;
@@ -70,7 +67,7 @@ public:
 	
 	AVL_Tree & operator =(AVL_Tree && rhs) {
 		if (this != &rhs) {
-			this->clear();
+			clear();
 			size_ = rhs.size_;
 			rhs.size_ = 0;
 			root_node = rhs.root_node;
@@ -90,7 +87,16 @@ public:
 	}
 	
 	void clear() {
-		clear_dfs(root_node);
+		if (!root_node) return;
+		std::stack<node_ptr> stk;
+		stk.emplace(root_node);
+		while (!stk.empty()) {
+			node_ptr node = stk.top();
+			stk.pop();
+			if (node->child[0]) stk.emplace(node->child[0]);
+			if (node->child[1]) stk.emplace(node->child[1]);
+			delete node;
+		}
 		root_node = nullptr;
 		size_ = 0;
 		std::fill(e_ptr, e_ptr + 2, nullptr);
@@ -271,13 +277,6 @@ private:
 			res->child[i] = copy_dfs(q->child[i], res);
 		}
 		return res;
-	}
-	
-	void clear_dfs(node_ptr q) {
-		if (!q) return;
-		clear_dfs(q->child[0]);
-		clear_dfs(q->child[1]);
-		delete q;
 	}
 	
 	void enumerate_dfs(const_ptr q, std::vector<value_type> & elements) const {

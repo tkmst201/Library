@@ -4,6 +4,7 @@
 #include <vector>
 #include <cassert>
 #include <functional>
+#include <cstdint>
 
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/SparseTable.hpp
@@ -32,7 +33,7 @@ public:
 		return table.empty() ? 0 : table.front().size();
 	}
 	
-	value_type fold(size_type l, size_type r) const {
+	value_type fold(size_type l, size_type r) const noexcept {
 		assert(l < r);
 		assert(r <= size());
 		const size_type k = log_table[r - l];
