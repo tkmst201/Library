@@ -145,7 +145,6 @@ int main() {
 
 # TODO
 
-TODO: test の追加  
 TODO: 重複組合せ nHk の追加  
 TODO: 順列 nPk の追加
 TODO: $r$ が小さい場合の愚直計算の追加  

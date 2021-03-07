@@ -26,14 +26,14 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 	- $\Theta(1)$ 先頭の要素のポインタを返す
 - `Node * end()`
 	- $\Theta(1)$ 最後の要素の次の位置を示すポインタを返す
-- `Node * find(const T & x)`
-	- $\Theta(\log{N})$ 値 $x$ と等しい要素の中で先頭の要素のポインタを返す
 - `Node * insert(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ を追加
 - `Node * erase(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ と等しい要素の中で先頭の要素を削除し、その次の要素のポインタを返す
 - `Node * erase(Node * q)`
 	- $\Theta(\log{N})$ ポインタ $q$ が指す要素を削除し、その次の要素のポインタを返す
+- `Node * find(const T & x)`
+	- $\Theta(\log{N})$ 値 $x$ と等しい要素の中で先頭の要素のポインタを返す
 - `Node * lower_bound(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ 以上の要素の中で先頭の要素のポインタを返す
 - `Node * upper_bound(const T & x)`
@@ -42,9 +42,9 @@ documentation_of: //DataStructure/AVL_Tree.hpp
 	- $\Theta(\log{N})$ 値 $x$ 未満の要素の個数を返す
 - `size_t count_less_equal(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ 以下の要素の個数を返す
-- `size_t count_more_than(const T & x)`
+- `size_t count_greater_than(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ より大きい要素の個数を返す
-- `size_t count_more_equal(const T & x)`
+- `size_t count_greater_equal(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ 以上の要素の個数を返す
 - `size_t count(const T & x)`
 	- $\Theta(\log{N})$ 値 $x$ と等しい要素の個数を返す
@@ -171,17 +171,6 @@ AVL 木が空であるか判定します。
 
 ---
 
-### Node * find(const T & x)
-
-値 $x$ と等しい要素の中で先頭の要素のポインタを返します。
-そのような要素が存在しない場合は `end()` を返します。  
-
-**計算量**
-
-- $\Theta(\log{N})$
-
----
-
 ### Node * insert(const T & x)
 
 値 $x$ を追加します。
@@ -211,6 +200,17 @@ AVL 木が空であるか判定します。
 **制約**
 
 - $q$ は有効なポインタ
+
+**計算量**
+
+- $\Theta(\log{N})$
+
+---
+
+### Node * find(const T & x)
+
+値 $x$ と等しい要素の中で先頭の要素のポインタを返します。
+そのような要素が存在しない場合は `end()` を返します。  
 
 **計算量**
 
@@ -260,7 +260,7 @@ AVL 木が空であるか判定します。
 
 ---
 
-### size_t count_more_than(const T & x)
+### size_t count_greater_than(const T & x)
 
 値 $x$ より大きい要素の個数を返します。  
 
@@ -270,7 +270,7 @@ AVL 木が空であるか判定します。
 
 ---
 
-### size_t count_more_equal(const T & x)
+### size_t count_greater_equal(const T & x)
 
 値 $x$ 以上の要素の個数を返します。  
 
@@ -290,7 +290,7 @@ AVL 木が空であるか判定します。
 
 ---
 
-### :warning: Node * k_th_smallest(uint32_t k)
+### Node * k_th_smallest(uint32_t k)
 
 先頭から $k$ 番目の要素のポインタを返します。
 $k = 0$ またはそのような要素が存在しない場合は `end()` を返します。  
@@ -303,13 +303,9 @@ $k = 0$ またはそのような要素が存在しない場合は `end()` を返
 
 - $\Theta(\log{N})$
 
-**Verified**
-
-- 2021/03/03 [https://atcoder.jp/contests/arc033/submissions/20630352](https://atcoder.jp/contests/arc033/submissions/20630352)
-
 ---
 
-### :warning: Node * k_th_largest(uint32_t k)
+### Node * k_th_largest(uint32_t k)
 
 後ろから $k$ 番目の要素のポインタを返します。
 $k = 0$ またはそのような要素が存在しない場合は `end()` を返します。  
@@ -386,14 +382,14 @@ int main() {
 	
 	cout << "lower_bound(-1) = " << avl.lower_bound(-1)->val << endl; // 1
 	cout << "upper_bound(6) = " << avl.upper_bound(6)->val << endl; // 7
-	cout << "upper_bound(7) == end() :" << boolalpha << (avl.upper_bound(7) == avl.end()) << endl; // true
+	cout << "upper_bound(7) == end() : " << boolalpha << (avl.upper_bound(7) == avl.end()) << endl; // true
 	
 	cout << "count_less_than(3) = " << avl.count_less_than(3) << endl; // 2
 	cout << "count_less_equal(4) = " << avl.count_less_equal(4) << endl; // 4
-	cout << "count_more_than(6) = " << avl.count_more_than(6) << endl; // 1
-	cout << "count_more_equal(6) = " << avl.count_more_equal(6) << endl; // 3
+	cout << "count_greater_than(6) = " << avl.count_greater_than(6) << endl; // 1
+	cout << "count_greater_equal(6) = " << avl.count_greater_equal(6) << endl; // 3
 	cout << "count(6) = " << avl.count(6) << endl; // 2
-	cout << "count_more_than(7) = " << avl.count_more_than(7) << endl; // 0
+	cout << "count_greater_than(7) = " << avl.count_greater_than(7) << endl; // 0
 	
 	cout << "k_th_smallest(3) = " << avl.k_th_smallest(3)->val << endl; // 3
 	cout << "k_th_largest(4) = " << avl.k_th_largest(4)->val << endl; // 5
@@ -435,7 +431,7 @@ $$C_0 = 1, C_1 = 2, C_i = C_{i-1} + C_{i-2} + 1\ (i \geq 2)$$
 # TODO
 
 TODO: イテレータを実装(アドレス解決演算子やアロー演算子で `val` にアクセスしたい)  
-TODO: `k_th_smallest`, `k_th_largest` の test の追加  
+TODO: `size`, `height` を子ではなく自身で持つように変更(必要な空間が減る)
 
 <br>
 

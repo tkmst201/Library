@@ -96,11 +96,7 @@ public:
 	void clear(size_type l, size_type r) {
 		assert(l <= r);
 		assert(r <= size());
-		if ((l == 0 && r == n_) || n_ == 1) {
-			clear_subtree(root);
-			root = nullptr;
-			return;
-		}
+		if ((l == 0 && r == n_) || n_ == 1) { clear(); return; }
 		if (l == r || !root) return;
 		std::stack<Data<node_ptr>> stk;
 		stk.emplace(root, 0, n_);
