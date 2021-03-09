@@ -33,7 +33,6 @@ public:
 		Node(const_reference val, node_ptr par, bool isr) : val(val), par(par), isr(isr) {}
 	};
 	
-	
 private:
 	size_type n = 0;
 	node_ptr root = nullptr;
