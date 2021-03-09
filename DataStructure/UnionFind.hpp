@@ -9,7 +9,6 @@
  * @brief https://tkmst201.github.io/Library/DataStructure/UnionFind.hpp
  */
 struct UnionFind {
-public:
 	using size_type = std::size_t;
 	
 private:
@@ -37,8 +36,8 @@ public:
 		y = find(y);
 		if (x == y) return;
 		if (dat[x] < dat[y]) std::swap(x, y);
-		dat[x] += dat[y];
-		dat[y] = x;
+		dat[y] += dat[x];
+		dat[x] = y;
 	}
 	
 	bool issame(size_type x, size_type y) noexcept {
