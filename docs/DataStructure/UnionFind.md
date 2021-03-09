@@ -56,10 +56,6 @@ documentation_of: //DataStructure/UnionFind.hpp
 
 - ならし $\Theta(\alpha(N))$
 
-**Verified**
-
-- 2020/04/22 [https://atcoder.jp/contests/abc157/submissions/12223429](https://atcoder.jp/contests/abc157/submissions/12223429)
-
 ---
 
 ### size_t find(size_t x)
