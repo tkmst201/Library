@@ -16,7 +16,7 @@ documentation_of: //DataStructure/BinaryIndexedTree2D.hpp
 	- $\mathcal{O}(\log{H} \log{W})$ $A_{ij}$ += $x$ をする
 - `T sum(size_t i, size_t j)`
 	- $\mathcal{O}(\log{H} \log{W})$ $\sum_{y=0}^{i-1} \sum_{x=0}^{j-1} A_{yx}$ を返す
-- `T sum(size_t i1, size_t j1, size_t i2, size_t j2)`
+- `T sum(size_t i1, size_t i2, size_t j1, size_t j2)`
 	- $\mathcal{O}(\log{H} \log{W})$ $\sum_{y=i1}^{i2-1} \sum_{x=j1}^{j2-1} A_{yx}$ を返す
 
 <br>
@@ -89,7 +89,7 @@ $i = 0$ または $j = 0$ のときは $0$ を返します。
 
 ---
 
-### T sum(size_t i1, size_t j1, size_t i2, size_t j2)
+### T sum(size_t i1, size_t i2, size_t j1, size_t j2)
 
 $\sum_{y=i1}^{i2-1} \sum_{x=j1}^{j2-1} A_{yx}$ を返します。
 $i1 = i2$ または $j1 = j2$ のときは $0$ を返します。  
@@ -127,28 +127,22 @@ int main() {
 	bit.add(2, 1, 4);
 	bit.add(2, 3, 1);
 	
-	for (int i = 0; i < h; ++i) {
-		for (int j = 0; j < w; ++j) {
-			cout << bit.sum(i, j, i + 1, j + 1) << " \n"[j + 1 == w];
-		}
-	}
 	/*
 		0 0 -2 0
 		5 0 0 0
 		0 4 0 1
 	*/
+	for (int i = 0; i < h; ++i) {
+		for (int j = 0; j < w; ++j) {
+			cout << bit.sum(i, i + 1, j, j + 1) << " \n"[j + 1 == w];
+		}
+	}
 	
-	cout << "sum = " << bit.sum(1, 1, 3, 4) << endl; // 5
-	cout << "sum = " << bit.sum(0, 0, 1, 3) << endl; // -2
+	cout << "sum = " << bit.sum(1, 3, 1, 4) << endl; // 5
+	cout << "sum = " << bit.sum(0, 1, 0, 3) << endl; // -2
 	cout << "sum = " << bit.sum(3, 3) << endl; // 7
 }
 ```
-
-<br>
-
-# TODO
-
-TODO: `sum` の引数を `i1, i2, j1, j2` の順に変更  
 
 <br>
 

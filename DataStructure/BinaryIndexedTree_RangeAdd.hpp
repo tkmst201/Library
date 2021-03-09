@@ -20,7 +20,7 @@ private:
 	
 public:
 	explicit BinaryIndexedTree_RangeAdd(size_type n)
-		: bit(2, bit_type{n, [](value_type x, value_type y) { return x + y; }, 0}) {}
+		: bit(2, bit_type{n, 0, [](value_type x, value_type y) { return x + y; }}) {}
 	
 	size_type size() const noexcept {
 		return bit[0].size();

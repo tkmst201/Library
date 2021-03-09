@@ -122,12 +122,12 @@ int main() {
 	cout << "N = " << bit.size() << endl; // 5
 	
 	bit.add(1, 3, 2);
-	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i, i + 1) << " \n"[i + 1 == bit.size()];
 	// 0 2 2 0 0
+	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i, i + 1) << " \n"[i + 1 == bit.size()];
 	
 	bit.add(0, 2, -1);
-	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i, i + 1) << " \n"[i + 1 == bit.size()];
 	// -1 1 2 0 0
+	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i, i + 1) << " \n"[i + 1 == bit.size()];
 	
 	cout << "sum = " << bit.sum(bit.size()) << endl; // 2
 }

@@ -49,7 +49,7 @@ public:
 		return res;
 	}
 	
-	value_type sum(size_type i1, size_type j1, size_type i2, size_type j2) const noexcept {
+	value_type sum(size_type i1, size_type i2, size_type j1, size_type j2) const noexcept {
 		assert(i1 <= i2);
 		assert(j1 <= j2);
 		assert(i2 <= h);

@@ -17,13 +17,13 @@ struct BinaryIndexedTree {
 	
 private:
 	size_type n;
-	F f;
 	value_type id_elem;
+	F f;
 	std::vector<value_type> node;
 	
 public:
-	BinaryIndexedTree(size_type n, const F & f, const_reference id_elem)
-		: n(n), f(f), id_elem(id_elem), node(n + 1, id_elem) {}
+	BinaryIndexedTree(size_type n, const_reference id_elem, const F & f)
+		: n(n), id_elem(id_elem), f(f), node(n + 1, id_elem) {}
 	
 	size_type size() const noexcept {
 		return n;

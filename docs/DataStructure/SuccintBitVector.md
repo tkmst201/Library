@@ -216,7 +216,6 @@ int main() {
 	
 	bit.build(); // 忘れずに呼ぶ
 	
-	for (int i = 0; i <= 10; ++i) cout << "i = " << i << " : rank0 = " << bit.rank0(i) << ", rank1 = " << bit.rank1(i) << endl;
 	/*
 		i = 0 : rank0 = 0, rank1 = 0
 		i = 1 : rank0 = 0, rank1 = 1
@@ -230,8 +229,8 @@ int main() {
 		i = 9 : rank0 = 5, rank1 = 4
 		i = 10 : rank0 = 5, rank1 = 5
 	*/
+	for (int i = 0; i <= 10; ++i) cout << "i = " << i << " : rank0 = " << bit.rank0(i) << ", rank1 = " << bit.rank1(i) << endl;
 	
-	for (int i = 0; i <= 6; ++i) cout << "i = " << i << " : select0 = " << bit.select0(i) << ", select1 = " << bit.select1(i) << endl;
 	/*
 		i = 0 : select0 = 0, select1 = 0
 		i = 1 : select0 = 2, select1 = 1
@@ -241,6 +240,7 @@ int main() {
 		i = 5 : select0 = 8, select1 = 10
 		i = 6 : select0 = 11, select1 = 11
 	*/
+	for (int i = 0; i <= 6; ++i) cout << "i = " << i << " : select0 = " << bit.select0(i) << ", select1 = " << bit.select1(i) << endl;
 }
 ```
 

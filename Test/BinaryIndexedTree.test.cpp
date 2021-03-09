@@ -6,9 +6,7 @@
 int main() {
 	int n, q;
 	scanf("%d %d", &n, &q);
-	BinaryIndexedTree<int> bit(n, [](auto &&x, auto &&y) {
-		return x + y;
-	}, 0);
+	BinaryIndexedTree<int> bit(n, 0, [](auto &&x, auto &&y) { return x + y; });
 	
 	while (q--) {
 		int com, x, y;
@@ -16,5 +14,4 @@ int main() {
 		if (com == 0) bit.add(x - 1, y);
 		else printf("%d\n", bit.sum(y) - bit.sum(x - 1));
 	}
-	return 0;
 }

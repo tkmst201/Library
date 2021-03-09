@@ -32,13 +32,11 @@ int main() {
 			que.emplace(t[i] + T, i);
 		}
 		else if (c[i] == 1) { // つまみ食い
-			if (bit1.sum(h1[i], w1[i], h1[i] + 1, w1[i] + 1) == 1) bit1.add(h1[i], w1[i], -1);
+			if (bit1.sum(h1[i], h1[i] + 1, w1[i], w1[i] + 1) == 1) bit1.add(h1[i], w1[i], -1);
 		}
 		else { // カウント
 			scanf("%d %d", &h2[i], &w2[i]);
-			printf("%d %d\n", bit1.sum(h1[i], w1[i], h2[i], w2[i]), bit2.sum(h1[i], w1[i], h2[i], w2[i]));
+			printf("%d %d\n", bit1.sum(h1[i], h2[i], w1[i], w2[i]), bit2.sum(h1[i], h2[i], w1[i], w2[i]));
 		}
 	}
-	
-	return 0;
 }

@@ -11,7 +11,7 @@ documentation_of: //DataStructure/BinaryIndexedTree.hpp
 逆元を持つ場合は任意の区間和の計算が可能です。  
 [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) に比べ、より省メモリで定数倍が良いです。  
 
-- `BinaryIndexedTree(size_t n, const F & f, const T & id_elem)`
+- `BinaryIndexedTree(size_t n, const T & id_elem, const F & f)`
 	- $\Theta(n)$ 要素数 $n$ で初期化
 - `size_t size()`
 	- $\Theta(1)$ 配列の要素数を返す
@@ -35,7 +35,7 @@ documentation_of: //DataStructure/BinaryIndexedTree.hpp
 
 ---
 
-### BinaryIndexedTree(size_t n, const F & f, const T & id_elem)
+### BinaryIndexedTree(size_t n, const T & id_elem, const F & f)
 
 要素数 $n$ で初期化します。
 初期値は単位元 `id_elem` です。  
@@ -125,16 +125,16 @@ $i = 0$ のときは `id_elem` を返します。
 using namespace std;
 
 int main() {
-	BinaryIndexedTree<int> bit(10, [](int x, int y) { return x + y; }, 0);
+	BinaryIndexedTree<int> bit(10, 0, [](int x, int y) { return x + y; });
 	int A[10] {1, 1, 0, 0, 1, 0, 0, 0, 1, 0};
 	for (int i = 0; i < 10; ++i) bit.add(i, A[i]);
 	
-	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i + 1) - bit.sum(i) << " \n"[i + 1 == bit.size()];
 	// 1 1 0 0 1 0 0 0 1 0
+	for (int i = 0; i < bit.size(); ++i) cout << bit.sum(i + 1) - bit.sum(i) << " \n"[i + 1 == bit.size()];
 	
 	cout << bit.sum(0) << endl; // 0
-	for (int i = 1; i <= bit.size(); ++i)  cout << bit.sum(i) << " \n"[i + 1 > bit.size()];
 	// 1 2 2 2 3 3 3 3 4 4
+	for (int i = 1; i <= bit.size(); ++i)  cout << bit.sum(i) << " \n"[i + 1 > bit.size()];
 	
 	for (int i = 0; i <= 5; ++i) cout << "x = " << i << ", idx = " << bit.lower_bound(i) << endl;
 	/*
@@ -160,16 +160,16 @@ xor にも逆元が存在するので任意の区間 xor の計算が可能で�
 using namespace std;
 
 int main() {
-	BinaryIndexedTree<int> bit(6, [](int x, int y) { return x ^ y; }, 0);
+	BinaryIndexedTree<int> bit(6, 0, [](int x, int y) { return x ^ y; });
 	int A[6] {2, 7, 5, 1, 0, 2};
 	for (int i = 0; i < 6; ++i) bit.add(i, A[i]);
 	
-	for (int i = 0; i < bit.size(); ++i) cout << (bit.sum(i + 1) ^ bit.sum(i)) << " \n"[i + 1 == bit.size()];
 	// 2 7 5 1 0 2
+	for (int i = 0; i < bit.size(); ++i) cout << (bit.sum(i + 1) ^ bit.sum(i)) << " \n"[i + 1 == bit.size()];
 	
 	cout << bit.sum(0) << endl; // 0
-	for (int i = 1; i <= bit.size(); ++i)  cout << bit.sum(i) << " \n"[i + 1 > bit.size()];
 	// 2 5 0 1 1 3
+	for (int i = 1; i <= bit.size(); ++i)  cout << bit.sum(i) << " \n"[i + 1 > bit.size()];
 	
 	cout << "A_2 xor A_3 xor A_4 xor A_5 = " << (bit.sum(6) ^ bit.sum(2)) << endl; // 6
 	
@@ -182,7 +182,6 @@ int main() {
 
 # TODO
 
-TODO: コンストラクタの `f` と `id_elem` の定義の順番を逆にする  
 TODO: `lower_bound` の test を追加する  
 
 <br>
