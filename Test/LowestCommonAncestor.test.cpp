@@ -12,7 +12,8 @@ int main() {
 	for (int i = 1; i < N; ++i) {
 		int p;
 		scanf("%d", &p);
-		lca.add_edge(p, i);
+		if (i % 2 == 0) lca.add_edge(p, i);
+		else lca.add_directed_edge(p, i);
 	}
 	lca.build();
 	
@@ -21,6 +22,4 @@ int main() {
 		scanf("%d %d", &u, &v);
 		printf("%d\n", lca.find(u, v));
 	}
-	
-	return 0;
 }

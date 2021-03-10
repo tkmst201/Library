@@ -8,7 +8,6 @@
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/LazySegmentTree.hpp
  */
-
 template<typename T, typename E>
 struct LazySegmentTree {
 	using value_type = T;

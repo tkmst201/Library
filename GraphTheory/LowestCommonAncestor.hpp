@@ -1,141 +1,113 @@
 #ifndef INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP
 #define INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP
 
-/*
-last-updated: 2020/08/27
-
-木グラフでの最近共通祖先を求める
-木グラフではないとバグるので注意
-
-おまけで木の任意の 2 頂点間のパスの長さを返す機能がついている
-Heavy Light Decomposition を使った 構築 O(n loglog n) クエリ O(loglog n) の方が早いのでそっちを使おう
-
-# 仕様
-LowestCommonAncestor(size_type n) :
-	時間計算量: Θ(n)
-	頂点数が n のグラフを作成する
-
-LowestCommonAncestor(std::vector<std::vector<size_type>> g) :
-	時間計算量: Θ(n + m)
-	グラフ g で初期化する
-	build() を呼ぶ必要があることに注意
-
-size_type size() const noexcept :
-	時間計算量: Θ(1)
-	グラフの頂点数を返す
-
-void add_edge(size_type s, size_type t)
-	時間計算量: Θ(1)
-	頂点 u -> 頂点 v に辺を張る
-
-void clear() :
-	時間計算量: Θ(n)
-	グラフを削除する
-
-void build(size_type rootNode = 0)
-	時間計算量: Θ(N log N)
-	LCA 計算のための事前計算を行う
-
-size_type find(size_type a, size_type b) const
-	時間計算量: Θ(log N)
-	頂点 a , 頂点 b の LCA を求める
-
-size_type query(size_type a, size_type b) const :
-	時間計算量: Θ(log N)
-	パス a - b の長さを求める
-*/
-
 #include <vector>
 #include <cassert>
 #include <utility>
+#include <cstdint>
+#include <stack>
 
+/**
+ * @brief https://tkmst201.github.io/Library/GraphTheory/LowestCommonAncestor.hpp
+ */
 struct LowestCommonAncestor {
 	using size_type = std::size_t;
+	using Graph = std::vector<std::vector<int>>;
 	
-private:
-	size_type logsize;
-	std::vector<std::vector<size_type> > g, par;
-	std::vector<size_type> depth;
+	Graph g;
 	bool isbuilt;
+	int logn = 0;
+	std::vector<std::vector<int>> par;
+	std::vector<int> depth_;
 	
-public:
-	LowestCommonAncestor(size_type n) {
-		g.resize(n);
-		isbuilt = false;
-	}
+	explicit LowestCommonAncestor(size_type n) : g(n), isbuilt(false) {}
 	
-	LowestCommonAncestor(std::vector<std::vector<size_type>> g) : g(g) {
-		isbuilt = false;
-	};
+	explicit LowestCommonAncestor(const Graph & g) : g(g), isbuilt(false) {}
 	
 	size_type size() const noexcept {
 		return g.size();
 	}
 	
-	void add_edge(size_type s, size_type t) {
-		assert(s < size());
-		assert(t < size());
-		g[s].push_back(t);
+	const Graph & get_graph() const noexcept {
+		return g;
+	}
+	
+	void add_edge(int u, int v) {
+		assert(0 <= u && u < size());
+		assert(0 <= v && v < size());
+		g[u].emplace_back(v);
+		g[v].emplace_back(u);
 		isbuilt = false;
 	}
 	
-	void clear() {
+	void add_directed_edge(int u, int v) {
+		assert(0 <= u && u < size());
+		assert(0 <= v && v < size());
+		g[u].emplace_back(v);
+		isbuilt = false;
+	}
+	
+	void clear() noexcept {
 		g.clear();
 		par.clear();
-		depth.clear();
+		depth_.clear();
 		isbuilt = false;
 	}
 	
-	void build(size_type rootNode = 0) {
-		assert(rootNode < size());
-		logsize = 1;
-		while (1 << logsize < size()) ++logsize;
-		depth.assign(size(), size());
-		par.assign(logsize, std::vector<size_type>(size(), size()));
-		
-		depth[rootNode] = 0;
-		dfs(rootNode, size());
-		for (size_type i = 1; i < logsize; ++i) {
-			for (size_type j = 0; j < size(); ++j) {
-				if (par[i - 1][j] != size()) par[i][j] = par[i - 1][ par[i - 1][j] ];
+	void build(int root = 0) {
+		assert(0 <= root && root < size());
+		logn = 1;
+		while ((1 << logn) + 1 <= size()) ++logn;
+		par.assign(logn, std::vector<int>(size()));
+		depth_.assign(size(), 0);
+		std::stack<std::pair<int, int>> stk;
+		par[0][root] = root;
+		stk.emplace(root, root);
+		while (!stk.empty()) {
+			auto [u, p] = stk.top();
+			stk.pop();
+			for (int v : g[u]) {
+				if (v == p) continue;
+				par[0][v] = u;
+				depth_[v] = depth_[u] + 1;
+				stk.emplace(v, u);
 			}
+		}
+		for (int i = 1; i < logn; ++i) {
+			for (int j = 0; j < size(); ++j) par[i][j] = par[i - 1][par[i - 1][j]];
 		}
 		isbuilt = true;
 	}
 	
-	size_type find(size_type a, size_type b) const {
+	int find(int a, int b) const noexcept {
 		assert(isbuilt);
-		assert(a < size());
-		assert(b < size());
-		if (depth[a] < depth[b]) std::swap(a, b);
-		
-		size_type up = depth[a] - depth[b];
-		for (size_type i = 0; i < logsize; ++i) if (up >> i & 1) a = par[i][a];
+		assert(0 <= a && a < size());
+		assert(0 <= b && b < size());
+		assert(par[0][a] != size());
+		assert(par[0][b] != size());
+		if (depth_[a] < depth_[b]) std::swap(a, b);
+		a = parent(a, depth_[a] - depth_[b]);
 		if (a == b) return a;
-		for (size_type i = logsize; i > 0; --i) {
-			if (par[i - 1][a] != par[i - 1][b]) {
-				a = par[i - 1][a];
-				b = par[i - 1][b];
-			}
+		for (int i = logn - 1; i >= 0; --i) {
+			if (par[i][a] != par[i][b]) a = par[i][a], b = par[i][b]; 
 		}
 		return par[0][a];
 	}
 	
-	size_type query(size_type a, size_type b) const {
+	int parent(int u, int k = 1) const noexcept {
 		assert(isbuilt);
-		assert(a < size());
-		assert(b < size());
-		return depth[a] + depth[b] - 2 * depth[find(a, b)];
+		assert(0 <= u && u < size());
+		assert(k <= depth_[u]);
+		assert(par[0][u] != size());
+		for (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];
+		return u;
 	}
 	
-private:
-	void dfs(size_type u, size_type p) {
-		for (size_type v : g[u]) {
-			if (v == p) continue;
-			depth[v] = depth[u] + 1;
-			par[0][v] = u;
-			dfs(v, u);
-		}
+	int depth(int u) const noexcept {
+		assert(isbuilt);
+		assert(0 <= u && u < size());
+		assert(par[0][u] != size());
+		return depth_[u];
 	}
 };
 
