@@ -14,47 +14,13 @@ struct LowestCommonAncestor {
 	using size_type = std::size_t;
 	using Graph = std::vector<std::vector<int>>;
 	
-	Graph g;
-	bool isbuilt;
-	int logn = 0;
+private:
+	int n, logn;
 	std::vector<std::vector<int>> par;
 	std::vector<int> depth_;
 	
-	explicit LowestCommonAncestor(size_type n) : g(n), isbuilt(false) {}
-	
-	explicit LowestCommonAncestor(const Graph & g) : g(g), isbuilt(false) {}
-	
-	size_type size() const noexcept {
-		return g.size();
-	}
-	
-	const Graph & get_graph() const noexcept {
-		return g;
-	}
-	
-	void add_edge(int u, int v) {
-		assert(0 <= u && u < size());
-		assert(0 <= v && v < size());
-		g[u].emplace_back(v);
-		g[v].emplace_back(u);
-		isbuilt = false;
-	}
-	
-	void add_directed_edge(int u, int v) {
-		assert(0 <= u && u < size());
-		assert(0 <= v && v < size());
-		g[u].emplace_back(v);
-		isbuilt = false;
-	}
-	
-	void clear() noexcept {
-		g.clear();
-		par.clear();
-		depth_.clear();
-		isbuilt = false;
-	}
-	
-	void build(int root = 0) {
+public:
+	LowestCommonAncestor(const Graph & g, int root = 0) : n(g.size()) {
 		assert(0 <= root && root < size());
 		logn = 1;
 		while ((1 << logn) + 1 <= size()) ++logn;
@@ -68,6 +34,7 @@ struct LowestCommonAncestor {
 			stk.pop();
 			for (int v : g[u]) {
 				if (v == p) continue;
+				assert(0 <= v && v < size());
 				par[0][v] = u;
 				depth_[v] = depth_[u] + 1;
 				stk.emplace(v, u);
@@ -76,11 +43,13 @@ struct LowestCommonAncestor {
 		for (int i = 1; i < logn; ++i) {
 			for (int j = 0; j < size(); ++j) par[i][j] = par[i - 1][par[i - 1][j]];
 		}
-		isbuilt = true;
+	}
+	
+	size_type size() const noexcept {
+		return n;
 	}
 	
 	int find(int a, int b) const noexcept {
-		assert(isbuilt);
 		assert(0 <= a && a < size());
 		assert(0 <= b && b < size());
 		assert(par[0][a] != size());
@@ -95,7 +64,6 @@ struct LowestCommonAncestor {
 	}
 	
 	int parent(int u, int k = 1) const noexcept {
-		assert(isbuilt);
 		assert(0 <= u && u < size());
 		assert(k <= depth_[u]);
 		assert(par[0][u] != size());
@@ -104,7 +72,6 @@ struct LowestCommonAncestor {
 	}
 	
 	int depth(int u) const noexcept {
-		assert(isbuilt);
 		assert(0 <= u && u < size());
 		assert(par[0][u] != size());
 		return depth_[u];

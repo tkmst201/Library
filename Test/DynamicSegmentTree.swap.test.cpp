@@ -10,15 +10,15 @@ int main() {
 	int N, Q;
 	scanf("%d %d", &N, &Q);
 	
-	EulerTour::Tree tree(N);
+	EulerTour<false>::Graph g(N);
 	for (int i = 1; i < N; ++i) {
 		int p;
 		scanf("%d", &p);
-		tree[p - 1].emplace_back(i);
+		g[p - 1].emplace_back(i);
 	}
 	
-	EulerTour et(tree, 0);
-	DynamicSegmentTree<int> seg(et.size(), 0, [](int x, int y) { return x + y; });
+	EulerTour<false> et(g, 0);
+	DynamicSegmentTree<int> seg(et.size(), 0, [](auto x, auto y) { return x + y; });
 	auto segr = seg;
 	
 	for (int i = 0; i < N; ++i) {

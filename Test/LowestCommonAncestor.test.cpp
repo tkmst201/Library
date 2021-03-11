@@ -8,14 +8,13 @@ int main() {
 	int N, Q;
 	scanf("%d %d", &N, &Q);
 	
-	LowestCommonAncestor lca(N);
+	LowestCommonAncestor::Graph g(N);
 	for (int i = 1; i < N; ++i) {
 		int p;
 		scanf("%d", &p);
-		if (i % 2 == 0) lca.add_edge(p, i);
-		else lca.add_directed_edge(p, i);
+		g[p].emplace_back(i);
 	}
-	lca.build();
+	LowestCommonAncestor lca(g, 0);
 	
 	while (Q--) {
 		int u, v;

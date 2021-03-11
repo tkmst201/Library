@@ -8,22 +8,10 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 頂点数を $N$ の木で任意の $2$ 点の最近共通祖先を事前計算 $\Theta(N \log{N})$ クエリ $\Theta(\log{N})$ で求めることのできるライブラリです。  
 実は [HL 分解](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp) を用いた LCA の方が高速です(事前計算 $\Theta(N\log{\log{N}})$ クエリ $\Theta(\log{\log{N}})$ )。  
 
-- `LowestCommonAncestor(size_t n)`
-	- $\Theta(n)$ $n$ 頂点のグラフで初期化
-- `LowestCommonAncestor(const Graph & g)`
-	- $\Theta(\|$`g`$\|)$ グラフ $g$ で初期化
+- `LowestCommonAncestor(const Graph & g, int root = 0)`
+	- 時間/空間 $\Theta(N \log{N})$ 根 `root` の根付き木 $g$ (頂点数 $N$) で初期化
 - `size_t size()`
 	- $\Theta(1)$ グラフの頂点数 $N$ を返す
-- `const Graph & get_graph()`
-	- $\Theta(1)$ グラフを返す
-- `void add_edge(int u, int v)`
-	- ならし $\Theta(1)$ 頂点 $u$ と頂点 $v$ の間に無向辺を張る
-- `void add_directed_edge(int u, int v)`
-	- ならし $\Theta(1)$ 頂点 $u$ から頂点 $v$ に有向辺を張る
-- `void clear()`
-	- $\Theta(N \log{N})$ グラフや事前計算テーブルを削除
-- `void build(int root = 0)`
-	- 時間/空間 $\Theta(N \log{N})$ `root` を根とした根付き木として事前計算を行う
 - `int find(int a, int b)`
 	- $\Theta(\log{N})$ 頂点 $a$, $b$ の最近共通祖先を返す
 - `int parent(int u, int k = 1)`
@@ -35,23 +23,18 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 
 # コンストラクタ
 
-### LowestCommonAncestor(size_t n)
+### LowestCommonAncestor(const Graph & g, int root = 0)
 
-$n$ 頂点のグラフで初期化します。  
+根 `root` の根付き木 $g$ (頂点数 $N$ ) で初期化します。  
 
-**計算量**
+**制約**
 
-- $\Theta(n)$
-
----
-
-### LowestCommonAncestor(const Graph & g)
-
-グラフ $g$ で初期化します。  
+- $0 \leq$ `root` $< N$
+- `g` は木
 
 **計算量**
 
-- $\Theta(\|$`g`$\|)$
+- 時間/空間 $\Theta(N \log{N})$
 
 ---
 
@@ -70,69 +53,6 @@ $n$ 頂点のグラフで初期化します。
 **計算量**
 
 - $\Theta(1)$
-
----
-
-### const Graph & get_graph()
-
-グラフを返します。  
-
-**計算量**
-
-- $\Theta(1)$
-
----
-
-### void add_edge(int u, int v)
-
-頂点 $u$ と頂点 $v$ の間に無向辺を張ります。  
-
-**制約**
-
-- $0 \leq u, v < N$
-
-**計算量**
-
-- ならし $\Theta(1)$
-
----
-
-### void add_directed_edge(int u, int v)
-
-頂点 $u$ から頂点 $v$ に有向辺を張ります。  
-
-**制約**
-
-- $0 \leq u, v < N$
-
-**計算量**
-
-- ならし $\Theta(1)$
-
----
-
-### void clear()
-
-グラフや事前計算テーブルを削除します。  
-
-**計算量**
-
-- $\Theta(N \log{N})$
-
----
-
-### void build(int root = 0)
-
-`root` を根とした根付き木として事前計算を行います。  
-
-**制約**
-
-- $0 \leq$ `root` $< size()$
-- グラフは木
-
-**計算量**
-
-- 時間/空間 $\Theta(N \log{N})$
 
 ---
 
@@ -189,17 +109,19 @@ $n$ 頂点のグラフで初期化します。
 using namespace std;
 
 int main() {
-	LowestCommonAncestor lca(6);
+	LowestCommonAncestor::Graph g(6);
 	//         1
 	//    2        3
 	// 0    4          5
-	lca.add_edge(1, 2);
-	lca.add_edge(2, 0);
-	lca.add_edge(4, 2);
-	lca.add_edge(1, 3);
-	lca.add_edge(3, 5);
+	g[1].emplace_back(2);
+	g[1].emplace_back(3);
+	g[2].emplace_back(0);
+	g[2].emplace_back(4);
+	g[3].emplace_back(5);
 	
-	lca.build(1); // 必ず呼ぶ
+	g[5].emplace_back(3); // 逆辺があっても良い
+	
+	LowestCommonAncestor lca(g, 1);
 	
 	cout << "size() = " << lca.size() << endl; // 6
 	
@@ -219,10 +141,6 @@ int main() {
 	cout << "depth(2) = " << lca.depth(2) << endl; // 1
 	cout << "depth(0) = " << lca.depth(0) << endl; // 2
 	cout << "depth(5) = " << lca.depth(5) << endl; // 2
-	
-	
-	lca.clear();
-	cout << "size() = " << lca.size() << endl; // 0
 }
 ```
 
