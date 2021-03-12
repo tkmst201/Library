@@ -20,7 +20,6 @@ int main() {
 	while (Q--) {
 		int u, v;
 		scanf("%d %d", &u, &v);
-		printf("%d\n", hld.get_lca(u, v));
+		printf("%d\n", hld.lca(u, v));
 	}
-	return 0;
 }

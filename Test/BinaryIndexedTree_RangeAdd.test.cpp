@@ -24,5 +24,4 @@ int main() {
 			printf("%lld\n", bit.sum(s, t));
 		}
 	}
-	return 0;
 }

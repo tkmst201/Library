@@ -28,5 +28,4 @@ int main() {
 		p *= sum;
 	}
 	printf("%d\n", ans.val());
-	return 0;
 }

@@ -38,5 +38,4 @@ int main() {
 			printf("%lld\n", hld.subtree_sum(u));
 		}
 	}
-	return 0;
 }

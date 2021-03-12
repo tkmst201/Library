@@ -16,6 +16,7 @@ int main() {
 	using mint = ModInt<998244353>;
 	using P = std::pair<mint, mint>;
 	using HLD = HeavyLightDecomposition;
+	using HLDQ = HeavyLightDecomposition_Query<HLD, P, SegmentTree>;
 	
 	std::vector<P> init(N);
 	for (int i = 0; i < N; ++i) {
@@ -24,7 +25,7 @@ int main() {
 		init[i] = {a, b};
 	}
 	
-	HeavyLightDecomposition_Query<HLD, P, SegmentTree>::Graph g(N);
+	HLDQ::Graph g(N);
 	for (int i = 0; i < N - 1; ++i) {
 		int u, v;
 		scanf("%d %d", &u, &v);
@@ -32,7 +33,7 @@ int main() {
 		g[v].emplace_back(u);
 	}
 	
-	HeavyLightDecomposition_Query<HLD, P, SegmentTree> hld(g, init, {1, 0},
+	HLDQ hld(g, init, {1, 0},
 		[](auto && x, auto && y) -> P { return {x.first * y.first, x.second * y.first + y.second}; });
 	
 	while (Q--) {
@@ -50,5 +51,4 @@ int main() {
 			printf("%d\n", (res.first * x + res.second).val());
 		}
 	}
-	return 0;
 }

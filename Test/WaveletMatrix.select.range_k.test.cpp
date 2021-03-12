@@ -96,6 +96,4 @@ int main() {
 			assert(points.size() == res.size());
 		}
 	}
-	
-	return 0;
 }

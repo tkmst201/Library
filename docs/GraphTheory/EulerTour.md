@@ -257,7 +257,7 @@ int main() {
 ```
 
 アーベル群に対するパスクエリは、頂点から出る時刻に逆元をセットすることによって処理することが可能です。
-また、[重軽分解 (HL 分解) クエリ](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition_Query.hpp)を用いれば、$\log$ が付きますがモノイドに対するパスクエリを処理することが可能です。  
+また、[重軽分解 ( HL 分解) クエリ](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition_Query.hpp)を用いれば、$\log$ が付きますがモノイドに対するパスクエリを処理することが可能です。  
 
 ```cpp
 #include <bits/stdc++.h>

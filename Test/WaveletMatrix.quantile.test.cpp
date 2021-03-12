@@ -17,5 +17,4 @@ int main() {
 		scanf("%d %d %d", &l, &r, &k);
 		printf("%d\n", wm.quantile(l, r, k + 1));
 	}
-	return 0;
 }

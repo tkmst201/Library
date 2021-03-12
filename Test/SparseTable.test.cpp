@@ -21,5 +21,4 @@ int main() {
 		scanf("%d %d", &l, &r);
 		printf("%d\n", st.fold(l, r));
 	}
-	return 0;
 }

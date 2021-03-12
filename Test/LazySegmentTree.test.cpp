@@ -37,6 +37,4 @@ int main() {
 		}
 		else printf("%d\n", seg.fold(l, r).val());
 	}
-	
-	return 0;
 }

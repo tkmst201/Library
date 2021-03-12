@@ -52,6 +52,4 @@ int main() {
 		edx = compress_get(cx, edx);
 		printf("%llu\n", wm.range_frequency(sum[stx - 1], sum[edx - 1], sty, edy));
 	}
-	
-	return 0;
 }

@@ -30,7 +30,7 @@ public:
 		par[0][root] = root;
 		stk.emplace(root, root);
 		while (!stk.empty()) {
-			auto [u, p] = stk.top();
+			const auto [u, p] = stk.top();
 			stk.pop();
 			for (int v : g[u]) {
 				if (v == p) continue;

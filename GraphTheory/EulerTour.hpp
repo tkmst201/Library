@@ -26,10 +26,12 @@ public:
 		in_[root] = num++;
 		stk.emplace(root, 0);
 		while (!stk.empty()) {
-			auto [u, i] = stk.top();
+			const auto [u, i] = stk.top();
 			stk.pop();
 			if (i < g[u].size()) {
 				const int v = g[u][i];
+				assert(0 <= v && v < n);
+				assert(v != u);
 				stk.emplace(u, i + 1);
 				if (v == par_[u]) g_idx[u << 1 | 1] = i;
 				else {
