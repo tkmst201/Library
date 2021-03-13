@@ -52,7 +52,13 @@ public:
 	RedBlackTree & operator =(const RedBlackTree & rhs) {
 		if (this != &rhs) {
 			clear();
-			root = copy_dfs(rhs.root, nullptr);
+			auto dfs = [](auto self, const_ptr q, node_ptr r) -> node_ptr {
+				if (!q) return nullptr;
+				node_ptr res = new Node(q->val, q->isred, r, q->isr);
+				for (int i = 0; i < 2; ++i) res->child[i] = self(self, q->child[i], res);
+				return res;
+			};
+			root = dfs(dfs, rhs.root, nullptr);
 			n = rhs.n;
 			e_ptr[0] = e_ptr[1] = root;
 			if (root) for (int i = 0; i < 2; ++i) while (e_ptr[i]->child[i]) e_ptr[i] = e_ptr[i]->child[i];
@@ -100,7 +106,13 @@ public:
 	std::vector<value_type> enumerate() const {
 		std::vector<value_type> elements;
 		elements.reserve(size());
-		enumerate_dfs(root, elements);
+		auto dfs = [&elements](auto self, const_ptr q) -> void {
+			if (!q) return;
+			self(self, q->child[0]);
+			elements.emplace_back(q->val);
+			self(self, q->child[1]);
+		};
+		dfs(dfs, root);
 		return elements;
 	}
 	
@@ -275,20 +287,6 @@ public:
 	}
 	
 private:
-	node_ptr copy_dfs(const_ptr q, node_ptr r) {
-		if (!q) return nullptr;
-		node_ptr res = new Node(q->val, q->isred, r, q->isr);
-		for (int i = 0; i < 2; ++i) res->child[i] = copy_dfs(q->child[i], res);
-		return res;
-	}
-	
-	void enumerate_dfs(const_ptr q, std::vector<value_type> & elements) const {
-		if (!q) return;
-		enumerate_dfs(q->child[0], elements);
-		elements.emplace_back(q->val);
-		enumerate_dfs(q->child[1], elements);
-	}
-	
 	void rotate(node_ptr q, bool d) noexcept {
 		node_ptr r = q->par, p = q->child[!d], b = p->child[d];
 		(r ? r->child[q->isr] : root) = p;
