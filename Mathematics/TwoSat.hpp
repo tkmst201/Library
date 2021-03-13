@@ -44,37 +44,37 @@ struct TwoSat {
 	
 private:
 	size_type n;
-	StronglyConnectedComponents scc;
+	StronglyConnectedComponents::Graph g;
 	std::vector<bool> ans;
 	bool isbuilt, satisfiability;
 	
 public:
-	TwoSat(size_type n) : n(n), scc(2 * n + 2) {}
+	TwoSat(size_type n) : n(n), g(2 * n + 2) {}
 	
 	void add_clause(size_type x, bool xb, size_type y, bool yb) {
 		assert(x < n);
 		assert(y < n);
-		scc.add_edge(x + (xb ? n : 0), y + ((yb^1) ? n : 0));
-		scc.add_edge(y + (yb ? n : 0), x + ((xb^1) ? n : 0));
+		g[x + (xb ? n : 0)].emplace_back(y + ((yb^1) ? n : 0));
+		g[y + (yb ? n : 0)].emplace_back(x + ((xb^1) ? n : 0));
 		isbuilt = false;
 	}
 	
 	void add_clause(size_type x, bool xb) {
 		assert(x < n);
-		scc.add_edge(x + (xb ? n : 0), 2*n);
-		scc.add_edge(x + (xb ? n : 0), 2*n + 1);
-		scc.add_edge(2*n, x + ((xb^1) ? n : 0));
-		scc.add_edge(2*n + 1, x + ((xb^1) ? n : 0));
+		g[x + (xb ? n : 0)].emplace_back(2*n);
+		g[x + (xb ? n : 0)].emplace_back(2*n + 1);
+		g[2*n].emplace_back(x + ((xb^1) ? n : 0));
+		g[2*n + 1].emplace_back(x + ((xb^1) ? n : 0));
 	}
 	
 	bool build() {
-		scc.build(false);
+		StronglyConnectedComponents scc(g);
 		ans.assign(n, false);
 		satisfiability = false;
-		if (scc.get_rank(2*n) == scc.get_rank(2*n + 1)) return false;
+		if (scc.rank(2*n) == scc.rank(2*n + 1)) return false;
 		for (size_type i = 0; i < n; ++i) {
-			if (scc.get_rank(i) == scc.get_rank(i + n)) return false;
-			if (scc.get_rank(i) > scc.get_rank(i + n)) ans[i] = true;
+			if (scc.rank(i) == scc.rank(i + n)) return false;
+			if (scc.rank(i) > scc.rank(i + n)) ans[i] = true;
 		}
 		isbuilt = true;
 		satisfiability = true;

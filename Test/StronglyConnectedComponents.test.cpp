@@ -8,21 +8,18 @@ int main() {
 	int N, M;
 	scanf("%d %d", &N, &M);
 	
-	StronglyConnectedComponents scc(N);
-	
+	StronglyConnectedComponents::Graph g(N);
 	for (int i = 0; i < M; ++i) {
 		int a, b;
 		scanf("%d %d", &a, &b);
-		scc.add_edge(a, b);
+		g[a].emplace_back(b);
 	}
+	StronglyConnectedComponents scc(g);
+	printf("%d\n", scc.scc_size());
 	
-	int sz = scc.build();
-	printf("%d\n", sz);
-	
-	for (int i = 0; i < sz; ++i) {
-		auto &lis = scc.get_map(i);
+	for (int i = 0; i < scc.scc_size(); ++i) {
+		auto & lis = scc.rank_list(i);
 		printf("%d ", lis.size());
 		for (int j = 0; j < lis.size(); ++j) printf("%d%c", lis[j], " \n"[j + 1 == lis.size()]);
 	}
-	return 0;
 }

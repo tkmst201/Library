@@ -7,7 +7,7 @@ documentation_of: //GraphTheory/HeavyLightDecomposition.hpp
 
 森に含まれる各木に対して重軽分解とオイラーツアーを行います。
 おまけで任意の $2$ 頂点の LCA を空間 $\Theta(N\log{\log{N}})$ クエリ $\mathcal{O}(\log{\log{N}})$ で求めることもできます。  
-重軽分解についてはページ最下部にある参考リンク先を参照してください。  
+重軽分解についてはページ下部にある参考リンク先を参照してください。  
 
 - `HeavyLightDecomposition(const Graph & g, bool LCA = false)`
 	- `LCA` $= false$ : $\Theta(N)$, `LCA` $= true$ : $\mathcal{O}(N \log{\log{N}})$ `g` の各木に対して重軽分解とオイラーツアーを行う

@@ -10,7 +10,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 
 - `LowestCommonAncestor(const Graph & g, int root = 0)`
 	- 時間/空間 $\Theta(N \log{N})$ 根 `root` の根付き木 $g$ (頂点数 $N$) で初期化
-- `size_t size()`
+- `int size()`
 	- $\Theta(1)$ グラフの頂点数 $N$ を返す
 - `int find(int a, int b)`
 	- $\Theta(\log{N})$ 頂点 $a$, $b$ の最近共通祖先を返す
@@ -46,7 +46,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 
 ---
 
-### size_t size()
+### int size()
 
 グラフの頂点数 $N$ を返します。  
 
