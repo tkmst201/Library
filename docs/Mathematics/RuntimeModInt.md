@@ -173,7 +173,7 @@ $x^{-1} \bmod{M}$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <Mathematics/RuntimeModInt.hpp>
+#include "Mathematics/RuntimeModInt.hpp"
 using namespace std;
 
 using mint1 = RuntimeModInt<0>;
@@ -227,6 +227,6 @@ TODO: test の追加
 
 # 参考
 
-[https://noshi91.hatenablog.com/entry/2019/03/31/174006](https://noshi91.hatenablog.com/entry/2019/03/31/174006)
+[https://noshi91.hatenablog.com/entry/2019/03/31/174006](https://noshi91.hatenablog.com/entry/2019/03/31/174006)  
 
 <br>

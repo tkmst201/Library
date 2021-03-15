@@ -196,7 +196,7 @@ $fold(0,N)$ の計算結果 $f(A_0, f(A_1, f(\ldots, f(A_{N-2}, A_{N-1}))\ldots)
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/DynamicSegmentTree.hpp>
+#include "DataStructure/DynamicSegmentTree.hpp"
 using namespace std;
 
 int main() {
@@ -268,6 +268,6 @@ TODO: `clear(l, r)` の test の追加
 
 # 参考
 
-2021/03/04: [https://kazuma8128.hatenablog.com/entry/2018/11/29/093827](https://kazuma8128.hatenablog.com/entry/2018/11/29/093827)
+2021/03/04: [https://kazuma8128.hatenablog.com/entry/2018/11/29/093827](https://kazuma8128.hatenablog.com/entry/2018/11/29/093827)  
 
 <br>

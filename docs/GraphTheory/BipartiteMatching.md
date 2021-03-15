@@ -142,7 +142,7 @@ $S, T$ の最大マッチングでの $T$ の頂点 $k$ のマッチング先を
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/BipartiteMatching.hpp>
+#include "GraphTheory/BipartiteMatching.hpp"
 using namespace std;
 
 int main() {

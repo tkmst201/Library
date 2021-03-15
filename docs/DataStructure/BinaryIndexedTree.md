@@ -121,7 +121,7 @@ $i = 0$ のときは `id_elem` を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/BinaryIndexedTree.hpp>
+#include "DataStructure/BinaryIndexedTree.hpp"
 using namespace std;
 
 int main() {
@@ -156,7 +156,7 @@ xor にも逆元が存在するので任意の区間 xor の計算が可能で�
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/BinaryIndexedTree.hpp>
+#include "DataStructure/BinaryIndexedTree.hpp"
 using namespace std;
 
 int main() {

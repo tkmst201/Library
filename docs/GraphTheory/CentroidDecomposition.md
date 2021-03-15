@@ -115,7 +115,7 @@ documentation_of: //GraphTheory/CentroidDecomposition.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/CentroidDecomposition.hpp>
+#include "GraphTheory/CentroidDecomposition.hpp"
 using namespace std;
 
 int main() {
@@ -163,7 +163,7 @@ int main() {
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/CentroidDecomposition.hpp>
+#include "GraphTheory/CentroidDecomposition.hpp"
 using namespace std;
 
 #include <utility>

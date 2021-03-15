@@ -161,7 +161,7 @@ $x^{-1} \bmod{M}$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <Mathematics/ModInt.hpp>
+#include "Mathematics/ModInt.hpp"
 using namespace std;
 
 constexpr int MOD = 13;
@@ -206,6 +206,6 @@ int main() {
 
 # 参考
 
-[https://noshi91.hatenablog.com/entry/2019/03/31/174006](https://noshi91.hatenablog.com/entry/2019/03/31/174006)
+[https://noshi91.hatenablog.com/entry/2019/03/31/174006](https://noshi91.hatenablog.com/entry/2019/03/31/174006)  
 
 <br>

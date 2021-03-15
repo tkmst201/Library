@@ -52,7 +52,7 @@ $x$ の二進表記で最上位ビットから連続する $0$ の個数を返�
 
 ```cpp
 #include <bits/stdc++.h>
-#include <Mathematics/bit_operation.hpp>
+#include "Mathematics/bit_operation.hpp"
 using namespace std;
 
 int main() {
@@ -102,7 +102,7 @@ constexpr int pop_count(unsigned int x) {
 
 # 参考
 
-2020/08/31: https://qiita.com/zawawahoge/items/8bbd4c2319e7f7746266  
-2021/02/08: http://www.nminoru.jp/~nminoru/programming/bitcount.html  
+2020/08/31: [https://qiita.com/zawawahoge/items/8bbd4c2319e7f7746266](https://qiita.com/zawawahoge/items/8bbd4c2319e7f7746266)  
+2021/02/08: [http://www.nminoru.jp/~nminoru/programming/bitcount.html](http://www.nminoru.jp/~nminoru/programming/bitcount.html)  
 
 <br>

@@ -196,7 +196,7 @@ $k = 0$ または、そのような位置が存在しなければ $N + 1$ を返
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SuccintBitVector.hpp>
+#include "DataStructure/SuccintBitVector.hpp"
 using namespace std;
 
 int main() {

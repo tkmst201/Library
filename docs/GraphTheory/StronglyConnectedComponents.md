@@ -128,7 +128,7 @@ documentation_of: //GraphTheory/StronglyConnectedComponents.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/StronglyConnectedComponents.hpp>
+#include "GraphTheory/StronglyConnectedComponents.hpp"
 using namespace std;
 
 int main() {

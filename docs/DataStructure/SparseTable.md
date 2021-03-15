@@ -79,7 +79,7 @@ $f(A_l, A_{l+1}, \ldots, A_{r-1})$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SparseTable.hpp>
+#include "DataStructure/SparseTable.hpp"
 using namespace std;
 
 int main() {
@@ -129,6 +129,6 @@ $f$ は冪等性がある演算で可換なので、
 
 # 参考
 
-2020/04/30: http://tookunn.hatenablog.com/entry/2016/07/13/211148  
+2020/04/30: [http://tookunn.hatenablog.com/entry/2016/07/13/211148](http://tookunn.hatenablog.com/entry/2016/07/13/211148)  
 
 <br>

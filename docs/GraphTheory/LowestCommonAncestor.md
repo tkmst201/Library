@@ -105,7 +105,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/LowestCommonAncestor.hpp>
+#include "GraphTheory/LowestCommonAncestor.hpp"
 using namespace std;
 
 int main() {

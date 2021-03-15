@@ -199,7 +199,7 @@ $g(fold(0, r)) = true$ または $l = 0$ のときは $0$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SegmentTree.hpp>
+#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 int main() {
@@ -234,7 +234,7 @@ int main() {
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SegmentTree.hpp>
+#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 constexpr int INF = 1<<30;

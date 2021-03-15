@@ -163,7 +163,7 @@ $fold(0,N)$ の計算結果 $f(A_0, f(A_1, f(\ldots, f(A_{N-2}, A_{N-1}))\ldots)
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/LazySegmentTree.hpp>
+#include "DataStructure/LazySegmentTree.hpp"
 using namespace std;
 
 int main() {
@@ -194,7 +194,7 @@ int main() {
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/LazySegmentTree.hpp>
+#include "DataStructure/LazySegmentTree.hpp"
 using namespace std;
 
 int main() {

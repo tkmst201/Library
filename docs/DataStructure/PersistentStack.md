@@ -103,7 +103,7 @@ Stack に入っている要素数を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/PersistentStack.hpp>
+#include "DataStructure/PersistentStack.hpp"
 using namespace std;
 
 int main() {
@@ -134,6 +134,6 @@ int main() {
 
 # 参考
 
-2020/04/10: http://noshi91.hatenablog.com/entry/2019/02/04/175100
+2020/04/10: [http://noshi91.hatenablog.com/entry/2019/02/04/175100](http://noshi91.hatenablog.com/entry/2019/02/04/175100)  
 
 <br>

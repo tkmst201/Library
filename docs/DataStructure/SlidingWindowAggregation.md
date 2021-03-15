@@ -100,7 +100,7 @@ documentation_of: //DataStructure/SlidingWindowAggregation.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SlidingWindowAggregation.hpp>
+#include "DataStructure/SlidingWindowAggregation.hpp"
 using namespace std;
 
 int main() {
@@ -133,7 +133,7 @@ int main() {
 
 # 参考
 
-2020/09/22: [https://scrapbox.io/data-structures/Sliding_Window_Aggregation](https://scrapbox.io/data-structures/Sliding_Window_Aggregation)
-2020/09/22: [https://snuke.hatenablog.com/entry/2018/09/18/135640](https://snuke.hatenablog.com/entry/2018/09/18/135640)
+2020/09/22: [https://scrapbox.io/data-structures/Sliding_Window_Aggregation](https://scrapbox.io/data-structures/Sliding_Window_Aggregation)  
+2020/09/22: [https://snuke.hatenablog.com/entry/2018/09/18/135640](https://snuke.hatenablog.com/entry/2018/09/18/135640)  
 
 <br>

@@ -109,7 +109,7 @@ documentation_of: //DataStructure/UnionFind.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/UnionFind.hpp>
+#include "DataStructure/UnionFind.hpp"
 using namespace std;
 
 int main() {

@@ -98,7 +98,7 @@ $A_k$ を返す。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/PersistentArray.hpp>
+#include "DataStructure/PersistentArray.hpp"
 using namespace std;
 
 int main() {
@@ -132,7 +132,7 @@ int main() {
 
 # 参考
 
-2020/04/10: https://trap.jp/post/663/
-2020/09/25: https://qiita.com/hotman78/items/9c643feae1de087e6fc5
+2020/04/10: [https://trap.jp/post/663/](https://trap.jp/post/663/)  
+2020/09/25: [https://qiita.com/hotman78/items/9c643feae1de087e6fc5](https://qiita.com/hotman78/items/9c643feae1de087e6fc5)  
 
 <br>

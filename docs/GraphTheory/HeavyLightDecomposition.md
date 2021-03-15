@@ -296,7 +296,7 @@ heavy-edge `k` から根が属する heavy-edge 間のパス上に含まれる h
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/HeavyLightDecomposition.hpp>
+#include "GraphTheory/HeavyLightDecomposition.hpp"
 using namespace std;
 
 int main() {

@@ -76,7 +76,7 @@ $f(A_l, f(A_{l+1}, f(\ldots, f(A_{r-1}, A_{r-1}))\ldots)$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/DisjointSparseTable.hpp>
+#include "DataStructure/DisjointSparseTable.hpp"
 using namespace std;
 
 int main() {
@@ -103,6 +103,6 @@ $level$ は 1 つの累積和のサイズが $2^{level}$ 個であることを�
 
 # 参考
 
-2020/04/30: https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b  
+2020/04/30: [https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b](https://noshi91.hatenablog.com/entry/2018/05/08/183946#fn-3c2b044b)  
 
 <br>

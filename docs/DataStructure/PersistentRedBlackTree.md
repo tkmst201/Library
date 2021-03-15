@@ -187,7 +187,7 @@ $v$ で初期化します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/PersistentRedBlackTree.hpp>
+#include "DataStructure/PersistentRedBlackTree.hpp"
 using namespace std;
 
 int main() {

@@ -132,7 +132,7 @@ $n$ 変数で初期化します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/PotentializedUnionFind.hpp>
+#include "DataStructure/PotentializedUnionFind.hpp"
 using namespace std;
 
 int main() {
@@ -173,7 +173,7 @@ TODO: `size` の test を追加する
 
 # 参考
 
-2021/03/09: [http://sigma425.hatenablog.com/entry/2015/12/07/185047](http://sigma425.hatenablog.com/entry/2015/12/07/185047)
-2021/03/09: [https://qiita.com/drken/items/cce6fc5c579051e64fab](https://qiita.com/drken/items/cce6fc5c579051e64fab)
+2021/03/09: [http://sigma425.hatenablog.com/entry/2015/12/07/185047](http://sigma425.hatenablog.com/entry/2015/12/07/185047)  
+2021/03/09: [https://qiita.com/drken/items/cce6fc5c579051e64fab](https://qiita.com/drken/items/cce6fc5c579051e64fab)  
 
 <br>

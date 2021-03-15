@@ -113,8 +113,8 @@ $l = r$ のときは $0$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/BinaryIndexedTree.hpp>
-#include <DataStructure/BinaryIndexedTree_RangeAdd.hpp>
+#include "DataStructure/BinaryIndexedTree.hpp"
+#include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 using namespace std;
 
 int main() {

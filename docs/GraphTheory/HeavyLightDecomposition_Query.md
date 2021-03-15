@@ -221,9 +221,9 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/HeavyLightDecomposition.hpp>
-#include <GraphTheory/HeavyLightDecomposition_Query.hpp>
-#include <DataStructure/SegmentTree.hpp>
+#include "GraphTheory/HeavyLightDecomposition.hpp"
+#include "GraphTheory/HeavyLightDecomposition_Query.hpp"
+#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 int main() {
@@ -263,9 +263,9 @@ int main() {
 
 ```cpp
 #include <bits/stdc++.h>
-#include <GraphTheory/HeavyLightDecomposition.hpp>
-#include <GraphTheory/HeavyLightDecomposition_Query.hpp>
-#include <DataStructure/SegmentTree.hpp>
+#include "GraphTheory/HeavyLightDecomposition.hpp"
+#include "GraphTheory/HeavyLightDecomposition_Query.hpp"
+#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 int main() {

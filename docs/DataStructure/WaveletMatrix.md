@@ -306,8 +306,8 @@ $l = r$ または `val_l` $=$ `val_r` のときは空の配列を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/SuccintBitVector.hpp>
-#include <DataStructure/WaveletMatrix.hpp>
+#include "DataStructure/SuccintBitVector.hpp"
+#include "DataStructure/WaveletMatrix.hpp"
 using namespace std;
 
 int main() {

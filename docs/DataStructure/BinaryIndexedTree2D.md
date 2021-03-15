@@ -113,7 +113,7 @@ $i1 = i2$ または $j1 = j2$ のときは $0$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include <DataStructure/BinaryIndexedTree2D.hpp>
+#include "DataStructure/BinaryIndexedTree2D.hpp"
 using namespace std;
 
 int main() {
