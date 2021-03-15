@@ -30,7 +30,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 **制約**
 
 - $0 \leq$ `root` $< N$
-- `g` は木
+- `g` は根付き木または木
 
 **計算量**
 

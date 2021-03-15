@@ -9,7 +9,7 @@ documentation_of: //GraphTheory/EulerTour.hpp
 [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) や [最近共通祖先 (LCA)](https://tkmst201.github.io/Library/GraphTheory/LowestCommonAncestor.hpp) を組み合わせることよって部分木クエリやパスクエリを効率的に処理することが可能です。
 詳しくは`使用例`をご覧ください。  
 
-- `SegmentTree(const Graph & g, int root = )`
+- `EulerTour(const Graph & g, int root = )`
 	- $\Theta(N)$ 根 `root` の根付き木 `g` (頂点数 $N$ ) で初期化
 - `size_t size()`
 	- $\Theta(1)$ 最大時刻 $+ 1$ を返す
@@ -28,13 +28,14 @@ documentation_of: //GraphTheory/EulerTour.hpp
 
 # コンストラクタ
 
-### SegmentTree(const Graph & g, int root = 0)
+### EulerTour(const Graph & g, int root = 0)
 
 根 `root` の根付き木 `g` (頂点数 $N$ ) で初期化します。
 時刻の経過地点を辺にするときは `EDGE` $= true$ を、頂点にするときは `EDGE` $= false$ を指定してください。  
 
 **制約**
 
+- `g` は `root` を根とした根付き木または木
 - $0 \leq$ `root` $< N$
 
 **計算量**

@@ -36,6 +36,7 @@ public:
 	template<typename T>
 	static std::vector<value_type> multiply(const std::vector<T> &A, const std::vector<T> &B) {
 		if (A.empty() || B.empty()) return {};
+		if (A.size() == 1 && B.size() == 1) return {static_cast<value_type>(A.front()) * B.front()};
 		size_type n_ = A.size() + B.size() - 1;
 		size_type n = 1, ni = 0;
 		while (n < n_) n <<= 1, ++ni;

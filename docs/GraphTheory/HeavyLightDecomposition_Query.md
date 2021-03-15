@@ -43,7 +43,6 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 - `HLD` は [HeavyLightDecomposition](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp)
 - `SEG` は [SegmentTree](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp)
 - $(T, f,$ `id_elem`$)$ はモノイド
-- `g` は森
 - 頂点に値を持つ場合は `VERTEX` $= true$
 - 辺に値を持つ場合は `VERTEX` $= false$
 
@@ -53,6 +52,10 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 グラフ `g` で初期化します。
 はじめ、すべての値は単位元です。  
+
+**制約**
+
+- `g` は木
 
 **計算量**
 
@@ -67,7 +70,7 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 **制約**
 
-- `g` は木
+- `g` は `root` を根とした根付き木または木
 
 **計算量**
 
@@ -82,6 +85,7 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 **制約**
 
+- `g` は木
 - $\|$`v`$\| = N$
 
 **計算量**
@@ -97,6 +101,7 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 **制約**
 
+- `g` は `root` を根とした根付き木または木
 - $\|$`v`$\| = N$
 
 **計算量**
