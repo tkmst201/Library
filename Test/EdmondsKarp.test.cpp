@@ -14,5 +14,4 @@ int main() {
 		ek.add_edge(u, v, c);
 	}
 	printf("%d\n", ek.max_flow(0, V - 1));
-	return 0;
 }

@@ -167,10 +167,12 @@ int main() {
 using namespace std;
 
 #include <utility>
+#include <cassert>
 
 namespace tk {
 template<typename CD>
 std::pair<int, typename CD::Graph> centroid_decomposition_tree(const typename CD::Graph & g) {
+	assert(!g.empty());
 	CD cd(g);
 	typename CD::Graph res(g.size());
 	auto dfs = [&](auto self, int centroid) -> void {

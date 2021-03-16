@@ -7,6 +7,7 @@
 #include <cassert>
 
 std::pair<long long, std::vector<int>> tree_diameter(const std::vector<std::vector<std::pair<int, int>>> & wg) {
+	assert(!wg.empty());
 	using CD = CentroidDecomposition;
 	using ll = long long;
 	const int n = wg.size();
@@ -49,7 +50,7 @@ std::pair<long long, std::vector<int>> tree_diameter(const std::vector<std::vect
 		if (top[0].first + top[1].first > res.dist) return {top[0].first + top[1].first, top[0].second, top[1].second};
 		return res;
 	};
-	Data dat = dfs(dfs, 0);
+	Data dat = dfs(dfs, cd.centroids(g, 0)[0]);
 	std::vector<int> par(n, -1);
 	auto dfs3 = [&](auto self, int u) -> void {
 		for (auto v : g[u]) if (v != par[u]) par[v] = u, self(self, v);
