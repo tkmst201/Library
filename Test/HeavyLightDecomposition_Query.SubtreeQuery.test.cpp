@@ -1,7 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 
-#include "DataStructure/SegmentTree.hpp"
-#include "GraphTheory/HeavyLightDecomposition.hpp"
 #include "GraphTheory/HeavyLightDecomposition_Query.hpp"
 
 #include <cstdio>
@@ -14,15 +12,15 @@ int main() {
 	std::vector<int> A(N);
 	for (int i = 0; i < N; ++i) scanf("%d", &A[i]);
 	
-	HeavyLightDecomposition::Graph g(N);
+	using ll = long long;
+	using HLD = HeavyLightDecomposition_Query<ll>;
+	HLD::Graph g(N);
 	for (int i = 1; i < N; ++i) {
 		int p;
 		scanf("%d", &p);
 		g[p].emplace_back(i);
 	}
-	
-	using ll = long long;
-	HeavyLightDecomposition_Query<HeavyLightDecomposition, ll, SegmentTree> hld(g, A, 0, [](ll a, ll b) { return a + b; });
+	HLD hld(g, A, 0, [](ll a, ll b) { return a + b; });
 	
 	while (Q--) {
 		int q;

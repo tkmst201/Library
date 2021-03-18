@@ -40,8 +40,6 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 **制約**
 
-- `HLD` は [HeavyLightDecomposition](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp)
-- `SEG` は [SegmentTree](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp)
 - $(T, f,$ `id_elem`$)$ はモノイド
 - 頂点に値を持つ場合は `VERTEX` $= true$
 - 辺に値を持つ場合は `VERTEX` $= false$
@@ -221,14 +219,12 @@ documentation_of: //GraphTheory/HeavyLightDecomposition_Query.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include "GraphTheory/HeavyLightDecomposition.hpp"
 #include "GraphTheory/HeavyLightDecomposition_Query.hpp"
-#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 int main() {
-	using HLDQ = HeavyLightDecomposition_Query<HeavyLightDecomposition, int, SegmentTree>;
-	HLDQ::Graph g(6);
+	using HLD = HeavyLightDecomposition_Query<int>;
+	HLD::Graph g(6);
 	//         1(10)
 	//    2(100)    3(1000)
 	// 0(1)  4(10000)    5(100000)
@@ -241,7 +237,7 @@ int main() {
 	g[5].emplace_back(3); // 逆辺があっても良い
 	
 	vector<int> A({1, 10, 100, 1000, 10000, 100000});
-	HLDQ hld(g, 1, A, 0, [](auto x, auto y) { return x + y; });
+	HLD hld(g, 1, A, 0, [](auto x, auto y) { return x + y; });
 	
 	// 1 -> 3 パス上の頂点 [1, 3] の総和
 	cout << "fold(1, 3) = " << hld.fold(1, 3) << endl; // 1010
@@ -263,14 +259,12 @@ int main() {
 
 ```cpp
 #include <bits/stdc++.h>
-#include "GraphTheory/HeavyLightDecomposition.hpp"
 #include "GraphTheory/HeavyLightDecomposition_Query.hpp"
-#include "DataStructure/SegmentTree.hpp"
 using namespace std;
 
 int main() {
-	using HLDQ = HeavyLightDecomposition_Query<HeavyLightDecomposition, int, SegmentTree>;
-	HLDQ::Graph g(6);
+	using HLD = HeavyLightDecomposition_Query<int>;
+	HLD::Graph g(6);
 	// 辺の値は葉側の頂点に書いてある
 	//         1
 	//    2(100)    3(1000)
@@ -283,7 +277,7 @@ int main() {
 	
 	g[5].emplace_back(3); // 逆辺があっても良い
 
-	HLDQ hld(g, false, 1, 0, [](auto x, auto y) { return x + y; });
+	HLD hld(g, false, 1, 0, [](auto x, auto y) { return x + y; });
 	hld.set(1, 2, 100);
 	hld.set(1, 3, 1000);
 	hld.set(2, 0, 1);

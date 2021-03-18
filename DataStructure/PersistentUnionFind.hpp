@@ -1,20 +1,22 @@
 #ifndef INCLUDE_GUARD_PERSISTENT_UNION_FIND_HPP
 #define INCLUDE_GUARD_PERSISTENT_UNION_FIND_HPP
 
+#include "DataStructure/PersistentArray.hpp"
+
 #include <cstdint>
 #include <utility>
 
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/PersistentUnionFind.hpp
  */
-template<template<typename, int> class PARRAY, int M>
+template<int M>
 struct PersistentUnionFind {
 	static_assert(M > 1);
 	
 	using size_type = std::size_t;
 	
 private:
-	using parray_type = PARRAY<int, M>;
+	using parray_type = PersistentArray<int, M>;
 	parray_type dat;
 	
 public:

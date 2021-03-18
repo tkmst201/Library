@@ -1,6 +1,9 @@
 #ifndef INCLUDE_GUARD_HEAVY_LIGHT_DECOMPOSITION_PATH_QUERY_HPP
 #define INCLUDE_GUARD_HEAVY_LIGHT_DECOMPOSITION_PATH_QUERY_HPP
 
+#include "DataStructure/SegmentTree.hpp"
+#include "GraphTheory/HeavyLightDecomposition.hpp"
+
 #include <vector>
 #include <cassert>
 #include <functional>
@@ -9,12 +12,12 @@
 /**
  * @brief https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition_Query.hpp
  */
-template<class HLD, typename T, template<typename> class SEG>
+template<typename T>
 struct HeavyLightDecomposition_Query {
 	using value_type = T;
 	using const_reference = const value_type &;
-	using seg_type = SEG<value_type>;
-	using hld_type = HLD;
+	using seg_type = SegmentTree<value_type>;
+	using hld_type = HeavyLightDecomposition;
 	using size_type = std::size_t;
 	using Graph = typename hld_type::Graph;
 	using F = std::function<value_type (const_reference, const_reference)>;

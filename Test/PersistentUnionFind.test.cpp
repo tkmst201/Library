@@ -1,6 +1,5 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 
-#include "DataStructure/PersistentArray.hpp"
 #include "DataStructure/PersistentUnionFind.hpp"
 
 #include <cstdio>
@@ -10,7 +9,7 @@ int main() {
 	int N, Q;
 	scanf("%d %d", &N, &Q);
 	
-	using PUF = PersistentUnionFind<PersistentArray, 6>;
+	using PUF = PersistentUnionFind<6>;
 	std::vector<PUF> hist(Q + 1);
 	
 	for (int i = 0; i < Q; ++i) {

@@ -1,17 +1,19 @@
 #ifndef INCLUDE_GUARD_BINARY_INDEXED_TREE_RANGE_ADD_HPP
 #define INCLUDE_GUARD_BINARY_INDEXED_TREE_RANGE_ADD_HPP
 
+#include "DataStructure/BinaryIndexedTree.hpp"
+
 #include <vector>
 #include <cassert>
 
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/BinaryIndexedTree_RangeAdd.hpp
  */
-template<typename T, template<typename> class U>
+template<typename T>
 struct BinaryIndexedTree_RangeAdd {
 	static_assert(std::is_integral<T>::value == true);
 	
-	using bit_type = U<T>;
+	using bit_type = BinaryIndexedTree<T>;
 	using value_type = typename bit_type::value_type;
 	using size_type = typename bit_type::size_type;
 	

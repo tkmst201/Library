@@ -1,96 +1,64 @@
 #ifndef INCLUDE_GUARD_TWO_SAT_HPP
 #define INCLUDE_GUARD_TWO_SAT_HPP
 
-/*
-last-updated: 2020/09/10
-
-# 仕様
-TwoSat(size_type n) :
-	時間計算量: Θ(n)
-	n 変数を対象として構築
-
-void add_clause(size_type x, bool xb, size_type y, bool yb) :
-	時間計算量: Θ(1)
-	(x = xb) v (y = yb) を加える
-
-void add_clause(size_type x, bool xb) :
-	時間計算量: Θ(1)
-	x = xb を加える
-
-bool build() :
-	時間計算量: Θ(n)
-	全ての条件を満たすような変数の値の組み合わせを求める
-	そのような組み合わせが存在するならば true, 存在しないのならば false を返す
-
-const std::vector<bool> & get_answer() const :
-	時間計算量: Θ(1)
-	全ての条件を満たすような変数の真偽値が入っているテーブルを返す
-
-bool get(size_type i) :
-	時間計算量: Θ(1)
-	全ての条件を満たすような変数の値の組み合わせで、変数 i の真偽値を返す
-
-# 参考
-"AC Library" https://atcoder.jp/posts/517m, 2020/09/10
-*/
-
 #include "GraphTheory/StronglyConnectedComponents.hpp"
 
 #include <vector>
 #include <cassert>
 
+/**
+ * @brief https://tkmst201.github.io/Library/Mathematics/TwoSat.hpp
+ */
 struct TwoSat {
-	using size_type = std::size_t;
+	using scc_type = StronglyConnectedComponents;
 	
 private:
-	size_type n;
-	StronglyConnectedComponents::Graph g;
+	int n;
+	typename scc_type::Graph g;
 	std::vector<bool> ans;
-	bool isbuilt, satisfiability;
+	bool satisfiability = false;
 	
 public:
-	TwoSat(size_type n) : n(n), g(2 * n + 2) {}
+	explicit TwoSat(int n) : n(n), g(2 * n) {}
 	
-	void add_clause(size_type x, bool xb, size_type y, bool yb) {
-		assert(x < n);
-		assert(y < n);
-		g[x + (xb ? n : 0)].emplace_back(y + ((yb^1) ? n : 0));
-		g[y + (yb ? n : 0)].emplace_back(x + ((xb^1) ? n : 0));
-		isbuilt = false;
+	int size() const noexcept {
+		return n;
 	}
 	
-	void add_clause(size_type x, bool xb) {
-		assert(x < n);
-		g[x + (xb ? n : 0)].emplace_back(2*n);
-		g[x + (xb ? n : 0)].emplace_back(2*n + 1);
-		g[2*n].emplace_back(x + ((xb^1) ? n : 0));
-		g[2*n + 1].emplace_back(x + ((xb^1) ? n : 0));
+	void add_clause(int x, bool xb, int y, bool yb) {
+		assert(0 <= x && x < n);
+		assert(0 <= y && y < n);
+		g[x + (xb ? n : 0)].emplace_back(y + (yb ? 0 : n));
+		g[y + (yb ? n : 0)].emplace_back(x + (xb ? 0 : n));
+		satisfiability = false;
+	}
+	
+	void add_clause(int x, bool xb) {
+		assert(0 <= x && x < n);
+		g[x + (xb ? n : 0)].emplace_back(x + (xb ? 0 : n));
+		satisfiability = false;
 	}
 	
 	bool build() {
-		StronglyConnectedComponents scc(g);
+		scc_type scc(g);
 		ans.assign(n, false);
 		satisfiability = false;
-		if (scc.rank(2*n) == scc.rank(2*n + 1)) return false;
-		for (size_type i = 0; i < n; ++i) {
+		for (int i = 0; i < n; ++i) {
 			if (scc.rank(i) == scc.rank(i + n)) return false;
 			if (scc.rank(i) > scc.rank(i + n)) ans[i] = true;
 		}
-		isbuilt = true;
 		satisfiability = true;
 		return true;
 	}
 	
-	const std::vector<bool> & get_answer() const {
-		assert(isbuilt);
+	const std::vector<bool> & ans_list() const noexcept {
 		assert(satisfiability);
 		return ans;
 	}
 	
-	bool get(size_type i) const {
-		assert(isbuilt);
+	bool get(int i) const noexcept {
 		assert(satisfiability);
-		assert(i < n);
+		assert(0 <= i && i < n);
 		return ans[i];
 	}
 };

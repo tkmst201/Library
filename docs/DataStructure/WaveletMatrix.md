@@ -50,7 +50,6 @@ documentation_of: //DataStructure/WaveletMatrix.hpp
 
 - `T` は `int`, `unsigned int`, `long long`, `unsigned long long`
 - `BITS` は `T` のビット数以下
-- `BV` は [`SuccintBitVector`](https://tkmst201.github.io/Library/DataStructure/SuccintBitVector.hpp)
 
 ---
 
@@ -306,13 +305,12 @@ $l = r$ または `val_l` $=$ `val_r` のときは空の配列を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include "DataStructure/SuccintBitVector.hpp"
 #include "DataStructure/WaveletMatrix.hpp"
 using namespace std;
 
 int main() {
 	//                                          0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-	WaveletMatrix<3, int, SuccintBitVector> wm({3, 0, 2, 3, 4, 6, 5, 7, 1, 1});
+	WaveletMatrix<int, 3> wm({3, 0, 2, 3, 4, 6, 5, 7, 1, 1});
 	cout << "size = " << wm.size() << endl; // 10
 	
 	// 3 0 2 3 4 6 5 7 1 1

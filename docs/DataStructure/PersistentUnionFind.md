@@ -36,7 +36,6 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 
 **制約**
 
-- $PARRAY$ は `PersistentArray`
 - $M > 1$
 
 ---
@@ -143,12 +142,11 @@ documentation_of: //DataStructure/PersistentUnionFind.hpp
 
 ```cpp
 #include <bits/stdc++.h>
-#include "DataStructure/PersistentArray.hpp"
 #include "DataStructure/PersistentUnionFind.hpp"
 using namespace std;
 
 int main() {
-	using PUF = PersistentUnionFind<PersistentArray, 6>;
+	using PUF = PersistentUnionFind<6>;
 	
 	PUF uf1;
 	cout << uf1.find(6) << ", " << uf1.size(6) << endl; // 6, 1

@@ -1,6 +1,8 @@
 #ifndef INCLUDE_GUARD_WAVELET_MATRIX_HPP
 #define INCLUDE_GUARD_WAVELET_MATRIX_HPP
 
+#include "DataStructure/SuccintBitVector.hpp"
+
 #include <vector>
 #include <cstdint>
 #include <cassert>
@@ -10,7 +12,7 @@
 /**
  * @brief https://tkmst201.github.io/Library/DataStructure/WaveletMatrix.hpp
  */
-template<int BITS, typename T, class BV>
+template<typename T, int BITS>
 struct WaveletMatrix {
 	static_assert(std::is_integral<T>::value == true);
 	static_assert(BITS > 0);
@@ -20,7 +22,7 @@ struct WaveletMatrix {
 	using size_type = std::size_t;
 	using value_type = T;
 	using const_reference = const value_type &;
-	using bv_type = BV;
+	using bv_type = SuccintBitVector;
 	
 private:
 	using uint32 = std::uint32_t;

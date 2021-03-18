@@ -1,6 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2426?year=2012"
 
-#include "DataStructure/SuccintBitVector.hpp"
 #include "DataStructure/WaveletMatrix.hpp"
 
 #include <cstdio>
@@ -36,7 +35,7 @@ int main() {
 	std::vector<int> cnt(cx.size()), sy(N); // sy[i] := x 座標が i 番目に小さい点の y 座標(x 座標が同一の場合にも差をつける)
 	for (int i = 0; i < x.size(); ++i) sy[sum[x[i] - 1] + cnt[x[i]]++] = y[i];
 	
-	WaveletMatrix<13, int, SuccintBitVector> wm(sy);
+	WaveletMatrix<int, 13> wm(sy);
 	
 	auto compress_get = [](auto &&cv, auto &&x) {
 		return std::lower_bound(begin(cv), end(cv), x) - std::begin(cv);

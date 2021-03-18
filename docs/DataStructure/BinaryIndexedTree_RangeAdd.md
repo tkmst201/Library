@@ -27,7 +27,6 @@ documentation_of: //DataStructure/BinaryIndexedTree_RangeAdd.hpp
 **制約**
 
 - `T` は `int`, `long long`, [`ModInt`](https://tkmst201.github.io/Library/Mathematics/ModInt.hpp)
-- `U` は [`BinaryIndexedTree`](https://tkmst201.github.io/Library/DataStructure/BinaryIndexedTree.hpp)
 
 ---
 
@@ -113,12 +112,11 @@ $l = r$ のときは $0$ を返します。
 
 ```cpp
 #include <bits/stdc++.h>
-#include "DataStructure/BinaryIndexedTree.hpp"
 #include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 using namespace std;
 
 int main() {
-	BinaryIndexedTree_RangeAdd<int, BinaryIndexedTree> bit(5);
+	BinaryIndexedTree_RangeAdd<int> bit(5);
 	cout << "N = " << bit.size() << endl; // 5
 	
 	bit.add(1, 3, 2);

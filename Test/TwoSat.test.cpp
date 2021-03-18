@@ -26,10 +26,8 @@ int main() {
 	if (!sat.build()) std::cout << "s UNSATISFIABLE" << std::endl;
 	else {
 		std::cout << "s SATISFIABLE" << std::endl;
-		const auto & ans = sat.get_answer();
 		std::cout << "v";
-		for (int i = 0; i < N; ++i) std::cout << " " << (ans[i] ? i + 1 : -(i + 1));
+		for (int i = 0; i < N; ++i) std::cout << " " << (sat.get(i) ? i + 1 : -(i + 1));
 		std::cout << " 0" << std::endl;
 	}
-	return 0;
 }

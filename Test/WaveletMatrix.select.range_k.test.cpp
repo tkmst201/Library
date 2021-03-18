@@ -1,6 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_C"
 
-#include "DataStructure/SuccintBitVector.hpp"
 #include "DataStructure/WaveletMatrix.hpp"
 
 #include <cstdio>
@@ -41,7 +40,7 @@ int main() {
 		++cnt[x[i]];
 	}
 	
-	WaveletMatrix<19, int, SuccintBitVector> wm(sy);
+	WaveletMatrix<int, 19> wm(sy);
 	
 	auto compress_get = [](auto &&cv, auto &&x) {
 		return std::lower_bound(begin(cv), end(cv), x) - std::begin(cv);
@@ -79,7 +78,7 @@ int main() {
 		// test range_max_k
 		{
 			auto t_points = wm.range_max_k(stx, edx, sty, edy, edx - stx);
-			using wm_type = WaveletMatrix<19, int, SuccintBitVector>;
+			using wm_type = WaveletMatrix<int, 19>;
 			std::vector<std::pair<wm_type::value_type, wm_type::size_type>> res;
 			for (const auto & p : t_points) {
 				const unsigned int c = wm.rank(0, stx, p.first);

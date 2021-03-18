@@ -1,6 +1,5 @@
 #define PROBLEM "https://onlinejudge.u-aizu.ac.jp/challenges/sources/UOA/UAPC/1549?year=2014"
 
-#include "DataStructure/SuccintBitVector.hpp"
 #include "DataStructure/WaveletMatrix.hpp"
 
 #include <cstdio>
@@ -15,7 +14,7 @@ int main() {
 	std::vector<int> A(N);
 	for (int i = 0; i < N; ++i) scanf("%d", &A[i]), A[i] += bias;
 	
-	WaveletMatrix<21, int, SuccintBitVector> wm(A);
+	WaveletMatrix<int, 21> wm(A);
 	
 	int Q;
 	scanf("%d", &Q);
