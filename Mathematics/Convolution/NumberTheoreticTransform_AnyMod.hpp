@@ -24,7 +24,7 @@ static std::vector<T> multiply(const std::vector<T> & A, const std::vector<T> & 
 */
 
 #include "Mathematics/Convolution/NumberTheoreticTransform.hpp"
-#include "Mathematics/Garner.hpp"
+#include "Mathematics/garner.hpp"
 
 #include <vector>
 #include <cstdint>
@@ -39,7 +39,7 @@ public:
 	
 	template<typename T>
 	static std::vector<T> multiply(const std::vector<T> & A, const std::vector<T> & B) {
-		std::vector<value_type> m;
+		std::vector<T> m;
 		auto ntt1_res = NumberTheoreticTransform<1'224'736'769, 3>::multiply(A, B);
 		m.emplace_back(1'224'736'769);
 		auto ntt2_res = NumberTheoreticTransform<469'762'049, 3>::multiply(A, B);
@@ -49,14 +49,14 @@ public:
 		// auto ntt4_res = NumberTheoreticTransform<998'244'353, 3>::multiply(A, B);
 		// m.emplace_back(998'244'353);
 		
-		std::vector<value_type> b(m.size());
+		std::vector<T> b(m.size());
 		std::vector<T> res(ntt1_res.size());
 		for (size_type i = 0; i < res.size(); ++i) {
 			b[0] = ntt1_res[i];
 			b[1] = ntt2_res[i];
 			b[2] = ntt3_res[i];
 			// b[3] = ntt4_res[i];
-			res[i] = Garner::garner<value_type>(b, m, MOD);
+			res[i] = tk::garner<T, value_type>(b, m, MOD);
 		}
 		return res;
 	}

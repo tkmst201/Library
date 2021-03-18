@@ -6,6 +6,7 @@ documentation_of: //Mathematics/chinese_remainder.hpp
 # 概要
 
 中国剰余定理です。連立一次合同式を解きます。  
+解 $x \pmod M$ を求めたい場合は [Garner](https://tkmst201.github.io/Library/Mathematics/garner.hpp) を使用してください。  
 
 <br>
 
@@ -25,7 +26,7 @@ $$x \equiv b_2 \pmod{m_2}$$
 
 **制約**
 
-- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`
+- `T` は `int`, `long long`
 - $lcm(m_1, m_2)$ が `T` で表現可能
 - $0 < m_1, m_2$
 
