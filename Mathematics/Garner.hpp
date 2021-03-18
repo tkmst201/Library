@@ -36,7 +36,8 @@ https://qiita.com/drken/items/ae02240cd1f8edfc86fd, 2020/05/05
 #include <vector>
 #include <cassert>
 
-#include <Mathematics/MathUtility.hpp>
+#include "Mathematics/euclid.hpp"
+#include "Mathematics/mod_pow_inv.hpp"
 
 struct Garner {
 public:

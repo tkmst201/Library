@@ -16,7 +16,7 @@ constexpr int pop_count(std::uint32_t x) noexcept {
 	return x & 0xff;
 }
 
- int pop_countll(std::uint64_t x) noexcept {
+constexpr int pop_countll(std::uint64_t x) noexcept {
 	x = (x & 0x5555555555555555) + ((x >> 1) & 0x5555555555555555);
 	x = (x & 0x3333333333333333) + ((x >> 2) & 0x3333333333333333);
 	x = (x + (x >> 4)) & 0x0f0f0f0f0f0f0f0f;
@@ -30,7 +30,7 @@ constexpr int count_trailing_zeros(std::uint32_t x) noexcept {
 	return pop_count(~x & (x - 1));
 }
 
- int count_trailing_zerosll(std::uint64_t x) {
+constexpr int count_trailing_zerosll(std::uint64_t x) noexcept {
 	return pop_countll(~x & (x - 1));
 }
 
@@ -43,7 +43,7 @@ constexpr int count_leading_zeros(std::uint32_t x) noexcept {
 	return pop_count(~x);
 }
 
- int count_leading_zerosll(std::uint64_t x) noexcept {
+constexpr int count_leading_zerosll(std::uint64_t x) noexcept {
 	x |= x >> 1;
 	x |= x >> 2;
 	x |= x >> 4;

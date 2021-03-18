@@ -31,7 +31,7 @@ https://ja.wikibooks.org/wiki/%E5%88%9D%E7%AD%89%E6%95%B4%E6%95%B0%E8%AB%96/%E5%
 http://wwwa.pikara.ne.jp/okojisan/stockham/cooley-tukey.html, 2020/07/27
 */
 
-#include "Mathematics/MathUtility.hpp"
+#include "Mathematics/mod_pow_inv.hpp"
 
 #include <vector>
 #include <utility>

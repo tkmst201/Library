@@ -30,7 +30,7 @@ documentation_of: //GraphTheory/EdmondsKarp.hpp
 **制約**
 
 - $0 \leq n$
-- `T` は `int`, `long long int`, `unsigned int`, `unsigned long long`, `float`, `double`
+- `T` は `int`, `unsigned int`, `long long int`, `unsigned long long`, `float`, `double`
 
 **計算量**
 

@@ -54,12 +54,12 @@ public:
 	constexpr ModInt inv() const noexcept {
 		value_type a = val_, a1 = 1, b = M, b1 = 0;
 		while (b > 0) {
-			value_type q = a / b, r = a % b;
-			value_type nb1 = a1 - q * b1;
-			a = b; b = r;
-			a1 = b1; b1 = nb1;
+			const value_type q = a / b;
+			value_type tmp = a - q * b; a = b; b = tmp;
+			tmp = a1 - q * b1; a1 = b1; b1 = tmp;
 		}
 		assert(a == 1);
+		if (a1 < 0) a1 += M;
 		return a1;
 	}
 };
