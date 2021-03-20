@@ -31,7 +31,7 @@ bool pre_garner(std::vector<T> & b, std::vector<T> & m) noexcept {
 	}
 	return true;
 }
-	
+
 template<typename T, typename U>
 T garner(const std::vector<T> & b, const std::vector<T> & m, const T M) {
 	assert(b.size() == m.size());

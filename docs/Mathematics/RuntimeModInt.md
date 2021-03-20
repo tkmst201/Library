@@ -87,11 +87,11 @@ std::cout << RuntimeModInt
 
 **制約**
 
-- `RuntimeModInt /= RuntimeModInt` または `RuntimeModInt /= RuntimeModInt` のとき、右辺の値と $M$ は互いに素
+- `RuntimeModInt /= RuntimeModInt` または `RuntimeModInt / RuntimeModInt` のとき、右辺の値と $M$ は互いに素
 
 **計算量**
 
-- $\Theta(\log{M})$ ( `RuntimeModInt /= RuntimeModInt` または `RuntimeModInt /= RuntimeModInt` )
+- $\Theta(\log{M})$ ( `RuntimeModInt /= RuntimeModInt` または `RuntimeModInt = RuntimeModInt` )
 - $\Theta(1)$ (それ以外)
 
 

@@ -13,7 +13,5 @@ int main() {
 	std::cin >> N;
 	Matrix<ModInt<998244353>> mat(N, N);
 	for (int i = 0; i < N; ++i) for (int j = 0; j < N; ++j) std::cin >> mat[i][j];
-	
-	std::cout << mat.gauss_jordan().second << std::endl;
-	return 0;
+	std::cout << mat.det() << std::endl;
 }

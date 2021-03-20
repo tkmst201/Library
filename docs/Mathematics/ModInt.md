@@ -89,11 +89,11 @@ std::cout << ModInt
 
 **制約**
 
-- `ModInt /= ModInt` または `ModInt /= ModInt` のとき、右辺の値と $M$ は互いに素
+- `ModInt /= ModInt` または `ModInt / ModInt` のとき、右辺の値と $M$ は互いに素
 
 **計算量**
 
-- $\Theta(\log{M})$ ( `ModInt /= ModInt` または `ModInt /= ModInt` )
+- $\Theta(\log{M})$ ( `ModInt /= ModInt` または `ModInt / ModInt` )
 - $\Theta(1)$ (それ以外)
 
 

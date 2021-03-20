@@ -26,7 +26,7 @@ public:
 	explicit constexpr operator bool() const noexcept { return val_; }
 	constexpr bool operator !() const noexcept { return !static_cast<bool>(*this); }
 	constexpr ModInt operator +() const noexcept { return *this; }
-	constexpr ModInt operator -() const noexcept { return ModInt(-val_); }
+	constexpr ModInt operator -() const noexcept { return ModInt(val_ == 0 ? 0 : M - val_); }
 	constexpr ModInt operator ++(int) noexcept { ModInt res = *this; ++*this; return res; }
 	constexpr ModInt operator --(int) noexcept { ModInt res = *this; --*this; return res; }
 	constexpr ModInt & operator ++() noexcept { val_ = val_ + 1 == M ? 0 : val_ + 1; return *this; }
