@@ -1,5 +1,5 @@
 ---
-title: 実行時 mod 指定 ModInt 構造体
+title: ModInt 構造体 (実行時 mod 指定)
 documentation_of: //Mathematics/RuntimeModInt.hpp
 ---
 
