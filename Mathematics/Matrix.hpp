@@ -115,14 +115,22 @@ public:
 	}
 	
 	friend Matrix operator /(const Matrix & lhs, const value_type & rhs) {
-		assert(rhs != 0);
+		if constexpr (std::is_floating_point<value_type>::value) assert(std::abs(rhs) >= eps);
+		else assert(rhs != 0);
 		Matrix res(lhs.val);
 		for (size_type i = 0; i < res.h; ++i) for (size_type j = 0; j < res.w; ++j) res.val[i][j] /= rhs;
 		return res;
 	}
 	
 	bool operator ==(const Matrix & rhs) const noexcept {
-		return val == rhs.val;
+		if (!match_type(rhs)) return false;
+		if constexpr (!std::is_floating_point<value_type>::value) return val == rhs.val;
+		else {
+			for (size_type i = 0; i < h; ++i) for (size_type j = 0; j < w; ++j) {
+				if (std::abs(val[i][j] - rhs.val[i][j]) >= eps) return false;
+			}
+			return true;
+		}
 	}
 	
 	bool operator !=(const Matrix & rhs) const noexcept {
@@ -240,7 +248,16 @@ public:
 		bool rflag = false;
 		for (uint32 k = 0; k < col; ++k) {
 			int pivot = -1;
-			for (uint32 i = rank; i < h; ++i) if (val[i][k] != 0) { pivot = i; break; }
+			if constexpr (std::is_floating_point<value_type>::value) {
+				value_type mx = eps;
+				for (uint32 i = rank; i < h; ++i) {
+					const value_type cur = std::abs(val[i][k]);
+					if (mx < cur) mx = cur, pivot = i;
+				}
+			}
+			else {
+				for (uint32 i = rank; i < h; ++i) if (val[i][k] != 0) { pivot = i; break; }
+			}
 			if (pivot == -1) continue;
 			if (static_cast<uint32>(pivot) != rank) {
 				rflag ^= true;
@@ -274,51 +291,5 @@ public:
 		return os << "]";
 	}
 };
-
-template<>
-bool Matrix<double>::operator ==(const Matrix<double> & rhs) const noexcept {
-	using size_type = Matrix<double>::size_type;
-	if (!match_type(rhs)) return false;
-	for (size_type i = 0; i < h; ++i) for (size_type j = 0; j < w; ++j) if (std::abs(val[i][j] - rhs.val[i][j]) >= eps) return false;
-	return true;
-}
-
-template<>
-std::pair<Matrix<double>::uint32, double> Matrix<double>::gauss_jordan(Matrix<double>::uint32 col) noexcept {
-	assert(col <= w);
-	using uint32 = Matrix<double>::uint32;
-	uint32 rank = 0;
-	double det = empty() || !is_square() ? 0 : 1;
-	bool rflag = false;
-	for (uint32 k = 0; k < col; ++k) {
-		int pivot = -1;
-		double mx = eps;
-		for (uint32 i = rank; i < h; ++i) {
-			const double cur = std::abs(val[i][k]);
-			if (mx < cur) mx = cur, pivot = i;
-		}
-		if (pivot == -1) continue;
-		if (static_cast<uint32>(pivot) != rank) {
-			rflag ^= true;
-			std::swap(val[pivot], val[rank]);
-		}
-		det *= val[rank][k];
-		const double div = 1.0 / val[rank][k];
-		val[rank][k] = 1;
-		for (uint32 j = k + 1; j < w; ++j) val[rank][j] *= div;
-		for (uint32 i = 0; i < rank; ++i) {
-			for (uint32 j = k + 1; j < w; ++j) val[i][j] -= val[rank][j] * val[i][k];
-			val[i][k] = 0;
-		}
-		for (uint32 i = std::max<uint32>(rank + 1, pivot); i < h; ++i) {
-			for (uint32 j = k + 1; j < w; ++j) val[i][j] -= val[rank][j] * val[i][k];
-			val[i][k] = 0;
-		}
-		++rank;
-	}
-	if (rank != h) det = 0;
-	if (rflag) det = -det;
-	return {rank, det};
-}
 
 #endif // INCLUDE_GUARD_MATRIX_HPP

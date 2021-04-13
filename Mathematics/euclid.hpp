@@ -35,6 +35,7 @@ constexpr T lcm(T a, T b) noexcept {
 template<typename T>
 constexpr std::tuple<T, T, T> ext_gcd(T a, T b) noexcept {
 	static_assert(std::is_integral<T>::value);
+	static_assert(std::is_signed<T>::value);
 	assert(a != 0);
 	assert(b != 0);
 	T a1 = (a > 0) * 2 - 1, a2 = 0, b1 = 0, b2 = (b > 0) * 2 - 1;

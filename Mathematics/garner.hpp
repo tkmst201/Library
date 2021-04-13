@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <cassert>
+#include <type_traits>
 
 #include "Mathematics/euclid.hpp"
 #include "Mathematics/mod_pow_inv.hpp"
@@ -13,6 +14,8 @@
 namespace tk {
 template<typename T>
 bool pre_garner(std::vector<T> & b, std::vector<T> & m) noexcept {
+	static_assert(std::is_integral<T>::value);
+	static_assert(std::is_signed<T>::value);
 	for (int i = 0; i < static_cast<int>(b.size()); ++i) {
 		b[i] = b[i] % m[i];
 		if (b[i] < 0) b[i] += m[i];
@@ -34,6 +37,8 @@ bool pre_garner(std::vector<T> & b, std::vector<T> & m) noexcept {
 
 template<typename T, typename U>
 T garner(const std::vector<T> & b, const std::vector<T> & m, const T M) {
+	static_assert(std::is_integral<T>::value);
+	static_assert(std::is_signed<T>::value);
 	assert(b.size() == m.size());
 	const int n = b.size();
 	assert(n > 0);
