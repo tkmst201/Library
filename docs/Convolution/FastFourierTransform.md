@@ -11,6 +11,44 @@ $2$ つの実数係数多項式 $f(x), g(x)$ に対して、積 $f(x)g(x)$ を�
 
 <br>
 
+# コンストラクタ
+
+# FastFourierTransform(uint32_t max_n)
+
+計算を行う多項式積の最大次数 $N$ が分かっている場合、`max_n` に $N + 1$ を指定します。
+事前に計算テーブルを構築することにより少しだけ高速になります。  
+
+**制約**
+
+- `T` は `int`, `long long int`, `float`, `double`
+
+**計算量**
+
+- $N := \|a\| + \|b\| - 1$ 以上の最小の $2$ 冪 として $\Theta(N\log{N})$
+
+---
+
+<br>
+
+# メンバ関数
+
+### std::vector&lt;double&gt; operator ()(const std::vector&lt;T&gt; &amp; a, const std::vector&lt;T&gt; &amp; b)
+
+静的メンバ関数 `multiply(...)` と仕様は同じです。
+事前計算テーブルを使用することによって少しだけ高速になります。  
+
+**制約**
+
+- `T` は `int`, `long long int`, `float`, `double`
+
+**計算量**
+
+- $N := \|a\| + \|b\| - 1$ 以上の最小の $2$ 冪 として $\Theta(N\log{N})$
+
+---
+
+<br>
+
 # 静的メンバ関数
 
 ### std::vector&lt;double&gt; multiply(const std::vector&lt;T&gt; &amp; a, const std::vector&lt;T&gt; &amp; b)
@@ -62,6 +100,12 @@ int main() {
 	//   4     11 8
 	// ==============
 	// 3 12.25 17 8
+	
+	auto fft = FastFourierTransform(6); // zeta 配列を使い回す
+	auto pc = fft(a, b);
+	auto pcd = fft(ad, bd);
+	cout << "c == pc : " << boolalpha << (c == pc) << endl;
+	cout << "cd == pcd : " << boolalpha << (cd == pcd) << endl;
 }
 ```
 
@@ -74,7 +118,7 @@ int main() {
 ### 記法
 
 多項式 $f(x)$ の $i$ 次の係数を $f[k]$ と書きます。
-つまり、$f(x)$ の次数を $d$ とすると、 $f(x) = \sum_{i=0}^d f[x]x^i$ です。  
+つまり、$f(x)$ の次数を $d$ とすると、 $f(x) = \sum_{i=0}^d f[i]x^i$ です。  
 $\zeta_N$ は $1$ の $N$ 乗根を表します。
 また、複素数 $z$ の複素共役を $\overline{z}$ 、虚数単位を $j$ と表します。  
 以下 $N$ が $2$ の冪として次数 $N-1$ の多項式を扱います。  
@@ -83,22 +127,22 @@ $\zeta_N$ は $1$ の $N$ 乗根を表します。
 
 ### 離散フーリエ変換
 
-$N-1$ 次多項式 $f(x)$ の離散フーリエ変換 $F(t)$ を $F(t) = \sum_{i=0}^{N-1} f(\zeta_N^i) t^i$ で定義します。  
+$N-1$ 次多項式 $f(x)$ の離散フーリエ変換 $F(X)$ を $F(X) = \sum_{i=0}^{N-1} f(\zeta_N^i) X^i$ で定義します。  
 
 $f[k] = \frac{1}{N} F(\zeta_N^{-k})$ です(逆離散フーリエ変換)。詳しく知りたい方は参考欄のサイトを参照してください。  
 
-$F(\zeta_N^{-k}) = \sum_{i=0}^{N-1} F[i] \zeta_N^{-ki} = \overline{\sum_{i=0}^{N-1} \overline{F[i]} \zeta_N^{ki}}$ より、$F(t)$ の係数の複素共役を取った後で離散フーリエ変換を行い $N$ で割ることにより $f(x)$ が復元できます。  
+$F(\zeta_N^{-k}) = \sum_{i=0}^{N-1} F[i] \zeta_N^{-ki} = \overline{\sum_{i=0}^{N-1} \overline{F[i]} \zeta_N^{ki}}$ より、$F(X)$ の係数の複素共役を取った後で離散フーリエ変換を行い $N$ で割ることにより $f(x)$ が復元できます。  
 
 <br>
 
 ### $2$ つの実数係数多項式の離散フーリエ変換を $1$ 回の離散フーリエ変換で行うテク
 
-$2$ つの実数係数多項式 $f(x), g(x)$ のフーリエ変換 $F(t), G(t)$ を $1$ 回の離散フーリエ変換で求めることができます。  
+$2$ つの実数係数多項式 $f(x), g(x)$ のフーリエ変換 $F(X), G(X)$ を $1$ 回の離散フーリエ変換で求めることができます。  
 
 まず、$F[N] = F[0]$ として、$F[N-t] = \overline{F[t]}$ が成り立ちます。  
-これは、$f(x)$ が実数係数であることから $f[i] = \overline{f[i]}$ が成り立ち、$F[N-t] = \sum_{i=0}^{N-1} f[i] \zeta_N^{N-t} = \overline{\sum_{i=0}^{N-1} \overline{f[i] \zeta_N^{-t}}} = \overline{\sum_{i=0}^{N-1} f[i] \zeta_N^t} = F[t]$ より分かります。  
+これは、$f(x)$ が実数係数であることから $f[k] = \overline{f[k]}$ が成り立ち、$F[N-t] = \sum_{i=0}^{N-1} f[i] \zeta_N^{N-t} = \overline{\sum_{i=0}^{N-1} \overline{f[i] \zeta_N^{-t}}} = \overline{\sum_{i=0}^{N-1} f[i] \zeta_N^t} = F[t]$ より分かります。  
 
-ここで、$h(x) := f(x) + j g(x)$ として多項式 $h(x)$ を定義します。$h(x)$ の離散フーリエ変換 $H(t)$ に対して $H(t) = F(t) + j G(t)$ です。  
+ここで、$h(x) := f(x) + j g(x)$ として多項式 $h(x)$ を定義します。$h(x)$ の離散フーリエ変換 $H(X)$ に関して $H(X) = F(X) + j G(X)$ です。  
 
 一方、$\overline{H[N-t]} = \overline{F(N-t)} - \overline{G[N-t]} j = F[t] - j G[t]$ も成り立ちます。  
 
@@ -125,12 +169,12 @@ $$C[t + N/2] = C_e[t] - \zeta_N^t C_o[t]$$
 $$C_e[t] = \frac{1}{2} (C[t] + C[t + N/2])$$
 $$C_o[t] = \frac{1}{2} \overline{\zeta_N^{t}} (C[t] - C[t + N/2])$$
 
-が得られ、$C(t)$ から $C_o(t), C_e(t)$ が求まることが分かります。  
+が得られ、$C(X)$ から $C_o(X), C_e(X)$ が求まることが分かります。  
 
 ここで、$p(x) := c_e(x) + j c_o(x)$ として多項式 $p(x)$ を定義します。  
-$p(x)$ の離散フーリエ変換 $P(t) = C_e(t) + j C_o(t)$ を逆離散フーリエ変換することにより $p(x) = c_e(x) + j c_o(x)$ が復元できることと、$c_e(x), c_o(x)$ は実数係数多項式なので $p[i]$ の実部、虚部がそれぞれ $c_e[i], c_o[i]$  に対応することに注意しておきます。  
+$p(x)$ の離散フーリエ変換 $P(X) = C_e(X) + j C_o(X)$ を逆離散フーリエ変換することにより $p(x) = c_e(x) + j c_o(x)$ が復元できることと、$c_e(x), c_o(x)$ は実数係数多項式なので $p[i]$ の実部、虚部がそれぞれ $c_e[i], c_o[i]$  に対応することに注意しておきます。  
 
-$C(t)$ は先程の "$2$ つの実数係数多項式の離散フーリエ変換を $1$ 回の離散フーリエ変換で行うテク" で求めることができるので、$C_e(t), C_o(t)$ は計算が可能です。$C_e(t), C_o(t)$ から $P(t)$ を構築して逆離散フーリエ変換を行うことにより $c_e(x), c_o(x)$ すなわち、$c(x)$ が計算できます。  
+$C(X)$ は先程の "$2$ つの実数係数多項式の離散フーリエ変換を $1$ 回の離散フーリエ変換で行うテク" で求めることができるので、$C_e(X), C_o(X)$ は計算が可能です。$C_e(X), C_o(X)$ から $P(X)$ を構築して逆離散フーリエ変換を行うことにより $c_e(x), c_o(x)$ すなわち、$c(x)$ が計算できます。  
 
 したがって、長さが $N$ の離散フーリエ変換と長さが半分($N/2$) の逆離散フーリエ変換を $1$ 回ずつ行うことにより積 $f(x) g(x)$ が得られました。  
 
@@ -157,9 +201,48 @@ $C[0] = H[0].real() \times H[0].imag(), C[N/2] = H[N/2].real() \times H[N/2].ima
 
 <br>
 
+# おまけ
+
+基数 $4$ の周波数間引き Cooley-Tukey 型アルゴリズムの実装も書いたので載せておきます。  
+
+```cpp
+static void fft(std::vector<complex_type> & a, uint32 log_n, const std::vector<complex_type> & zeta, uint32 log_z) {
+	const uint32 n = a.size();
+	auto zeta_f = [&](uint32 d, uint32 p) {
+		return zeta[p << (log_z - d)];
+	};
+	for (uint32 w = n, c = log_n; w >= 4; w >>= 2, c -= 2) {
+		const uint32 s = w >> 2;
+		for (uint32 p = 0; p < n; p += w) {
+			for (uint32 i = 0; i < s; ++i) {
+				const uint32 pos = p + i;
+				const complex_type a0 = a[pos], a2 = a[pos + (s << 1)];
+				const complex_type ep = a0 + a2, en = (a0 - a2) * zeta_f(c, i, zeta, log_z);
+				const complex_type a1 = a[pos + s], a3 = a[pos + w - s];
+				const complex_type op = a1 + a3, on = ie * (a1 - a3) * zeta_f(c, i, zeta, log_z);
+				a[pos] = ep + op;
+				a[pos + s] = (ep - op) * zeta_f(c - 1, i, zeta, log_z);
+				a[pos + (s << 1)] = en + on;
+				a[pos + w - s] = (en - on) * zeta_f(c - 1, i, zeta, log_z);
+			}
+		}
+	}
+	if (log_n & 1) {
+		for (uint32 i = 0; i < n; i += 2) {
+			const complex_type x = a[i], y = a[i + 1];
+			a[i] = x + y;
+			a[i + 1] = x - y;
+		}
+	}
+	bit_reverse(a);
+}
+```
+
+<br>
+
 # TODO
 
-TODO: 周波数間引きを書いて bit_reverese を消す  
+TODO: 周波数間引きを用いて bit_reverese を消せるか考えてみる  
 TODO: zeta 配列を線形に見るように上手く変形する  
 
 
