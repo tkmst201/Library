@@ -72,6 +72,8 @@ public:
 		Matrix mat(h, rhs.w);
 		for (size_type i = 0; i < h; ++i) for (size_type j = 0; j < rhs.w; ++j) for (size_type k = 0; k < w; ++k)
 			mat.val[i][j] += val[i][k] * rhs.val[k][j];
+		h = mat.h;
+		w = mat.w;
 		val = std::move(mat.val);
 		return *this;
 	}
@@ -122,19 +124,19 @@ public:
 		return res;
 	}
 	
-	bool operator ==(const Matrix & rhs) const noexcept {
-		if (!match_type(rhs)) return false;
-		if constexpr (!std::is_floating_point<value_type>::value) return val == rhs.val;
+	friend bool operator ==(const Matrix & lhs, const Matrix & rhs) noexcept {
+		if (!lhs.match_type(rhs)) return false;
+		if constexpr (!std::is_floating_point<value_type>::value) return lhs.val == rhs.val;
 		else {
-			for (size_type i = 0; i < h; ++i) for (size_type j = 0; j < w; ++j) {
-				if (std::abs(val[i][j] - rhs.val[i][j]) >= eps) return false;
+			for (size_type i = 0; i < lhs.h; ++i) for (size_type j = 0; j < lhs.w; ++j) {
+				if (std::abs(lhs.val[i][j] - rhs.val[i][j]) >= eps) return false;
 			}
 			return true;
 		}
 	}
 	
-	bool operator !=(const Matrix & rhs) const noexcept {
-		return !(*this == rhs);
+	friend bool operator !=(const Matrix & lhs, const Matrix & rhs) noexcept {
+		return !(lhs == rhs);
 	}
 	
 	std::vector<value_type> & operator [](size_type i) noexcept {

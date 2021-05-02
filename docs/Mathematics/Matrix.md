@@ -372,6 +372,7 @@ int main() {
 	// (2, 2) [[1, 2], [3, 4]]
 	cout << mat1 << endl;
 	Matrix<mint> mat2({ {1, 2}, {3, 4} });
+	// (2, 2) [[1, 2], [3, 4]]
 	cout << mat2 << endl;
 	cout << "mat1 == mat2 : " << boolalpha << (mat1 == mat2) << endl; // true
 	
@@ -380,7 +381,7 @@ int main() {
 	cout << mat1 * mat2 << endl; // (2, 2) [[7, 10], [15, 22]]
 	cout << mat1 / mat2 << endl; // (2, 2) [[1, 0], [0, 1]]
 	cout << mat1 * 2 << endl; // (2, 2) [[2, 4], [6, 8]]
-	cout << 3 * mat1 << endl; // (2, 2) [[3, 6], [9, 16]]
+	cout << 3 * mat1 << endl; // (2, 2) [[3, 6], [9, 12]]
 	cout << mat1 / 2 << endl; // (2, 2) [[52, 1], [53, 2]]
 	cout << mat1[1][1] << endl; // 4
 	

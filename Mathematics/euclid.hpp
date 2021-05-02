@@ -17,7 +17,7 @@ constexpr T gcd(T a, T b) noexcept {
 	assert(a >= 0);
 	assert(b >= 0);
 	while (b != 0) {
-		T t = a % b;
+		const T t = a % b;
 		a = b; b = t;
 	}
 	return a;
