@@ -19,5 +19,4 @@ int main() {
 	}
 	auto table = tk::frequency_table_of_tree_distance<CentroidDecomposition, FastFourierTransform>(g);
 	for (int i = 1; i < N; ++i) printf("%lld%c", i < table.size() ? table[i] : 0, " \n"[i + 1 == N]);
-	return 0;
 }

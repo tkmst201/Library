@@ -14,5 +14,4 @@ int main() {
 	
 	auto sa = SuffixArray::sa_is(S);
 	for (int i = 1; i <= S.size(); ++i) std::cout << sa[i] << " \n"[i == S.size()];
-	return 0;
 }

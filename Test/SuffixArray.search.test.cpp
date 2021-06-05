@@ -20,6 +20,4 @@ int main() {
 		cin >> P;
 		cout << (sa.search(P) != sa.size()) << endl;
 	}
-	
-	return 0;
 }

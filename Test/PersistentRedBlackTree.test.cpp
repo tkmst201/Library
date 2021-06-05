@@ -38,6 +38,4 @@ int main() {
 		}
 		else printf("%lld\n", tree.get(k[i]));
 	}
-	
-	return 0;
 }

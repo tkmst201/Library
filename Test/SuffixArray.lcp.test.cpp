@@ -19,6 +19,4 @@ int main() {
 	const auto & lcp = sa.get_lcp();
 	for (auto l : lcp) ans -= l;
 	std::cout << ans << std::endl;
-	
-	return 0;
 }

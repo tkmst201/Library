@@ -77,5 +77,4 @@ int main() {
 	auto [ans, path] = tree_diameter(g);
 	printf("%lld %d\n", ans, (int)path.size());
 	for (int i = 0; i < path.size(); ++i) printf("%d%c", path[i], " \n"[i + 1 == path.size()]);
-	return 0;
 }

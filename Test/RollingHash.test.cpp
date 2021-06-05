@@ -17,6 +17,4 @@ int main() {
 			printf("%d\n", i - P.size());
 		}
 	}
-	
-	return 0;
 }

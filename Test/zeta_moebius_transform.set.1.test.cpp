@@ -86,5 +86,4 @@ int main() {
 	double ans1 = solve1();
 	double ans2 = solve2();
 	printf("%.16f\n", (ans1 + ans2) / 2.0);
-	return 0;
 }
