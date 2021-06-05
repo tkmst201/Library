@@ -34,7 +34,7 @@ documentation_of: //Mathematics/mod_pow_inv.hpp
 
 **制約**
 
-- `T` は `int`, `unsigned int`, `long long`, `unsigned long long`
+- `T` は `int`, `long long`
 - $0 < m$
 - $x$ と $m$ は互いに素
 

@@ -19,7 +19,7 @@ private:
 	value_type val_;
 	
 public:
-	constexpr ModInt(calc_type val = 0) : val_(val < 0 ? (val % M + M) % M : val % M) {}
+	constexpr ModInt(calc_type val = 0) : val_(val % M + (val >= 0 ? 0 : M)) {}
 	constexpr value_type val() const noexcept { return val_; }
 	constexpr static decltype(M) mod() noexcept { return M; }
 	

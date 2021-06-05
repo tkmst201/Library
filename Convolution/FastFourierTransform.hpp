@@ -100,13 +100,13 @@ private:
 		}
 	}
 	
-	static uint32 calc_l2(uint32 n_) {
+	static uint32 calc_l2(uint32 n_) noexcept {
 		uint32 log_n = 0;
 		for (uint32 n = 1; n < n_; n <<= 1) ++log_n;
 		return log_n;
 	}
 	
-	static void bit_reverse(std::vector<complex_type> & a) {
+	static void bit_reverse(std::vector<complex_type> & a) noexcept {
 		const uint32 N = a.size();
 		for (uint32 i = 1, j = 0; i < N - 1; ++i) {
 			for (uint32 k = N >> 1; k > (j ^= k); k >>= 1);
@@ -127,7 +127,7 @@ private:
 		return zeta;
 	}
 	
-	static complex_type zeta_f(uint32 d, uint32 p, const std::vector<complex_type> & zeta, uint32 log_z) {
+	static complex_type zeta_f(uint32 d, uint32 p, const std::vector<complex_type> & zeta, uint32 log_z) noexcept {
 		const uint32 idx = p << (log_z - d);
 		return idx < zeta.size() ? zeta[idx] : -zeta[idx - zeta.size()];
 	}

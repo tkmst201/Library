@@ -17,6 +17,7 @@ $2$ つの実数係数多項式 $f(x), g(x)$ に対して、積 $f(x)g(x)$ を�
 
 計算を行う多項式積の最大次数 $N$ が分かっている場合、`max_n` に $N + 1$ を指定します。
 事前に計算テーブルを構築することにより少しだけ高速になります。  
+実装の都合上、事前計算テーブルを使用した積の計算には `()` 演算子を使用して下さい。  
 
 **制約**
 
@@ -77,7 +78,7 @@ $a, b$ いずれかが空である場合は、空の列を返します。
 using namespace std;
 
 int main() {
-	vector<int> a{{0, 1, 2, 3}}, b{{2, 3, 4}};
+	vector<int> a({0, 1, 2, 3}), b({2, 3, 4});
 	auto c = FastFourierTransform::multiply(a, b);
 	cout << "size = " << c.size() << endl; // 6
 	for (int i = 0; i < c.size(); ++i) cout << c[i] << " "; cout << endl; // 0 2 7 16 17 12
@@ -104,8 +105,8 @@ int main() {
 	auto fft = FastFourierTransform(6); // zeta 配列を使い回す
 	auto pc = fft(a, b);
 	auto pcd = fft(ad, bd);
-	cout << "c == pc : " << boolalpha << (c == pc) << endl;
-	cout << "cd == pcd : " << boolalpha << (cd == pcd) << endl;
+	cout << "c == pc : " << boolalpha << (c == pc) << endl; // true
+	cout << "cd == pcd : " << boolalpha << (cd == pcd) << endl; // true
 }
 ```
 
@@ -149,6 +150,7 @@ $2$ つの実数係数多項式 $f(x), g(x)$ のフーリエ変換 $F(X), G(X)$ 
 これら $2$ つの等式を連立して解くことにより次の式が得られます。  
 
 $$F[t] = \frac{1}{2} (H[t] + \overline{H[N-t]})$$
+
 $$G[t] = \frac{1}{2i} (H[t] - \overline{H[N-t]})$$
 
 これより、$C[t] := F[t] G[t]$ とすると、$C[t] = \frac{1}{4i} (H[t] + \overline{H[N-t]})(H[t] - \overline{H[N-t]})$ です。  
@@ -160,6 +162,7 @@ $C[t]$ に対して逆離散フーリエ変換を行うことにより積 $c(x) 
 周波数間引きにより、$2$ つの $N/2 - 1$ 次の多項式 $c_e, c_o$ を $c_e[k] = c[2k], c_o[k] = c[2k+1]$ として定めると、
 
 $$C[t] = C_e[t] + \zeta_N^t C_o[t]$$
+
 $$C[t + N/2] = C_e[t] - \zeta_N^t C_o[t]$$
 
 です。  
@@ -167,6 +170,7 @@ $$C[t + N/2] = C_e[t] - \zeta_N^t C_o[t]$$
 これらを $C_e[t], C_o[t]$ について解くことにより、
 
 $$C_e[t] = \frac{1}{2} (C[t] + C[t + N/2])$$
+
 $$C_o[t] = \frac{1}{2} \overline{\zeta_N^{t}} (C[t] - C[t + N/2])$$
 
 が得られ、$C(X)$ から $C_o(X), C_e(X)$ が求まることが分かります。  
@@ -186,6 +190,7 @@ $\overline{C[N-t]} = \overline{F[N-t]G[N-t]} = F[t]G[t] = C[t]$ より、 $\over
 これを代入することにより、
 
 $$C_e[t] = \frac{1}{2} (C[t] + \overline{C[N/2 - t]})$$
+
 $$C_o[t] = \frac{1}{2} \overline{\zeta_N^{t}} (C[t] - \overline{C[N/2 - t]})$$
 
 が得られます。  

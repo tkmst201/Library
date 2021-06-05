@@ -254,7 +254,7 @@ LazySegmentTree<ll, int> seg(N, 0, std::numeric_limits<int>::max(),
 
 - 区間更新, 区間 `min`
 ```cpp
-LazySegmentTree<int, int> seg(N, std::numeric_limits<int>:max(), std::numeric_limits<int>:max(),
+LazySegmentTree<int, int> seg(N, std::numeric_limits<int>::max(), std::numeric_limits<int>::max(),
 	[](auto x, auto y) { return std::min(x, y); },
 	[](auto x, auto e) { return e; },
 	[](auto e1, auto e2) { return e2; });

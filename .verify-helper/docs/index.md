@@ -3,6 +3,6 @@
 Twitter: [@mtk_cp21](https://twitter.com/mtk_cp21)  
 AtCoder: [tkmst201](https://atcoder.jp/users/tkmst201)  
 
-:warning: マークがあるものは verify が行われていないか、verify したが自動テストが行われていないことを表します。
+:warning: マークがあるものは verify または自動テストが行われていないことを表しています。  
 
 <br>

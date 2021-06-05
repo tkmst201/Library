@@ -13,7 +13,7 @@ constexpr T mod_pow(T x, T n, T m) noexcept {
 	static_assert(std::is_integral<T>::value);
 	assert(m > 0);
 	assert(n >= 0);
-	x = (x % m + m) % m;
+	x = x % m + (x >= 0 ? 0 : m);
 	T res = 1 % m;
 	while (n > 0) {
 		if (n & 1) res = res * x % m;
@@ -26,8 +26,9 @@ constexpr T mod_pow(T x, T n, T m) noexcept {
 template<typename T>
 constexpr T mod_inv(T x, T m) noexcept {
 	static_assert(std::is_integral<T>::value);
+	static_assert(std::is_signed<T>::value);
 	assert(m > 0);
-	x = (x % m + m) % m;
+	x = x % m + (x >= 0 ? 0 : m);
 	T x1 = 1, y = m, y1 = 0;
 	while (y > 0) {
 		const T q = x / y;

@@ -35,13 +35,13 @@ $$x \equiv b_K \pmod{m_K}$$
 
 **計算量**
 
-- $\mathcal{O}(K^2 \log{\max{m_i}} \log{\log{\max{m}}}))$
+- $\mathcal{O}(K^2 \log{\max{m_i}} \log{\log{\max{m_i}}}))$
 
 ---
 
 ### template&lt;typename T, typename U&gt; T garner(const vector&lt;T&gt; & b, const vector&lt;T&gt; & m, const T M)
 
-$m_i, m_j$ が互いに素な連立一次合同式
+$m_i, m_j (i \neq j)$ が互いに素な連立一次合同式
 
 $$x \equiv b_1 \pmod{m_1}$$
 
@@ -51,7 +51,7 @@ $$\vdots$$
 
 $$x \equiv b_K \pmod{m_K}$$
 
-の解 $x$ に対して、 $x \pmod M$ を返します。  
+の解 $x \pmod lcm(m_1, m_2, \ldots, m_K)$ に対して、 $x \pmod M$ を返します。  
 内部の計算で使用する型を `U` に指定してください。  
 
 **制約**

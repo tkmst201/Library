@@ -19,7 +19,7 @@ private:
 	static int & mod_() noexcept { static int M = 2; return M; }
 	
 public:
-	RuntimeModInt(calc_type val = 0) : val_(val < 0 ? (val % mod() + mod()) % mod() : val % mod()) {}
+	RuntimeModInt(calc_type val = 0) : val_(val % mod() + (val >= 0 ? 0 : mod())) {}
 	const value_type val() const noexcept { return val_; }
 	static void set_mod(int M) noexcept { assert(M > 0); mod_() = M; }
 	static int mod() noexcept { return mod_(); }

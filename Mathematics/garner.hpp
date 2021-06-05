@@ -17,8 +17,7 @@ bool pre_garner(std::vector<T> & b, std::vector<T> & m) noexcept {
 	static_assert(std::is_integral<T>::value);
 	static_assert(std::is_signed<T>::value);
 	for (int i = 0; i < static_cast<int>(b.size()); ++i) {
-		b[i] = b[i] % m[i];
-		if (b[i] < 0) b[i] += m[i];
+		b[i] = b[i] % m[i] + (b[i] >= 0 ? 0 : m[i]);
 		for (int j = 0; j < i; ++j) {
 			T g = gcd(m[i], m[j]);
 			if ((b[i] - b[j]) % g != 0) return false;
@@ -38,7 +37,6 @@ bool pre_garner(std::vector<T> & b, std::vector<T> & m) noexcept {
 template<typename T, typename U>
 T garner(const std::vector<T> & b, const std::vector<T> & m, const T M) {
 	static_assert(std::is_integral<T>::value);
-	static_assert(std::is_signed<T>::value);
 	assert(b.size() == m.size());
 	const int n = b.size();
 	assert(n > 0);
@@ -59,7 +57,7 @@ T garner(const std::vector<T> & b, const std::vector<T> & m, const T M) {
 			sum[j] = (sum[j] + ip[j] * t) % m[j];
 			ip[j] = static_cast<U>(ip[j]) * m[i] % m[j];
 		}
-		sum[n] = (sum[n] + ip[n] * t) % M;
+		sum[n] = (sum[n] + ip[n] * t % M) % M;
 		ip[n] = static_cast<U>(ip[n]) * m[i] % M; 
 	}
 	return sum.back();

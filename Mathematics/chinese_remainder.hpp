@@ -17,8 +17,8 @@ constexpr std::pair<T, T> chinese_remainder(T b1, T m1, T b2, T m2) noexcept {
 	assert(m1 > 0);
 	assert(m2 > 0);
 	if (m1 < m2) { std::swap(b1, b2); std::swap(m1, m2); }
-	b1 = (b1 % m1 + m1) % m1;
-	b2 = (b2 % m2 + m2) % m2;
+	b1 = b1 % m1 + (b1 >= 0 ? 0 : m1);
+	b2 = b2 % m2 + (b2 >= 0 ? 0 : m2);
 	auto [g, x, _] = ext_gcd(m1, m2);
 	if ((b2 - b1) % g != 0) return {0, 0};
 	const T pm2 = m2 / g;
