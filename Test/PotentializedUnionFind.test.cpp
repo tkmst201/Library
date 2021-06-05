@@ -6,8 +6,8 @@
 
 int main() {
 	int N, M;
-	while(scanf("%d %d", &N, &M), N && M) {
-		PotentializedUnionFind<int> puf(N, [](int a, int b){ return a + b; }, 0);
+	while(scanf("%d %d", &N, &M), N || M) {
+		PotentializedUnionFind<int> puf(N, 0, [](int a, int b){ return a + b; });
 		for (int i = 0; i < M; ++i) {
 			char c;
 			int a, b;
@@ -17,17 +17,12 @@ int main() {
 			if (c == '!') {
 				int w;
 				scanf("%d", &w);
-				if (!puf.issame(a, b)) {
-					int u = puf.add(w - puf.get(b));
-					puf.link(a, u);
-					puf.link(u, puf.find(b));
-				}
+				if (!puf.issame(a, b)) puf.merge(a, b, w);
 			}
 			else {
-				if (puf.issame(a, b)) printf("%d\n", puf.get(b) - puf.get(a));
+				if (puf.issame(a, b)) printf("%d\n", puf.diff(a, b));
 				else puts("UNKNOWN");
 			}
 		}
 	}
-	return 0;
 }

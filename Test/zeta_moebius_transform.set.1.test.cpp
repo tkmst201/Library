@@ -2,7 +2,7 @@
 #define ERROR "1e-7"
 
 #include "Mathematics/zeta_moebius_transform.hpp"
-#include "Mathematics/MathUtility.hpp"
+#include "Mathematics/euclid.hpp"
 
 #include <vector>
 #include <iostream>

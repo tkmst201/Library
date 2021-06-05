@@ -33,12 +33,10 @@ int main() {
 	
 	for (int i = 0; i < Q; ++i) {
 		if (q[i] == 0) {
-			tree.erase(k[i]);
-			tree.insert(k[i], v[i]);
+			tree = tree.erase(k[i]);
+			tree = tree.insert(k[i], v[i]);
 		}
-		else {
-			printf("%lld\n", tree.get(k[i]));
-		}
+		else printf("%lld\n", tree.get(k[i]));
 	}
 	
 	return 0;

@@ -1,8 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 
 #include "Mathematics/ModInt.hpp"
-#include "DataStructure/SegmentTree.hpp"
-#include "GraphTheory/HeavyLightDecomposition.hpp"
 #include "GraphTheory/HeavyLightDecomposition_Query.hpp"
 
 #include <cstdio>
@@ -15,7 +13,7 @@ int main() {
 	
 	using mint = ModInt<998244353>;
 	using P = std::pair<mint, mint>;
-	using HLD = HeavyLightDecomposition;
+	using HLD = HeavyLightDecomposition_Query<P>;
 	
 	std::vector<P> init(N);
 	for (int i = 0; i < N; ++i) {
@@ -24,7 +22,7 @@ int main() {
 		init[i] = {a, b};
 	}
 	
-	HeavyLightDecomposition_Query<HLD, P, SegmentTree>::Graph g(N);
+	HLD::Graph g(N);
 	for (int i = 0; i < N - 1; ++i) {
 		int u, v;
 		scanf("%d %d", &u, &v);
@@ -32,7 +30,7 @@ int main() {
 		g[v].emplace_back(u);
 	}
 	
-	HeavyLightDecomposition_Query<HLD, P, SegmentTree> hld(g, init, {1, 0},
+	HLD hld(g, init, {1, 0},
 		[](auto && x, auto && y) -> P { return {x.first * y.first, x.second * y.first + y.second}; });
 	
 	while (Q--) {
@@ -50,5 +48,4 @@ int main() {
 			printf("%d\n", (res.first * x + res.second).val());
 		}
 	}
-	return 0;
 }

@@ -14,5 +14,4 @@ int main() {
 		dinic.add_edge(u, v, c);
 	}
 	printf("%d\n", dinic.max_flow(0, V - 1));
-	return 0;
 }

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_1000000007"
 
-#include "Mathematics/Convolution/NumberTheoreticTransform_AnyMod.hpp"
+#include "Convolution/NumberTheoreticTransform_AnyMod.hpp"
 
 #include <cstdio>
 #include <vector>
@@ -15,5 +15,4 @@ int main() {
 	
 	auto ans = NumberTheoreticTransform_AnyMod<1'000'000'007>::multiply(A, B);
 	for (int i = 0; i < N + M - 1; ++i) printf("%d%c", ans[i], i == N + M - 1 ? '\n': ' ');
-	return 0;
 }

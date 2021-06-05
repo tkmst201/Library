@@ -1,6 +1,5 @@
 #define PROBLEM "http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_G"
 
-#include "DataStructure/BinaryIndexedTree.hpp"
 #include "DataStructure/BinaryIndexedTree_RangeAdd.hpp"
 
 #include <cstdio>
@@ -10,7 +9,7 @@ int main() {
 	
 	using ll = long long;
 	
-	BinaryIndexedTree_RangeAdd<ll, BinaryIndexedTree> bit(n);
+	BinaryIndexedTree_RangeAdd<ll> bit(n);
 	while (q--) {
 		int query, s, t;
 		scanf("%d %d %d", &query, &s, &t);
@@ -24,5 +23,4 @@ int main() {
 			printf("%lld\n", bit.sum(s, t));
 		}
 	}
-	return 0;
 }

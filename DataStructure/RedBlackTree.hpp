@@ -1,124 +1,38 @@
 #ifndef INCLUDE_GUARD_RED_BLACK_TREE_HPP
 #define INCLUDE_GUARD_RED_BLACK_TREE_HPP
 
-/*
-last-updated: 2020/08/30
-
-全てのノードに値を持たせる insert/delete ベースの赤黒木
-操作の前後で安定
-
-TODO: 葉に値を持たせるような insert/erase ベース(merge/split 対応) の赤黒木の作成(できるかはわからない)
-
-# 仕様
-RedBrackTree() :
-	時間計算量: O(1)
-	空の RedBrackTree を作成
-
-RedBrackTree(const RedBrackTree & rhs) :
-	時間計算量: O(rhs.n)
-	コンストラクタ初期化
-
-~RedBrackTree() :
-	時間計算量: O(n)
-	デストラクタ
-	clear() を呼ぶ
-
-size_type size() const noexcept :
-	時間計算量: O(1)
-	要素数を返す
-
-bool empty() const noexcept :
-	時間計算量: O(1)
-	要素が空であるかどうか判定する
-
-void clear() :
-	時間計算量: O(n)
-	全ての要素を delete する
-
-node_ptr begin() const :
-	時間計算量: O(1)
-	最も小さい要素のポインタを返す
-
-node_ptr end() const :
-	時間計算量: O(1)
-	最も大きい要素の次のポインタを返す
-
-node_ptr next(node_ptr node) const :
-	時間計算量: O(log n), ならし O(1)
-	node の次に大きい要素のポインタを返す
-
-node_ptr prev(node_ptr node) const :
-	時間計算量: O(log n), ならし O(1)
-	node の次に小さい要素のポインタを返す
-
-node_ptr insert(const_reference x) :
-	時間計算量: O(log n)
-	値 x を挿入する
-
-node_ptr lower_bound(const_reference x) const :
-	時間計算量: O(log n)
-	x 以上で先頭の要素を返す
-
-node_ptr upper_bound(const_reference x) const :
-	時間計算量: O(log n)
-	x より大きい先頭の要素を返す
-
-node_ptr find(const_reference x) const :
-	時間計算量: O(log n)
-	x と等しい先頭の要素を返す
-
-node_ptr erase(const_reference x) :
-	時間計算量: O(log n)
-	値 x を持つ要素を 1 つ削除する
-	複数存在する場合は一番先頭の要素
-	削除した要素の次に大きい要素を返す
-
-node_ptr erase(node_ptr node) :
-	時間計算量: O(log n)
-	node が指す要素を削除する
-	削除した要素の次に大きい要素を返す
-
-bool check() const : 赤黒木の条件を満たしているか確認する
-void debug() : 木を出力する(int, std::pair) に対応
-
-# 参考
-https://ja.wikipedia.org/wiki/%E8%B5%A4%E9%BB%92%E6%9C%A8, 2020/08/27
-http://wwwa.pikara.ne.jp/okojisan/rb-tree/index.html, 2020/08/27
-http://www.nct9.ne.jp/m_hiroi/light/pyalgo16.html, 2020/08/27
-*/
-
-// #include <iostream>
-
-#include <cassert>
+#include <algorithm>
+#include <vector>
 #include <utility>
+#include <stack>
 
+/**
+ * @brief https://tkmst201.github.io/Library/DataStructure/RedBlackTree.hpp
+ */
 template<typename T>
 struct RedBlackTree {
-private:
+	using size_type = std::size_t;
 	using value_type = T;
 	using const_reference = const value_type &;
-	using size_type = std::size_t;
 	
 public:
 	struct Node;
 	using node_ptr = Node *;
-	
-public:
+	using const_ptr = const Node * const;
 	struct Node {
 		value_type val;
 		bool isred;
-		node_ptr child[2];
 		node_ptr par;
-		bool isright;
-		
-		Node(const_reference val, bool isred, node_ptr child_l, node_ptr child_r, node_ptr par, bool isright)
-			: val(val), isred(isred), child{child_l, child_r}, par(par), isright(isright) {}
+		bool isr;
+		node_ptr child[2] {nullptr, nullptr};
+		Node(const_reference val, bool isred, node_ptr par, bool isr)
+			: val(val), isred(isred), par(par), isr(isr) {}
 	};
 	
 private:
-	node_ptr root = nullptr;
-	node_ptr begin_ptr = nullptr, end_ptr = nullptr;
 	size_type n = 0;
+	node_ptr root = nullptr;
+	node_ptr e_ptr[2] {nullptr, nullptr};
 	
 public:
 	RedBlackTree() = default;
@@ -127,417 +41,277 @@ public:
 		*this = rhs;
 	}
 	
-	RedBlackTree & operator =(const RedBlackTree & rhs) {
-		auto dfs = [&](auto &&self, node_ptr node, node_ptr par) -> node_ptr {
-			if (!node) return nullptr;
-			node_ptr ret = new Node{node->val, node->isred, nullptr, nullptr, par, node->isright};
-			if (node == rhs.begin_ptr) begin_ptr = ret;
-			if (node == rhs.end_ptr) end_ptr = ret;
-			ret->child[0] = self(self, node->child[0], ret);
-			ret->child[1] = self(self, node->child[1], ret);
-			return ret;
-		};
-		root = dfs(dfs, rhs.root, nullptr);
-		n = rhs.n;
-		return *this;
+	RedBlackTree(RedBlackTree && rhs) {
+		*this = std::forward<RedBlackTree>(rhs);
 	}
 	
 	~RedBlackTree() {
 		clear();
 	}
 	
-	size_type size() const noexcept {
-		return n;
+	RedBlackTree & operator =(const RedBlackTree & rhs) {
+		if (this != &rhs) {
+			clear();
+			auto dfs = [](auto self, const_ptr q, node_ptr r) -> node_ptr {
+				if (!q) return nullptr;
+				node_ptr res = new Node(q->val, q->isred, r, q->isr);
+				for (int i = 0; i < 2; ++i) res->child[i] = self(self, q->child[i], res);
+				return res;
+			};
+			root = dfs(dfs, rhs.root, nullptr);
+			n = rhs.n;
+			e_ptr[0] = e_ptr[1] = root;
+			if (root) for (int i = 0; i < 2; ++i) while (e_ptr[i]->child[i]) e_ptr[i] = e_ptr[i]->child[i];
+		}
+		return *this;
+	}
+	
+	RedBlackTree & operator =(RedBlackTree && rhs) {
+		if (this != &rhs) {
+			clear();
+			n = rhs.n;
+			rhs.n = 0;
+			root = rhs.root;
+			rhs.root = nullptr;
+			std::copy(rhs.e_ptr, rhs.e_ptr + 2, e_ptr);
+			std::fill(rhs.e_ptr, rhs.e_ptr + 2, nullptr);
+		}
+		return *this;
 	}
 	
 	bool empty() const noexcept {
 		return size() == 0;
 	}
 	
+	size_type size() const noexcept {
+		return n;
+	}
+	
 	void clear() {
-		node_ptr cur = root;
-		while (cur) {
-			if (cur->child[0]) cur = cur->child[0];
-			else if (cur->child[1]) cur = cur->child[1];
-			else {
-				node_ptr par = cur->par;
-				if (par) par->child[cur->isright] = nullptr;
-				delete cur;
-				cur = par;
-			}
+		if (!root) return;
+		std::stack<node_ptr> stk;
+		stk.emplace(root);
+		while (!stk.empty()) {
+			node_ptr node = stk.top();
+			stk.pop();
+			if (node->child[0]) stk.emplace(node->child[0]);
+			if (node->child[1]) stk.emplace(node->child[1]);
+			delete node;
 		}
+		n = 0;
 		root = nullptr;
+		std::fill(e_ptr, e_ptr + 2, nullptr);
 	}
 	
-	node_ptr begin() const {
-		return begin_ptr;
+	std::vector<value_type> enumerate() const {
+		std::vector<value_type> elements;
+		elements.reserve(size());
+		auto dfs = [&elements](auto self, const_ptr q) -> void {
+			if (!q) return;
+			self(self, q->child[0]);
+			elements.emplace_back(q->val);
+			self(self, q->child[1]);
+		};
+		dfs(dfs, root);
+		return elements;
 	}
 	
-	node_ptr end() const {
+	node_ptr begin() const noexcept {
+		return e_ptr[0];
+	}
+	
+	node_ptr end() const noexcept {
 		return nullptr;
 	}
 	
-	node_ptr next(node_ptr node) const {
-		return node != end() ? move(node, true) : begin_ptr;
-	};
-	
-	node_ptr prev(node_ptr node) const {
-		return node != end() ? move(node, false) : end_ptr;
-	}
-	
 	node_ptr insert(const_reference x) {
-		if (!root) {
-			root = new Node{x, false, nullptr, nullptr, nullptr, false};
-			++n;
-			begin_ptr = end_ptr = root;
-			return root;
+		node_ptr p = nullptr, node = root;
+		bool ef[2] {}, d = false;
+		while (node) {
+			d = node->val <= x;
+			p = node;
+			node = node->child[d];
+			ef[!d] = true;
 		}
-		
-		node_ptr par = root, ins = nullptr;
-		bool move_only[2] {true, true};
-		while (!ins) {
-			const bool nex_r = par->val <= x;
-			move_only[!nex_r] = false;
-			if (par->child[nex_r]) par = par->child[nex_r];
-			else {
-				ins = new Node{x, true, nullptr, nullptr, par, nex_r};
-				++n;
-				if (move_only[0]) begin_ptr = ins;
-				if (move_only[1]) end_ptr = ins;
-				par->child[nex_r] = ins;
-			}
+		node = new Node{x, true, p, d};
+		++n;
+		if (!ef[0]) e_ptr[0] = node;
+		if (!ef[1]) e_ptr[1] = node;
+		if (!p) {
+			root = node;
+			node->isred = false;
+			return node;
 		}
-		if (!par->isred) return ins;
-		
-		// (ins, par) = (red, red), par \neq root
-		node_ptr grand = par->par; // grand = black
-		node_ptr uncle = grand->child[!par->isright];
-		if (!uncle) {
-			if (ins->isright == par->isright) {
-				rotate(grand, !par->isright);
-				par->isred = false;
-				grand->isred = true;
+		p->child[d] = node;
+		if (!p->isred) return node;
+		node_ptr g = p->par, u = g->child[!p->isr];
+		if (!u) {
+			if (node->isr == p->isr) {
+				rotate(g, !p->isr);
+				p->isred = false;
+				g->isred = true;
+				return node;
 			}
 			else {
-				const bool isflip = par->isright;
-				
-				grand->child[par->isright] = nullptr;
-				par->child[ins->isright] = nullptr;
-				
-				ins->isred = false;
-				ins->par = grand->par;
-				ins->isright = grand->isright;
-				ins->child[isflip] = par;
-				ins->child[!isflip] = grand;
-				
-				par->par = ins;
-				par->isright = isflip;
-				
-				grand->isred = true;
-				grand->par = ins;
-				grand->isright = !isflip;
-				
-				if (ins->par) ins->par->child[ins->isright] = ins;
-				else root = ins;
+				p->child[node->isr] = nullptr;
+				g->child[!p->isr] = node;
+				node->par = g;
+				std::swap(g->val, node->val);
+				if (e_ptr[0] == g) e_ptr[0] = node;
+				if (e_ptr[1] == g) e_ptr[1] = node;
+				return g;
 			}
-			return ins;
 		}
-		
-		// uncle = red
-		grand->isred = true;
-		par->isred = false;
-		uncle->isred = false;
-		
-		while (true) {
-			// grand = red, exists(par(grand)) = ?
-			node_ptr cur = grand;
-			par = cur->par;
-			if (!par) {
-				cur->isred = false;
-				break;
-			}
-			if (!par->isred) break;
-			grand = par->par;
-			uncle = grand->child[!par->isright];
-			
-			// (cur, par) = (red, red), grand = black, uncle = ?
-			if (!uncle->isred) {
-				if (cur->isright == par->isright) {
-					rotate(grand, !par->isright);
-					par->isred = false;
-					grand->isred = true;
+		while (u->isred) {
+			g->isred = true;
+			p->isred = false;
+			u->isred = false;
+			const node_ptr cur = g;
+			p = cur->par;
+			if (!p) { cur->isred = false; break; }
+			if (!p->isred) break;
+			g = p->par;
+			u = g->child[!p->isr];
+			if (!u->isred) {
+				if (cur->isr == p->isr) {
+					rotate(g, !p->isr);
+					p->isred = false;
+					g->isred = true;
 				}
 				else {
-					rotate(par, par->isright);
-					rotate(grand, !par->isright);
+					rotate(p, p->isr);
+					rotate(g, !p->isr);
 					cur->isred = false;
-					grand->isred = true;
+					g->isred = true;
 				}
+			}
+		}
+		return node;
+	}
+	
+	node_ptr erase(const_reference x) noexcept {
+		node_ptr q = find(x);
+		if (q == end()) return end();
+		return erase(q);
+	}
+	
+	node_ptr erase(node_ptr q) noexcept {
+		if (!q) return end();
+		node_ptr ret = next(q);
+		if (q->child[0]) {
+			node_ptr p = q->child[0];
+			while (p->child[1]) p = p->child[1];
+			q->val = std::move(p->val);
+			q = p;
+		}
+		if (e_ptr[0] == q) e_ptr[0] = next(q);
+		if (e_ptr[1] == q) e_ptr[1] = prev(q);
+		node_ptr ch = q->child[0] ? q->child[0] : q->child[1];
+		if (ch) {
+			q->val = std::move(ch->val);
+			if (e_ptr[0] == ch) e_ptr[0] = q;
+			if (e_ptr[1] == ch) e_ptr[1] = q;
+			if (ret == ch) ret = q;
+			q = ch;
+		}
+		node_ptr p = q->par;
+		bool isred = q->isred, isr = q->isr;
+		(p ? p->child[q->isr] : root) = nullptr;
+		delete q;
+		--n;
+		if (!root || isred) return ret;
+		while (p) {
+			node_ptr c = p->child[!isr];
+			if (c->isred) {
+				rotate(p, isr);
+				c->isred = false;
+				p->isred = true;
+				c = p->child[!isr];
+			}
+			node_ptr g = c->child[!isr];
+			if (g && g->isred) {
+				rotate(p, isr);
+				c->isred = p->isred;
+				g->isred = false;
+				p->isred = false;
 				break;
 			}
-			
-			grand->isred = true;
-			par->isred = false;
-			uncle->isred = false;
+			g = c->child[isr];
+			if (g && g->isred) {
+				rotate(c, !isr);
+				rotate(p, isr);
+				g->isred = p->isred;
+				p->isred = false;
+				break;
+			}
+			c->isred = true;
+			if (p->isred) {
+				p->isred = false;
+				break;
+			}
+			isr = p->isr;
+			p = p->par;
 		}
-		return ins;
-	}
-	
-	node_ptr lower_bound(const_reference x) const {
-		node_ptr node = root;
-		if (!node) return end();
-		while (true) {
-			bool cmp = x <= node->val;
-			if (node->child[!cmp]) node = node->child[!cmp];
-			else break;
-		}
-		if (node->val < x) return next(node);
-		return node;
-	}
-	
-	node_ptr upper_bound(const_reference x) const {
-		node_ptr node = root;
-		if (!node) return end();
-		while (true) {
-			bool cmp = x < node->val;
-			if (node->child[!cmp]) node = node->child[!cmp];
-			else break;
-		}
-		if (x <= node->val) return next(node);
-		return node;
-	}
-	
-	node_ptr find(const_reference x) const {
-		node_ptr cur = lower_bound(x);
-		if (cur != end() && cur->val == x) return cur;
-		return end();
-	}
-	
-	node_ptr erase(const_reference x) {
-		return erase(find(x));
-	}
-	
-	node_ptr erase(node_ptr node) {
-		if (node == end()) return end();
-		node_ptr ret = next(node);
-		if (node->child[0]) {
-			node_ptr rep = node->child[0];
-			while (rep->child[1]) rep = rep->child[1];
-			node->val = std::move(rep->val);
-			erase_sub(rep);
-		}
-		else erase_sub(node);
+		if (root) root->isred = false;
 		return ret;
 	}
 	
-	bool check() const {
-		if (!root) return true;
-		assert(!root->isred);
-		
-		size_type tmp = -1;
-		
-		auto dfs = [&](auto &&self, node_ptr node, node_ptr par, size_type cnt) -> node_ptr {
-			if (!node) {
-				++cnt;
-				if (tmp == -1) tmp = cnt;
-				assert(cnt == tmp);
-				return node;
-			}
-			
-			if (!node->isred) ++cnt;
-			
-			if (node->child[0]) {
-				assert(node->child[0]->val <= node->val);
-				assert(!node->isred || !node->child[0]->isred);
-				if (par) assert(node == par->child[node->isright]);
-				else assert(root == node);
-			}
-			self(self, node->child[0], node, cnt);
-			
-			if (node->child[1]) {
-				assert(node->child[1]->val >= node->val);
-				assert(!node->isred || !node->child[1]->isred);
-				if (par) assert(node == par->child[node->isright]);
-				else assert(root == node);
-			}
-			self(self, node->child[1], node, cnt);
-			return node;
-		};
-		dfs(dfs, root, nullptr, 0);
-		return true;
+	node_ptr find(const_reference x) const noexcept {
+		const node_ptr q = lower_bound(x);
+		if (q != end() && q->val != x) return end();
+		return q;
+	}
+	
+	node_ptr lower_bound(const_reference x) const noexcept {
+		node_ptr q = root;
+		if (!q) return end();
+		while (q->child[q->val < x]) q = q->child[q->val < x];
+		if (q->val < x) q = next(q);
+		return q;
+	}
+	
+	node_ptr upper_bound(const_reference x) const noexcept {
+		node_ptr q = root;
+		if (!q) return end();
+		while (q->child[q->val <= x]) q = q->child[q->val <= x];
+		if (q->val <= x) q = next(q);
+		return q;
+	}
+	
+	node_ptr next(node_ptr q) const noexcept {
+		return move(q, true);
+	}
+	
+	node_ptr prev(node_ptr q) const noexcept {
+		return move(q, false);
 	}
 	
 private:
-	void rotate(node_ptr node, bool rotR) {
-		node_ptr u = node->child[!rotR];
-		node_ptr b = u->child[rotR];
-		
-		if (node->par) node->par->child[node->isright] = u;
-		else root = u;
-		
-		u->par = node->par;
-		u->isright = node->isright;
-		u->child[rotR] = node;
-		
-		node->par = u;
-		node->isright = rotR;
-		node->child[!rotR] = b;
-		
+	void rotate(node_ptr q, bool d) noexcept {
+		node_ptr r = q->par, p = q->child[!d], b = p->child[d];
+		(r ? r->child[q->isr] : root) = p;
+		q->child[!d] = b;
+		p->child[d] = q;
 		if (b) {
-			b->par = node;
-			b->isright = !rotR;
+			b->par = q;
+			b->isr = !d;
 		}
+		p->par = r;
+		p->isr = q->isr;
+		q->par = p;
+		q->isr = d;
 	}
 	
-	node_ptr move(node_ptr node, bool isnext) const {
-		if (node->child[isnext]) {
-			node = node->child[isnext];
-			while (node->child[!isnext]) node = node->child[!isnext];
-		}
+	node_ptr move(node_ptr q, bool d) const noexcept {
+		if (q == end()) return e_ptr[!d];
+		if (q == begin() && !d) return end();
+		if (q->child[d]) for (q = q->child[d]; q->child[!d]; q = q->child[!d]);
 		else {
-			while (node && (!node->isright ^ isnext)) node = node->par;
-			if (node) node = node->par;
+			while (q && (d ^ !q->isr)) q = q->par;
+			if (q) q = q->par;
 		}
-		return node;
+		return q;
 	}
-	
-	void erase_sub(node_ptr node) {
-		// |node->child| \leq 1
-		bool isred = node->isred;
-		bool isright = node->isright;
-		
-		node_ptr par = node->par;
-		for (size_type i = 0; i < 2; ++i) {
-			if (node->child[i]) {
-				if (par) par->child[node->isright] = node->child[i];
-				else root = node->child[i];
-				node->child[i]->par = par;
-				node->child[i]->isright = node->isright;
-			}
-		}
-		if (!node->child[0] && !node->child[1]) {
-			if (par) par->child[node->isright] = nullptr;
-			else root = nullptr;
-		}
-		delete node;
-		--n;
-		if (isred) return;
-		
-		while (par) {
-			// exists(par->child[!isright]) = true
-			// isright = -1-subtree
-			node_ptr b = par->child[!isright];
-			
-			if (b->isred) {
-				// par = black, b = red
-				rotate(par, isright);
-				b->isred = false;
-				par->isred = true;
-				b = par->child[!isright];
-			}
-			
-			node_ptr tar = b->child[!isright];
-			if (tar && tar->isred) {
-				rotate(par, isright);
-				b->isred = par->isred;
-				par->isred = false;
-				tar->isred = false;
-				break;
-			}
-			
-			tar = b->child[isright];
-			if (tar && tar->isred) {
-				rotate(b, !isright);
-				rotate(par, isright);
-				tar->isred = par->isred;
-				par->isred = false;
-				break;
-			}
-			b->isred = true;
-			if (par->isred) {
-				par->isred = false;
-				break;
-			}
-			
-			isright = par->isright;
-			par = par->par;
-		}
-		
-		if (root) root->isred = false;
-	}
-	
-public:
-	// void debug() {
-	// 	if (!root) {
-	// 		std::cout << "debug : empty" << std::endl;
-	// 		return;
-	// 	}
-	// 	auto dfs = [&](auto &&self, node_ptr cur) -> void {
-	// 		if (!root) std::cout << "empty" << std::endl;
-	// 		if (!cur) return;
-			
-	// 		std::cout << "val = " << cur->val << ", color = " << (cur->isred ? "red" : "black");
-	// 		if (cur->par) std::cout << ", par = " << cur->par->val << ", " << (cur->isright ? "right" : "left");
-			
-	// 		std::cout << ", leftval = ";
-	// 		if (!cur->child[0]) std::cout << "null";
-	// 		else std::cout << cur->child[0]->val;
-			
-	// 		std::cout << ", rightval = ";
-	// 		if (!cur->child[1]) std::cout << "null";
-	// 		else std::cout << cur->child[1]->val;
-	// 		std::cout << std::endl;
-			
-	// 		if (cur->child[0]) {
-	// 			std::cout << "move left" << std::endl;
-	// 			self(self, cur->child[0]);
-	// 		}
-			
-	// 		if (cur->child[1]) {
-	// 			std::cout << "move right" << std::endl;
-	// 			self(self, cur->child[1]);
-	// 		}
-			
-	// 		if (cur->par) std::cout << "move par -> val = " << cur->par->val << std::endl;
-	// 	};
-	// 	dfs(dfs, root);
-	// }
-	
-	// void debug() {
-	// 	if (!root) {
-	// 		std::cout << "debug : empty" << std::endl;
-	// 		return;
-	// 	}
-	// 	auto dfs = [&](auto &&self, node_ptr cur) -> void {
-	// 		if (!root) std::cout << "empty" << std::endl;
-	// 		if (!cur) return;
-			
-	// 		std::cout << "val = " << "(" << cur->val.first << ", " << cur->val.second << ")" << ", color = " << (cur->isred ? "red" : "black");
-	// 		if (cur->par) std::cout << ", par = (" << cur->par->val.first << ", " << cur->par->val.second << ")" << ", " << (cur->isright ? "right" : "left");
-			
-	// 		std::cout << ", leftval = ";
-	// 		if (!cur->child[0]) std::cout << "null";
-	// 		else std::cout << "(" << cur->child[0]->val.first << ", " << cur->child[0]->val.second << ")";
-			
-	// 		std::cout << ", rightval = ";
-	// 		if (!cur->child[1]) std::cout << "null";
-	// 		else std::cout << "(" << cur->child[1]->val.first << ", " << cur->child[1]->val.second << ")";
-	// 		std::cout << std::endl;
-			
-	// 		if (cur->child[0]) {
-	// 			std::cout << "move left" << std::endl;
-	// 			self(self, cur->child[0]);
-	// 		}
-			
-	// 		if (cur->child[1]) {
-	// 			std::cout << "move right" << std::endl;
-	// 			self(self, cur->child[1]);
-	// 		}
-			
-	// 		if (cur->par) std::cout << "move par -> val = " <<  "(" << cur->par->val.first << ", " << cur->par->val.second << ")"<< std::endl;
-	// 	};
-	// 	dfs(dfs, root);
-	// }
 };
 
 #endif // INCLUDE_GUARD_RED_BLACK_TREE_HPP

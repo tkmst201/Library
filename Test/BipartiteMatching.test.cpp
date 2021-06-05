@@ -3,6 +3,7 @@
 #include "GraphTheory/BipartiteMatching.hpp"
 
 #include <cstdio>
+#include <map>
 
 int main() {
 	int L, R, M;
@@ -16,9 +17,16 @@ int main() {
 	}
 	bm.build();
 	
-	auto match = bm.get_match();
-	printf("%d\n", match.size());
-	for (int i = 0; i < match.size(); ++i) printf("%d %d\n", match[i].first, match[i].second);
+	printf("%d\n", bm.max_matching());
 	
-	return 0;
+	std::map<int, int> mtl, mtr;
+	for (auto [a, b] : bm.matching()) {
+		printf("%d %d\n", a, b);
+		mtl[a] = b;
+		mtr[b] = a;
+	}
+	
+	// [match_*] test
+	for (int i = 0; i < L; ++i) assert(mtl.count(i) ? mtl[i] == bm.matching_x(i) : -1);
+	for (int i = 0; i < R; ++i) assert(mtr.count(i) ? mtr[i] == bm.matching_y(i) : -1);
 }

@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 
-#include "Mathematics/Convolution/NumberTheoreticTransform.hpp"
+#include "Convolution/NumberTheoreticTransform.hpp"
 
 #include <cstdio>
 #include <vector>

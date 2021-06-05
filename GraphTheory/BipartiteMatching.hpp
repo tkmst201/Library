@@ -1,142 +1,100 @@
 #ifndef INCLUDE_GUARD_BIPARTITE_MATCHING_HPP
 #define INCLUDE_GUARD_BIPARTITE_MATCHING_HPP
 
-/*
-last-updated: 2020/08/26
-
-二部グラフでの最大マッチングを求める
-オーダーが怪しいが実際には高速に動く
-
-N \leq 10^5, M \leq 2 \times 10^5 でも高速
-
-TODO: 二部マッチング 頂点 or 辺 の追加や削除
-
-# 仕様
-BipartiteMatching(size_type x, size_type y)
-	時間計算量: Θ(x + y)
-	集合 X, Y の二部グラフを準備
-	|X| = x, |Y| = y
-
-BipartiteMatching(size_type n)
-	時間計算量: Θ(n)
-	|X| = |Y| = y の二部グラフを準備
-
-void add_edge(size_type a, size_type b) :
-	時間計算量: Θ(1)
-	頂点 a, 頂点 b 間に辺を張る
-
-size_type build() :
-	時間計算量: O(NE) ?? 謎だけど高速
-	最大マッチングを求める
-	最大マッチングの大きさを返す
-
-std::vector<std::pair<size_type, size_type>> get_match() const :
-	時間計算量: Θ(min{x, y})
-	計算済みのマッチングのペアを返す (X の要素, Y の要素)
-
-std::vector<size_type> get_match_x() const :
-	時間計算量: Θ(x)
-	X の各要素のマッチング先を記録した配列を返す(マッチングが存在しない場合 y)
-
-std::vector<size_type> get_match_y() const :
-	時間計算量: Θ(y)
-	Y の各要素のマッチング先を記録した配列を返す(マッチングが存在しない場合 x)
-
-# 参考
-https://ikatakos.com/pot/programming_algorithm/graph_theory/bipartite_matching, 2020/03/05
-https://snuke.hatenablog.com/entry/2019/05/07/013609, 2020/08/26
-*/
-
 #include <vector>
 #include <cassert>
 #include <utility>
+#include <queue>
 
+/**
+ * @brief https://tkmst201.github.io/Library/GraphTheory/BipartiteMatching.hpp
+ */
 struct BipartiteMatching {
-	using size_type = std::size_t;
-	
 private:
-	size_type x, y;
-	std::vector<std::vector<size_type>> g;
-	size_type match_;
-	std::vector<size_type> match_x, match_y;
-	std::vector<size_type> visited;
-	bool isbuilt;
+	using Graph = std::vector<std::vector<int>>;
+	Graph g;
+	int x, y;
+	bool isswap;
+	int max_maching_;
+	std::vector<int> match_x, match_y;
+	bool isbuilt = false;
 	
 public:
-	BipartiteMatching(size_type x, size_type y) : x(x), y(y), g(x + y, std::vector<size_type>()), isbuilt(false) {}
-	BipartiteMatching(size_type n) : BipartiteMatching(n, n) {}
+	BipartiteMatching(int x, int y)
+		: g(std::min(x, y)), x(std::min(x, y)), y(std::max(x, y)), isswap(x > y) {}
 	
-	void add_edge(size_type a, size_type b) {
-		assert(a < x && b < y);
-		g[a].push_back(b);
+	BipartiteMatching(int n) : BipartiteMatching(n, n) {}
+	
+	void add_edge(int a, int b) {
+		if (isswap) std::swap(a, b);
+		assert(0 <= a && a < x);
+		assert(0 <= b && b < y);
+		g[a].emplace_back(b);
 		isbuilt = false;
 	}
 	
-	size_type build() {
-		match_y.assign(y, x);
-		match_x.assign(x, y);
-		match_ = 0;
-		size_type c = 0;
-		visited.assign(x, 0);
-		bool updated;
-		do {
-			updated = false;
+	void build() {
+		match_y.assign(y, -1);
+		match_x.assign(x, -1);
+		max_maching_ = 0;
+		int c = 1;
+		std::vector<int> visited(x, 0);
+		bool update = false;
+		auto dfs = [&](auto self, int u) -> bool {
+			visited[u] = c;
+			for (int v : g[u]) if (match_y[v] == -1) { match_y[v] = u; match_x[u] = v; return true; }
+			for (int v : g[u]) if (visited[match_y[v]] >= 0 && visited[match_y[v]] != c && self(self, match_y[v])) { match_y[v] = u; match_x[u] = v; return true; }
+			if (!update) visited[u] = -1;
+			return false;
+		};
+		std::queue<int> que;
+		for (int i = 0; i < x; ++i) {
+			if (dfs(dfs, i)) ++max_maching_, update = true;
+			else if (update) que.emplace(i);
+		}
+		while (!que.empty()) {
 			++c;
-			for (size_type i = 0; i < x; ++i) {
-				if (match_x[i] == y && dfs(i, c)) {
-					++match_;
-					updated = true;
+			const int n = que.size();
+			update = false;
+			for (int i = 0; i < n; ++i) {
+				const int u = que.front();
+				que.pop();
+				if (match_x[u] == -1 && visited[u] != c && dfs(dfs, u)) {
+					++max_maching_;
+					update = true;
 				}
-			}
-		} while (updated);
-		isbuilt = true;
-		return match_;
-	}
-	
-	size_type match() const {
-		assert(isbuilt);
-		return match_;
-	}
-	
-	std::vector<std::pair<size_type, size_type>> get_match() const {
-		assert(isbuilt);
-		std::vector<std::pair<size_type, size_type>> res;
-		if (x < y) {
-			for (size_type i = 0; i < x; ++i) {
-				if (match_x[i] != y) res.emplace_back(i, match_x[i]);
+				else if (update) que.emplace(u);
 			}
 		}
-		else {
-			for (size_type i = 0; i < y; ++i) {
-				if (match_y[i] != x) res.emplace_back(match_y[i], i);
-			}
+		isbuilt = true;
+	}
+	
+	int max_matching() const noexcept {
+		assert(isbuilt);
+		return max_maching_;
+	}
+	
+	std::vector<std::pair<int, int>> matching() const {
+		assert(isbuilt);
+		std::vector<std::pair<int, int>> res;
+		for (int i = 0; i < x; ++i) {
+			if (match_x[i] == -1) continue;
+			if (isswap) res.emplace_back(match_x[i], i);
+			else res.emplace_back(i, match_x[i]);
 		}
 		return res;
 	}
 	
-	std::vector<size_type> get_match_x() const {
+	int matching_x(int k) const noexcept {
 		assert(isbuilt);
-		return match_x;
+		assert(0 <= k && k < (isswap ? y : x));
+		return isswap ? match_y[k] : match_x[k];
 	}
 	
-	std::vector<size_type> get_match_y() const {
+	int matching_y(int k) const noexcept {
 		assert(isbuilt);
-		return match_y;
-	}
-	
-private:
-	bool dfs(size_type u, size_type c) {
-		if (visited[u] == c) return false;
-		visited[u] = c;
-		
-		for (size_type v: g[u]) {
-			if (match_y[v] == x || dfs(match_y[v], c)) {
-				match_y[v] = u;
-				match_x[u] = v;
-				return true;
-			}
-		}
-		return false;
+		assert(0 <= k && k < (isswap ? x : y));
+		return isswap ? match_x[k] : match_y[k];
 	}
 };
 
