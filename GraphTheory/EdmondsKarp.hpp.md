@@ -10,100 +10,188 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: https://tkmst201.github.io/Library/GraphTheory/EdmondsKarp.hpp
     links:
-    - http://hos.ac/slides/20150319_flow.pdf,
-  bundledCode: "#line 1 \"GraphTheory/EdmondsKarp.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
-    \ 2020/02/28\r\n\r\n\u8FBA\u306E\u5BB9\u91CF\u306F\u975E\u8CA0\u306E\u5B9F\u6570\
-    \u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\r\n\r\n# \u4ED5\u69D8\r\
-    \nEdmondsKarp(size_type n) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\
-    \t\u9802\u70B9\u6570\u304C n \u306E\u30B0\u30E9\u30D5\u3092\u6E96\u5099\r\n\r\n\
-    size_type size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
-    (1)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\u8FD4\u3059\r\n\r\n\
-    void add_edge(size_type i, size_type j, value_type c) :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(1)\r\n\tu -> v \u3078\u5BB9\u91CF c \u306E\u8FBA\u3092\u5F35\
-    \u308B\r\n\r\nvalue_type max_flow(size_type s, size_type t) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: O(VE^2)\r\n\ts -> t \u306E\u6700\u5927\u30D5\u30ED\u30FC\u3092\
-    \u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf,\
-    \ 2020/02/27\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
-    \ <queue>\r\n#include <utility>\r\n#include <type_traits>\r\n#include <algorithm>\r\
-    \n\r\ntemplate<typename T>\r\nstruct EdmondsKarp {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tEdmondsKarp(size_type n)\
-    \ : g(std::vector<std::vector<Edge>>(n)) {}\r\n\t\r\n\tsize_type size() const\
-    \ noexcept { return g.size(); }\r\n\t\r\n\tvoid add_edge(size_type i, size_type\
-    \ j, value_type c) {\r\n\t\tassert(i < size() && j < size() && c >= 0);\r\n\t\t\
-    g[i].push_back({j, g[j].size(), c});\r\n\t\tg[j].push_back({i, g[i].size() - 1,\
-    \ 0});\r\n\t}\r\n\t\r\n\tvalue_type max_flow(size_type s, size_type t) {\r\n\t\
-    \tassert(s < size() && t < size());\r\n\t\tvalue_type res = 0;\r\n\t\tstd::vector<std::pair<size_type,\
-    \ size_type>> prv(size(), std::make_pair(-1, -1));\r\n\t\t\r\n\t\twhile (true)\
-    \ {\r\n\t\t\tstd::vector<size_type> visited;\r\n\t\t\tstd::queue<size_type> que;\r\
-    \n\t\t\tprv[s].first = s;\r\n\t\t\tvisited.push_back(s);\r\n\t\t\tque.push(s);\r\
-    \n\t\t\twhile (!que.empty() && !~prv[t].first) {\r\n\t\t\t\tsize_type u = que.front();\
-    \ que.pop();\r\n\t\t\t\tfor (size_type i = 0; i < g[u].size(); ++i) {\r\n\t\t\t\
-    \t\tsize_type to = g[u][i].to;\r\n\t\t\t\t\tif (~prv[to].first || g[u][i].c <=\
-    \ EPS) continue;\r\n\t\t\t\t\tprv[to] = std::make_pair(u, i);\r\n\t\t\t\t\tvisited.push_back(to);\r\
-    \n\t\t\t\t\tif (to == t) break;\r\n\t\t\t\t\tque.push(to);\r\n\t\t\t\t}\r\n\t\t\
-    \t}\r\n\t\t\tif (!~prv[t].first) break;\r\n\t\t\tvalue_type flow = g[prv[t].first][prv[t].second].c;\r\
-    \n\t\t\tfor (size_type u = prv[t].first; u != prv[u].first; u = prv[u].first)\r\
-    \n\t\t\t\tflow = std::min(flow, g[prv[u].first][prv[u].second].c);\r\n\t\t\tfor\
-    \ (size_type u = t; u != prv[u].first; u = prv[u].first) {\r\n\t\t\t\tg[prv[u].first][prv[u].second].c\
-    \ -= flow;\r\n\t\t\t\tg[u][g[prv[u].first][prv[u].second].rev].c += flow;\r\n\t\
-    \t\t}\r\n\t\t\tfor (size_type u : visited) prv[u] = std::make_pair(-1, -1);\r\n\
-    \t\t\tres += flow;\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n\t\r\nprivate:\r\n\t\
-    struct Edge { size_type to, rev; value_type c; };\r\n\tstd::vector<std::vector<Edge>>\
-    \ g;\r\n\tstatic constexpr value_type EPS = std::is_floating_point<value_type>()\
-    \ ? 1e-6 : 0;\r\n};\r\n\r\n\n"
+    - https://tkmst201.github.io/Library/GraphTheory/EdmondsKarp.hpp
+  bundledCode: "#line 1 \"GraphTheory/EdmondsKarp.hpp\"\n\n\n\r\n#include <vector>\r\
+    \n#include <cassert>\r\n#include <queue>\r\n#include <utility>\r\n#include <type_traits>\r\
+    \n#include <algorithm>\r\n\r\n/**\r\n * @brief https://tkmst201.github.io/Library/GraphTheory/EdmondsKarp.hpp\r\
+    \n */\r\ntemplate<typename T>\r\nstruct EdmondsKarp {\r\n\tusing cap_type = T;\r\
+    \n\t\r\nprivate:\r\n\tstatic constexpr cap_type EPS = std::is_floating_point<cap_type>()\
+    \ ? 1e-8 : 0;\r\n\tstruct Edge {\r\n\t\tint to, rev;\r\n\t\tcap_type c;\r\n\t\t\
+    Edge(int to, int rev, const cap_type & c) : to(to), rev(rev), c(c) {}\r\n\t};\r\
+    \n\tusing Graph = std::vector<std::vector<Edge>>;\r\n\tGraph g;\r\n\t\r\npublic:\r\
+    \n\texplicit EdmondsKarp(int n) : g(n) {}\r\n\t\r\n\tint size() const noexcept\
+    \ {\r\n\t\treturn g.size();\r\n\t}\r\n\t\r\n\tvoid add_edge(int u, int v, const\
+    \ cap_type & cap) {\r\n\t\tassert(0 <= u && u < size());\r\n\t\tassert(0 <= v\
+    \ && v < size());\r\n\t\tassert(cap >= 0);\r\n\t\tg[u].emplace_back(v, g[v].size(),\
+    \ cap);\r\n\t\tg[v].emplace_back(u, g[u].size() - 1, 0);\r\n\t}\r\n\t\r\n\tcap_type\
+    \ max_flow(int s, int t) {\r\n\t\tassert(0 <= s && s < size());\r\n\t\tassert(0\
+    \ <= t && t < size());\r\n\t\tassert(s != t);\r\n\t\tcap_type res = 0;\r\n\t\t\
+    std::vector<std::pair<int, int>> prv(size(), std::make_pair(-1, -1));\r\n\t\t\
+    while (true) {\r\n\t\t\tstd::vector<int> visited;\r\n\t\t\tstd::queue<int> que;\r\
+    \n\t\t\tprv[s].first = s;\r\n\t\t\tvisited.emplace_back(s);\r\n\t\t\tque.emplace(s);\r\
+    \n\t\t\twhile (!que.empty() && prv[t].first == -1) {\r\n\t\t\t\tconst int u =\
+    \ que.front();\r\n\t\t\t\tque.pop();\r\n\t\t\t\tfor (int i = 0; i < static_cast<int>(g[u].size());\
+    \ ++i) {\r\n\t\t\t\t\tconst int to = g[u][i].to;\r\n\t\t\t\t\tif (prv[to].first\
+    \ != -1 || g[u][i].c <= EPS) continue;\r\n\t\t\t\t\tprv[to] = {u, i};\r\n\t\t\t\
+    \t\tvisited.emplace_back(to);\r\n\t\t\t\t\tif (to == t) break;\r\n\t\t\t\t\tque.emplace(to);\r\
+    \n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif (prv[t].first == -1) break;\r\n\t\t\tcap_type\
+    \ flow = g[prv[t].first][prv[t].second].c;\r\n\t\t\tfor (int u = prv[t].first;\
+    \ u != prv[u].first; u = prv[u].first) {\r\n\t\t\t\tflow = std::min(flow, g[prv[u].first][prv[u].second].c);\r\
+    \n\t\t\t}\r\n\t\t\tfor (int u = t; u != prv[u].first; u = prv[u].first) {\r\n\t\
+    \t\t\tconst auto [v, eidx] = prv[u];\r\n\t\t\t\tg[v][eidx].c -= flow;\r\n\t\t\t\
+    \tg[u][g[v][eidx].rev].c += flow;\r\n\t\t\t}\r\n\t\t\tfor (int u : visited) prv[u]\
+    \ = {-1, -1};\r\n\t\t\tres += flow;\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\
+    \n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_EDMONDS_KARP_HPP\r\n#define INCLUDE_GUARD_EDMONDS_KARP_HPP\r\
-    \n\r\n/*\r\nlast-updated: 2020/02/28\r\n\r\n\u8FBA\u306E\u5BB9\u91CF\u306F\u975E\
-    \u8CA0\u306E\u5B9F\u6570\u3067\u3042\u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\
-    \r\n\r\n# \u4ED5\u69D8\r\nEdmondsKarp(size_type n) :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(n)\r\n\t\u9802\u70B9\u6570\u304C n \u306E\u30B0\u30E9\u30D5\u3092\
-    \u6E96\u5099\r\n\r\nsize_type size() const noexcept :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u30B0\u30E9\u30D5\u306E\u9802\u70B9\u6570\u3092\u8FD4\u3059\
-    \r\n\r\nvoid add_edge(size_type i, size_type j, value_type c) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(1)\r\n\tu -> v \u3078\u5BB9\u91CF c \u306E\u8FBA\u3092\
-    \u5F35\u308B\r\n\r\nvalue_type max_flow(size_type s, size_type t) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: O(VE^2)\r\n\ts -> t \u306E\u6700\u5927\u30D5\u30ED\u30FC\
-    \u3092\u8FD4\u3059\r\n\r\n# \u53C2\u8003\r\nhttp://hos.ac/slides/20150319_flow.pdf,\
-    \ 2020/02/27\r\n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include\
-    \ <queue>\r\n#include <utility>\r\n#include <type_traits>\r\n#include <algorithm>\r\
-    \n\r\ntemplate<typename T>\r\nstruct EdmondsKarp {\r\npublic:\r\n\tusing value_type\
-    \ = T;\r\n\tusing size_type = std::size_t;\r\n\t\r\n\tEdmondsKarp(size_type n)\
-    \ : g(std::vector<std::vector<Edge>>(n)) {}\r\n\t\r\n\tsize_type size() const\
-    \ noexcept { return g.size(); }\r\n\t\r\n\tvoid add_edge(size_type i, size_type\
-    \ j, value_type c) {\r\n\t\tassert(i < size() && j < size() && c >= 0);\r\n\t\t\
-    g[i].push_back({j, g[j].size(), c});\r\n\t\tg[j].push_back({i, g[i].size() - 1,\
-    \ 0});\r\n\t}\r\n\t\r\n\tvalue_type max_flow(size_type s, size_type t) {\r\n\t\
-    \tassert(s < size() && t < size());\r\n\t\tvalue_type res = 0;\r\n\t\tstd::vector<std::pair<size_type,\
-    \ size_type>> prv(size(), std::make_pair(-1, -1));\r\n\t\t\r\n\t\twhile (true)\
-    \ {\r\n\t\t\tstd::vector<size_type> visited;\r\n\t\t\tstd::queue<size_type> que;\r\
-    \n\t\t\tprv[s].first = s;\r\n\t\t\tvisited.push_back(s);\r\n\t\t\tque.push(s);\r\
-    \n\t\t\twhile (!que.empty() && !~prv[t].first) {\r\n\t\t\t\tsize_type u = que.front();\
-    \ que.pop();\r\n\t\t\t\tfor (size_type i = 0; i < g[u].size(); ++i) {\r\n\t\t\t\
-    \t\tsize_type to = g[u][i].to;\r\n\t\t\t\t\tif (~prv[to].first || g[u][i].c <=\
-    \ EPS) continue;\r\n\t\t\t\t\tprv[to] = std::make_pair(u, i);\r\n\t\t\t\t\tvisited.push_back(to);\r\
-    \n\t\t\t\t\tif (to == t) break;\r\n\t\t\t\t\tque.push(to);\r\n\t\t\t\t}\r\n\t\t\
-    \t}\r\n\t\t\tif (!~prv[t].first) break;\r\n\t\t\tvalue_type flow = g[prv[t].first][prv[t].second].c;\r\
-    \n\t\t\tfor (size_type u = prv[t].first; u != prv[u].first; u = prv[u].first)\r\
-    \n\t\t\t\tflow = std::min(flow, g[prv[u].first][prv[u].second].c);\r\n\t\t\tfor\
-    \ (size_type u = t; u != prv[u].first; u = prv[u].first) {\r\n\t\t\t\tg[prv[u].first][prv[u].second].c\
-    \ -= flow;\r\n\t\t\t\tg[u][g[prv[u].first][prv[u].second].rev].c += flow;\r\n\t\
-    \t\t}\r\n\t\t\tfor (size_type u : visited) prv[u] = std::make_pair(-1, -1);\r\n\
-    \t\t\tres += flow;\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n\t\r\nprivate:\r\n\t\
-    struct Edge { size_type to, rev; value_type c; };\r\n\tstd::vector<std::vector<Edge>>\
-    \ g;\r\n\tstatic constexpr value_type EPS = std::is_floating_point<value_type>()\
-    \ ? 1e-6 : 0;\r\n};\r\n\r\n#endif // INCLUDE_GUARD_EDMONDS_KARP_HPP"
+    \n\r\n#include <vector>\r\n#include <cassert>\r\n#include <queue>\r\n#include\
+    \ <utility>\r\n#include <type_traits>\r\n#include <algorithm>\r\n\r\n/**\r\n *\
+    \ @brief https://tkmst201.github.io/Library/GraphTheory/EdmondsKarp.hpp\r\n */\r\
+    \ntemplate<typename T>\r\nstruct EdmondsKarp {\r\n\tusing cap_type = T;\r\n\t\r\
+    \nprivate:\r\n\tstatic constexpr cap_type EPS = std::is_floating_point<cap_type>()\
+    \ ? 1e-8 : 0;\r\n\tstruct Edge {\r\n\t\tint to, rev;\r\n\t\tcap_type c;\r\n\t\t\
+    Edge(int to, int rev, const cap_type & c) : to(to), rev(rev), c(c) {}\r\n\t};\r\
+    \n\tusing Graph = std::vector<std::vector<Edge>>;\r\n\tGraph g;\r\n\t\r\npublic:\r\
+    \n\texplicit EdmondsKarp(int n) : g(n) {}\r\n\t\r\n\tint size() const noexcept\
+    \ {\r\n\t\treturn g.size();\r\n\t}\r\n\t\r\n\tvoid add_edge(int u, int v, const\
+    \ cap_type & cap) {\r\n\t\tassert(0 <= u && u < size());\r\n\t\tassert(0 <= v\
+    \ && v < size());\r\n\t\tassert(cap >= 0);\r\n\t\tg[u].emplace_back(v, g[v].size(),\
+    \ cap);\r\n\t\tg[v].emplace_back(u, g[u].size() - 1, 0);\r\n\t}\r\n\t\r\n\tcap_type\
+    \ max_flow(int s, int t) {\r\n\t\tassert(0 <= s && s < size());\r\n\t\tassert(0\
+    \ <= t && t < size());\r\n\t\tassert(s != t);\r\n\t\tcap_type res = 0;\r\n\t\t\
+    std::vector<std::pair<int, int>> prv(size(), std::make_pair(-1, -1));\r\n\t\t\
+    while (true) {\r\n\t\t\tstd::vector<int> visited;\r\n\t\t\tstd::queue<int> que;\r\
+    \n\t\t\tprv[s].first = s;\r\n\t\t\tvisited.emplace_back(s);\r\n\t\t\tque.emplace(s);\r\
+    \n\t\t\twhile (!que.empty() && prv[t].first == -1) {\r\n\t\t\t\tconst int u =\
+    \ que.front();\r\n\t\t\t\tque.pop();\r\n\t\t\t\tfor (int i = 0; i < static_cast<int>(g[u].size());\
+    \ ++i) {\r\n\t\t\t\t\tconst int to = g[u][i].to;\r\n\t\t\t\t\tif (prv[to].first\
+    \ != -1 || g[u][i].c <= EPS) continue;\r\n\t\t\t\t\tprv[to] = {u, i};\r\n\t\t\t\
+    \t\tvisited.emplace_back(to);\r\n\t\t\t\t\tif (to == t) break;\r\n\t\t\t\t\tque.emplace(to);\r\
+    \n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\tif (prv[t].first == -1) break;\r\n\t\t\tcap_type\
+    \ flow = g[prv[t].first][prv[t].second].c;\r\n\t\t\tfor (int u = prv[t].first;\
+    \ u != prv[u].first; u = prv[u].first) {\r\n\t\t\t\tflow = std::min(flow, g[prv[u].first][prv[u].second].c);\r\
+    \n\t\t\t}\r\n\t\t\tfor (int u = t; u != prv[u].first; u = prv[u].first) {\r\n\t\
+    \t\t\tconst auto [v, eidx] = prv[u];\r\n\t\t\t\tg[v][eidx].c -= flow;\r\n\t\t\t\
+    \tg[u][g[v][eidx].rev].c += flow;\r\n\t\t\t}\r\n\t\t\tfor (int u : visited) prv[u]\
+    \ = {-1, -1};\r\n\t\t\tres += flow;\r\n\t\t}\r\n\t\treturn res;\r\n\t}\r\n};\r\
+    \n\r\n#endif // INCLUDE_GUARD_EDMONDS_KARP_HPP"
   dependsOn: []
   isVerificationFile: false
   path: GraphTheory/EdmondsKarp.hpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-03-16 16:17:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/EdmondsKarp.test.cpp
 documentation_of: GraphTheory/EdmondsKarp.hpp
 layout: document
-redirect_from:
-- /library/GraphTheory/EdmondsKarp.hpp
-- /library/GraphTheory/EdmondsKarp.hpp.html
-title: GraphTheory/EdmondsKarp.hpp
+title: "\u6700\u5927\u6D41 (Edmonds-Karp)"
 ---
+
+# 概要
+
+容量付きの有向グラフにおいて、任意の $2$ 頂点 $s, t$ に対する $s-t$ フローの最大値を求めます。  
+計算量は、頂点数を $N$ 、辺の数を $M$ として $\mathcal{O}(NM^2)$ です。  
+より高速で使い勝手の良い [AC Library](https://github.com/atcoder/ac-library) の `maxflow` を使用したほうが良いです。  
+
+- `EdmondsKarp(int n)`
+	- $\Theta(n)$ 頂点数 $n$ のグラフで初期化する
+- `int size()`
+	- $\Theta(1)$ グラフの頂点数 $N$ を返す
+- `void add_edge(int u, int v const T & cap)`
+	- ならし $\Theta(1)$ 頂点 $u$ から頂点 $v$ へ容量 $cap$ の有向辺を張る
+- `T max_flow(int s, int t)`
+	- $\mathcal{O}(NM^2)$ $s-t$ フローの最大値を返す
+
+<br>
+
+# コンストラクタ
+
+### EdmondsKarp(int n)
+
+頂点数 $n$ のグラフで初期化します。
+`T` には容量の型を指定してください。  
+
+**制約**
+
+- $0 \leq n$
+- `T` は `int`, `unsigned int`, `long long int`, `unsigned long long`, `float`, `double`
+
+**計算量**
+
+- $\Theta(n)$
+
+---
+
+<br>
+
+# メンバ関数
+
+以下、頂点数を $N$ 、辺の数を $M$ とします。  
+
+---
+
+### int size()
+
+グラフの頂点数 $N$ を返します。  
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### void add_edge(int u, int v const T & cap)
+
+頂点 $u$ から頂点 $v$ へ容量 $cap$ の有向辺を張ります。  
+
+**制約**
+
+- $0 \leq u, v < N$
+- $0 \leq cap$
+
+**計算量**
+
+- ならし $\Theta(1)$
+
+### T max_flow(int s, int t)
+
+$s-t$ フローの最大値を返します。
+この関数を $2$ 回以上呼んだ場合の動作は未定義です。  
+
+**制約**
+
+- $0 \leq u, v < N$
+- $u \neq v$
+
+**計算量**
+
+- $\mathcal{O}(NM^2)$
+
+# 使用例
+
+```cpp
+#include <bits/stdc++.h>
+#include "GraphTheory/EdmondsKarp.hpp"
+using namespace std;
+
+int main() {
+	EdmondsKarp<int> ek(5);
+	cout << "size() = " << ek.size() << endl; // 5
+	ek.add_edge(0, 1, 2);
+	ek.add_edge(0, 2, 3);
+	ek.add_edge(1, 2, 2);
+	ek.add_edge(1, 4, 1);
+	ek.add_edge(2, 4, 3);
+	cout << "max_flow(0, 4) = " << ek.max_flow(0, 4) << endl; // 4
+}
+```
+
+<br>
+
+# 参考
+
+2020/02/27: [http://hos.ac/slides/20150319_flow.pdf](http://hos.ac/slides/20150319_flow.pdf)  
+
+<br>

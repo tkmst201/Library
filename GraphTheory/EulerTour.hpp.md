@@ -4,181 +4,395 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: Test/EulerTour.test.cpp
-    title: Test/EulerTour.test.cpp
+    path: Test/DynamicSegmentTree.swap.test.cpp
+    title: Test/DynamicSegmentTree.swap.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/EulerTour.path.test.cpp
+    title: Test/EulerTour.path.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/EulerTour.subtree.test.cpp
+    title: Test/EulerTour.subtree.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: https://tkmst201.github.io/Library/GraphTheory/EulerTour.hpp
     links:
-    - https://beet-aizu.hatenablog.com/entry/2019/07/08/174727,
-    - https://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7,
-  bundledCode: "#line 1 \"GraphTheory/EulerTour.hpp\"\n\n\n\r\n/*\r\nlast-updated:\
-    \ 2020/09/16\r\n\r\n\u8FBA\u306B\u756A\u53F7\u3092\u4ED8\u3051\u308B\u30BF\u30A4\
-    \u30D7\u306E EulerTour\r\n\u5358\u7D14\u306A\u6728\u306E\u307F\u5BFE\u5FDC(\u81EA\
-    \u5DF1\u30EB\u30FC\u30D7, \u591A\u91CD\u8FBA, \u68EE\u306B\u306F\u975E\u5BFE\u5FDC\
-    )\r\n\u30B0\u30E9\u30D5\u306B\u306F\u5B64\u7ACB\u70B9\u304C\u5B58\u5728\u3057\u306A\
-    \u3044\u3068\u4EEE\u5B9A\u3059\u308B\r\n\r\n# \u89E3\u8AAC\r\n\u90E8\u5206\u6728\
-    \u30AF\u30A8\u30EA\u306E\u51E6\u7406\r\n\t(i) \u9802\u70B9\u306B\u5024\u304C\u5B58\
-    \u5728\u3059\u308B\u3068\u304D\r\n\t\t\u5404\u9802\u70B9 u \u306B\u5BFE\u3057\u3001\
-    in[u] \u306B\u9802\u70B9 u \u306E\u5024\u3092\u6301\u305F\u305B\u308B\u3002\r\n\
-    \t\t\u90E8\u5206\u6728 u \u306E\u5024\u306E\u7DCF\u548C\u306F [in[u], out[u])\
-    \ \u306E\u7DCF\u548C\r\n\t(ii) \u8FBA\u306B\u5024\u304C\u5B58\u5728\u3059\u308B\
-    \u3068\u304D\r\n\t\t\u5404\u9802\u70B9 u \u306B\u5BFE\u3057\u3001\u89AA p \u304B\
-    \u3089\u306E\u8FBA\u306E\u5024\u3092 in[u] \u306B\u6301\u305F\u305B\u308B\u3002\
-    \r\n\t\t\u90E8\u5206\u6728 u \u306E\u5024\u306E\u7DCF\u548C\u306F [in[u] + 1,\
-    \ out[u]) \u306E\u7DCF\u548C\r\n\r\n\u30D1\u30B9\u30AF\u30A8\u30EA\u306E\u51E6\
-    \u7406\r\n\t\u9802\u70B9\u306B\u5024\u304C\u5B58\u5728\u3059\u308B\u3068\u304D\
-    \u306E\u307F\u8003\u3048\u308B(\u8FBA\u3082\u540C\u69D8)\r\n\t\u5404\u9802\u70B9\
-    \ u \u306B\u5BFE\u3057\u3001\r\n\t\tin[u] \u306B\u9802\u70B9 u \u306E\u5024\r\n\
-    \t\tout[u] \u306B\u9802\u70B9 u \u306E\u5024\u306E\u9006\u5143\r\n\t\u3092\u3082\
-    \u305F\u305B\u308B\u3002\r\n\t\u8449\u3078\u4E0B\u308B\u65B9\u5411\u306B\u3057\
-    \u304B\u8A08\u7B97\u3067\u304D\u306A\u3044\u305F\u3081\u3001lca \u3092\u6C42\u3081\
-    \u3066 2 \u3064\u306E\u30D1\u30B9\u306B\u5206\u3051\u3066\u8A08\u7B97\u3059\u308B\
-    \u3002\r\n\t\u3053\u306E\u3068\u304D\u3001\u53EF\u63DB\u3067\u306A\u3044\u5834\
-    \u5408\u306F\u30D1\u30B9\u306E\u4E0A\u308A\u4E0B\u308A\u3067\u8A08\u7B97\u306E\
-    \u4ED5\u65B9\u3092\u5DE5\u592B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308B\u3002\
-    \r\n\r\n# \u4ED5\u69D8\r\nEulerTour(const Tree & tree, size_type root)\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u6728 g, \u6839\u3092 root \u3068\u3057\
-    \u3066 EulerTour \u3067\u756A\u53F7\u3092\u632F\u308B\r\n\t\u3053\u3053\u3067\u6E21\
-    \u3057\u305F tree \u306E\u53C2\u7167\u5143\u306F\u5909\u66F4\u3057\u3066\u306F\
-    \u3044\u3051\u306A\u3044\u3002\r\n\r\nsize_type size() const noexcept\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u5272\u308A\u632F\u3063\u305F\u8FBA\u306E\
-    \u756A\u53F7\u306E\u7DCF\u6570(2n) \u3092\u8FD4\u3059\r\n\r\nsize_type par(size_type\
-    \ k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k\
-    \ \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7\u3092\u8FD4\u3059\r\n\r\nsize_type\
-    \ in(size_type k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\
-    \u70B9 k \u306B\u5165\u3063\u305F\u3068\u304D\u306E\u8FBA\u756A\u53F7(EulerTour\
-    \ \u9806) \u3092\u8FD4\u3059\r\n\tk \u304C\u6839\u306E\u5834\u5408\u306F 0\r\n\
-    \r\nsize_type out(size_type k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
-    (1)\r\n\t\u9802\u70B9 k \u304B\u3089\u51FA\u305F\u3068\u304D\u306E\u8FBA\u756A\
-    \u53F7(EulerTour \u9806) \u3092\u8FD4\u3059\r\n\tk \u304C\u6839\u306E\u5834\u5408\
-    \u306F 2n\r\n\r\nstd::pair<size_type, size_type> par_from(size_type k) const\r\
-    \n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k \u306E\u89AA\
-    \u304B\u3089\u9802\u70B9 k \u3078\u306E\u8FBA e \u306E\u60C5\u5831 ( {\u9802\u70B9\
-    \ k \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7}, {tree \u4E0A\u306E\u8FBA e \u306E\
-    \ index}) \u3092\u8FD4\u3059\r\n\t\u3064\u307E\u308A\u3001tree[par[k]][e-index]\
-    \ = k\r\n\tk \u304C\u6839\u306E\u5834\u5408\u306F (n, n)\r\n\r\nsize_type par_to(size_type\
-    \ k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k\
-    \ \u304B\u3089\u89AA\u3078\u306E\u8FBA e \u306E tree \u4E0A\u306E index \u3092\
-    \u8FD4\u3059\r\n\t\u3064\u307E\u308A\u3001tree[k][e-index] = par[k]\r\n\tk \u304C\
-    \u6839\u3082\u3057\u304F\u306F tree \u304C\u9006\u8FBA\u3092\u6301\u3063\u3066\
-    \u3044\u306A\u3044\u5834\u5408\u306F n\r\n\r\n# \u53C2\u8003\r\nhttps://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7,\
-    \ 2020/09/16\r\nhttps://beet-aizu.hatenablog.com/entry/2019/07/08/174727, 2020/09/16\r\
-    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include <stack>\r\n#include\
-    \ <utility>\r\n\r\nstruct EulerTour {\r\n\tusing size_type = std::size_t;\r\n\t\
-    using Tree = std::vector<std::vector<size_type>>;\r\n\t\r\nprivate:\r\n\tsize_type\
-    \ n;\r\n\tconst Tree & tree;\r\n\tsize_type root;\r\n\tstd::vector<size_type>\
-    \ in_, out_;\r\n\tstd::vector<size_type> par_, g_idx;\r\n\t\r\npublic:\r\n\tEulerTour(const\
-    \ Tree & tree, size_type root) : n(tree.size()), tree(tree), root(root) {\r\n\t\
-    \tin_.assign(size(), size());\r\n\t\tout_.assign(size(), size());\r\n\t\tpar_.assign(n,\
-    \ n);\r\n\t\tg_idx.assign(size(), n);\r\n\t\t\r\n\t\tstd::stack<std::pair<size_type,\
-    \ size_type>> stk;\r\n\t\tstd::vector<size_type> par_edge(n, n);\r\n\t\tsize_type\
-    \ num = 0;\r\n\t\t\r\n\t\tin_[root] = num++;\r\n\t\tstk.emplace(root, 0);\r\n\t\
-    \t\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst size_type u = stk.top().first;\r\
-    \n\t\t\tconst size_type i = stk.top().second;\r\n\t\t\tstk.pop();\r\n\t\t\t\r\n\
-    \t\t\tif (i < tree[u].size()) {\r\n\t\t\t\tconst size_type v = tree[u][i];\r\n\
-    \t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\tif (v == par_[u]) par_edge[u] = i;\r\
-    \n\t\t\t\telse {\r\n\t\t\t\t\tg_idx[num] = i;\r\n\t\t\t\t\tin_[v] = num++;\r\n\
-    \t\t\t\t\tpar_[v] = u;\r\n\t\t\t\t\tstk.emplace(v, 0);\r\n\t\t\t\t}\r\n\t\t\t\
-    }\r\n\t\t\telse out_[u] = num++;\r\n\t\t}\r\n\t\tfor (size_type i = 0; i < n;\
-    \ ++i) g_idx[out_[i]] = par_edge[i];\r\n\t}\r\n\t\r\n\tsize_type size() const\
-    \ noexcept { return n << 1; }\r\n\tsize_type par(size_type k) const { assert(k\
-    \ < size()); return par_[k]; }\r\n\tsize_type in(size_type k) const { assert(k\
-    \ < size()); return in_[k]; }\r\n\tsize_type out(size_type k) const { assert(k\
-    \ < size()); return out_[k]; }\r\n\tstd::pair<size_type, size_type> par_from(size_type\
-    \ k) const { assert(k < size()); return {par_[k], g_idx[in_[k]]}; }\r\n\tsize_type\
-    \ par_to(size_type k) const { assert(k < size()); return g_idx[out_[k]]; }\r\n\
-    };\r\n\r\n\n"
+    - https://tkmst201.github.io/Library/GraphTheory/EulerTour.hpp
+  bundledCode: "#line 1 \"GraphTheory/EulerTour.hpp\"\n\n\n\r\n#include <vector>\r\
+    \n#include <cassert>\r\n#include <stack>\r\n#include <utility>\r\n\r\n/**\r\n\
+    \ * @brief https://tkmst201.github.io/Library/GraphTheory/EulerTour.hpp\r\n */\r\
+    \ntemplate<bool EDGE>\r\nstruct EulerTour {\r\n\tusing size_type = std::size_t;\r\
+    \n\tusing Graph = std::vector<std::vector<int>>;\r\n\t\r\nprivate:\r\n\tint n,\
+    \ root;\r\n\tstd::vector<int> in_, out_, par_, g_idx;\r\n\t\r\npublic:\r\n\tEulerTour(const\
+    \ Graph & g, int root = 0)\r\n\t\t: n(g.size()), root(root), in_(size(), -1),\
+    \ out_(size(), -1), par_(n, -1), g_idx(n << 1, -1) {\r\n\t\tstd::stack<std::pair<int,\
+    \ int>> stk;\r\n\t\tint num = 0;\r\n\t\tin_[root] = num++;\r\n\t\tstk.emplace(root,\
+    \ 0);\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst auto [u, i] = stk.top();\r\n\
+    \t\t\tstk.pop();\r\n\t\t\tif (i < g[u].size()) {\r\n\t\t\t\tconst int v = g[u][i];\r\
+    \n\t\t\t\tassert(0 <= v && v < n);\r\n\t\t\t\tassert(v != u);\r\n\t\t\t\tstk.emplace(u,\
+    \ i + 1);\r\n\t\t\t\tif (v == par_[u]) g_idx[u << 1 | 1] = i;\r\n\t\t\t\telse\
+    \ {\r\n\t\t\t\t\tin_[v] = num++;\r\n\t\t\t\t\tpar_[v] = u;\r\n\t\t\t\t\tg_idx[v\
+    \ << 1] = i;\r\n\t\t\t\t\tstk.emplace(v, 0);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\t\
+    else {\r\n\t\t\t\tout_[u] = num;\r\n\t\t\t\tif (EDGE) ++num;\r\n\t\t\t}\r\n\t\t\
+    }\r\n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn EDGE ? n <<\
+    \ 1 : n;\r\n\t}\r\n\t\r\n\tint par(int k) const noexcept {\r\n\t\tassert(0 <=\
+    \ k && k < n);\r\n\t\treturn par_[k];\r\n\t}\r\n\t\r\n\tint in(int k) const noexcept\
+    \ {\r\n\t\tassert(0 <= k && k < n);\r\n\t\treturn in_[k];\r\n\t}\r\n\t\r\n\tint\
+    \ out(int k) const noexcept {\r\n\t\tassert(0 <= k && k < n);\r\n\t\treturn out_[k];\r\
+    \n\t}\r\n\t\r\n\tstd::pair<int, int> par_from(int k) const noexcept {\r\n\t\t\
+    assert(0 <= k && k < n);\r\n\t\treturn {par_[k], g_idx[k << 1]};\r\n\t}\r\n\t\r\
+    \n\tint par_to(int k) const noexcept {\r\n\t\tassert(0 <= k && k < n);\r\n\t\t\
+    return g_idx[k << 1 | 1];\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_EULER_TOUR_HPP\r\n#define INCLUDE_GUARD_EULER_TOUR_HPP\r\
-    \n\r\n/*\r\nlast-updated: 2020/09/16\r\n\r\n\u8FBA\u306B\u756A\u53F7\u3092\u4ED8\
-    \u3051\u308B\u30BF\u30A4\u30D7\u306E EulerTour\r\n\u5358\u7D14\u306A\u6728\u306E\
-    \u307F\u5BFE\u5FDC(\u81EA\u5DF1\u30EB\u30FC\u30D7, \u591A\u91CD\u8FBA, \u68EE\u306B\
-    \u306F\u975E\u5BFE\u5FDC)\r\n\u30B0\u30E9\u30D5\u306B\u306F\u5B64\u7ACB\u70B9\u304C\
-    \u5B58\u5728\u3057\u306A\u3044\u3068\u4EEE\u5B9A\u3059\u308B\r\n\r\n# \u89E3\u8AAC\
-    \r\n\u90E8\u5206\u6728\u30AF\u30A8\u30EA\u306E\u51E6\u7406\r\n\t(i) \u9802\u70B9\
-    \u306B\u5024\u304C\u5B58\u5728\u3059\u308B\u3068\u304D\r\n\t\t\u5404\u9802\u70B9\
-    \ u \u306B\u5BFE\u3057\u3001in[u] \u306B\u9802\u70B9 u \u306E\u5024\u3092\u6301\
-    \u305F\u305B\u308B\u3002\r\n\t\t\u90E8\u5206\u6728 u \u306E\u5024\u306E\u7DCF\u548C\
-    \u306F [in[u], out[u]) \u306E\u7DCF\u548C\r\n\t(ii) \u8FBA\u306B\u5024\u304C\u5B58\
-    \u5728\u3059\u308B\u3068\u304D\r\n\t\t\u5404\u9802\u70B9 u \u306B\u5BFE\u3057\u3001\
-    \u89AA p \u304B\u3089\u306E\u8FBA\u306E\u5024\u3092 in[u] \u306B\u6301\u305F\u305B\
-    \u308B\u3002\r\n\t\t\u90E8\u5206\u6728 u \u306E\u5024\u306E\u7DCF\u548C\u306F\
-    \ [in[u] + 1, out[u]) \u306E\u7DCF\u548C\r\n\r\n\u30D1\u30B9\u30AF\u30A8\u30EA\
-    \u306E\u51E6\u7406\r\n\t\u9802\u70B9\u306B\u5024\u304C\u5B58\u5728\u3059\u308B\
-    \u3068\u304D\u306E\u307F\u8003\u3048\u308B(\u8FBA\u3082\u540C\u69D8)\r\n\t\u5404\
-    \u9802\u70B9 u \u306B\u5BFE\u3057\u3001\r\n\t\tin[u] \u306B\u9802\u70B9 u \u306E\
-    \u5024\r\n\t\tout[u] \u306B\u9802\u70B9 u \u306E\u5024\u306E\u9006\u5143\r\n\t\
-    \u3092\u3082\u305F\u305B\u308B\u3002\r\n\t\u8449\u3078\u4E0B\u308B\u65B9\u5411\
-    \u306B\u3057\u304B\u8A08\u7B97\u3067\u304D\u306A\u3044\u305F\u3081\u3001lca \u3092\
-    \u6C42\u3081\u3066 2 \u3064\u306E\u30D1\u30B9\u306B\u5206\u3051\u3066\u8A08\u7B97\
-    \u3059\u308B\u3002\r\n\t\u3053\u306E\u3068\u304D\u3001\u53EF\u63DB\u3067\u306A\
-    \u3044\u5834\u5408\u306F\u30D1\u30B9\u306E\u4E0A\u308A\u4E0B\u308A\u3067\u8A08\
-    \u7B97\u306E\u4ED5\u65B9\u3092\u5DE5\u592B\u3059\u308B\u5FC5\u8981\u304C\u3042\
-    \u308B\u3002\r\n\r\n# \u4ED5\u69D8\r\nEulerTour(const Tree & tree, size_type root)\r\
-    \n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(n)\r\n\t\u6728 g, \u6839\u3092 root\
-    \ \u3068\u3057\u3066 EulerTour \u3067\u756A\u53F7\u3092\u632F\u308B\r\n\t\u3053\
-    \u3053\u3067\u6E21\u3057\u305F tree \u306E\u53C2\u7167\u5143\u306F\u5909\u66F4\
-    \u3057\u3066\u306F\u3044\u3051\u306A\u3044\u3002\r\n\r\nsize_type size() const\
-    \ noexcept\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u5272\u308A\u632F\
-    \u3063\u305F\u8FBA\u306E\u756A\u53F7\u306E\u7DCF\u6570(2n) \u3092\u8FD4\u3059\r\
-    \n\r\nsize_type par(size_type k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
-    (1)\r\n\t\u9802\u70B9 k \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7\u3092\u8FD4\
-    \u3059\r\n\r\nsize_type in(size_type k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(1)\r\n\t\u9802\u70B9 k \u306B\u5165\u3063\u305F\u3068\u304D\u306E\u8FBA\
-    \u756A\u53F7(EulerTour \u9806) \u3092\u8FD4\u3059\r\n\tk \u304C\u6839\u306E\u5834\
-    \u5408\u306F 0\r\n\r\nsize_type out(size_type k) const\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k \u304B\u3089\u51FA\u305F\u3068\u304D\
-    \u306E\u8FBA\u756A\u53F7(EulerTour \u9806) \u3092\u8FD4\u3059\r\n\tk \u304C\u6839\
-    \u306E\u5834\u5408\u306F 2n\r\n\r\nstd::pair<size_type, size_type> par_from(size_type\
-    \ k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k\
-    \ \u306E\u89AA\u304B\u3089\u9802\u70B9 k \u3078\u306E\u8FBA e \u306E\u60C5\u5831\
-    \ ( {\u9802\u70B9 k \u306E\u89AA\u306E\u9802\u70B9\u756A\u53F7}, {tree \u4E0A\u306E\
-    \u8FBA e \u306E index}) \u3092\u8FD4\u3059\r\n\t\u3064\u307E\u308A\u3001tree[par[k]][e-index]\
-    \ = k\r\n\tk \u304C\u6839\u306E\u5834\u5408\u306F (n, n)\r\n\r\nsize_type par_to(size_type\
-    \ k) const\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u9802\u70B9 k\
-    \ \u304B\u3089\u89AA\u3078\u306E\u8FBA e \u306E tree \u4E0A\u306E index \u3092\
-    \u8FD4\u3059\r\n\t\u3064\u307E\u308A\u3001tree[k][e-index] = par[k]\r\n\tk \u304C\
-    \u6839\u3082\u3057\u304F\u306F tree \u304C\u9006\u8FBA\u3092\u6301\u3063\u3066\
-    \u3044\u306A\u3044\u5834\u5408\u306F n\r\n\r\n# \u53C2\u8003\r\nhttps://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7,\
-    \ 2020/09/16\r\nhttps://beet-aizu.hatenablog.com/entry/2019/07/08/174727, 2020/09/16\r\
-    \n*/\r\n\r\n#include <vector>\r\n#include <cassert>\r\n#include <stack>\r\n#include\
-    \ <utility>\r\n\r\nstruct EulerTour {\r\n\tusing size_type = std::size_t;\r\n\t\
-    using Tree = std::vector<std::vector<size_type>>;\r\n\t\r\nprivate:\r\n\tsize_type\
-    \ n;\r\n\tconst Tree & tree;\r\n\tsize_type root;\r\n\tstd::vector<size_type>\
-    \ in_, out_;\r\n\tstd::vector<size_type> par_, g_idx;\r\n\t\r\npublic:\r\n\tEulerTour(const\
-    \ Tree & tree, size_type root) : n(tree.size()), tree(tree), root(root) {\r\n\t\
-    \tin_.assign(size(), size());\r\n\t\tout_.assign(size(), size());\r\n\t\tpar_.assign(n,\
-    \ n);\r\n\t\tg_idx.assign(size(), n);\r\n\t\t\r\n\t\tstd::stack<std::pair<size_type,\
-    \ size_type>> stk;\r\n\t\tstd::vector<size_type> par_edge(n, n);\r\n\t\tsize_type\
-    \ num = 0;\r\n\t\t\r\n\t\tin_[root] = num++;\r\n\t\tstk.emplace(root, 0);\r\n\t\
-    \t\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst size_type u = stk.top().first;\r\
-    \n\t\t\tconst size_type i = stk.top().second;\r\n\t\t\tstk.pop();\r\n\t\t\t\r\n\
-    \t\t\tif (i < tree[u].size()) {\r\n\t\t\t\tconst size_type v = tree[u][i];\r\n\
-    \t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\tif (v == par_[u]) par_edge[u] = i;\r\
-    \n\t\t\t\telse {\r\n\t\t\t\t\tg_idx[num] = i;\r\n\t\t\t\t\tin_[v] = num++;\r\n\
-    \t\t\t\t\tpar_[v] = u;\r\n\t\t\t\t\tstk.emplace(v, 0);\r\n\t\t\t\t}\r\n\t\t\t\
-    }\r\n\t\t\telse out_[u] = num++;\r\n\t\t}\r\n\t\tfor (size_type i = 0; i < n;\
-    \ ++i) g_idx[out_[i]] = par_edge[i];\r\n\t}\r\n\t\r\n\tsize_type size() const\
-    \ noexcept { return n << 1; }\r\n\tsize_type par(size_type k) const { assert(k\
-    \ < size()); return par_[k]; }\r\n\tsize_type in(size_type k) const { assert(k\
-    \ < size()); return in_[k]; }\r\n\tsize_type out(size_type k) const { assert(k\
-    \ < size()); return out_[k]; }\r\n\tstd::pair<size_type, size_type> par_from(size_type\
-    \ k) const { assert(k < size()); return {par_[k], g_idx[in_[k]]}; }\r\n\tsize_type\
-    \ par_to(size_type k) const { assert(k < size()); return g_idx[out_[k]]; }\r\n\
-    };\r\n\r\n#endif // INCLUDE_GUARD_EULER_TOUR_HPP"
+    \n\r\n#include <vector>\r\n#include <cassert>\r\n#include <stack>\r\n#include\
+    \ <utility>\r\n\r\n/**\r\n * @brief https://tkmst201.github.io/Library/GraphTheory/EulerTour.hpp\r\
+    \n */\r\ntemplate<bool EDGE>\r\nstruct EulerTour {\r\n\tusing size_type = std::size_t;\r\
+    \n\tusing Graph = std::vector<std::vector<int>>;\r\n\t\r\nprivate:\r\n\tint n,\
+    \ root;\r\n\tstd::vector<int> in_, out_, par_, g_idx;\r\n\t\r\npublic:\r\n\tEulerTour(const\
+    \ Graph & g, int root = 0)\r\n\t\t: n(g.size()), root(root), in_(size(), -1),\
+    \ out_(size(), -1), par_(n, -1), g_idx(n << 1, -1) {\r\n\t\tstd::stack<std::pair<int,\
+    \ int>> stk;\r\n\t\tint num = 0;\r\n\t\tin_[root] = num++;\r\n\t\tstk.emplace(root,\
+    \ 0);\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst auto [u, i] = stk.top();\r\n\
+    \t\t\tstk.pop();\r\n\t\t\tif (i < g[u].size()) {\r\n\t\t\t\tconst int v = g[u][i];\r\
+    \n\t\t\t\tassert(0 <= v && v < n);\r\n\t\t\t\tassert(v != u);\r\n\t\t\t\tstk.emplace(u,\
+    \ i + 1);\r\n\t\t\t\tif (v == par_[u]) g_idx[u << 1 | 1] = i;\r\n\t\t\t\telse\
+    \ {\r\n\t\t\t\t\tin_[v] = num++;\r\n\t\t\t\t\tpar_[v] = u;\r\n\t\t\t\t\tg_idx[v\
+    \ << 1] = i;\r\n\t\t\t\t\tstk.emplace(v, 0);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\t\
+    else {\r\n\t\t\t\tout_[u] = num;\r\n\t\t\t\tif (EDGE) ++num;\r\n\t\t\t}\r\n\t\t\
+    }\r\n\t}\r\n\t\r\n\tsize_type size() const noexcept {\r\n\t\treturn EDGE ? n <<\
+    \ 1 : n;\r\n\t}\r\n\t\r\n\tint par(int k) const noexcept {\r\n\t\tassert(0 <=\
+    \ k && k < n);\r\n\t\treturn par_[k];\r\n\t}\r\n\t\r\n\tint in(int k) const noexcept\
+    \ {\r\n\t\tassert(0 <= k && k < n);\r\n\t\treturn in_[k];\r\n\t}\r\n\t\r\n\tint\
+    \ out(int k) const noexcept {\r\n\t\tassert(0 <= k && k < n);\r\n\t\treturn out_[k];\r\
+    \n\t}\r\n\t\r\n\tstd::pair<int, int> par_from(int k) const noexcept {\r\n\t\t\
+    assert(0 <= k && k < n);\r\n\t\treturn {par_[k], g_idx[k << 1]};\r\n\t}\r\n\t\r\
+    \n\tint par_to(int k) const noexcept {\r\n\t\tassert(0 <= k && k < n);\r\n\t\t\
+    return g_idx[k << 1 | 1];\r\n\t}\r\n};\r\n\r\n#endif // INCLUDE_GUARD_EULER_TOUR_HPP"
   dependsOn: []
   isVerificationFile: false
   path: GraphTheory/EulerTour.hpp
   requiredBy: []
-  timestamp: '2020-09-17 16:57:57+09:00'
+  timestamp: '2021-03-12 18:03:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/EulerTour.test.cpp
+  - Test/DynamicSegmentTree.swap.test.cpp
+  - Test/EulerTour.path.test.cpp
+  - Test/EulerTour.subtree.test.cpp
 documentation_of: GraphTheory/EulerTour.hpp
 layout: document
-redirect_from:
-- /library/GraphTheory/EulerTour.hpp
-- /library/GraphTheory/EulerTour.hpp.html
-title: GraphTheory/EulerTour.hpp
+title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"
 ---
+
+# 概要
+
+木の頂点や辺を良い性質を持つような列に並べます。  
+[セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) や [最近共通祖先 (LCA)](https://tkmst201.github.io/Library/GraphTheory/LowestCommonAncestor.hpp) を組み合わせることよって部分木クエリやパスクエリを効率的に処理することが可能です。
+詳しくは`使用例`をご覧ください。  
+
+- `EulerTour(const Graph & g, int root = )`
+	- $\Theta(N)$ 根 `root` の根付き木 `g` (頂点数 $N$ ) で初期化
+- `size_t size()`
+	- $\Theta(1)$ 最大時刻 $+ 1$ を返す
+- `int par(int k)`
+	- $\Theta(1)$ 頂点 $k$ の親を返す
+- `int in(int k)`
+	- $\Theta(1)$ 頂点 $k$ に入ったときの時刻を返す
+- `int out(int k)`
+	- $\Theta(1)$ 頂点 $k$ から出たときの時刻を返す
+- `std::pair<int, int> par_from(int k)`
+	- $\Theta(1)$ 頂点 $k$ の親 $p$ と、頂点 $p$ の隣接リストに含まれる頂点 $k$ の index の組を返す
+- `int par_to(int k)`
+	- $\Theta(1)$ 頂点 $k$ の隣接リストに含まれる親 $p$ の index を返す
+
+<br>
+
+# コンストラクタ
+
+### EulerTour(const Graph & g, int root = 0)
+
+根 `root` の根付き木 `g` (頂点数 $N$ ) で初期化します。
+時刻の経過地点を辺にするときは `EDGE` $= true$ を、頂点にするときは `EDGE` $= false$ を指定してください。  
+
+**制約**
+
+- `g` は `root` を根とした根付き木または木
+- $0 \leq$ `root` $< N$
+
+**計算量**
+
+- $\Theta(N)$
+
+---
+
+<br>
+
+# メンバ関数
+
+以下、グラフの頂点数を $N$ とします。  
+
+---
+
+### size_t size()
+
+最大時刻 $+ 1$ を返します。  
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### int par(int k)
+
+頂点 $k$ の親を返します。
+ただし、親が存在しない場合は $-1$ を返します。  
+
+**制約**
+
+- $0 \leq k < N$
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### int in(int k)
+
+頂点 $k$ に入ったときの時刻を返します。
+ただし、$k$ が根のときは $0$ を返します。  
+
+**制約**
+
+- $0 \leq k < N$
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### int out(int k)
+
+頂点 $k$ から出たときの時刻を返します。
+ただし、$k$ が根のときは $0$ を返します。  
+
+**制約**
+
+- $0 \leq k < N$
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### std::pair<int, int> par_from(int k)
+
+頂点 $k$ の親 $p$ と、頂点 $p$ の隣接リストに含まれる頂点 $k$ の index の組を返します。
+ただし、親が存在しない場合は $(-1, -1)$ を返します。  
+
+**制約**
+
+- $0 \leq k < N$
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+### int par_to(int k)
+
+頂点 $k$ の隣接リストに含まれる親 $p$ の index を返します。
+そのような index が存在しない場合は $-1$ を返します。  
+
+**制約**
+
+- $0 \leq k < N$
+
+**計算量**
+
+- $\Theta(1)$
+
+---
+
+<br>
+
+# 使用例
+
+```cpp
+#include <bits/stdc++.h>
+#include "GraphTheory/EulerTour.hpp"
+using namespace std;
+
+int main() {
+	EulerTour<false>::Graph g(6);
+	//         1
+	//    2        3
+	// 0    4          5
+	g[1].emplace_back(2);
+	g[1].emplace_back(3);
+	g[2].emplace_back(0);
+	g[2].emplace_back(4);
+	g[3].emplace_back(5);
+	
+	g[5].emplace_back(3); // 逆辺があっても良い
+	
+	// EDGE = false の各頂点の入出時刻
+	puts("EDGE = false");
+	EulerTour<false> etf(g, 1);
+	cout << "size() = " << etf.size() << endl; // 6
+	/*
+	i = 0, in = 2, out = 3
+	i = 1, in = 0, out = 6
+	i = 2, in = 1, out = 4
+	i = 3, in = 4, out = 6
+	i = 4, in = 3, out = 4
+	i = 5, in = 5, out = 6
+	頂点 u の部分木は区間 [ in(u), out(u) )
+	*/
+	for (int i = 0; i < 6; ++i) cout << "i = " << i << ", in = " << etf.in(i) << ", out = " << etf.out(i) << endl;
+	
+	puts("EDGE = true");
+	EulerTour<true> ett(g, 1);
+	cout << "size() = " << ett.size() << endl; // 12
+	/*
+	i = 0, in = 2, out = 3
+	i = 1, in = 0, out = 11
+	i = 2, in = 1, out = 6
+	i = 3, in = 7, out = 10
+	i = 4, in = 4, out = 5
+	i = 5, in = 8, out = 9
+	頂点 u の部分木は区間 [ in(u), out(u) )
+	*/
+	for (int i = 0; i < 6; ++i) cout << "i = " << i << ", in = " << ett.in(i) << ", out = " << ett.out(i) << endl;
+	
+	
+	//         1
+	//    2        3
+	// 0    4          5
+	cout << "par(4) = " << etf.par(4) << endl; // 2
+	cout << "par(3) = " << etf.par(3) << endl; // 1
+	cout << "par(1) = " << etf.par(1) << endl; // -1
+	
+	auto [p, pfidx] = etf.par_from(2);
+	cout << "par_from(2) = (" << p << ", " << pfidx << "), (" << g[p][pfidx] << ")" << endl; // (1, 0) (2)
+	cout << "par_from(1) = (" << etf.par_from(1).first << ", " << etf.par_from(1).second << ")" << endl; // (-1, -1)
+	
+	cout << "par_to(5) = " << etf.par_to(5) << " (" << g[5][etf.par_to(5)] << ")" << endl; // 0, 3
+}
+```
+
+頂点 $u$ の部分木の頂点は区間 $[$ in$[u],$ out$[u]\ )$ にあることに注意すると可環モノイドに対する部分木クエリは次のように処理することができます。  
+
+```cpp
+#include <bits/stdc++.h>
+#include "GraphTheory/EulerTour.hpp"
+#include "DataStructure/SegmentTree.hpp"
+#include "DataStructure/LazySegmentTree.hpp"
+using namespace std;
+
+int main() {
+	EulerTour<false>::Graph g(6);
+	//         1(10)
+	//    2(100)    3(1000)
+	// 0(1)  4(10000)    5(100000)
+	g[1].emplace_back(2);
+	g[1].emplace_back(3);
+	g[2].emplace_back(0);
+	g[2].emplace_back(4);
+	g[3].emplace_back(5);
+	
+	EulerTour<false> et(g, 1);
+	
+	SegmentTree<int> seg(et.size(), 0, [](auto x, auto y) { return x + y; });
+	constexpr int A[6] {1, 10, 100, 1000, 10000, 100000};
+	for (int i = 0; i < 6; ++i) seg.set(et.in(i), A[i]); // in(i) に値をセット
+	
+	// 頂点 1 の部分木の頂点の値の総和
+	cout << "subtree sum(1) = " << seg.fold(et.in(1), et.out(1)) << endl; // 111111
+	// 頂点 2 の部分木の頂点の値の総和
+	cout << "subtree sum(2) = " << seg.fold(et.in(2), et.out(2)) << endl; // 10101
+	// 頂点 5 の部分木の頂点の値の総和
+	cout << "subtree sum(5) = " << seg.fold(et.in(5), et.out(5)) << endl; // 100000
+	
+	// 遅延セグメント木を使用すると部分木の頂点全体に対する操作が可能
+	LazySegmentTree<int, int> lseg(et.size(), 0, 0,
+		[](auto x, auto y) { return x + y; },
+		[](auto x, auto e) { return x + e; },
+		[](auto e1, auto e2) { return e1 + e2; },
+		[](auto e, auto k) { return e * k; });
+	for (int i = 0; i < 6; ++i) lseg.set(et.in(i), A[i]); // in(i) に値をセット
+	
+	// 頂点 2 の部分木の頂点の値の総和
+	cout << "subtree sum(2) = " << lseg.fold(et.in(2), et.out(2)) << endl; // 10101
+	
+	// 頂点 3 の部分木に含まれる頂点の値を 1000000 増やす
+	lseg.update(et.in(3), et.out(3), 1000000);
+	// 頂点 3 の部分木の頂点の値の総和
+	cout << "subtree sum(3) = " << lseg.fold(et.in(3), et.out(3)) << endl; // 2101000
+	// 頂点 2 の部分木の頂点の値の総和
+	cout << "subtree sum(2) = " << lseg.fold(et.in(2), et.out(2)) << endl; // 10101
+}
+```
+
+アーベル群に対するパスクエリは、頂点から出る時刻に逆元をセットすることによって処理することが可能です。
+また、[重軽分解 ( HL 分解) クエリ](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition_Query.hpp)を用いれば、$\log$ が付きますがモノイドに対するパスクエリを処理することが可能です。  
+
+```cpp
+#include <bits/stdc++.h>
+#include "GraphTheory/EulerTour.hpp"
+#include "DataStructure/SegmentTree.hpp"
+#include "GraphTheory/LowestCommonAncestor.hpp"
+using namespace std;
+
+int main() {
+	EulerTour<true>::Graph g(6);
+	// 辺の値は葉側の頂点に持たせている
+	//         1
+	//    2(100)    3(1000)
+	// 0(1)  4(10000)    5(100000)
+	g[1].emplace_back(2);
+	g[1].emplace_back(3);
+	g[2].emplace_back(0);
+	g[2].emplace_back(4);
+	g[3].emplace_back(5);
+	
+	EulerTour<true> et(g, 1);
+	
+	SegmentTree<int> seg(et.size(), 0, [](auto x, auto y) { return x + y; });
+	constexpr int A[6] {1, 0, 100, 1000, 10000, 100000};
+	for (int i = 0; i < 6; ++i) {
+		seg.set(et.in(i), A[i]); // in(i) に値をセット
+		seg.set(et.out(i), -A[i]); // out(i) に逆元をセット
+	}
+	LowestCommonAncestor lca(g, 1);
+	
+	// u-v パスに含まれる辺の値の総和を返す
+	auto func = [&](int u, int v) {
+		const int l = lca.find(u, v); // lca(u, v)
+		// l-a パスに含まれる辺の値の総和を返す
+		// l-a パスに含まれない辺の値は逆元に打ち消される
+		auto sub = [&](int a) {
+			return seg.fold(et.in(l) + 1, et.in(a) + 1);
+		};
+		return sub(u) + sub(v);
+	};
+	
+	cout << "1-3 path sum = " << func(1, 3) << endl; // 1000
+	cout << "1-4 path sum = " << func(1, 4) << endl; // 10100
+	cout << "0-5 path sum = " << func(0, 5) << endl; // 101101
+	cout << "4-4 path sum = " << func(4, 4) << endl; // 0
+}
+```
+
+<br>
+
+# 参考
+
+2020/09/16: [https://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7](https://maspypy.com/euler-tour-%E3%81%AE%E3%81%8A%E5%8B%89%E5%BC%B7)  
+2020/09/16: [https://beet-aizu.hatenablog.com/entry/2019/07/08/174727](https://beet-aizu.hatenablog.com/entry/2019/07/08/174727)  
+
+<br>

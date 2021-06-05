@@ -10,119 +10,245 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    document_title: https://tkmst201.github.io/Library/DataStructure/PotentializedUnionFind.hpp
     links:
-    - http://sigma425.hatenablog.com/entry/2015/12/07/185047,
-    - https://atcoder.jp/contests/abc087/submissions/12241089
-  bundledCode: "#line 1 \"DataStructure/PotentializedUnionFind.hpp\"\n\n\n\r\n/*\r\
-    \nlast-updated: 2020/04/23\r\n\r\n\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\u4ED8\u304D\
-    \ UnionFind\r\n\r\n# \u4ED5\u69D8\r\nPotentializedUnionFind(size_type n, const\
-    \ F &f, const_reference id_elem) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: \u0398\
-    (n)\r\n\t\u8981\u7D20\u6570 n, \u4E8C\u9805\u6F14\u7B97 f, \u5358\u4F4D\u5143\
-    \ id_elem \u3067\u521D\u671F\u5316\r\n\r\nsize_type size(size_type x) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20 x \u304C\u5C5E\u3059\u308B\
-    \u30B0\u30EB\u30FC\u30D7\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\nvalue_type\
-    \ get(size_type x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\
-    \u7D20 x \u304B\u3089\u6839\u307E\u3067 fold \u3057\u305F\u7D50\u679C\u3092\u8FD4\
-    \u3059\r\n\r\nsize_type add(const_reference v) :\r\n\t\u6642\u9593\u8A08\u7B97\
-    \u91CF: \u0398(1)\r\n\t\u5024\u304C v \u3067\u3042\u308B\u9802\u70B9\u3092\u8FFD\
-    \u52A0\u3059\u308B\r\n\r\nsize_type find(size_type x) :\r\n\t\u6642\u9593\u8A08\
-    \u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20 x \u304C\u5C5E\u3059\u308B\u30B0\u30EB\
-    \u30FC\u30D7\u306E\u4EE3\u8868\u756A\u53F7\u3092\u8FD4\u3059\r\n\r\nvoid link(size_type\
-    \ p, size_type x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20\
-    \ x \u306E\u89AA\u3092 p \u306B\u8A2D\u5B9A\u3059\u308B(\u3053\u306E\u3068\u304D\
-    \u3001x \u306E\u89AA\u306E\u4ED8\u3051\u66FF\u3048\u306F\u767A\u751F\u3057\u3066\
-    \u306F\u3044\u3051\u306A\u3044)\r\n\r\nbool issame(size_type x, size_type y) :\r\
-    \n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20 x, y \u304C\u540C\
-    \u4E00\u30B0\u30EB\u30FC\u30D7\u306B\u5C5E\u3059\u308B\u304B\u3092\u8FD4\u3059\
-    \r\n\r\nTODO: \u8A08\u7B97\u91CF\u3092 O(\u03B1(n)) \u306B\u6539\u5584\u3067\u304D\
-    \u308B\u3089\u3057\u3044\u306E\u3067\u3059\u308B\r\nTODO: Potential \u611F\u3092\
-    \u51FA\u3059 (2 \u8981\u7D20\u306E\u5DEE\u306E\u5236\u7D04\u306E\u8FFD\u52A0,\
-    \ diff \u306E\u8FFD\u52A0\u306A\u3069)\r\n\r\n# \u53C2\u8003\r\nhttp://sigma425.hatenablog.com/entry/2015/12/07/185047,\
-    \ 2020/04/23\r\n\r\nverify : https://atcoder.jp/contests/abc087/submissions/12241089\r\
-    \n*/\r\n\r\n#include <vector>\r\n#include <numeric>\r\n#include <utility>\r\n\
-    #include <cassert>\r\n#include <functional>\r\n#include <stack>\r\n\r\ntemplate<typename\
-    \ T>\r\nstruct PotentializedUnionFind {\r\npublic:\r\n\tusing value_type = T;\r\
-    \n\tusing const_reference = const value_type &;\r\n\tusing size_type = std::size_t;\r\
-    \n\tusing F = std::function<value_type(const_reference, const_reference)>;\r\n\
-    \t\r\n\tPotentializedUnionFind(size_type n, const F &f, const_reference id_elem)\r\
-    \n\t\t\t: n(n), f(f), id_elem(id_elem), size_(n, 1), val(n, id_elem) {\r\n\t\t\
-    par.resize(n);\r\n\t\tstd::iota(par.begin(), par.end(), 0);\r\n\t}\r\n\t\r\n\t\
-    size_type size(size_type x) { return size_[find(x)]; }\r\n\t\r\n\tvalue_type get(size_type\
-    \ x) {\r\n\t\tfind(x);\r\n\t\tif (par[x] == x) return val[x];\r\n\t\treturn f(val[par[x]],\
-    \ val[x]);\r\n\t}\r\n\t\r\n\tsize_type add(const_reference v) {\r\n\t\tsize_.emplace_back(1);\r\
-    \n\t\tpar.emplace_back(n);\r\n\t\tval.emplace_back(v);\r\n\t\treturn n++;\r\n\t\
-    }\r\n\t\r\n\tsize_type find(size_type x) {\r\n\t\tassert(x < n);\r\n\t\tstd::stack<size_type>\
-    \ stk;\r\n\t\tstk.push(x);\r\n\t\twhile (par[stk.top()] != stk.top()) stk.push(par[stk.top()]);\r\
-    \n\t\t\r\n\t\tsize_type r = stk.top();\r\n\t\tstk.pop();\r\n\t\tbool r_child =\
-    \ true;\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst size_type &t = stk.top();\r\
-    \n\t\t\tif (!r_child) val[t] = f(val[par[t]], val[t]);\r\n\t\t\tpar[t] = r;\r\n\
-    \t\t\tr_child = false;\r\n\t\t\tstk.pop();\r\n\t\t}\r\n\t\treturn r;\r\n\t}\r\n\
-    \t\r\n\tvoid link(size_type p, size_type x) {\r\n\t\tassert(par[x] == x);\r\n\t\
-    \tpar[x] = p;\r\n\t\tsize_[find(p)] += size_[x];\r\n\t}\r\n\t\r\n\tbool issame(size_type\
-    \ x, size_type y) { return find(x) == find(y); }\r\n\t\r\nprivate:\r\n\tsize_type\
-    \ n;\r\n\tvalue_type id_elem;\r\n\tF f;\r\n\tstd::vector<size_type> size_, par;\r\
-    \n\tstd::vector<value_type> val;\r\n};\r\n\r\n\n"
+    - https://tkmst201.github.io/Library/DataStructure/PotentializedUnionFind.hpp
+  bundledCode: "#line 1 \"DataStructure/PotentializedUnionFind.hpp\"\n\n\n\r\n#include\
+    \ <cassert>\r\n#include <vector>\r\n#include <functional>\r\n#include <utility>\r\
+    \n\r\n/**\r\n * @brief https://tkmst201.github.io/Library/DataStructure/PotentializedUnionFind.hpp\r\
+    \n */\r\ntemplate<typename T>\r\nstruct PotentializedUnionFind {\r\n\tusing value_type\
+    \ = T;\r\n\tusing const_reference = const value_type &;\r\n\tusing size_type =\
+    \ std::size_t;\r\n\tusing F = std::function<value_type (const_reference, const_reference)>;\r\
+    \n\tusing G = std::function<value_type (const_reference)>;\r\n\t\r\nprivate:\r\
+    \n\tsize_type n;\r\n\tvalue_type id_elem;\r\n\tF f;\r\n\tG g;\r\n\tstd::vector<int>\
+    \ dat;\r\n\tstd::vector<value_type> val;\r\n\t\r\npublic:\r\n\tPotentializedUnionFind(size_type\
+    \ n, const_reference id_elem, const F & f, const G & g = [](const_reference x)\
+    \ { return -x; })\r\n\t\t: n(n), id_elem(id_elem), f(f), g(g), dat(n, -1), val(n,\
+    \ id_elem) {}\r\n\t\r\n\tsize_type size(size_type x) noexcept {\r\n\t\tassert(x\
+    \ < n);\r\n\t\treturn -dat[find(x)];\r\n\t}\r\n\t\r\n\tsize_type find(size_type\
+    \ x) noexcept {\r\n\t\tassert(x < n);\r\n\t\tif (dat[x] < 0) return x;\r\n\t\t\
+    const size_type p = dat[x];\r\n\t\tdat[x] = find(p);\r\n\t\tval[x] = f(val[x],\
+    \ val[p]);\r\n\t\treturn dat[x];\r\n\t}\r\n\t\r\n\tvoid merge(size_type x, size_type\
+    \ y, const_reference w) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\
+    \n\t\tsize_type rx = find(x), ry = find(y);\r\n\t\tassert(rx != ry);\r\n\t\tvalue_type\
+    \ v = f(val[y], g(f(val[x], w)));\r\n\t\tif (dat[rx] < dat[ry]) {\r\n\t\t\tstd::swap(rx,\
+    \ ry);\r\n\t\t\tv = g(v);\r\n\t\t}\r\n\t\tdat[ry] += dat[rx];\r\n\t\tdat[rx] =\
+    \ ry;\r\n\t\tval[rx] = std::move(v);\r\n\t}\r\n\t\r\n\tvalue_type diff(size_type\
+    \ x, size_type y) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\n\t\
+    \tconst size_type rx = find(x), ry = find(y);\r\n\t\tassert(rx == ry);\r\n\t\t\
+    return f(val[y], g(val[x]));\r\n\t}\r\n\t\r\n\tbool issame(size_type x, size_type\
+    \ y) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\n\t\treturn find(x)\
+    \ == find(y);\r\n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP\r\n#define INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP\r\
-    \n\r\n/*\r\nlast-updated: 2020/04/23\r\n\r\n\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\
-    \u4ED8\u304D UnionFind\r\n\r\n# \u4ED5\u69D8\r\nPotentializedUnionFind(size_type\
-    \ n, const F &f, const_reference id_elem) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF\
-    : \u0398(n)\r\n\t\u8981\u7D20\u6570 n, \u4E8C\u9805\u6F14\u7B97 f, \u5358\u4F4D\
-    \u5143 id_elem \u3067\u521D\u671F\u5316\r\n\r\nsize_type size(size_type x) :\r\
-    \n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20 x \u304C\u5C5E\u3059\
-    \u308B\u30B0\u30EB\u30FC\u30D7\u306E\u8981\u7D20\u6570\u3092\u8FD4\u3059\r\n\r\
-    \nvalue_type get(size_type x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\
-    \n\t\u8981\u7D20 x \u304B\u3089\u6839\u307E\u3067 fold \u3057\u305F\u7D50\u679C\
-    \u3092\u8FD4\u3059\r\n\r\nsize_type add(const_reference v) :\r\n\t\u6642\u9593\
-    \u8A08\u7B97\u91CF: \u0398(1)\r\n\t\u5024\u304C v \u3067\u3042\u308B\u9802\u70B9\
-    \u3092\u8FFD\u52A0\u3059\u308B\r\n\r\nsize_type find(size_type x) :\r\n\t\u6642\
-    \u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20 x \u304C\u5C5E\u3059\u308B\
-    \u30B0\u30EB\u30FC\u30D7\u306E\u4EE3\u8868\u756A\u53F7\u3092\u8FD4\u3059\r\n\r\
-    \nvoid link(size_type p, size_type x) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log\
-    \ n)\r\n\t\u8981\u7D20 x \u306E\u89AA\u3092 p \u306B\u8A2D\u5B9A\u3059\u308B(\u3053\
-    \u306E\u3068\u304D\u3001x \u306E\u89AA\u306E\u4ED8\u3051\u66FF\u3048\u306F\u767A\
-    \u751F\u3057\u3066\u306F\u3044\u3051\u306A\u3044)\r\n\r\nbool issame(size_type\
-    \ x, size_type y) :\r\n\t\u6642\u9593\u8A08\u7B97\u91CF: O(log n)\r\n\t\u8981\u7D20\
-    \ x, y \u304C\u540C\u4E00\u30B0\u30EB\u30FC\u30D7\u306B\u5C5E\u3059\u308B\u304B\
-    \u3092\u8FD4\u3059\r\n\r\nTODO: \u8A08\u7B97\u91CF\u3092 O(\u03B1(n)) \u306B\u6539\
-    \u5584\u3067\u304D\u308B\u3089\u3057\u3044\u306E\u3067\u3059\u308B\r\nTODO: Potential\
-    \ \u611F\u3092\u51FA\u3059 (2 \u8981\u7D20\u306E\u5DEE\u306E\u5236\u7D04\u306E\
-    \u8FFD\u52A0, diff \u306E\u8FFD\u52A0\u306A\u3069)\r\n\r\n# \u53C2\u8003\r\nhttp://sigma425.hatenablog.com/entry/2015/12/07/185047,\
-    \ 2020/04/23\r\n\r\nverify : https://atcoder.jp/contests/abc087/submissions/12241089\r\
-    \n*/\r\n\r\n#include <vector>\r\n#include <numeric>\r\n#include <utility>\r\n\
-    #include <cassert>\r\n#include <functional>\r\n#include <stack>\r\n\r\ntemplate<typename\
-    \ T>\r\nstruct PotentializedUnionFind {\r\npublic:\r\n\tusing value_type = T;\r\
-    \n\tusing const_reference = const value_type &;\r\n\tusing size_type = std::size_t;\r\
-    \n\tusing F = std::function<value_type(const_reference, const_reference)>;\r\n\
-    \t\r\n\tPotentializedUnionFind(size_type n, const F &f, const_reference id_elem)\r\
-    \n\t\t\t: n(n), f(f), id_elem(id_elem), size_(n, 1), val(n, id_elem) {\r\n\t\t\
-    par.resize(n);\r\n\t\tstd::iota(par.begin(), par.end(), 0);\r\n\t}\r\n\t\r\n\t\
-    size_type size(size_type x) { return size_[find(x)]; }\r\n\t\r\n\tvalue_type get(size_type\
-    \ x) {\r\n\t\tfind(x);\r\n\t\tif (par[x] == x) return val[x];\r\n\t\treturn f(val[par[x]],\
-    \ val[x]);\r\n\t}\r\n\t\r\n\tsize_type add(const_reference v) {\r\n\t\tsize_.emplace_back(1);\r\
-    \n\t\tpar.emplace_back(n);\r\n\t\tval.emplace_back(v);\r\n\t\treturn n++;\r\n\t\
-    }\r\n\t\r\n\tsize_type find(size_type x) {\r\n\t\tassert(x < n);\r\n\t\tstd::stack<size_type>\
-    \ stk;\r\n\t\tstk.push(x);\r\n\t\twhile (par[stk.top()] != stk.top()) stk.push(par[stk.top()]);\r\
-    \n\t\t\r\n\t\tsize_type r = stk.top();\r\n\t\tstk.pop();\r\n\t\tbool r_child =\
-    \ true;\r\n\t\twhile (!stk.empty()) {\r\n\t\t\tconst size_type &t = stk.top();\r\
-    \n\t\t\tif (!r_child) val[t] = f(val[par[t]], val[t]);\r\n\t\t\tpar[t] = r;\r\n\
-    \t\t\tr_child = false;\r\n\t\t\tstk.pop();\r\n\t\t}\r\n\t\treturn r;\r\n\t}\r\n\
-    \t\r\n\tvoid link(size_type p, size_type x) {\r\n\t\tassert(par[x] == x);\r\n\t\
-    \tpar[x] = p;\r\n\t\tsize_[find(p)] += size_[x];\r\n\t}\r\n\t\r\n\tbool issame(size_type\
-    \ x, size_type y) { return find(x) == find(y); }\r\n\t\r\nprivate:\r\n\tsize_type\
-    \ n;\r\n\tvalue_type id_elem;\r\n\tF f;\r\n\tstd::vector<size_type> size_, par;\r\
-    \n\tstd::vector<value_type> val;\r\n};\r\n\r\n#endif // INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP"
+    \n\r\n#include <cassert>\r\n#include <vector>\r\n#include <functional>\r\n#include\
+    \ <utility>\r\n\r\n/**\r\n * @brief https://tkmst201.github.io/Library/DataStructure/PotentializedUnionFind.hpp\r\
+    \n */\r\ntemplate<typename T>\r\nstruct PotentializedUnionFind {\r\n\tusing value_type\
+    \ = T;\r\n\tusing const_reference = const value_type &;\r\n\tusing size_type =\
+    \ std::size_t;\r\n\tusing F = std::function<value_type (const_reference, const_reference)>;\r\
+    \n\tusing G = std::function<value_type (const_reference)>;\r\n\t\r\nprivate:\r\
+    \n\tsize_type n;\r\n\tvalue_type id_elem;\r\n\tF f;\r\n\tG g;\r\n\tstd::vector<int>\
+    \ dat;\r\n\tstd::vector<value_type> val;\r\n\t\r\npublic:\r\n\tPotentializedUnionFind(size_type\
+    \ n, const_reference id_elem, const F & f, const G & g = [](const_reference x)\
+    \ { return -x; })\r\n\t\t: n(n), id_elem(id_elem), f(f), g(g), dat(n, -1), val(n,\
+    \ id_elem) {}\r\n\t\r\n\tsize_type size(size_type x) noexcept {\r\n\t\tassert(x\
+    \ < n);\r\n\t\treturn -dat[find(x)];\r\n\t}\r\n\t\r\n\tsize_type find(size_type\
+    \ x) noexcept {\r\n\t\tassert(x < n);\r\n\t\tif (dat[x] < 0) return x;\r\n\t\t\
+    const size_type p = dat[x];\r\n\t\tdat[x] = find(p);\r\n\t\tval[x] = f(val[x],\
+    \ val[p]);\r\n\t\treturn dat[x];\r\n\t}\r\n\t\r\n\tvoid merge(size_type x, size_type\
+    \ y, const_reference w) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\
+    \n\t\tsize_type rx = find(x), ry = find(y);\r\n\t\tassert(rx != ry);\r\n\t\tvalue_type\
+    \ v = f(val[y], g(f(val[x], w)));\r\n\t\tif (dat[rx] < dat[ry]) {\r\n\t\t\tstd::swap(rx,\
+    \ ry);\r\n\t\t\tv = g(v);\r\n\t\t}\r\n\t\tdat[ry] += dat[rx];\r\n\t\tdat[rx] =\
+    \ ry;\r\n\t\tval[rx] = std::move(v);\r\n\t}\r\n\t\r\n\tvalue_type diff(size_type\
+    \ x, size_type y) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\n\t\
+    \tconst size_type rx = find(x), ry = find(y);\r\n\t\tassert(rx == ry);\r\n\t\t\
+    return f(val[y], g(val[x]));\r\n\t}\r\n\t\r\n\tbool issame(size_type x, size_type\
+    \ y) noexcept {\r\n\t\tassert(x < n);\r\n\t\tassert(y < n);\r\n\t\treturn find(x)\
+    \ == find(y);\r\n\t}\r\n};\r\n\r\n#endif // INCLUDE_GUARD_POTENTIALIZED_UNION_FIND_HPP"
   dependsOn: []
   isVerificationFile: false
   path: DataStructure/PotentializedUnionFind.hpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-03-09 20:19:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/PotentializedUnionFind.test.cpp
 documentation_of: DataStructure/PotentializedUnionFind.hpp
 layout: document
-redirect_from:
-- /library/DataStructure/PotentializedUnionFind.hpp
-- /library/DataStructure/PotentializedUnionFind.hpp.html
-title: DataStructure/PotentializedUnionFind.hpp
+title: "\u30DD\u30C6\u30F3\u30B7\u30E3\u30EB\u4ED8\u304D Union Find"
 ---
+
+# 概要
+
+差分制約の一次方程式を効率的に解くことができるデータ構造です。  
+変数が $N$ 個あるとき、差分制約の追加や差分の計算をならし $\Theta(\alpha(N))$ ( $\alpha(N)$ はアッカーマン関数の逆関数 ) で計算できます。  
+[Union Find](https://tkmst201.github.io/Library/DataStructure/UnionFind.hpp) の機能強化版です。  
+
+- `PotentializedUnionFind(size_t n, const T & id_elem, const F & f, const F & g = [];(const_refrence x) { return -x; })`
+	- $\Theta(n)$ $n$ 変数で初期化
+- `:warning: size_t size(size_t x)`
+	- ならし $\Theta(\alpha(N))$ 変数 $x$ と同じグループに含まれる変数の個数を返す
+- `size_t find(size_t x)`
+	- ならし $\Theta(\alpha(N))$ 変数 $x$ が属するグループの代表の変数を返す
+- `void merge(size_t x, size_t y, const T & w)`
+	- ならし $\Theta(\alpha(N))$ 変数 $x, y$ それぞれが属するグループを併合し、差分制約 $x + w = y$ を追加
+- `T diff(size_t x, size_t y)`
+	- ならし $\Theta(\alpha(N))$ これまでに追加された差分制約を満たすような変数 $x, y$ の値に対して $y - x$ を返す
+- `bool issame(size_t x, size_t y)`
+	- ならし $\Theta(\alpha(N))$ 変数 $x, y$ が同じグループに属しているか判定
+
+<br>
+
+# コンストラクタ
+
+### PotentializedUnionFind(size_t n, const T & id_elem, const F & f, const F & g = &#91;&#93;(const_refrence x) { return -x; })
+
+$n$ 変数で初期化します。
+はじめ、すべての変数は自身のみからなるグループに属しています。  
+
+**制約**
+
+- `f` の単位元は `id_elem`
+- `g` は逆元を返す
+- $(T, f,$ `id_elem`, `g`$)$ はアーベル群
+
+**計算量**
+
+- $\Theta(n)$
+
+---
+
+<br>
+
+# メンバ関数
+
+以下、変数の個数を $N$ とします。
+また、アッカーマン関数の逆関数を $\alpha(N)$ と表します。  
+
+---
+
+### :warning: size_t size(size_t x)
+
+変数 $x$ と同じグループに含まれる変数の個数を返します。  
+
+**制約**
+
+- $0 \leq x < N$
+
+**計算量**
+
+- ならし $\Theta(\alpha(N))$
+
+---
+
+### size_t find(size_t x)
+
+変数 $x$ が属するグループの代表の変数を返します。
+`unite` を行うことにより代表の変数が変化する場合があります。  
+
+**制約**
+
+- $0 \leq x < N$
+
+**計算量**
+
+- ならし $\Theta(\alpha(N))$
+
+---
+
+### void merge(size_t x, size_t y, const T & w)
+
+変数 $x, y$ それぞれが属するグループを併合し、差分制約 $x + w = y$ を追加します。  
+
+**制約**
+
+- $0 \leq x, y < N$
+- $x, y$ は同じグループに属さない
+
+**計算量**
+
+- ならし $\Theta(\alpha(N))$
+
+---
+
+### T diff(size_t x, size_t y)
+
+これまでに追加された差分制約を満たすような変数 $x, y$ の値に対して $y - x$ を返します。  
+
+**制約**
+
+- $0 \leq x, y < N$
+- $x, y$ は同じグループに属する
+
+**計算量**
+
+- ならし $\Theta(\alpha(N))$
+
+---
+
+### bool issame(size_t x, size_t y)
+
+変数 $x, y$ が同じグループに属しているか判定します。
+同じグループに属しているなら $true$ 、違うグループに属しているなら $false$ を返します。  
+
+**制約**
+
+- $0 \leq x, y < N$
+
+**計算量**
+
+- ならし $\Theta(\alpha(N))$
+
+---
+
+<br>
+
+# 使用例
+
+```cpp
+#include <bits/stdc++.h>
+#include "DataStructure/PotentializedUnionFind.hpp"
+using namespace std;
+
+int main() {
+	PotentializedUnionFind<int> puf(3, 0, [](auto x, auto y) { return x + y; });
+	puf.merge(1, 0, 5); // x0 - x1 = 5
+	cout << "diff(1, 0) = " << puf.diff(1, 0) << endl; // 5
+	puf.merge(1, 2, 7); // x2 - x1 = 7
+	cout << "diff(2, 1) = " << puf.diff(2, 1) << endl; // -7
+	
+	// => x0 - x2 = -2
+	cout << "diff(2, 0) = " << puf.diff(2, 0) << endl;
+	// => x0 - x2 = 2
+	cout << "diff(0, 2) = " << puf.diff(0, 2) << endl;
+	
+	
+	PotentializedUnionFind<int> pufxor(5, 0, [](auto x, auto y) { return x ^ y; }, [](auto x) { return x; });
+	pufxor.merge(1, 0, 1); // x1 ^ x0 = 1
+	pufxor.merge(1, 2, 2); // x2 ^ x1 = 2
+	
+	// => x2 ^ x0 = 3
+	cout << "diff(2, 0) = " << pufxor.diff(2, 0) << endl;
+	// => x0 ^ x2 = 3
+	cout << "diff(0, 2) = " << pufxor.diff(2, 0) << endl;
+	
+	for (int i = 0; i < 5; ++i) cout << pufxor.size(i) << " \n"[i + 1 == 5]; // 3 3 3 1 1
+	cout << "issame(0, 1) = " << boolalpha << pufxor.issame(0, 1) << endl; // true
+	cout << "issame(2, 3) = " << boolalpha << pufxor.issame(2, 3) << endl; // false
+	cout << "find(2) = " << pufxor.find(2) << endl; // 0 or 1 or 2
+	cout << "find(4) = " << pufxor.find(4) << endl; // 4
+}
+```
+
+<br>
+
+# TODO
+
+TODO: `size` の test を追加する  
+
+# 参考
+
+2021/03/09: [http://sigma425.hatenablog.com/entry/2015/12/07/185047](http://sigma425.hatenablog.com/entry/2015/12/07/185047)  
+2021/03/09: [https://qiita.com/drken/items/cce6fc5c579051e64fab](https://qiita.com/drken/items/cce6fc5c579051e64fab)  
+
+<br>
