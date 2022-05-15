@@ -70,9 +70,9 @@ data:
   timestamp: '2021-03-09 16:44:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/BinaryIndexedTree_RangeAdd.test.cpp
   - Test/EulerTour.path.test.cpp
   - Test/BinaryIndexedTree.test.cpp
-  - Test/BinaryIndexedTree_RangeAdd.test.cpp
 documentation_of: DataStructure/BinaryIndexedTree.hpp
 layout: document
 title: Binary Indexed Tree

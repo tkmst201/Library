@@ -194,19 +194,19 @@ data:
     int main() {\r\n\tstd::cin.tie(0);\r\n\tstd::ios::sync_with_stdio(false);\r\n\t\
     \r\n\tstd::string S;\r\n\tstd::cin >> S;\r\n\t\r\n\tauto sa = SuffixArray::sa_is(S);\r\
     \n\tfor (int i = 1; i <= S.size(); ++i) std::cout << sa[i] << \" \\n\"[i == S.size()];\r\
-    \n\treturn 0;\r\n}\n"
+    \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/suffixarray\"\r\n\r\n#include\
     \ \"String/SuffixArray.hpp\"\r\n\r\n#include <string>\r\n#include <iostream>\r\
     \n\r\nint main() {\r\n\tstd::cin.tie(0);\r\n\tstd::ios::sync_with_stdio(false);\r\
     \n\t\r\n\tstd::string S;\r\n\tstd::cin >> S;\r\n\t\r\n\tauto sa = SuffixArray::sa_is(S);\r\
     \n\tfor (int i = 1; i <= S.size(); ++i) std::cout << sa[i] << \" \\n\"[i == S.size()];\r\
-    \n\treturn 0;\r\n}"
+    \n}"
   dependsOn:
   - String/SuffixArray.hpp
   isVerificationFile: true
   path: Test/SuffixArray.sa_is.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/SuffixArray.sa_is.test.cpp

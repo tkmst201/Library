@@ -84,7 +84,7 @@ data:
     \ && primes[idx] <= N; ++i, idx += A)\r\n\t\tans.emplace_back(primes[idx]);\r\n\
     \t\r\n\tprintf(\"%d %d\\n\", primes.size(), ans.size());\r\n\tfor (int i = 0;\
     \ i < ans.size(); ++i) printf(\"%d%c\", ans[i], \" \\n\"[i + 1 == ans.size()]);\r\
-    \n\t\r\n\treturn 0;\r\n}\n"
+    \n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\r\n\r\
     \n#include \"Mathematics/PrimeNumber/enumerate_primes.hpp\"\r\n\r\n#include <cstdio>\r\
     \n\r\nint main() {\r\n\tint N, A, B;\r\n\tscanf(\"%d %d %d\", &N, &A, &B);\r\n\
@@ -92,13 +92,13 @@ data:
     \n\tfor (int i = 0, idx = B; idx < primes.size() && primes[idx] <= N; ++i, idx\
     \ += A)\r\n\t\tans.emplace_back(primes[idx]);\r\n\t\r\n\tprintf(\"%d %d\\n\",\
     \ primes.size(), ans.size());\r\n\tfor (int i = 0; i < ans.size(); ++i) printf(\"\
-    %d%c\", ans[i], \" \\n\"[i + 1 == ans.size()]);\r\n\t\r\n\treturn 0;\r\n}"
+    %d%c\", ans[i], \" \\n\"[i + 1 == ans.size()]);\r\n}"
   dependsOn:
   - Mathematics/PrimeNumber/enumerate_primes.hpp
   isVerificationFile: true
   path: Test/PrimeNumber.enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2020-11-10 21:09:37+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/PrimeNumber.enumerate_primes.test.cpp

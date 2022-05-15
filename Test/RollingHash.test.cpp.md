@@ -97,20 +97,20 @@ data:
     \ rh(T);\r\n\tauto phash = RollingHash(P).hash(0, 0, P.size());\r\n\t\r\n\tfor\
     \ (int i = P.size(); i <= T.size(); ++i) {\r\n\t\tif (rh.hash(0, i - P.size(),\
     \ i) == phash) {\r\n\t\t\tprintf(\"%d\\n\", i - P.size());\r\n\t\t}\r\n\t}\r\n\
-    \t\r\n\treturn 0;\r\n}\n"
+    }\n"
   code: "#define PROBLEM \"http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_14_B\"\
     \r\n\r\n#include \"String/RollingHash.hpp\"\r\n\r\n#include <string>\r\n#include\
     \ <iostream>\r\nusing namespace std;\r\n\r\nint main() {\r\n\tstring T, P;\r\n\
     \tcin >> T >> P;\r\n\tRollingHash rh(T);\r\n\tauto phash = RollingHash(P).hash(0,\
     \ 0, P.size());\r\n\t\r\n\tfor (int i = P.size(); i <= T.size(); ++i) {\r\n\t\t\
     if (rh.hash(0, i - P.size(), i) == phash) {\r\n\t\t\tprintf(\"%d\\n\", i - P.size());\r\
-    \n\t\t}\r\n\t}\r\n\t\r\n\treturn 0;\r\n}"
+    \n\t\t}\r\n\t}\r\n}"
   dependsOn:
   - String/RollingHash.hpp
   isVerificationFile: true
   path: Test/RollingHash.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/RollingHash.test.cpp

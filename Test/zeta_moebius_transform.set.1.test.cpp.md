@@ -147,7 +147,7 @@ data:
     if (s >> i & 1) p *= P[i] * 0.01;\r\n\t\t\t\telse p *= (100 - P[i]) * 0.01;\r\n\
     \t\t\t}\r\n\t\t\tans += (M - v[(1 << N) - 1 - s]) * p;\r\n\t\t}\r\n\t\treturn\
     \ ans;\r\n\t};\r\n\t\r\n\tdouble ans1 = solve1();\r\n\tdouble ans2 = solve2();\r\
-    \n\tprintf(\"%.16f\\n\", (ans1 + ans2) / 2.0);\r\n\treturn 0;\r\n}\n"
+    \n\tprintf(\"%.16f\\n\", (ans1 + ans2) / 2.0);\r\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/challenges/sources/JAG/Summer/2446?year=2012\"\
     \r\n#define ERROR \"1e-7\"\r\n\r\n#include \"Mathematics/zeta_moebius_transform.hpp\"\
     \r\n#include \"Mathematics/euclid.hpp\"\r\n\r\n#include <vector>\r\n#include <iostream>\r\
@@ -177,14 +177,14 @@ data:
     else p *= (100 - P[i]) * 0.01;\r\n\t\t\t}\r\n\t\t\tans += (M - v[(1 << N) - 1\
     \ - s]) * p;\r\n\t\t}\r\n\t\treturn ans;\r\n\t};\r\n\t\r\n\tdouble ans1 = solve1();\r\
     \n\tdouble ans2 = solve2();\r\n\tprintf(\"%.16f\\n\", (ans1 + ans2) / 2.0);\r\n\
-    \treturn 0;\r\n}"
+    }"
   dependsOn:
   - Mathematics/zeta_moebius_transform.hpp
   - Mathematics/euclid.hpp
   isVerificationFile: true
   path: Test/zeta_moebius_transform.set.1.test.cpp
   requiredBy: []
-  timestamp: '2021-05-02 14:09:01+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/zeta_moebius_transform.set.1.test.cpp

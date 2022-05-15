@@ -107,18 +107,18 @@ data:
     \t}\r\n\t}\r\n\t\r\n\treturn dp.back();\r\n}\r\n} // namespace tk\r\n\r\n\n#line\
     \ 4 \"Test/PrimeNumber.counting_primes.test.cpp\"\n\r\n#include <cstdio>\r\n\r\
     \nint main() {\r\n\tlong long N;\r\n\tscanf(\"%lld\", &N);\r\n\tprintf(\"%lld\\\
-    n\", tk::counting_primes(N));\r\n\treturn 0;\r\n}\n"
+    n\", tk::counting_primes(N));\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n\r\
     \n#include \"Mathematics/PrimeNumber/counting_primes.hpp\"\r\n\r\n#include <cstdio>\r\
     \n\r\nint main() {\r\n\tlong long N;\r\n\tscanf(\"%lld\", &N);\r\n\tprintf(\"\
-    %lld\\n\", tk::counting_primes(N));\r\n\treturn 0;\r\n}"
+    %lld\\n\", tk::counting_primes(N));\r\n}"
   dependsOn:
   - Mathematics/PrimeNumber/counting_primes.hpp
   - Mathematics/PrimeNumber/enumerate_primes.hpp
   isVerificationFile: true
   path: Test/PrimeNumber.counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2020-11-10 21:09:37+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/PrimeNumber.counting_primes.test.cpp

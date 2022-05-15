@@ -127,14 +127,14 @@ data:
   timestamp: '2021-06-05 13:56:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/Combination.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/SegmentTree.fold.test.cpp
+  - Test/Combination.test.cpp
+  - Test/DynamicSegmentTree.test.cpp
+  - Test/SlidingWindowAggregation.test.cpp
+  - Test/matrix.pow.test.cpp
   - Test/LazySegmentTree.test.cpp
   - Test/matrix.det.test.cpp
-  - Test/matrix.pow.test.cpp
-  - Test/SlidingWindowAggregation.test.cpp
-  - Test/DynamicSegmentTree.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document
 title: "ModInt \u69CB\u9020\u4F53"
@@ -310,6 +310,8 @@ int main() {
 	cout << "15: " << mint(15) << endl; // 2
 	cout << "-1: " << mint(-1) << endl; // 12
 	cout << "-1: " << mint(-1).val() << endl; // 12
+	cout << "10^2 " << mint(10).pow(2) << endl; // 9
+	cout << "3^-1 " << mint(3).inv() << endl; // 9 ( 9*3 = 27 = 1+(13*2) )
 	
 	mint a(10);
 	cout << a << endl; // 10

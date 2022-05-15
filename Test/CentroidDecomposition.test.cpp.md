@@ -71,8 +71,7 @@ data:
     \tscanf(\"%d %d %d\", &a, &b, &c);\r\n\t\tg[a].emplace_back(b, c);\r\n\t\tg[b].emplace_back(a,\
     \ c);\r\n\t}\r\n\t\r\n\tauto [ans, path] = tree_diameter(g);\r\n\tprintf(\"%lld\
     \ %d\\n\", ans, (int)path.size());\r\n\tfor (int i = 0; i < path.size(); ++i)\
-    \ printf(\"%d%c\", path[i], \" \\n\"[i + 1 == path.size()]);\r\n\treturn 0;\r\n\
-    }\n"
+    \ printf(\"%d%c\", path[i], \" \\n\"[i + 1 == path.size()]);\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\r\n\r\n\
     #include \"GraphTheory/CentroidDecomposition.hpp\"\r\n\r\n#include <cstdio>\r\n\
     #include <vector>\r\n#include <cassert>\r\n\r\nstd::pair<long long, std::vector<int>>\
@@ -108,14 +107,13 @@ data:
     \tscanf(\"%d %d %d\", &a, &b, &c);\r\n\t\tg[a].emplace_back(b, c);\r\n\t\tg[b].emplace_back(a,\
     \ c);\r\n\t}\r\n\t\r\n\tauto [ans, path] = tree_diameter(g);\r\n\tprintf(\"%lld\
     \ %d\\n\", ans, (int)path.size());\r\n\tfor (int i = 0; i < path.size(); ++i)\
-    \ printf(\"%d%c\", path[i], \" \\n\"[i + 1 == path.size()]);\r\n\treturn 0;\r\n\
-    }"
+    \ printf(\"%d%c\", path[i], \" \\n\"[i + 1 == path.size()]);\r\n}"
   dependsOn:
   - GraphTheory/CentroidDecomposition.hpp
   isVerificationFile: true
   path: Test/CentroidDecomposition.test.cpp
   requiredBy: []
-  timestamp: '2021-03-16 16:17:21+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/CentroidDecomposition.test.cpp

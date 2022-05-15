@@ -267,8 +267,8 @@ data:
   timestamp: '2021-03-18 15:32:11+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
+  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
 documentation_of: GraphTheory/HeavyLightDecomposition_Query.hpp
 layout: document
 title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"

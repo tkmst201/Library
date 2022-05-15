@@ -261,8 +261,8 @@ data:
   timestamp: '2021-05-02 14:09:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/matrix.det.test.cpp
   - Test/matrix.pow.test.cpp
+  - Test/matrix.det.test.cpp
 documentation_of: Mathematics/Matrix.hpp
 layout: document
 title: "\u884C\u5217"

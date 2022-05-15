@@ -148,7 +148,7 @@ data:
     %d %d\", &a, &b);\r\n\t\tg[a].emplace_back(b);\r\n\t\tg[b].emplace_back(a);\r\n\
     \t}\r\n\tauto table = tk::frequency_table_of_tree_distance<CentroidDecomposition,\
     \ FastFourierTransform>(g);\r\n\tfor (int i = 1; i < N; ++i) printf(\"%lld%c\"\
-    , i < table.size() ? table[i] : 0, \" \\n\"[i + 1 == N]);\r\n\treturn 0;\r\n}\n"
+    , i < table.size() ? table[i] : 0, \" \\n\"[i + 1 == N]);\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/frequency_table_of_tree_distance\"\
     \r\n\r\n#include \"GraphTheory/CentroidDecomposition.hpp\"\r\n#include \"Convolution/FastFourierTransform.hpp\"\
     \r\n#include \"Algorithm/frequency_table_of_tree_distance.hpp\"\r\n\r\n#include\
@@ -157,7 +157,7 @@ data:
     \ - 1; ++i) {\r\n\t\tint a, b;\r\n\t\tscanf(\"%d %d\", &a, &b);\r\n\t\tg[a].emplace_back(b);\r\
     \n\t\tg[b].emplace_back(a);\r\n\t}\r\n\tauto table = tk::frequency_table_of_tree_distance<CentroidDecomposition,\
     \ FastFourierTransform>(g);\r\n\tfor (int i = 1; i < N; ++i) printf(\"%lld%c\"\
-    , i < table.size() ? table[i] : 0, \" \\n\"[i + 1 == N]);\r\n\treturn 0;\r\n}"
+    , i < table.size() ? table[i] : 0, \" \\n\"[i + 1 == N]);\r\n}"
   dependsOn:
   - GraphTheory/CentroidDecomposition.hpp
   - Convolution/FastFourierTransform.hpp
@@ -165,7 +165,7 @@ data:
   isVerificationFile: true
   path: Test/FastFourierTransform.test.cpp
   requiredBy: []
-  timestamp: '2021-06-05 13:56:14+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/FastFourierTransform.test.cpp

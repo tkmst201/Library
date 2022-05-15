@@ -38,11 +38,11 @@ data:
     \n\t\tfor (int i = logn - 1; i >= 0; --i) {\r\n\t\t\tif (par[i][a] != par[i][b])\
     \ a = par[i][a], b = par[i][b]; \r\n\t\t}\r\n\t\treturn par[0][a];\r\n\t}\r\n\t\
     \r\n\tint parent(int u, int k = 1) const noexcept {\r\n\t\tassert(0 <= u && u\
-    \ < size());\r\n\t\tassert(k <= depth_[u]);\r\n\t\tassert(par[0][u] != -1);\r\n\
-    \t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\n\t\treturn\
-    \ u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0 <= u\
-    \ && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\n\
-    \t}\r\n};\r\n\r\n\n#line 4 \"Test/LowestCommonAncestor.test.cpp\"\n\r\n#include\
+    \ < size());\r\n\t\tassert(0 <= k && k <= depth_[u]);\r\n\t\tassert(par[0][u]\
+    \ != -1);\r\n\t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\
+    \n\t\treturn u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0\
+    \ <= u && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\
+    \n\t}\r\n};\r\n\r\n\n#line 4 \"Test/LowestCommonAncestor.test.cpp\"\n\r\n#include\
     \ <cstdio>\r\n\r\nint main() {\r\n\tint N, Q;\r\n\tscanf(\"%d %d\", &N, &Q);\r\
     \n\t\r\n\tLowestCommonAncestor::Graph g(N);\r\n\tfor (int i = 1; i < N; ++i) {\r\
     \n\t\tint p;\r\n\t\tscanf(\"%d\", &p);\r\n\t\tg[p].emplace_back(i);\r\n\t}\r\n\
@@ -61,7 +61,7 @@ data:
   isVerificationFile: true
   path: Test/LowestCommonAncestor.test.cpp
   requiredBy: []
-  timestamp: '2021-03-13 10:43:13+09:00'
+  timestamp: '2022-05-15 21:01:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/LowestCommonAncestor.test.cpp

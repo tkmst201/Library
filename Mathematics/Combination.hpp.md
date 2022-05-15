@@ -77,7 +77,7 @@ $5 \times 10^7$ 未満の $n$ や $r$ に対して $_nC_r \bmod{M}$ を なら�
 - `Combination(size_t sz = 1)`
 	- $\Theta(sz + \log{M})$ $sz$ を指定することにより事前にテーブルを構築
 - `T fact(size_t k)`
-	- ならし $\Theta(1)$ $k!$ を返す。
+	- ならし $\Theta(1)$ $k!$ を返す
 - `T finv(size_t k)`
 	- ならし $\Theta(1)$ $(k!)^{-1}$ を返す
 - `T inv(size_t k)`

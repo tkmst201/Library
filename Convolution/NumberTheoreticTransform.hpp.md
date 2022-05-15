@@ -116,8 +116,8 @@ data:
   timestamp: '2021-06-05 13:56:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/NumberTheoreticTransform_AnyMod.test.cpp
   - Test/NumberTheoreticTransform.test.cpp
+  - Test/NumberTheoreticTransform_AnyMod.test.cpp
 documentation_of: Convolution/NumberTheoreticTransform.hpp
 layout: document
 title: "\u6570\u8AD6\u5909\u63DB (NTT)"

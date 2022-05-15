@@ -114,8 +114,8 @@ data:
   timestamp: '2021-06-05 13:56:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/NumberTheoreticTransform_AnyMod.test.cpp
   - Test/garner.test.cpp
+  - Test/NumberTheoreticTransform_AnyMod.test.cpp
 documentation_of: Mathematics/garner.hpp
 layout: document
 title: "Garner (\u9023\u7ACB\u4E00\u6B21\u5408\u540C\u5F0F mod M)"

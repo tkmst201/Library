@@ -247,8 +247,8 @@ data:
   timestamp: '2021-03-13 13:17:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/AVL_Tree.test.cpp
   - Test/AVL_Tree.2.test.cpp
+  - Test/AVL_Tree.test.cpp
 documentation_of: DataStructure/AVL_Tree.hpp
 layout: document
 title: "AVL \u6728 (\u5E73\u8861\u4E8C\u5206\u63A2\u7D22\u6728)"

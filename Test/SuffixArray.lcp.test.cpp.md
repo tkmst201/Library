@@ -195,20 +195,20 @@ data:
     \n\tstd::string S;\r\n\tstd::cin >> S;\r\n\t\r\n\tSuffixArray sa(S);\r\n\t\r\n\
     \tusing ll = long long;\r\n\tll ans = (ll)S.size() * (S.size() + 1) / 2;\r\n\t\
     const auto & lcp = sa.get_lcp();\r\n\tfor (auto l : lcp) ans -= l;\r\n\tstd::cout\
-    \ << ans << std::endl;\r\n\t\r\n\treturn 0;\r\n}\n"
+    \ << ans << std::endl;\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/number_of_substrings\"\r\
     \n\r\n#include \"String/SuffixArray.hpp\"\r\n\r\n#include <string>\r\n#include\
     \ <iostream>\r\n\r\nint main() {\r\n\tstd::cin.tie(0);\r\n\tstd::ios::sync_with_stdio(false);\r\
     \n\t\r\n\tstd::string S;\r\n\tstd::cin >> S;\r\n\t\r\n\tSuffixArray sa(S);\r\n\
     \t\r\n\tusing ll = long long;\r\n\tll ans = (ll)S.size() * (S.size() + 1) / 2;\r\
     \n\tconst auto & lcp = sa.get_lcp();\r\n\tfor (auto l : lcp) ans -= l;\r\n\tstd::cout\
-    \ << ans << std::endl;\r\n\t\r\n\treturn 0;\r\n}"
+    \ << ans << std::endl;\r\n}"
   dependsOn:
   - String/SuffixArray.hpp
   isVerificationFile: true
   path: Test/SuffixArray.lcp.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/SuffixArray.lcp.test.cpp

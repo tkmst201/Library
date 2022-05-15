@@ -119,9 +119,9 @@ data:
   timestamp: '2021-03-04 18:57:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/SegmentTree.fold.test.cpp
+  - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
   - Test/EulerTour.subtree.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document

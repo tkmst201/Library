@@ -39,11 +39,11 @@ data:
     \n\t\tfor (int i = logn - 1; i >= 0; --i) {\r\n\t\t\tif (par[i][a] != par[i][b])\
     \ a = par[i][a], b = par[i][b]; \r\n\t\t}\r\n\t\treturn par[0][a];\r\n\t}\r\n\t\
     \r\n\tint parent(int u, int k = 1) const noexcept {\r\n\t\tassert(0 <= u && u\
-    \ < size());\r\n\t\tassert(k <= depth_[u]);\r\n\t\tassert(par[0][u] != -1);\r\n\
-    \t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\n\t\treturn\
-    \ u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0 <= u\
-    \ && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\n\
-    \t}\r\n};\r\n\r\n\n"
+    \ < size());\r\n\t\tassert(0 <= k && k <= depth_[u]);\r\n\t\tassert(par[0][u]\
+    \ != -1);\r\n\t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\
+    \n\t\treturn u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0\
+    \ <= u && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\
+    \n\t}\r\n};\r\n\r\n\n"
   code: "#ifndef INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP\r\n#define INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP\r\
     \n\r\n#include <vector>\r\n#include <cassert>\r\n#include <utility>\r\n#include\
     \ <cstdint>\r\n#include <stack>\r\n\r\n/**\r\n * @brief https://tkmst201.github.io/Library/GraphTheory/LowestCommonAncestor.hpp\r\
@@ -67,16 +67,16 @@ data:
     \n\t\tfor (int i = logn - 1; i >= 0; --i) {\r\n\t\t\tif (par[i][a] != par[i][b])\
     \ a = par[i][a], b = par[i][b]; \r\n\t\t}\r\n\t\treturn par[0][a];\r\n\t}\r\n\t\
     \r\n\tint parent(int u, int k = 1) const noexcept {\r\n\t\tassert(0 <= u && u\
-    \ < size());\r\n\t\tassert(k <= depth_[u]);\r\n\t\tassert(par[0][u] != -1);\r\n\
-    \t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\n\t\treturn\
-    \ u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0 <= u\
-    \ && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\n\
-    \t}\r\n};\r\n\r\n#endif // INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP"
+    \ < size());\r\n\t\tassert(0 <= k && k <= depth_[u]);\r\n\t\tassert(par[0][u]\
+    \ != -1);\r\n\t\tfor (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];\r\
+    \n\t\treturn u;\r\n\t}\r\n\t\r\n\tint depth(int u) const noexcept {\r\n\t\tassert(0\
+    \ <= u && u < size());\r\n\t\tassert(par[0][u] != -1);\r\n\t\treturn depth_[u];\r\
+    \n\t}\r\n};\r\n\r\n#endif // INCLUDE_GUARD_LOWEST_COMMON_ANCESTOR_HPP"
   dependsOn: []
   isVerificationFile: false
   path: GraphTheory/LowestCommonAncestor.hpp
   requiredBy: []
-  timestamp: '2021-03-13 10:43:13+09:00'
+  timestamp: '2022-05-15 21:01:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/EulerTour.path.test.cpp
@@ -88,7 +88,7 @@ title: "\u6700\u8FD1\u5171\u901A\u7956\u5148 (LCA)"
 
 # 概要
 
-頂点数を $N$ の木で任意の $2$ 頂点の最近共通祖先を事前計算 $\Theta(N \log{N})$ クエリ $\Theta(\log{N})$ で求めることのできるライブラリです。  
+頂点数 $N$ の木で任意の $2$ 頂点の最近共通祖先を事前計算 $\Theta(N \log{N})$ クエリ $\Theta(\log{N})$ で求めることのできるライブラリです。  
 実は [重軽分解 ( HL 分解)](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp) を用いた LCA の方が高速かつ使用メモリも少ないです(事前計算 $\Theta(N\log{\log{N}})$ クエリ $\Theta(\log{\log{N}})$ )、森にも対応しています。  
 
 - `LowestCommonAncestor(const Graph & g, int root = 0)`
@@ -160,6 +160,7 @@ title: "\u6700\u8FD1\u5171\u901A\u7956\u5148 (LCA)"
 **制約**
 
 - $0 \leq u < N$
+- $0 \le N$
 - 頂点 $u$ から根までのパス上にある辺の個数は $k$ 個以下
 
 **計算量**

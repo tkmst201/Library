@@ -156,9 +156,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/WaveletMatrix.range_frequency.test.cpp
+  - Test/WaveletMatrix.quantile.test.cpp
   - Test/WaveletMatrix.select.range_k.test.cpp
   - Test/WaveletMatrix.next_prev_value.test.cpp
-  - Test/WaveletMatrix.quantile.test.cpp
 documentation_of: DataStructure/SuccintBitVector.hpp
 layout: document
 title: "\u7C21\u6F54\u30D3\u30C3\u30C8\u30D9\u30AF\u30C8\u30EB"

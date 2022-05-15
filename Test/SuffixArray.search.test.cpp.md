@@ -194,20 +194,19 @@ data:
     \ namespace std;\r\n\r\nint main() {\r\n\tcin.tie(0);\r\n\tios::sync_with_stdio(false);\r\
     \n\t\r\n\tstring T;\r\n\tint Q;\r\n\tcin >> T >> Q;\r\n\t\r\n\tSuffixArray sa(T);\r\
     \n\twhile (Q--) {\r\n\t\tstring P;\r\n\t\tcin >> P;\r\n\t\tcout << (sa.search(P)\
-    \ != sa.size()) << endl;\r\n\t}\r\n\t\r\n\treturn 0;\r\n}\n"
+    \ != sa.size()) << endl;\r\n\t}\r\n}\n"
   code: "#define PROBLEM \"https://onlinejudge.u-aizu.ac.jp/courses/lesson/1/ALDS1/all/ALDS1_14_D\"\
     \r\n\r\n#include \"String/SuffixArray.hpp\"\r\n\r\n#include <string>\r\n#include\
     \ <iostream>\r\nusing namespace std;\r\n\r\nint main() {\r\n\tcin.tie(0);\r\n\t\
     ios::sync_with_stdio(false);\r\n\t\r\n\tstring T;\r\n\tint Q;\r\n\tcin >> T >>\
     \ Q;\r\n\t\r\n\tSuffixArray sa(T);\r\n\twhile (Q--) {\r\n\t\tstring P;\r\n\t\t\
-    cin >> P;\r\n\t\tcout << (sa.search(P) != sa.size()) << endl;\r\n\t}\r\n\t\r\n\
-    \treturn 0;\r\n}"
+    cin >> P;\r\n\t\tcout << (sa.search(P) != sa.size()) << endl;\r\n\t}\r\n}"
   dependsOn:
   - String/SuffixArray.hpp
   isVerificationFile: true
   path: Test/SuffixArray.search.test.cpp
   requiredBy: []
-  timestamp: '2020-09-21 15:29:04+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/SuffixArray.search.test.cpp

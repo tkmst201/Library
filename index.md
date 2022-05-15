@@ -101,6 +101,9 @@ data:
       path: GraphTheory/HeavyLightDecomposition_Query.hpp
       title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"
     - icon: ':heavy_check_mark:'
+      path: GraphTheory/LevelAncestor.hpp
+      title: Level Ancestor Problem
+    - icon: ':heavy_check_mark:'
       path: GraphTheory/LowestCommonAncestor.hpp
       title: "\u6700\u8FD1\u5171\u901A\u7956\u5148 (LCA)"
     - icon: ':heavy_check_mark:'
@@ -229,6 +232,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Test/LazySegmentTree.test.cpp
       title: Test/LazySegmentTree.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/LevelAncestor.test.cpp
+      title: Test/LevelAncestor.test.cpp
     - icon: ':heavy_check_mark:'
       path: Test/LowestCommonAncestor.test.cpp
       title: Test/LowestCommonAncestor.test.cpp

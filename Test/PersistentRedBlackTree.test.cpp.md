@@ -105,8 +105,8 @@ data:
     \n\t};\r\n\t\r\n\tstd::vector<ll> cv;\r\n\tcompress(k, cv);\r\n\tPersistentRedBlackTree<ll>\
     \ tree(cv.size(), 0);\r\n\t\r\n\tfor (int i = 0; i < Q; ++i) {\r\n\t\tif (q[i]\
     \ == 0) {\r\n\t\t\ttree = tree.erase(k[i]);\r\n\t\t\ttree = tree.insert(k[i],\
-    \ v[i]);\r\n\t\t}\r\n\t\telse printf(\"%lld\\n\", tree.get(k[i]));\r\n\t}\r\n\t\
-    \r\n\treturn 0;\r\n}\n"
+    \ v[i]);\r\n\t\t}\r\n\t\telse printf(\"%lld\\n\", tree.get(k[i]));\r\n\t}\r\n\
+    }\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\r\n\
     \r\n#include \"DataStructure/PersistentRedBlackTree.hpp\"\r\n\r\n#include <cstdio>\r\
     \n#include <vector>\r\n#include <algorithm>\r\n\r\nint main() {\r\n\tint Q;\r\n\
@@ -121,13 +121,13 @@ data:
     \n\tPersistentRedBlackTree<ll> tree(cv.size(), 0);\r\n\t\r\n\tfor (int i = 0;\
     \ i < Q; ++i) {\r\n\t\tif (q[i] == 0) {\r\n\t\t\ttree = tree.erase(k[i]);\r\n\t\
     \t\ttree = tree.insert(k[i], v[i]);\r\n\t\t}\r\n\t\telse printf(\"%lld\\n\", tree.get(k[i]));\r\
-    \n\t}\r\n\t\r\n\treturn 0;\r\n}"
+    \n\t}\r\n}"
   dependsOn:
   - DataStructure/PersistentRedBlackTree.hpp
   isVerificationFile: true
   path: Test/PersistentRedBlackTree.test.cpp
   requiredBy: []
-  timestamp: '2021-03-09 15:27:18+09:00'
+  timestamp: '2021-06-05 15:29:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/PersistentRedBlackTree.test.cpp

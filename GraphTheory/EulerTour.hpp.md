@@ -76,9 +76,9 @@ data:
   timestamp: '2021-03-12 18:03:59+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/EulerTour.subtree.test.cpp
   - Test/DynamicSegmentTree.swap.test.cpp
   - Test/EulerTour.path.test.cpp
-  - Test/EulerTour.subtree.test.cpp
 documentation_of: GraphTheory/EulerTour.hpp
 layout: document
 title: "\u30AA\u30A4\u30E9\u30FC\u30C4\u30A2\u30FC"

@@ -157,8 +157,8 @@ data:
   timestamp: '2020-11-10 21:09:37+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/PrimeNumber.enumerate_primes.test.cpp
   - Test/PrimeNumber.counting_primes.test.cpp
+  - Test/PrimeNumber.enumerate_primes.test.cpp
 documentation_of: Mathematics/PrimeNumber/enumerate_primes.hpp
 layout: document
 redirect_from:

@@ -5,10 +5,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: DataStructure/DisjointSparseTable.hpp
     title: Disjoint Sparse Table
+  - icon: ':heavy_check_mark:'
+    path: GraphTheory/LevelAncestor.hpp
+    title: Level Ancestor Problem
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: Test/DisjointSparseTable.test.cpp
     title: Test/DisjointSparseTable.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: Test/LevelAncestor.test.cpp
+    title: Test/LevelAncestor.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -57,10 +63,12 @@ data:
   path: Mathematics/bit_operation.hpp
   requiredBy:
   - DataStructure/DisjointSparseTable.hpp
+  - GraphTheory/LevelAncestor.hpp
   timestamp: '2021-03-18 11:48:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/DisjointSparseTable.test.cpp
+  - Test/LevelAncestor.test.cpp
 documentation_of: Mathematics/bit_operation.hpp
 layout: document
 title: "bit \u64CD\u4F5C"
