@@ -64,7 +64,7 @@ public:
 	
 	int parent(int u, int k = 1) const noexcept {
 		assert(0 <= u && u < size());
-		assert(k <= depth_[u]);
+		assert(0 <= k && k <= depth_[u]);
 		assert(par[0][u] != -1);
 		for (int i = 0; i < logn; ++i) if (k >> i & 1) u = par[i][u];
 		return u;

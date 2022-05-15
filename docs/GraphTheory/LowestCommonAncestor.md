@@ -5,7 +5,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 
 # 概要
 
-頂点数を $N$ の木で任意の $2$ 頂点の最近共通祖先を事前計算 $\Theta(N \log{N})$ クエリ $\Theta(\log{N})$ で求めることのできるライブラリです。  
+頂点数 $N$ の木で任意の $2$ 頂点の最近共通祖先を事前計算 $\Theta(N \log{N})$ クエリ $\Theta(\log{N})$ で求めることのできるライブラリです。  
 実は [重軽分解 ( HL 分解)](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp) を用いた LCA の方が高速かつ使用メモリも少ないです(事前計算 $\Theta(N\log{\log{N}})$ クエリ $\Theta(\log{\log{N}})$ )、森にも対応しています。  
 
 - `LowestCommonAncestor(const Graph & g, int root = 0)`
@@ -77,6 +77,7 @@ documentation_of: //GraphTheory/LowestCommonAncestor.hpp
 **制約**
 
 - $0 \leq u < N$
+- $0 \le N$
 - 頂点 $u$ から根までのパス上にある辺の個数は $k$ 個以下
 
 **計算量**

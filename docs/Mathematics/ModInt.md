@@ -173,6 +173,8 @@ int main() {
 	cout << "15: " << mint(15) << endl; // 2
 	cout << "-1: " << mint(-1) << endl; // 12
 	cout << "-1: " << mint(-1).val() << endl; // 12
+	cout << "10^2 " << mint(10).pow(2) << endl; // 9
+	cout << "3^-1 " << mint(3).inv() << endl; // 9 ( 9*3 = 27 = 1+(13*2) )
 	
 	mint a(10);
 	cout << a << endl; // 10
