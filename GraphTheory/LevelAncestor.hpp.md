@@ -67,38 +67,38 @@ data:
     jump[u] = jp;\r\n\t\t\t\tutreeid[u] = utid;\r\n\t\t\t\trdict.emplace_back(u);\r\
     \n\t\t\t\tstk2[dep] = num++;\r\n\t\t\t\tstk1[stkp1++] = -u - 1;\r\n\t\t\t\tfor\
     \ (int v : g[u]) if (v != par[u]) stk1[stkp1++] = v;\r\n\t\t\t}\r\n\t\t}; \r\n\
-    \t\trdict.shrink_to_fit();\r\n\t\trdst.shrink_to_fit();\r\n\t\t\r\n\t\t// build\
-    \ Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int, int>>\
-    \ stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\tconst\
-    \ auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\t\t\
-    \tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
+    \t\t\r\n\t\t// build Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int,\
+    \ int>> stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\t\
+    const auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\
+    \t\t\tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
     \n\t\t\t\tbool f = false;\r\n\t\t\t\tif (jump[u] == n) {\r\n\t\t\t\t\tif (par[u]\
     \ != -1 && data[u] < S) continue;\r\n\t\t\t\t\tjump[u] = u;\r\n\t\t\t\t\tjumps.emplace_back(u);\r\
-    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tif (par[u] != -1 && jump[par[u]]\
-    \ == n) jump[par[u]] = jump[u];\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tfor (int v\
-    \ : g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
+    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tif (par[u]\
+    \ != -1 && jump[par[u]] == n) jump[par[u]] = jump[u];\r\n\t\t\t\tfor (int v :\
+    \ g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
     \n\t\t\t}\r\n\t\t\telse {\r\n\t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\tif (g[u][i]\
     \ == par[u]) continue;\r\n\t\t\t\tstk.emplace(g[u][i], 0);\r\n\t\t\t\tpar[g[u][i]]\
     \ = u;\r\n\t\t\t\tdepth_[g[u][i]] = depth_[u] + 1;\r\n\t\t\t\tif (mxdep < depth_[g[u][i]])\
-    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\t// counting_sort(ord[i])\
-    \ by depth_[i]\r\n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0;\
-    \ i < n; ++i) ++cnt[depth_[i] + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i\
-    \ + 1] += cnt[i];\r\n\t\tstd::vector<int> ord(n);\r\n\t\tfor (int i = 0; i < n;\
-    \ ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\r\n\t\t// build ladder\r\n\t\tladnum.assign(n,\
-    \ -1);\r\n\t\tladder.reserve(jumps.size());\r\n\t\tfor (int t = n - 1; t >= 0;\
-    \ --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\tif (ladnum[i] != -1) continue;\r\
-    \n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile (u != -1 && ladnum[u] == -1) ladnum[u]\
-    \ = ladder.size(), u = par[u], ++lpathc;\r\n\t\t\tint lsize = 0;\r\n\t\t\twhile\
-    \ (u != -1 && lsize < lpathc) u = par[u], ++lsize;\r\n\t\t\tlsize += lpathc;\r\
-    \n\t\t\tladder.emplace_back(lsize);\r\n\t\t\tu = i;\r\n\t\t\tfor (int c = 0; c\
-    \ < lsize; ++c, u = par[u]) ladder.back()[c] = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build\
-    \ jumpp\r\n\t\tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn,\
-    \ std::vector<int>(jumps.size(), -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size());\
-    \ ++i) jumpp[0][i] = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i)\
-    \ {\r\n\t\t\tfor (int j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\
-    \t\tconst int v = jumpp[i][j];\r\n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst\
-    \ int ln = ladnum[v];\r\n\t\t\t\tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\
-    \n\t\t\t\tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
+    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\trdict.shrink_to_fit();\r\
+    \n\t\trdst.shrink_to_fit(); \r\n\t\t\r\n\t\t// counting_sort(ord[i]) by depth_[i]\r\
+    \n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0; i < n; ++i) ++cnt[depth_[i]\
+    \ + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i + 1] += cnt[i];\r\n\t\tstd::vector<int>\
+    \ ord(n);\r\n\t\tfor (int i = 0; i < n; ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\
+    \r\n\t\t// build ladder\r\n\t\tladnum.assign(n, -1);\r\n\t\tladder.reserve(jumps.size());\r\
+    \n\t\tfor (int t = n - 1; t >= 0; --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\
+    \tif (ladnum[i] != -1) continue;\r\n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile\
+    \ (u != -1 && ladnum[u] == -1) ladnum[u] = ladder.size(), u = par[u], ++lpathc;\r\
+    \n\t\t\tint lsize = 0;\r\n\t\t\twhile (u != -1 && lsize < lpathc) u = par[u],\
+    \ ++lsize;\r\n\t\t\tlsize += lpathc;\r\n\t\t\tladder.emplace_back(lsize);\r\n\t\
+    \t\tu = i;\r\n\t\t\tfor (int c = 0; c < lsize; ++c, u = par[u]) ladder.back()[c]\
+    \ = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build jumpp\r\n\t\tif (n == 1) return;\r\n\t\
+    \tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn, std::vector<int>(jumps.size(),\
+    \ -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size()); ++i) jumpp[0][i]\
+    \ = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i) {\r\n\t\t\tfor (int\
+    \ j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\t\tconst int v = jumpp[i][j];\r\
+    \n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst int ln = ladnum[v];\r\n\t\t\t\
+    \tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\n\t\t\t\
+    \tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
     \n\t\t\t\t\tjumpp[i + 1][j] = ladder[ln][ladder[ln].size() - 1 - ridx];\r\n\t\t\
     \t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tint size() const noexcept {\r\n\t\t\
     return n;\r\n\t}\r\n\t\r\n\tint depth(int v) const noexcept {\r\n\t\tassert(0\
@@ -152,38 +152,38 @@ data:
     jump[u] = jp;\r\n\t\t\t\tutreeid[u] = utid;\r\n\t\t\t\trdict.emplace_back(u);\r\
     \n\t\t\t\tstk2[dep] = num++;\r\n\t\t\t\tstk1[stkp1++] = -u - 1;\r\n\t\t\t\tfor\
     \ (int v : g[u]) if (v != par[u]) stk1[stkp1++] = v;\r\n\t\t\t}\r\n\t\t}; \r\n\
-    \t\trdict.shrink_to_fit();\r\n\t\trdst.shrink_to_fit();\r\n\t\t\r\n\t\t// build\
-    \ Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int, int>>\
-    \ stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\tconst\
-    \ auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\t\t\
-    \tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
+    \t\t\r\n\t\t// build Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int,\
+    \ int>> stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\t\
+    const auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\
+    \t\t\tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
     \n\t\t\t\tbool f = false;\r\n\t\t\t\tif (jump[u] == n) {\r\n\t\t\t\t\tif (par[u]\
     \ != -1 && data[u] < S) continue;\r\n\t\t\t\t\tjump[u] = u;\r\n\t\t\t\t\tjumps.emplace_back(u);\r\
-    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tif (par[u] != -1 && jump[par[u]]\
-    \ == n) jump[par[u]] = jump[u];\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tfor (int v\
-    \ : g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
+    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tif (par[u]\
+    \ != -1 && jump[par[u]] == n) jump[par[u]] = jump[u];\r\n\t\t\t\tfor (int v :\
+    \ g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
     \n\t\t\t}\r\n\t\t\telse {\r\n\t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\tif (g[u][i]\
     \ == par[u]) continue;\r\n\t\t\t\tstk.emplace(g[u][i], 0);\r\n\t\t\t\tpar[g[u][i]]\
     \ = u;\r\n\t\t\t\tdepth_[g[u][i]] = depth_[u] + 1;\r\n\t\t\t\tif (mxdep < depth_[g[u][i]])\
-    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\t// counting_sort(ord[i])\
-    \ by depth_[i]\r\n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0;\
-    \ i < n; ++i) ++cnt[depth_[i] + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i\
-    \ + 1] += cnt[i];\r\n\t\tstd::vector<int> ord(n);\r\n\t\tfor (int i = 0; i < n;\
-    \ ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\r\n\t\t// build ladder\r\n\t\tladnum.assign(n,\
-    \ -1);\r\n\t\tladder.reserve(jumps.size());\r\n\t\tfor (int t = n - 1; t >= 0;\
-    \ --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\tif (ladnum[i] != -1) continue;\r\
-    \n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile (u != -1 && ladnum[u] == -1) ladnum[u]\
-    \ = ladder.size(), u = par[u], ++lpathc;\r\n\t\t\tint lsize = 0;\r\n\t\t\twhile\
-    \ (u != -1 && lsize < lpathc) u = par[u], ++lsize;\r\n\t\t\tlsize += lpathc;\r\
-    \n\t\t\tladder.emplace_back(lsize);\r\n\t\t\tu = i;\r\n\t\t\tfor (int c = 0; c\
-    \ < lsize; ++c, u = par[u]) ladder.back()[c] = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build\
-    \ jumpp\r\n\t\tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn,\
-    \ std::vector<int>(jumps.size(), -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size());\
-    \ ++i) jumpp[0][i] = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i)\
-    \ {\r\n\t\t\tfor (int j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\
-    \t\tconst int v = jumpp[i][j];\r\n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst\
-    \ int ln = ladnum[v];\r\n\t\t\t\tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\
-    \n\t\t\t\tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
+    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\trdict.shrink_to_fit();\r\
+    \n\t\trdst.shrink_to_fit(); \r\n\t\t\r\n\t\t// counting_sort(ord[i]) by depth_[i]\r\
+    \n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0; i < n; ++i) ++cnt[depth_[i]\
+    \ + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i + 1] += cnt[i];\r\n\t\tstd::vector<int>\
+    \ ord(n);\r\n\t\tfor (int i = 0; i < n; ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\
+    \r\n\t\t// build ladder\r\n\t\tladnum.assign(n, -1);\r\n\t\tladder.reserve(jumps.size());\r\
+    \n\t\tfor (int t = n - 1; t >= 0; --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\
+    \tif (ladnum[i] != -1) continue;\r\n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile\
+    \ (u != -1 && ladnum[u] == -1) ladnum[u] = ladder.size(), u = par[u], ++lpathc;\r\
+    \n\t\t\tint lsize = 0;\r\n\t\t\twhile (u != -1 && lsize < lpathc) u = par[u],\
+    \ ++lsize;\r\n\t\t\tlsize += lpathc;\r\n\t\t\tladder.emplace_back(lsize);\r\n\t\
+    \t\tu = i;\r\n\t\t\tfor (int c = 0; c < lsize; ++c, u = par[u]) ladder.back()[c]\
+    \ = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build jumpp\r\n\t\tif (n == 1) return;\r\n\t\
+    \tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn, std::vector<int>(jumps.size(),\
+    \ -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size()); ++i) jumpp[0][i]\
+    \ = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i) {\r\n\t\t\tfor (int\
+    \ j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\t\tconst int v = jumpp[i][j];\r\
+    \n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst int ln = ladnum[v];\r\n\t\t\t\
+    \tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\n\t\t\t\
+    \tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
     \n\t\t\t\t\tjumpp[i + 1][j] = ladder[ln][ladder[ln].size() - 1 - ridx];\r\n\t\t\
     \t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tint size() const noexcept {\r\n\t\t\
     return n;\r\n\t}\r\n\t\r\n\tint depth(int v) const noexcept {\r\n\t\tassert(0\
@@ -208,7 +208,7 @@ data:
   isVerificationFile: false
   path: GraphTheory/LevelAncestor.hpp
   requiredBy: []
-  timestamp: '2022-05-15 20:57:59+09:00'
+  timestamp: '2022-05-16 13:51:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/LevelAncestor.test.cpp
@@ -396,8 +396,6 @@ int main() {
 
 ### long-path と ladder について
 
----
-
 根からの距離が最長であるようなパス(long-path) に再帰的に分解します。  
 $P(v)$ で頂点 $v$ が属する long-path を表すことにします。  
 
@@ -409,7 +407,7 @@ $P(v)$ で頂点 $v$ が属する long-path を表すことにします。
 これは各 long-path 上での高さみたいなものが $1$ 回根方向に上ることにより $1$ 以上増えることを表しています。  
  $k$ についての帰納法で証明ができます。ここでは $k = 1$ の場合のみ示しますが同じ議論で拡張できます。  
 
-> 分かりやすくするため、$H(v)$ を $| P(v)$ の $v$ 以下の頂点 $|$ とする。  
+> 分かりやすくするために $H(v)$ を $| P(v)$ の $v$ 以下の頂点 $|$ とする。  
 > $u \in P(u)$ の場合は、 $P(u) =P(v)$ より $H(u) = H(v) + 1$ であるので成り立つ。  
 > $u \notin P(u)$ の場合は、$P(u) \neq P(v)$ であり $P(u)$ の方が先に long-path として選ばれているため $|H(v)| \le |H(u)|$ である。  
 > $|H(v)| = |H(u)|$ と仮定すると、 $P(u)$ の $u$ より下を $P(v)$ につなぎ変えることにより long-path を今以上に長くできるため $P(u)$ が選ばれたことに矛盾する。よって $|H(v)| < |H(u)|$ である。  
@@ -422,14 +420,11 @@ $P(v)$ で頂点 $v$ が属する long-path を表すことにします。
 $P(u) = P(v)$ のときは、$|P(v)| > d(v, t) / 2$  
 $P(u) \neq P(v)$ のときは、上の事実より $|P(v)| > d(v, t) / 2$ です。  
 
-頂点 $v$ から $t$ へは残り $d(v, t) / 2$ 回上がる必要がありますが、どちらの場合も $P(v)$ の最も根方向の頂点から $|P(v)|$ 回以下で到達することができるので ladder を用いて
+頂点 $v$ から $t$ へは $d(v, t) / 2$ 回上がる必要がありますが、どちらの場合も $P(v)$ の最も根方向の頂点から $|P(v)|$ 回以下で到達することができるので ladder を用いて
 $1$ 回での移動が可能です ( ladder $i$ は $P(i)$ の頂点に、
 $P(i)$ より根方向にある頂点を順に $|P(i)|$ 個加えた列である)。  
 
-
 ### ジャンプ頂点の個数について
-
----
 
 ジャンプ頂点 (ダブリング計算を行う頂点) は、自身を含む子孫(部分木) の頂点数が $S$ 以上となる極大の深さの頂点です。  
 つまり、ある頂点 $v$ について、$v$ の子に $1$ つでも子孫が $S$ 個以上になるような頂点が存在する場合、$v$ はジャンプ頂点にはなり得ません。  
@@ -439,19 +434,19 @@ $v$ の全ての子それぞれの子孫が $S$ 子未満かつ、$v$ の子孫�
 全ての頂点を合わせても高々 $N$ 種類であることから $x S \le N$ です。  
 よってジャンプ頂点の個数は $\mathcal{O}(N / \log{N})$ となります。  
 
+---
 
 ### 実装について
 
----
-
 - jump[u] は頂点 $u$ の対応するジャンプ頂点を示しています。$u$ 自身がジャンプ頂点である場合、最後に -(jumpp に対応する index [1-index]) に書き換えられます。未確定のとき、$N$ が割り当てられています。
 - data[u] は、処理の途中で表す内容が変化します。はじめは、頂点 $u$ の自身を含む子孫の数を表します。処理が終わると、Micro-Tree 内のノードは (Micro-Tree の形状 ID,　形状に対応した $u$ の頂点番号, Micro-Tree 内での深さ) を 1 つの int で表した値に書き換えられます。それ以外の頂点は -1 に設定されます。
-- utreeid[u] は形状によらない各 Micro-Tree の固有 ID です。$u$ が Micro-Node ではない場合は -1 が入ります。
+- utreeid[u] は形状によらない各 Micro-Tree の固有 ID です (同じ形状の 2 つの Micro-Tree でも異なる ID を持つ) 。$u$ が Micro-Node ではない場合は -1 が入ります。
 - rdict[i] は Micro-Tree での頂点番号 $x$ と対応しているもとの木 $T$ の頂点番号が utreeid 毎に連続して入っています。
-- rdst[i] は utreeid i の木の対応する rdict のデータが入っている先頭 index を表します。  
+- rdst[i] は rdict において、utreeid i の木の対応するデータが入っている先頭 index を表します。  
 - `build_micro(int r)` は根を $r$ とする Micro-Tree の形状を求め、Micro-Tree 内のすべてのクエリを事前に計算する関数です。Micro-Tree 内の各頂点の data, jump の設定も行います。 jump[par[$r$]] が正しくセットされていることを仮定します。
 - Micro-Tree 内クエリの事前計算には、Offline の Level Ancestor のアルゴリズムを用いています (定数倍高速化になっているかは分からない)。  
 
+---
 
 <br>
 

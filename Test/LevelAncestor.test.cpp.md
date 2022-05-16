@@ -69,38 +69,38 @@ data:
     jump[u] = jp;\r\n\t\t\t\tutreeid[u] = utid;\r\n\t\t\t\trdict.emplace_back(u);\r\
     \n\t\t\t\tstk2[dep] = num++;\r\n\t\t\t\tstk1[stkp1++] = -u - 1;\r\n\t\t\t\tfor\
     \ (int v : g[u]) if (v != par[u]) stk1[stkp1++] = v;\r\n\t\t\t}\r\n\t\t}; \r\n\
-    \t\trdict.shrink_to_fit();\r\n\t\trdst.shrink_to_fit();\r\n\t\t\r\n\t\t// build\
-    \ Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int, int>>\
-    \ stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\tconst\
-    \ auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\t\t\
-    \tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
+    \t\t\r\n\t\t// build Macro-Micro-Tree\r\n\t\tint mxdep = 0;\r\n\t\tstd::stack<std::pair<int,\
+    \ int>> stk;\r\n\t\tstk.emplace(root, 0);\r\n\t\twhile (stk.size()) {\r\n\t\t\t\
+    const auto [u, i] = stk.top(); stk.pop();\r\n\t\t\tassert(0 <= u && u < n);\r\n\
+    \t\t\tif (g[u].size() == i) {\r\n\t\t\t\tif (par[u] != -1) data[par[u]] += data[u];\r\
     \n\t\t\t\tbool f = false;\r\n\t\t\t\tif (jump[u] == n) {\r\n\t\t\t\t\tif (par[u]\
     \ != -1 && data[u] < S) continue;\r\n\t\t\t\t\tjump[u] = u;\r\n\t\t\t\t\tjumps.emplace_back(u);\r\
-    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tif (par[u] != -1 && jump[par[u]]\
-    \ == n) jump[par[u]] = jump[u];\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tfor (int v\
-    \ : g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
+    \n\t\t\t\t\tf = true;\r\n\t\t\t\t}\r\n\t\t\t\tdata[u] = -1;\r\n\t\t\t\tif (par[u]\
+    \ != -1 && jump[par[u]] == n) jump[par[u]] = jump[u];\r\n\t\t\t\tfor (int v :\
+    \ g[u]) if (jump[v] == n) build_micro(v);\r\n\t\t\t\tif (f) jump[u] = -static_cast<int>(jumps.size());\r\
     \n\t\t\t}\r\n\t\t\telse {\r\n\t\t\t\tstk.emplace(u, i + 1);\r\n\t\t\t\tif (g[u][i]\
     \ == par[u]) continue;\r\n\t\t\t\tstk.emplace(g[u][i], 0);\r\n\t\t\t\tpar[g[u][i]]\
     \ = u;\r\n\t\t\t\tdepth_[g[u][i]] = depth_[u] + 1;\r\n\t\t\t\tif (mxdep < depth_[g[u][i]])\
-    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\t\r\n\t\t// counting_sort(ord[i])\
-    \ by depth_[i]\r\n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0;\
-    \ i < n; ++i) ++cnt[depth_[i] + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i\
-    \ + 1] += cnt[i];\r\n\t\tstd::vector<int> ord(n);\r\n\t\tfor (int i = 0; i < n;\
-    \ ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\r\n\t\t// build ladder\r\n\t\tladnum.assign(n,\
-    \ -1);\r\n\t\tladder.reserve(jumps.size());\r\n\t\tfor (int t = n - 1; t >= 0;\
-    \ --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\tif (ladnum[i] != -1) continue;\r\
-    \n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile (u != -1 && ladnum[u] == -1) ladnum[u]\
-    \ = ladder.size(), u = par[u], ++lpathc;\r\n\t\t\tint lsize = 0;\r\n\t\t\twhile\
-    \ (u != -1 && lsize < lpathc) u = par[u], ++lsize;\r\n\t\t\tlsize += lpathc;\r\
-    \n\t\t\tladder.emplace_back(lsize);\r\n\t\t\tu = i;\r\n\t\t\tfor (int c = 0; c\
-    \ < lsize; ++c, u = par[u]) ladder.back()[c] = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build\
-    \ jumpp\r\n\t\tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn,\
-    \ std::vector<int>(jumps.size(), -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size());\
-    \ ++i) jumpp[0][i] = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i)\
-    \ {\r\n\t\t\tfor (int j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\
-    \t\tconst int v = jumpp[i][j];\r\n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst\
-    \ int ln = ladnum[v];\r\n\t\t\t\tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\
-    \n\t\t\t\tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
+    \ mxdep = depth_[g[u][i]];\r\n\t\t\t}\r\n\t\t}\r\n\t\trdict.shrink_to_fit();\r\
+    \n\t\trdst.shrink_to_fit(); \r\n\t\t\r\n\t\t// counting_sort(ord[i]) by depth_[i]\r\
+    \n\t\tstd::vector<int> cnt(mxdep + 2);\r\n\t\tfor (int i = 0; i < n; ++i) ++cnt[depth_[i]\
+    \ + 1];\r\n\t\tfor (int i = 1; i < mxdep; ++i) cnt[i + 1] += cnt[i];\r\n\t\tstd::vector<int>\
+    \ ord(n);\r\n\t\tfor (int i = 0; i < n; ++i) ord[cnt[depth_[i]]++] = i;\r\n\t\t\
+    \r\n\t\t// build ladder\r\n\t\tladnum.assign(n, -1);\r\n\t\tladder.reserve(jumps.size());\r\
+    \n\t\tfor (int t = n - 1; t >= 0; --t) {\r\n\t\t\tconst int i = ord[t];\r\n\t\t\
+    \tif (ladnum[i] != -1) continue;\r\n\t\t\tint u = i, lpathc = 0;\r\n\t\t\twhile\
+    \ (u != -1 && ladnum[u] == -1) ladnum[u] = ladder.size(), u = par[u], ++lpathc;\r\
+    \n\t\t\tint lsize = 0;\r\n\t\t\twhile (u != -1 && lsize < lpathc) u = par[u],\
+    \ ++lsize;\r\n\t\t\tlsize += lpathc;\r\n\t\t\tladder.emplace_back(lsize);\r\n\t\
+    \t\tu = i;\r\n\t\t\tfor (int c = 0; c < lsize; ++c, u = par[u]) ladder.back()[c]\
+    \ = u;\r\n\t\t}\r\n\t\t\r\n\t\t// build jumpp\r\n\t\tif (n == 1) return;\r\n\t\
+    \tlogn = 0;\r\n\t\twhile ((1 << logn) < n) ++logn;\r\n\t\tjumpp.assign(logn, std::vector<int>(jumps.size(),\
+    \ -1));\r\n\t\tfor (int i = 0; i < static_cast<int>(jumps.size()); ++i) jumpp[0][i]\
+    \ = par[jumps[i]];\r\n\t\tfor (int i = 0; i + 1 < logn; ++i) {\r\n\t\t\tfor (int\
+    \ j = 0; j < static_cast<int>(jumps.size()); ++j) {\r\n\t\t\t\tconst int v = jumpp[i][j];\r\
+    \n\t\t\t\tif (v == -1) continue;\r\n\t\t\t\tconst int ln = ladnum[v];\r\n\t\t\t\
+    \tconst int ridx = depth_[v] - (1 << i) - depth_[ladder[ln].back()];\r\n\t\t\t\
+    \tif (ridx >= 0) {\r\n\t\t\t\t\tassert(ridx < static_cast<int>(ladder[ln].size()));\r\
     \n\t\t\t\t\tjumpp[i + 1][j] = ladder[ln][ladder[ln].size() - 1 - ridx];\r\n\t\t\
     \t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\t\r\n\tint size() const noexcept {\r\n\t\t\
     return n;\r\n\t}\r\n\t\r\n\tint depth(int v) const noexcept {\r\n\t\tassert(0\
@@ -157,7 +157,7 @@ data:
   isVerificationFile: true
   path: Test/LevelAncestor.test.cpp
   requiredBy: []
-  timestamp: '2022-05-15 20:57:59+09:00'
+  timestamp: '2022-05-16 13:51:22+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: Test/LevelAncestor.test.cpp
