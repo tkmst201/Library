@@ -83,8 +83,6 @@ public:
 				for (int v : g[u]) if (v != par[u]) stk1[stkp1++] = v;
 			}
 		}; 
-		rdict.shrink_to_fit();
-		rdst.shrink_to_fit();
 		
 		// build Macro-Micro-Tree
 		int mxdep = 0;
@@ -102,8 +100,8 @@ public:
 					jumps.emplace_back(u);
 					f = true;
 				}
-				if (par[u] != -1 && jump[par[u]] == n) jump[par[u]] = jump[u];
 				data[u] = -1;
+				if (par[u] != -1 && jump[par[u]] == n) jump[par[u]] = jump[u];
 				for (int v : g[u]) if (jump[v] == n) build_micro(v);
 				if (f) jump[u] = -static_cast<int>(jumps.size());
 			}
@@ -116,6 +114,8 @@ public:
 				if (mxdep < depth_[g[u][i]]) mxdep = depth_[g[u][i]];
 			}
 		}
+		rdict.shrink_to_fit();
+		rdst.shrink_to_fit(); 
 		
 		// counting_sort(ord[i]) by depth_[i]
 		std::vector<int> cnt(mxdep + 2);
@@ -141,6 +141,7 @@ public:
 		}
 		
 		// build jumpp
+		if (n == 1) return;
 		logn = 0;
 		while ((1 << logn) < n) ++logn;
 		jumpp.assign(logn, std::vector<int>(jumps.size(), -1));
