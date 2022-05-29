@@ -40,6 +40,7 @@
 "Test/SuffixArray.search.test.cpp": "2021-06-05 15:29:26 +0900",
 "Test/TwoSat.test.cpp": "2021-03-18 15:32:11 +0900",
 "Test/UnionFind.test.cpp": "2021-03-09 18:26:45 +0900",
+"Test/VertexUpdatePathFold.vertex.test.cpp": "2022-05-29 18:12:58 +0900",
 "Test/WaveletMatrix.next_prev_value.test.cpp": "2021-03-18 15:32:11 +0900",
 "Test/WaveletMatrix.quantile.test.cpp": "2021-03-18 15:32:11 +0900",
 "Test/WaveletMatrix.range_frequency.test.cpp": "2021-03-18 15:32:11 +0900",
