@@ -119,10 +119,10 @@ data:
   timestamp: '2021-03-04 18:57:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/EulerTour.subtree.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
   - Test/SegmentTree.fold.test.cpp
   - Test/HeavyLightDecomposition_Query.SubtreeQuery.test.cpp
-  - Test/EulerTour.subtree.test.cpp
 documentation_of: DataStructure/SegmentTree.hpp
 layout: document
 title: "\u30BB\u30B0\u30E1\u30F3\u30C8\u6728"
@@ -428,6 +428,7 @@ $A_l, (\ldots)$ を含むノード ($A_{l-1}$ は含まない) 最も根側の�
 
 TODO: `max_right`, `min_left` の test を追加する  
 TODO: `InputIterator` コンストラクタに変更  
+TODO: セグ木構築のための余計な vector の作成を避けたいので move に対応したい
 
 <br>
 

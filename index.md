@@ -109,6 +109,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: GraphTheory/StronglyConnectedComponents.hpp
       title: "\u5F37\u9023\u7D50\u6210\u5206\u5206\u89E3 (SCC)"
+    - icon: ':heavy_check_mark:'
+      path: GraphTheory/VertexUpdatePathFold.hpp
+      title: "1 \u70B9\u66F4\u65B0 \u30D1\u30B9 Fold"
   - name: Mathematics
     pages:
     - icon: ':heavy_check_mark:'
@@ -295,6 +298,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: Test/UnionFind.test.cpp
       title: Test/UnionFind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: Test/VertexUpdatePathFold.vertex.test.cpp
+      title: Test/VertexUpdatePathFold.vertex.test.cpp
     - icon: ':heavy_check_mark:'
       path: Test/WaveletMatrix.next_prev_value.test.cpp
       title: Test/WaveletMatrix.next_prev_value.test.cpp

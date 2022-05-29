@@ -60,8 +60,8 @@ data:
   isVerificationFile: false
   path: Mathematics/mod_pow_inv.hpp
   requiredBy:
-  - Convolution/NumberTheoreticTransform.hpp
   - Convolution/NumberTheoreticTransform_AnyMod.hpp
+  - Convolution/NumberTheoreticTransform.hpp
   - Mathematics/garner.hpp
   timestamp: '2021-06-05 13:56:14+09:00'
   verificationStatus: LIBRARY_ALL_AC

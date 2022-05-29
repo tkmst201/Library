@@ -62,8 +62,8 @@ data:
   isVerificationFile: false
   path: Mathematics/bit_operation.hpp
   requiredBy:
-  - DataStructure/DisjointSparseTable.hpp
   - GraphTheory/LevelAncestor.hpp
+  - DataStructure/DisjointSparseTable.hpp
   timestamp: '2021-03-18 11:48:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -168,6 +168,12 @@ constexpr int pop_count(unsigned int x) {
 	// 00011100 = 28
 }
 ```
+
+<br>
+
+# TODO
+
+TODO: buildin 系の関数に置き換え
 
 <br>
 

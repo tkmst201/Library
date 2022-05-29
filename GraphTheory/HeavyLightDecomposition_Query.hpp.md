@@ -276,7 +276,8 @@ title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"
 
 # 概要
 
-[重軽分解 ( HL 分解)](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp) と [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) を用いて森上で 頂点数を $N$ として、$1$ 点更新を $\Theta(\log{N})$ 、パスクエリを $\mathcal{O}((\log{N})^2)$ 、部分木クエリを $\Theta(\log{N})$ で処理します。
+頂点数 $N$ の木に対し、[重軽分解 ( HL 分解)](https://tkmst201.github.io/Library/GraphTheory/HeavyLightDecomposition.hpp) と [セグメント木](https://tkmst201.github.io/Library/DataStructure/SegmentTree.hpp) を用いて、$1$ 点更新 $\Theta(\log{N})$ 、パスクエリを $\mathcal{O}((\log{N})^2)$ 、部分木クエリを $\Theta(\log{N})$ で処理します。  
+[1 点更新パス Fold](https://tkmst201.github.io/Library/GraphTheory/VertexUpdatePathFold.hpp) でも同様な処理ができます。$\log$ が 1 つ少ないのでより高速な(はず)です。  
 詳しくは`使用例`をご覧ください。  
 
 - `HeavyLightDecomposition_Query(const Graph & g, bool VERTEX, const T & id_elem, const F & f)`
@@ -291,11 +292,11 @@ title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"
 	- $\Theta(1)$ 内部で保持している HLD を返す
 - `void set(int v, const T & x)`
 	- $\Theta(\log{N})$ 頂点 $v$ に値 $x$ をセットする
-- `void get(int v)`
+- `T get(int v)`
 	- $\Theta(1)$ 頂点 $v$ の値を返す
 - `void set(int u, int v, const T & x)`
 	- $\Theta(\log{N})$ 辺 $u-v$ に値 $x$ をセットする
-- `void get(int u, int v)`
+- `T get(int u, int v)`
 	- $\Theta(1)$ 辺 $u-v$ の値を返す
 - `T fold(int u, int v)`
 	- $\mathcal{O}((\log{N})^2)$ $u-v$ パスを畳み込んだ結果を返す
@@ -408,7 +409,7 @@ title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"
 
 ---
 
-### void get(int v)
+### T get(int v)
 
 頂点 $v$ の値を返します。  
 
@@ -438,7 +439,7 @@ title: "\u91CD\u8EFD\u5206\u89E3 ( HL \u5206\u89E3) \u30AF\u30A8\u30EA"
 
 ---
 
-### void get(int u, int v)
+### T get(int u, int v)
 
 辺 $u-v$ の値を返します。  
 
@@ -507,7 +508,7 @@ int main() {
 	
 	g[5].emplace_back(3); // 逆辺があっても良い
 	
-	vector<int> A({1, 10, 100, 1000, 10000, 100000});
+	vector<int> A{1, 10, 100, 1000, 10000, 100000};
 	HLD hld(g, 1, A, 0, [](auto x, auto y) { return x + y; });
 	
 	// 1 -> 3 パス上の頂点 [1, 3] の総和

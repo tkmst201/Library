@@ -69,8 +69,8 @@ data:
   timestamp: '2021-03-15 16:06:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/FastFourierTransform.test.cpp
   - Test/CentroidDecomposition.test.cpp
+  - Test/FastFourierTransform.test.cpp
 documentation_of: GraphTheory/CentroidDecomposition.hpp
 layout: document
 title: "\u91CD\u5FC3\u5206\u89E3"

@@ -71,8 +71,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/BinaryIndexedTree_RangeAdd.test.cpp
-  - Test/EulerTour.path.test.cpp
   - Test/BinaryIndexedTree.test.cpp
+  - Test/EulerTour.path.test.cpp
 documentation_of: DataStructure/BinaryIndexedTree.hpp
 layout: document
 title: Binary Indexed Tree

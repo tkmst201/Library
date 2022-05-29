@@ -79,8 +79,8 @@ data:
   timestamp: '2022-05-15 21:01:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/EulerTour.path.test.cpp
   - Test/LowestCommonAncestor.test.cpp
+  - Test/EulerTour.path.test.cpp
 documentation_of: GraphTheory/LowestCommonAncestor.hpp
 layout: document
 title: "\u6700\u8FD1\u5171\u901A\u7956\u5148 (LCA)"

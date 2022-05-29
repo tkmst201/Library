@@ -311,9 +311,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/WaveletMatrix.range_frequency.test.cpp
+  - Test/WaveletMatrix.next_prev_value.test.cpp
   - Test/WaveletMatrix.quantile.test.cpp
   - Test/WaveletMatrix.select.range_k.test.cpp
-  - Test/WaveletMatrix.next_prev_value.test.cpp
 documentation_of: DataStructure/WaveletMatrix.hpp
 layout: document
 title: Wavelet Matrix

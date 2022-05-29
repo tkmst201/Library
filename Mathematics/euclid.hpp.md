@@ -79,10 +79,10 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - Test/zeta_moebius_transform.set.1.test.cpp
-  - Test/euclid.gcd.lcm.test.cpp
-  - Test/chinese_remainder.test.cpp
   - Test/garner.test.cpp
+  - Test/chinese_remainder.test.cpp
   - Test/NumberTheoreticTransform_AnyMod.test.cpp
+  - Test/euclid.gcd.lcm.test.cpp
 documentation_of: Mathematics/euclid.hpp
 layout: document
 title: "\u30E6\u30FC\u30AF\u30EA\u30C3\u30C9\u306E\u4E92\u9664\u6CD5"

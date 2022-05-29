@@ -235,8 +235,8 @@ data:
   timestamp: '2021-03-13 13:17:47+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - Test/RedBlackTree.test.cpp
   - Test/RedBlackTree.lower.upper.test.cpp
+  - Test/RedBlackTree.test.cpp
 documentation_of: DataStructure/RedBlackTree.hpp
 layout: document
 title: "\u8D64\u9ED2\u6728 (\u5E73\u8861\u4E8C\u5206\u63A2\u7D22\u6728)"

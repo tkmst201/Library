@@ -22,6 +22,9 @@ data:
     path: Test/SlidingWindowAggregation.test.cpp
     title: Test/SlidingWindowAggregation.test.cpp
   - icon: ':heavy_check_mark:'
+    path: Test/VertexUpdatePathFold.vertex.test.cpp
+    title: Test/VertexUpdatePathFold.vertex.test.cpp
+  - icon: ':heavy_check_mark:'
     path: Test/matrix.det.test.cpp
     title: Test/matrix.det.test.cpp
   - icon: ':heavy_check_mark:'
@@ -127,13 +130,14 @@ data:
   timestamp: '2021-06-05 13:56:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - Test/matrix.pow.test.cpp
   - Test/HeavyLightDecomposition_Query.PathQuery.test.cpp
-  - Test/SegmentTree.fold.test.cpp
-  - Test/Combination.test.cpp
+  - Test/LazySegmentTree.test.cpp
   - Test/DynamicSegmentTree.test.cpp
   - Test/SlidingWindowAggregation.test.cpp
-  - Test/matrix.pow.test.cpp
-  - Test/LazySegmentTree.test.cpp
+  - Test/SegmentTree.fold.test.cpp
+  - Test/Combination.test.cpp
+  - Test/VertexUpdatePathFold.vertex.test.cpp
   - Test/matrix.det.test.cpp
 documentation_of: Mathematics/ModInt.hpp
 layout: document
