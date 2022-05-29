@@ -303,6 +303,7 @@ $A_l, (\ldots)$ を含むノード ($A_{l-1}$ は含まない) 最も根側の�
 
 TODO: `max_right`, `min_left` の test を追加する  
 TODO: `InputIterator` コンストラクタに変更  
+TODO: セグ木構築のための余計な vector の作成を避けたいので move に対応したい
 
 <br>
 
